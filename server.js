@@ -1,33 +1,35 @@
+// Importation d'Express
 import express from "express";
-import cors from "cors";
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // permet à Wix d'appeler ton serveur
+// Middleware pour lire du JSON dans les requêtes POST
 app.use(express.json());
 
-// Stockage en mémoire (simple exemple)
-let messages = [];
-
-// Route pour recevoir un message de Wix
-app.post("/api/message", (req, res) => {
-  const { text } = req.body;
-  if (!text) return res.status(400).json({ error: "Message requis" });
-
-  const newMessage = { id: Date.now(), text };
-  messages.push(newMessage);
-
-  console.log("📩 Nouveau message reçu :", newMessage);
-  res.status(201).json(newMessage);
+// Route GET simple
+app.get("/", (req, res) => {
+  res.send("Bienvenue sur m API Node.js 🚀");
 });
 
-// Route pour renvoyer les messages à Wix
-app.get("/api/messages", (req, res) => {
-  console.log("📩 Nouveau message reçu :", 'newMessage');
-  res.json(messages);
+// Route GET avec données JSON
+app.get("/api/users", (req, res) => {
+  res.json([
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+  ]);
 });
 
+// Route POST pour ajouter un utilisateur
+app.post("/api/users", (req, res) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ error: "Le champ 'name' est requis" });
+  }
+  res.status(201).json({ id: Date.now(), name });
+});
+
+// Démarrage du serveur
 app.listen(PORT, () => {
-  console.log(`✅ Serveur Node.js démarré sur http://localhost:${PORT}`);
+  console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
 });
