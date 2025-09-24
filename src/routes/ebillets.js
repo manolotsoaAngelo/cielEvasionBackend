@@ -1,5 +1,5 @@
 import express from "express";
-import { getEbillets,pushEbillets} from "../controllers/ebilletsController.js";
+import { getEbillets,tri_reportByASC_ref_Ebillets} from "../controllers/ebilletsController.js";
 
 const router = express.Router();
 
@@ -7,6 +7,6 @@ const router = express.Router();
 router.get("/", getEbillets);
 
 // POST new message
-router.post("/", pushEbillets);
+router.post("/tri_reportByASC_ref", tri_reportByASC_ref_Ebillets);
 
 export default router;
