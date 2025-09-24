@@ -1,35 +1,32 @@
 import express from "express";
-import fetch from "node-fetch"; // si besoin pour renvoyer des données à Wix
+import cors from "cors";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
+app.use(cors()); // permet à Wix d'appeler ton serveur
 app.use(express.json());
 
-// Route qui reçoit un message depuis Wix
-app.post("/from-wix", (req, res) => {
-  const { message } = req.body;
-  console.log("📩 Message reçu de Wix:", message);
+// Stockage en mémoire (simple exemple)
+let messages = [];
 
-  // Exemple : répondre directement à Wix
-  res.json({ reply: `Node.js a bien reçu: ${message}` });
+// Route pour recevoir un message de Wix
+app.post("/api/message", (req, res) => {
+  const { text } = req.body;
+  if (!text) return res.status(400).json({ error: "Message requis" });
+
+  const newMessage = { id: Date.now(), text };
+  messages.push(newMessage);
+
+  console.log("📩 Nouveau message reçu :", newMessage);
+  res.status(201).json(newMessage);
 });
 
-// Exemple : Node.js envoie un message vers Wix
-app.post("/to-wix", async (req, res) => {
-  const wixUrl = "https://tonsite.wixsite.com/_functions/receiveMessage"; 
-  // ⚠️ route backend Wix (fonction web exposée)
-
-  const response = await fetch(wixUrl, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: "Hello depuis Node.js 🚀" })
-  });
-
-  const data = await response.json();
-  res.json({ status: "OK", wixReply: data });
+// Route pour renvoyer les messages à Wix
+app.get("/api/messages", (req, res) => {
+  res.json(messages);
 });
 
 app.listen(PORT, () => {
-  console.log(`✅ Node.js API sur http://localhost:${PORT}`);
+  console.log(`✅ Serveur Node.js démarré sur http://localhost:${PORT}`);
 });
