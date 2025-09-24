@@ -9,7 +9,7 @@ export function getEbillets(req, res) {
 
 export function tri_reportByASC_ref_Ebillets(req, res) {
   const { data } = req.body;
-  if (!text) return res.status(400).json({ error: "données requis" });
+  if (!data) return res.status(400).json({ error: "données requis" });
     
   //const newEbillets = { id: Date.now(), text };
   //Ebilletss.push(newEbillets);
