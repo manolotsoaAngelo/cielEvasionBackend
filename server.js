@@ -24,6 +24,7 @@ app.post("/api/message", (req, res) => {
 
 // Route pour renvoyer les messages à Wix
 app.get("/api/messages", (req, res) => {
+  console.log("📩 Nouveau message reçu :", 'newMessage');
   res.json(messages);
 });
 
