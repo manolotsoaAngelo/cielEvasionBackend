@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Exemple route GET
-app.get("/api/hello", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "Salut depuis mon backend Node.js 🚀" });
 });
 
