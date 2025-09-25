@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("CielEvasionBackend");
+  res.send("404 not found");
 });
 
 app.use("/api/ebillets", ebilletsRoutes);
