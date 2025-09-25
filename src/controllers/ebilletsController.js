@@ -12,7 +12,7 @@ export async function getEbillets(req, res) {
     });
 
     const result = await response.json();
-    res.json(tri_reportByASC_ref(result));
+    res.json((result));
 }
 
 export async function tri_reportByASC_ref_Ebillets(req, res) {
