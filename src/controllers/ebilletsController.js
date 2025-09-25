@@ -19,9 +19,9 @@ export async function tri_reportByASC_ref_Ebillets(req, res) {
     });
 
     const data = await response.json();
-    let all_ebillet = decompressed_obj(data)
+    //let all_ebillet = decompressed_obj(data)
     //const newEbillets = { id: Date.now(), text };
     //Ebilletss.push(newEbillets);
     //res.json(decompressed_obj(data));
-    res.status(201).json(compressed_obj(tri_reportByASC_ref(all_ebillet)));
+    res.status(201).json(data);
 }
