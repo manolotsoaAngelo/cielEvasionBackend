@@ -3,13 +3,21 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 
 let Ebilletss = []; // Mémoire (tu peux remplacer par DB ou fichier)
 
-export function getEbillets(req, res) {
-    res.json(Ebilletss);
+export async function getEbillets(req, res) {
+    const response = await fetch("https://ciel-evasion.fr/_functions/myFunction/findMe", {
+        method: "GET", // ou "POST" selon ton endpoint
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    const result = await response.json();
+    res.json(tri_reportByASC_ref(result));
 }
 
 export async function tri_reportByASC_ref_Ebillets(req, res) {
-    //const { data } = (req.body);
-    //if (!data) return res.status(400).json({ error: "données requis" });
+    const { data } = (req.body);
+    if (!data) return res.status(400).json({ error: "données requis" });
 
     const response = await fetch("https://ciel-evasion.fr/_functions/myFunction/findMe", {
         method: "GET", // ou "POST" selon ton endpoint
@@ -18,10 +26,10 @@ export async function tri_reportByASC_ref_Ebillets(req, res) {
         }
     });
 
-    const data = await response.json();
+    const result = await response.json();
     //let all_ebillet = decompressed_obj(data)
     //const newEbillets = { id: Date.now(), text };
     //Ebilletss.push(newEbillets);
     //res.json(decompressed_obj(data));
-    res.status(201).json(data);
+    res.status(201).json(result);
 }

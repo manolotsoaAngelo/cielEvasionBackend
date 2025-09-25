@@ -4,7 +4,7 @@ import { getEbillets,tri_reportByASC_ref_Ebillets} from "../controllers/ebillets
 const router = express.Router();
 
 // GET all messages
-router.get("/", getEbillets);
+router.get("/getAllEbillets", getEbillets);
 
 // POST new message
 router.post("/tri_reportByASC_ref", tri_reportByASC_ref_Ebillets);
