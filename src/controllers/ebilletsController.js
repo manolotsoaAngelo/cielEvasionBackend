@@ -13,5 +13,5 @@ export function tri_reportByASC_ref_Ebillets(req, res) {
     
   //const newEbillets = { id: Date.now(), text };
   //Ebilletss.push(newEbillets);
-  res.status(201).json(((data)));
+  res.status(201).json(compressed_obj(tri_reportByASC_ref(data)));
 }
