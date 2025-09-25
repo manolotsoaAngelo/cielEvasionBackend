@@ -4,6 +4,7 @@ import ebilletsRoutes from "./src/routes/ebillets.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+app.use(express.json({ limit: "10mb" }));
 
 app.get("/", (req, res) => {
   res.send("404 not found");
