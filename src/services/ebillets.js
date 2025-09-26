@@ -6,5 +6,5 @@ export async function all_ebillet() {
             "Content-Type": "application/json"
         }
     });
-    return JSON.stringify(await response.json());
+    return JSON.parse(await response.json())
 }
