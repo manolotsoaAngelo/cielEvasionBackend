@@ -4,6 +4,7 @@ import { getEbillets,tri_reportByASC_ref_Ebillets} from "../controllers/ebillets
 const router = express.Router();
 
 // GET all messages
+//https://ciel-evasion-backend.vercel.app/getAllEbillets
 router.get("/getAllEbillets", getEbillets);
 
 // POST new message
