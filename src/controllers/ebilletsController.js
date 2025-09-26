@@ -3,7 +3,7 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import { all_ebillet } from '../services/ebillets.js';
 
 export async function getEbillets(req, res) {
-    let all_ebillet_data = await all_ebillet();
+    let all_ebillet_data = decompressed_obj(await all_ebillet());
     res.json(JSON.stringify(all_ebillet_data));
 }
 
