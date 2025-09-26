@@ -4,7 +4,7 @@ import { all_ebillet } from '../services/ebillets.js';
 
 export async function getEbillets(req, res) {
     let all_ebillet_data = (await all_ebillet());
-    res.json(JSON.stringify(all_ebillet_data));
+    res.json(all_ebillet_data);
 }
 
 export async function tri_reportByASC_ref_Ebillets(req, res) {
