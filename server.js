@@ -1,5 +1,6 @@
 import express from "express";
 import ebilletsRoutes from "./src/routes/ebillets.js";
+import reservationController from "./src/routes/reservation.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,6 +12,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/ebillets", ebilletsRoutes);
+app.use("/api/reservation", reservationController);
 
 
 
