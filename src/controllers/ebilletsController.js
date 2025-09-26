@@ -10,7 +10,7 @@ export async function getEbillets(req, res) {
     });
 
     const result = await response.json();
-    res.json((result));
+    res.json(decompressed_obj(result));
 }
 
 export async function tri_reportByASC_ref_Ebillets(req, res) {
