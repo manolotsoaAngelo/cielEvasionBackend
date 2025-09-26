@@ -3,7 +3,6 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import { all_reservation } from '../services/reservation.js';
 
 export async function getAllreservation(req, res) {
-    let all_reservation_data = decompressed_obj(await all_reservation());
-    
+    let all_reservation_data = await all_reservation();
     res.json(all_reservation_data);
 }
