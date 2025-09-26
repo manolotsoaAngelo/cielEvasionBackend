@@ -1,16 +1,9 @@
 import { tri_reportByASC_ref } from '../utils/crud/function.js';
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
+import { all_ebillet } from '../services/ebillets.js';
 
 export async function getEbillets(req, res) {
-    const response = await fetch("https://ciel-evasion.fr/_functions/myFunction/all_ebillet", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-
-    const result = await response.json();
-    res.json(decompressed_obj(result.data));
+    res.json(all_ebillet());
 }
 
 export async function tri_reportByASC_ref_Ebillets(req, res) {
