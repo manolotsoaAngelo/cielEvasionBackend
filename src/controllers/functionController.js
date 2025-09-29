@@ -3,7 +3,7 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import { crypter, decrypter } from '../utils/cryptographie/cryptographie.js'
 
 export async function runFunction(req, res) {
-    const { data } = decompressed_obj(req.body);
+    const { data } = (req.body);
     if (!data) return res.status(400).json({ error: "données requis" });
     let result
     switch (data.typeFunction) {
@@ -18,5 +18,5 @@ export async function runFunction(req, res) {
             break;
     }
 
-    res.status(201).json(compressed_obj(result));
+    res.status(201).json((result));
 }
