@@ -9,4 +9,4 @@ export async function all_ebillet() {
     return await response.json()
 }
 
-//console.log(await all_ebillet())
+//console.log(decompressed_obj(await all_ebillet()))
