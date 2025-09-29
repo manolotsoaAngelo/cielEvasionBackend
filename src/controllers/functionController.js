@@ -5,7 +5,6 @@ import { crypter, decrypter } from '../utils/cryptographie/cryptographie.js'
 export async function runFunction(req, res) {
     const { data } = (req.body);
     if (!data) return res.status(400).json({ error: "données requis" });
-    /*
     let result
     switch (data.typeFunction) {
         case 'crypter':
@@ -18,6 +17,6 @@ export async function runFunction(req, res) {
         default:
             break;
     }
-*/
-    res.status(201).json((data));
+
+    res.status(201).json((result));
 }
