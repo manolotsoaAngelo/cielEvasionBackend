@@ -8,3 +8,5 @@ export async function all_reservation() {
     });
     return await response.json()
 }
+
+console.log(await all_reservation())

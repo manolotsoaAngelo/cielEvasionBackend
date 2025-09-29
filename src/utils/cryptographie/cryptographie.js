@@ -12,14 +12,16 @@ export function decrypter(message) {
     }
 }
 
-console.log(crypter('/api/function/runFunction'))
-//console.log(decrypter(crypter('message')))
+let crypt = crypter('/api/orders/getAllOrders')
+console.log(crypt)
+console.log(decrypter(crypt))
 
 /*
 
 /// https://ciel-evasion-backend.vercel.app/ : aHR0cHM6Ly9jaWVsLWV2YXNpb24tYmFja2VuZC52ZXJjZWwuYXBwLw==
-/// /api/ebillets : 
-/// /api/reservation/getAllreservation :
+/// /api/ebillets/getAllEbillets : L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
+/// /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
+/// /api/reservation/getAllreservation :L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
 /// /api/function/runFunction : L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==
 
 */

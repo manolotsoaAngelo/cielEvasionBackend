@@ -2,6 +2,7 @@ import express from "express";
 import ebilletsRoutes from "./src/routes/ebillets.js";
 import reservationController from "./src/routes/reservation.js";
 import functionController from "./src/routes/function.js";
+import ordersController from "./src/routes/orders.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 app.use("/api/ebillets", ebilletsRoutes);
 app.use("/api/reservation", reservationController);
 app.use("/api/function", functionController);
+app.use("/api/orders", ordersController);
 
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
