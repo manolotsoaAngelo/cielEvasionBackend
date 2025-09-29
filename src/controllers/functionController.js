@@ -14,7 +14,12 @@ export async function runFunction(req, res) {
         case 'decrypter':
             result = decrypter(value.valeur)
             break;
-
+        case 'compressed_obj':
+            result = compressed_obj(value.valeur)
+            break;
+        case 'decompressed_obj':
+            result = decompressed_obj(value.valeur)
+            break;
         default:
             break;
     }

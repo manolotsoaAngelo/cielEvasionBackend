@@ -12,7 +12,7 @@ export function decrypter(message) {
     }
 }
 
-//console.log(crypter('https://ciel-evasion-backend.vercel.app/'))
+console.log(crypter('/api/function/runFunction'))
 //console.log(decrypter(crypter('message')))
 
 /*
@@ -20,6 +20,6 @@ export function decrypter(message) {
 /// https://ciel-evasion-backend.vercel.app/ : aHR0cHM6Ly9jaWVsLWV2YXNpb24tYmFja2VuZC52ZXJjZWwuYXBwLw==
 /// /api/ebillets : 
 /// /api/reservation/getAllreservation :
-/// /api/function/runFunction : 
+/// /api/function/runFunction : L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==
 
 */
