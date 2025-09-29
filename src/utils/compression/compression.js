@@ -1,5 +1,5 @@
 import LZString from "lz-string";
-//import { compressed_obj, decompressed_obj } from 'backend/modules/fonctionnalites/information/compression'
+//import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
 
 export function compressed_obj(data) {
     return LZString.compressToUTF16(JSON.stringify(data));

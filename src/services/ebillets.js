@@ -8,3 +8,5 @@ export async function all_ebillet() {
     });
     return await response.json()
 }
+
+console.log(await all_ebillet())
