@@ -12,8 +12,8 @@ export function decrypter(message) {
     }
 }
 
-console.log(crypter('https://ciel-evasion-backend.vercel.app/'))
-console.log(decrypter(crypter('message')))
+//console.log(crypter('https://ciel-evasion-backend.vercel.app/'))
+//console.log(decrypter(crypter('message')))
 
 /*
 
