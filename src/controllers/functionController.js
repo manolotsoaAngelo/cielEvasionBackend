@@ -5,19 +5,18 @@ import { crypter, decrypter } from '../utils/cryptographie/cryptographie.js'
 export async function runFunction(req, res) {
     const { data } = (req.body);
     if (!data) return res.status(400).json({ error: "données requis" });
-    /*
+    let value = decompressed_obj(data)
     let result
-    switch (data.typeFunction) {
+    switch (value.typeFunction) {
         case 'crypter':
-            result = crypter(data.valeur)
+            result = crypter(value.valeur)
             break;
-            case 'decrypter':
-            result = decrypter(data.valeur)
+        case 'decrypter':
+            result = decrypter(value.valeur)
             break;
-    
+
         default:
             break;
     }
-*/
-    res.status(201).json((data));
+    res.status(201).json(compressed_obj(result));
 }
