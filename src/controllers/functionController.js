@@ -12,7 +12,7 @@ export async function runFunction(req, res) {
     let result
     switch (value.typeFunction) {
         case 'chaine_opt_partenaire':
-            result = chaine_opt_partenaire(value.valeur)
+            result = await chaine_opt_partenaire(value.valeur)
             break;
         case 'crypter':
             result = crypter(value.valeur)
