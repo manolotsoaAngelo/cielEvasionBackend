@@ -1,6 +1,7 @@
 import { tri_reportByASC_ref } from '../utils/crud/function.js';
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
 import { crypter, decrypter } from '../utils/cryptographie/cryptographie.js'
+import { chaine_opt_partenaire,chaine_opt,opt_reportByRef} from '../utils/tinyFunction/tinyFunction.js';
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -10,6 +11,9 @@ export async function runFunction(req, res) {
     let value = decompressed_obj(data)
     let result
     switch (value.typeFunction) {
+        case 'chaine_opt_partenaire':
+            result = chaine_opt_partenaire(value.valeur)
+            break;
         case 'crypter':
             result = crypter(value.valeur)
             break;

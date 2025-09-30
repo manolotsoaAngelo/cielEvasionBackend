@@ -1,5 +1,6 @@
 import { all_ebillet,get_ebilletById,get_ebilletByRef } from '../../services/ebillets.js';
 import { all_order,get_orderById } from '../../services/orders.js';
+///import { chaine_opt_partenaire,chaine_opt,opt_reportByRef} from '../utils/tinyFunction/tinyFunction.js';
 
 console.log(await opt_reportByRef("E10917-2"))
 console.log(await chaine_opt_partenaire("E10917-2"))
