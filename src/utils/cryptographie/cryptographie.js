@@ -12,9 +12,9 @@ export function decrypter(message) {
     }
 }
 
-let crypt = crypter('/api/orders/getAllOrders')
-console.log(crypt)
-console.log(decrypter(crypt))
+//let crypt = crypter('/api/orders/getAllOrders')
+//console.log(crypt)
+//console.log(decrypter(crypt))
 
 /*
 

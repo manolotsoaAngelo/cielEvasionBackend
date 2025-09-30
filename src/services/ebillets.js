@@ -1,26 +1,18 @@
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
+import { get_wix_services } from '../utils/wixData/wixHttp.js'
 ///import { all_ebillet,get_ebilletById,get_ebilletByRef } from '../services/ebillets.js';
+let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/"
 
 export async function get_ebilletByRef(ref) {
-    let all = (await all_ebillet()).data;
-    let result = all.filter(a => a.ref === ref);
-    return result;
+    return (await get_wix_services(wixData_url + "ref/" + ref)).data
 }
 
 export async function get_ebilletById(id) {
-    let all = (await all_ebillet()).data;
-    let result = all.filter(a => a._id === id);
-    return result;
+    return (await get_wix_services(wixData_url + "_id/" + id)).data
 }
 
 export async function all_ebillet() {
-    const response = await fetch("https://ciel-evasion.fr/_functions/myFunction/all_ebillet", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    return decompressed_obj(await response.json())
+    return await get_wix_services(wixData_url)
 }
 
 //console.log(await get_ebilletByRef("E241230-3"))
