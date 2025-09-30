@@ -1,9 +1,15 @@
 import { tri_reportByASC_ref } from '../utils/crud/function.js';
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
 import { crypter, decrypter } from '../utils/cryptographie/cryptographie.js'
-import { chaine_opt_partenaire,chaine_opt,opt_reportByRef} from '../utils/tinyFunction/tinyFunction.js';
+import { chaine_opt_partenaire,
+    chaine_opt,
+    opt_reportByRef} from '../utils/tinyFunction/tinyFunction.js';
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
+
+///import { services_post, services_get } from 'backend/modules/server/server'
+///return await services_post("L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==", { typeFunction: 'opt_reportByRef', valeur: ref })
+
 
 export async function runFunction(req, res) {
     const { data } = (req.body);
@@ -11,6 +17,15 @@ export async function runFunction(req, res) {
     let value = decompressed_obj(data)
     let result
     switch (value.typeFunction) {
+        case 'tri_reportByASC_ref':
+            result = await tri_reportByASC_ref(value.valeur)
+            break;
+        case 'chaine_opt':
+            result = await chaine_opt(value.valeur)
+            break;
+            case 'opt_reportByRef':
+            result = await opt_reportByRef(value.valeur)
+            break;
         case 'chaine_opt_partenaire':
             result = await chaine_opt_partenaire(value.valeur)
             break;

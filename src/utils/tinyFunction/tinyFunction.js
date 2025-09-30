@@ -2,9 +2,9 @@ import { all_ebillet,get_ebilletById,get_ebilletByRef } from '../../services/ebi
 import { all_order,get_orderById } from '../../services/orders.js';
 ///import { chaine_opt_partenaire,chaine_opt,opt_reportByRef} from '../utils/tinyFunction/tinyFunction.js';
 
-console.log(await opt_reportByRef("E10917-2"))
-console.log(await chaine_opt_partenaire("E10917-2"))
-console.log(await chaine_opt("E10917-2"))
+//console.log(await opt_reportByRef("E10917-2"))
+//console.log(await chaine_opt_partenaire("E10917-2"))
+//console.log(await chaine_opt("E10917-2"))
 
 export async function chaine_opt_partenaire(ref) {
     let liste_option = await opt_reportByRef(ref)

@@ -1,4 +1,6 @@
-export async function tri_reportByASC_ref(result) {
+///import { tri_reportByASC_ref } from '../utils/crud/function.js';
+
+export function tri_reportByASC_ref(result) {
     let array_result = []
     let seen = new Set();
     for (let item of result) {
