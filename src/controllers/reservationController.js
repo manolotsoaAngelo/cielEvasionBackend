@@ -4,5 +4,5 @@ import { all_reservation } from '../services/reservation.js';
 
 export async function getAllreservation(req, res) {
     let all_reservation_data = await all_reservation();
-    res.json(all_reservation_data);
+    res.json(compressed_obj(all_reservation_data));
 }
