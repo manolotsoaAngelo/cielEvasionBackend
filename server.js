@@ -11,7 +11,8 @@ app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
 
 app.get("/", (req, res) => {
-  res.send("404 not found");
+  res.redirect(301, "https://ciel-evasion.fr/");
+  //res.send("404 not found");
 });
 
 app.use("/api/ebillets", ebilletsRoutes);

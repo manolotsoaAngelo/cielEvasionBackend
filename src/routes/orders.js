@@ -1,10 +1,10 @@
 import express from "express";
-import { getAllOrders} from "../controllers/ordersController.js";
+import { get_all_order} from "../controllers/ordersController.js";
 
 const router = express.Router();
 
 // GET all Orders
-//https://ciel-evasion-backend.vercel.app/getAllOrders
-router.get("/getAllOrders", getAllOrders);
+
+router.get("/getAllOrders", get_all_order);
 
 export default router;

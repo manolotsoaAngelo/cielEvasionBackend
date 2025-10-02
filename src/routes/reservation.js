@@ -1,10 +1,10 @@
 import express from "express";
-import { getAllreservation} from "../controllers/reservationController.js";
+import { get_all_reservation} from "../controllers/reservationController.js";
 
 const router = express.Router();
 
 // GET all reservation
-//https://ciel-evasion-backend.vercel.app/getAllreservation
-router.get("/getAllreservation", getAllreservation);
+
+router.get("/getAllreservation", get_all_reservation);
 
 export default router;
