@@ -3,7 +3,7 @@ import ebilletsRoutes from "./src/routes/ebillets.js";
 import reservationController from "./src/routes/reservation.js";
 import functionController from "./src/routes/function.js";
 import ordersController from "./src/routes/orders.js";
-import membersController from "./src/routes/orders.js";
+import membersController from "./src/routes/members.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
