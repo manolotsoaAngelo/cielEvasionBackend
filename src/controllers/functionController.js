@@ -6,6 +6,7 @@ import {
     chaine_opt,
     opt_reportByRef
 } from '../utils/tinyFunction/tinyFunction.js';
+import { validNbon_onClick } from '../pages/partenaire/comptabilite/comptabilite.js';
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -19,6 +20,10 @@ export async function runFunction(req, res) {
     let value = decompressed_obj(data)
     let result
     switch (value.typeFunction) {
+        ///PAGE
+        case 'validNbon_onClick':
+            result = await validNbon_onClick()
+            break;
         case 'tri_reportByASC_ref':
             result = await tri_reportByASC_ref(value.valeur)
             break;
