@@ -1,6 +1,6 @@
 //import { validNbon_onClick } from '../pages/partenaire/comptabilite/comptabilite.js';
 
-
+/*
 export async function validNbon_onClick() {
    return validNbon.onClick(async (event) => {
         if (allNbon.value) {
@@ -15,3 +15,4 @@ export async function validNbon_onClick() {
         }
     })
 }
+*/
