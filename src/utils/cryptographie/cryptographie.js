@@ -12,7 +12,7 @@ export function decrypter(message) {
     }
 }
 
-//let crypt = crypter('/api/partenaires/getAllpartenaires')
+//let crypt = crypter('https://cielevasionbackend.onrender.com')
 //console.log(crypt)
 //console.log(decrypter(crypt))
 
@@ -21,6 +21,9 @@ export function decrypter(message) {
 /// https://ciel-evasion-backend.vercel.app//api/ebillets/getAllEbillets
 
 /// https://ciel-evasion-backend.vercel.app/ : aHR0cHM6Ly9jaWVsLWV2YXNpb24tYmFja2VuZC52ZXJjZWwuYXBwLw==
+/// https://cielevasionbackend.onrender.com : aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t
+
+
 /// /api/ebillets/getAllEbillets : L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
 /// /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
 /// /api/reservation/getAllreservation : L2FwaS9yZXNlcnZhdGlvbi9nZXRBbGxyZXNlcnZhdGlvbg==
