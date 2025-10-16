@@ -36,7 +36,7 @@ export async function create_order_new(wixData) {
     let prix_article = wixData.prix_article
     let methode_paiement = wixData.methode_paiement
     let variable_line_commande, command
-    
+
     let report = data
     let ref = report.ref
     if (report.commande) {
@@ -213,8 +213,7 @@ export async function create_order_new(wixData) {
         report.nb_er++
         report.souscription = true
     }
-    //await update_ebillet(report)
+    await update_ebillet(report)
     command.lineItems = item
     return await insert_order(command)
-   //return command
 }
