@@ -17,4 +17,4 @@ export async function all_members() {
 
 //console.log(await get_membersByEmail("quiquempoisaudrey@yahoo.fr"))
 //console.log(await get_membersById('6e5646a3-697e-4a7f-8d33-53749be48815'))
-//console.log(await all_members())
+//console.log(((await all_members()).data))

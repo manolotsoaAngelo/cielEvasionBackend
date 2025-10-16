@@ -25,7 +25,6 @@ export async function runFunction(req, res) {
         case 'create_order_new':
             result = await create_order_new(value.valeur)
             break;
-
         case 'tri_reportByASC_ref':
             result = await tri_reportByASC_ref(value.valeur)
             break;
