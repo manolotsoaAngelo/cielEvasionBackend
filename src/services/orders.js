@@ -30,8 +30,8 @@ export async function all_order() {
 }
 
 export async function create_order_new(wixData) {
-    let data = wixData.data
-    let address = wixData.address
+    let data = await get_ebilletByRef((wixData.data).ref)
+    let address = await get_membersById(wixData.address)._id
     let prix_article = wixData.prix_article
     let methode_paiement = wixData.methode_paiement
     /*
