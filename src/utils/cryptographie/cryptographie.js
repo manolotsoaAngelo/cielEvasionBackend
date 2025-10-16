@@ -12,7 +12,7 @@ export function decrypter(message) {
     }
 }
 
-let crypt = crypter('/api/members/getAllMembers')
+let crypt = crypter('/api/partenaires/getAllpartenaires')
 console.log(crypt)
 //console.log(decrypter(crypt))
 
@@ -26,5 +26,5 @@ console.log(crypt)
 /// /api/reservation/getAllreservation : L2FwaS9yZXNlcnZhdGlvbi9nZXRBbGxyZXNlcnZhdGlvbg==
 /// /api/function/runFunction : L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==
 /// /api/members/getAllMembers : L2FwaS9tZW1iZXJzL2dldEFsbE1lbWJlcnM=
-
+/// /api/partenaires/getAllpartenaires : L2FwaS9wYXJ0ZW5haXJlcy9nZXRBbGxwYXJ0ZW5haXJlcw==
 */

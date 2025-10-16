@@ -1,10 +1,21 @@
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
-import { get_wix_services } from '../utils/wixData/wixHttp.js'
-import { all_ebillet,get_ebilletById,get_ebilletByRef } from '../services/ebillets.js';
+import { get_wix_services, post_wix_services } from '../utils/wixData/wixHttp.js'
+import { all_partenaire, get_partenaireByIdEbillet } from '../services/partenaires.js';
+import { all_members, get_membersById, get_membersByEmail } from '../services/members.js';
+import { all_ebillet, get_ebilletById, get_ebilletByRef, update_ebillet, get_ebilletByidArticle } from '../services/ebillets.js';
 
-
-///import { all_order,get_orderById } from '../services/orders.js';
+///import { all_order,get_orderById,insert_order,get_orderByNumber,create_order_new} from '../services/orders.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_order/"
+let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/order/"
+
+//console.log(await get_orderById('0a5ad329-d5cd-40d2-ace4-5d25fae1f758'))
+//console.log(await all_order())
+//console.log(await create_order_new())
+//console.log(await get_orderByNumber("11468"))
+
+export async function insert_order(order) {
+    return (await post_wix_services(wixData_url_post + "insert/", order)).data
+}
 
 export async function get_orderById(id) {
     return (await get_wix_services(wixData_url + "_id/" + id)).data
@@ -18,23 +29,27 @@ export async function all_order() {
     return await get_wix_services(wixData_url)
 }
 
-//console.log(await get_orderById('0a5ad329-d5cd-40d2-ace4-5d25fae1f758'))
-//console.log(await all_order())
-
-export async function create_order_new() {
-
-   let data
-    let address 
-    let prix_article 
-    let methode_paiement
-
+export async function create_order_new(wixData) {
+    let data = wixData.data
+    let address = wixData.address
+    let prix_article = wixData.prix_article
+    let methode_paiement = wixData.methode_paiement
+    /*
+       let data = await get_ebilletByRef("E241230-3")
+        let address = await get_membersById((await get_membersByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id)
+        let prix_article = {
+                    "prolongation": 100,
+                    "er": null
+                } 
+        let methode_paiement = "Successful"
+    */
     let variable_line_commande, command
     let report = await get_ebilletById(data._id)
     let ref = report.ref
     if (report.commande) {
         command = await get_orderById(report.commande)
     } else {
-        let report_clone = (await get_all(wixData.query('Reports').eq('article', report.article).isNotEmpty('commande')))[0]
+        let report_clone = await get_ebilletByidArticle(report.article)
         ref = report_clone.ref
         command = await get_orderByNumber(Number((ref).replace(/^[A-Za-z]/, '').split('-')[0]))
     }
@@ -52,7 +67,7 @@ export async function create_order_new() {
         prix += prix_article.er
     }
     let ciel_evasion_id = "15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"
-    let partenaire = await wixData.queryReferenced('Reports', report._id, 'partenairetest').then((res) => { return res.items })
+    let partenaire = [await get_partenaireByIdEbillet(report._id)]
     let TVA
     if (partenaire.map(a => a._id).join(' ').includes(ciel_evasion_id)) {
         TVA = 10
@@ -77,7 +92,7 @@ export async function create_order_new() {
     delete command.buyerInfo
     delete command.enteredBy
     command.buyerNote = null
-    let member = await getMemberByEmail(address.loginEmail)
+    let member = await get_membersByEmail(address.loginEmail)
     let shippingInfo
     let billingInfo
     if ((address.contactDetails.addresses).length > 0) {
@@ -205,7 +220,7 @@ export async function create_order_new() {
         report.nb_er++
         report.souscription = true
     }
-    await updatereport(report)
+    //await update_ebillet(report)
     command.lineItems = item
-    return await wixStoresBackend.createOrder(command);
+    return await insert_order(command)
 }
