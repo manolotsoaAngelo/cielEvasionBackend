@@ -35,17 +35,9 @@ export async function create_order_new(wixData) {
     let address = await get_membersById((wixData.address)._id)
     let prix_article = wixData.prix_article
     let methode_paiement = wixData.methode_paiement
-/*
-       let data = await get_ebilletByRef("E241230-3")
-        let address = await get_membersById((await get_membersByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id)
-        let prix_article = {
-                    "prolongation": 100,
-                    "er": null
-                } 
-        let methode_paiement = "Successful"
-*/
     let variable_line_commande, command
-    let report = await get_ebilletById(data._id)
+    
+    let report = data
     let ref = report.ref
     if (report.commande) {
         command = await get_orderById(report.commande)
