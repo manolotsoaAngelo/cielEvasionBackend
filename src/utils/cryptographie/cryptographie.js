@@ -12,8 +12,8 @@ export function decrypter(message) {
     }
 }
 
-let crypt = crypter('/api/partenaires/getAllpartenaires')
-console.log(crypt)
+//let crypt = crypter('/api/partenaires/getAllpartenaires')
+//console.log(crypt)
 //console.log(decrypter(crypt))
 
 /*
