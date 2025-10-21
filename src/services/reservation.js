@@ -13,18 +13,24 @@ import { tri_reportByASC_ref } from '../utils/crud/function.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 
 //console.log(await all_reservation_FullData())
-//console.log(await all_reservation())
 //console.log(await all_reservation_ContreProposition())
 //console.log(await reservation_ContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await reservation_ContrePropositionByIdebillet("9b4e932b-9dd2-467b-a28e-a8b63e25d2d2"))
-
 //console.log(await all_reservation_byPartenaire())
+//console.log(await all_reservation())
+
+export async function all_reservation() {
+    return reservation(await all_ebillet_FullData())
+}
 
 export async function all_reservation_byPartenaire(id_partenaire) {
-    const partnerData = await get_All_ebilletByPartenaire(id_partenaire)
-    let all_contreProposition = contreProposition(partnerData)
-    let all_reserver = reserver(partnerData)
-    let all_enattente = enattente(partnerData)
+    return reservation(await get_All_ebilletByPartenaire(id_partenaire))
+}
+
+function reservation(data) {
+    let all_contreProposition = contreProposition(data)
+    let all_reserver = reserver(data)
+    let all_enattente = enattente(data)
     let result = tri_reportByASC_ref([...all_contreProposition, ...all_reserver, ...all_enattente])
     return result
 }
@@ -65,8 +71,4 @@ export async function all_reservation_FullData() {
     let full_data = await all_ebillet_FullData()
     let reservations = full_data.filter(item => item.statut_reservation === "en attente" || (item.rdv_sup_now === true && item.statut_reservation === "reserver"))
     return tri_reportByASC_ref(reservations)
-}
-
-export async function all_reservation() {
-    return await get_wix_services(wixData_url)
 }
