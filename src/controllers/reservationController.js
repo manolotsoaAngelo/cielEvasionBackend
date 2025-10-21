@@ -8,6 +8,12 @@ import {
     all_reservation_byPartenaire
 } from '../services/reservation.js';
 
+export async function get_all_reservation_byId(req, res) {
+    let value = req
+    let result = await all_reservation_byPartenaire(value._id)
+    res.status(201).json(compressed_obj(result));
+}
+
 export async function get_all_reservation_byPartenaire(req, res) {
     let value = post(req, res)
     let result = await all_reservation_byPartenaire(value._id)
