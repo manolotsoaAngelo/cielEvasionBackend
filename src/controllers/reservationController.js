@@ -24,7 +24,7 @@ async function postById(req, res, type) {
     } else if (type === "ebillet") {
         result = await reservation_ContrePropositionByIdebillet(value._id)
     }
-    return result
+    res.status(201).json(compressed_obj(result));
 }
 
 export async function get_all_reservation(req, res) {
