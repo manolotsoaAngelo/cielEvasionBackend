@@ -18,6 +18,17 @@ let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 //console.log(await reservation_ContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await reservation_ContrePropositionByIdebillet("9b4e932b-9dd2-467b-a28e-a8b63e25d2d2"))
 
+//console.log(await all_reservation_byPartenaire())
+
+export async function all_reservation_byPartenaire(id_partenaire) {
+    const partnerData = await get_All_ebilletByPartenaire(id_partenaire)
+    let all_contreProposition = contreProposition(partnerData)
+    let all_reserver = reserver(partnerData)
+    let all_enattente = enattente(partnerData)
+    let result = tri_reportByASC_ref([...all_contreProposition, ...all_reserver, ...all_enattente])
+    return result
+}
+
 export async function reservation_ContrePropositionByIdebillet(id) {
     return (contreProposition(await all_ebillet_FullData())).find(item => item._id === id)
 }
@@ -28,6 +39,18 @@ export async function reservation_ContrePropositionByIdpartenaire(id_partenaire)
 
 export async function all_reservation_ContreProposition() {
     return tri_reportByASC_ref(contreProposition(await all_ebillet_FullData()))
+}
+
+function enattente(data) {
+    return data.filter(item => (
+        item.statut_reservation === "en attente" && item.datePriseRdvClient
+    ));
+}
+
+function reserver(data) {
+    return data.filter(item => (
+        item.rdv_sup_now === true && item.statut_reservation === "reserver"
+    ));
 }
 
 function contreProposition(data) {
