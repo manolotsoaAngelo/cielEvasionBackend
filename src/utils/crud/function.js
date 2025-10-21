@@ -1,21 +1,13 @@
 ///import { tri_reportByASC_ref,tri_ebilletByASC_ref,tri_ebilletByASC_Date} from '../utils/crud/function.js';
 
 export function tri_ebilletByASC_Date(array_result) {
-    array_result.sort((a, b) => {
-        if (a.datePriseRdvClient < b.datePriseRdvClient) return -1;
-        if (a.datePriseRdvClient > b.datePriseRdvClient) return 1;
+    return [...array_result].sort((a, b) => {
+        const dateA = new Date(a.datePriseRdvClient).getTime();
+        const dateB = new Date(b.datePriseRdvClient).getTime();
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
         return 0;
     });
-    return array_result
-}
-
-export function tri_ebilletByASC_ref(array_result) {
-    array_result.sort((a, b) => {
-        if (a.ref < b.ref) return -1;
-        if (a.ref > b.ref) return 1;
-        return 0;
-    });
-    return array_result
 }
 
 export function tri_reportByASC_ref(result) {

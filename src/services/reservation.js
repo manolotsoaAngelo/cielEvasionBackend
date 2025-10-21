@@ -47,6 +47,8 @@ export async function all_reservation_ContreProposition() {
     return tri_ebilletByASC_Date(contreProposition(await all_ebillet_FullData()))
 }
 
+
+
 function enattente(data) {
     return data.filter(item => (
         item.statut_reservation === "en attente" && item.datePriseRdvClient
