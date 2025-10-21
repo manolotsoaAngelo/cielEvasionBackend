@@ -13,7 +13,7 @@ import { tri_reportByASC_ref,tri_ebilletByASC_ref,tri_ebilletByASC_Date} from '.
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 
 //console.log(await all_reservation_FullData())
-console.log(await all_reservation_ContreProposition())
+//console.log(await all_reservation_ContreProposition())
 //console.log(await reservation_ContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await reservation_ContrePropositionByIdebillet("9b4e932b-9dd2-467b-a28e-a8b63e25d2d2"))
 //console.log(await all_reservation_byPartenaire())
