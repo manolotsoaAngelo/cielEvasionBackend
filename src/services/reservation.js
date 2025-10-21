@@ -9,7 +9,7 @@ import {
     update_ebillet
 } from './ebillets.js';
 
-import { tri_reportByASC_ref,tri_ebilletByASC_ref,tri_ebilletByDate} from '../utils/crud/function.js';
+import { tri_reportByASC_ref,tri_ebilletByASC_ref,tri_ebilletByASC_Date} from '../utils/crud/function.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 
 //console.log(await all_reservation_FullData())
@@ -40,11 +40,11 @@ export async function reservation_ContrePropositionByIdebillet(id) {
 }
 
 export async function reservation_ContrePropositionByIdpartenaire(id_partenaire) {
-    return tri_ebilletByDate(contreProposition(await get_All_ebilletByPartenaire(id_partenaire)))
+    return tri_ebilletByASC_Date(contreProposition(await get_All_ebilletByPartenaire(id_partenaire)))
 }
 
 export async function all_reservation_ContreProposition() {
-    return tri_ebilletByDate(contreProposition(await all_ebillet_FullData()))
+    return tri_ebilletByASC_Date(contreProposition(await all_ebillet_FullData()))
 }
 
 function enattente(data) {
