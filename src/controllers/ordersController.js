@@ -2,6 +2,6 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import { all_order } from '../services/orders.js';
 
 export async function get_all_order(req, res) {
-    let all_order_data = await all_order();
+    let all_order_data = (await all_order()).data;
     res.json(compressed_obj(all_order_data));
 }

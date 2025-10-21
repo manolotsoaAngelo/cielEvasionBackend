@@ -29,10 +29,10 @@ async function postById(req, res, type) {
 
 export async function get_all_reservation_ContreProposition(req, res) {
     let all_reservation_data = await all_reservation_ContreProposition();
-    res.json(compressed_obj({ data: all_reservation_data }));
+    res.json(compressed_obj(all_reservation_data));
 }
 
 export async function get_all_reservation(req, res) {
-    let all_reservation_data = await all_reservation();
+    let all_reservation_data = (await all_reservation()).data;
     res.json(compressed_obj(all_reservation_data));
 }
