@@ -1,9 +1,49 @@
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
 import { get_wix_services } from '../utils/wixData/wixHttp.js'
+import {
+    all_ebillet_FullData,
+    get_All_ebilletByPartenaire,
+    get_ebilletById,
+    get_ebilletByRef,
+    get_ebilletByidArticle,
+    update_ebillet
+} from './ebillets.js';
+
+import { tri_reportByASC_ref } from '../utils/crud/function.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
+
+//console.log(await all_reservation_FullData())
+//console.log(await all_reservation())
+//console.log(await all_reservation_ContreProposition())
+//console.log(await reservation_ContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await reservation_ContrePropositionByIdebillet("9b4e932b-9dd2-467b-a28e-a8b63e25d2d2"))
+
+export async function reservation_ContrePropositionByIdebillet(id) {
+    return (contreProposition(await all_ebillet_FullData())).find(item => item._id === id)
+}
+
+export async function reservation_ContrePropositionByIdpartenaire(id_partenaire) {
+    return contreProposition(await get_All_ebilletByPartenaire(id_partenaire))
+}
+
+export async function all_reservation_ContreProposition() {
+    return tri_reportByASC_ref(contreProposition(await all_ebillet_FullData()))
+}
+
+function contreProposition(data) {
+    return data.filter(item => (
+        item.statut_reservation === "reserver" &&
+        !item.rdv &&
+        (item.contrepropositionDate1 || item.contrepropositionDate2 || item.contrepropositionDate3)
+    ));
+}
+
+export async function all_reservation_FullData() {
+    let full_data = await all_ebillet_FullData()
+    let reservations = full_data.filter(item => item.statut_reservation === "en attente" || (item.rdv_sup_now === true && item.statut_reservation === "reserver"))
+    return tri_reportByASC_ref(reservations)
+}
 
 export async function all_reservation() {
     return await get_wix_services(wixData_url)
 }
-
-//console.log(await all_reservation())
