@@ -61,7 +61,9 @@ export async function get_ebilletByidArticle(id) {
 }
 
 export async function get_ebilletByRef(ref) {
-    return (await get_wix_services(wixData_url_get + "ref/" + ref)).data
+    let all_ebillets = await all_ebillet_FullData();
+    return all_ebillets.find(item => item.ref === ref)
+    //return (await get_wix_services(wixData_url_get + "ref/" + ref)).data
 }
 
 export async function get_All_ebilletByPartenaire(partenaire) {
@@ -69,7 +71,9 @@ export async function get_All_ebilletByPartenaire(partenaire) {
 }
 
 export async function get_ebilletById(id) {
-    return (await get_wix_services(wixData_url_get + "_id/" + id)).data
+    let all_ebillets = await all_ebillet_FullData();
+    return all_ebillets.find(item => item._id === id)
+    //return (await get_wix_services(wixData_url_get + "_id/" + id)).data
 }
 
 export async function all_ebillet() {
