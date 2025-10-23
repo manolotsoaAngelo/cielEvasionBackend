@@ -8,17 +8,49 @@ import { all_ebillet, get_ebilletById, get_ebilletByRef, update_ebillet, get_ebi
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_order/"
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/order/"
 let collection_name = "Orders_everyone"
-let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/"+collection_name+"/"
+let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/"
+
+let cachedData = null;
+let lastFetchTime = 0;
+let refreshPromise = null;
+const CACHE_DURATION = 5 * 60 * 1000;
+
+export async function all_order_FullData() {
+    const now = Date.now();
+    const hasCache = cachedData && (now - lastFetchTime) < CACHE_DURATION * 2;
+    if (hasCache) {
+        if ((now - lastFetchTime) > CACHE_DURATION && !refreshPromise) {
+            refreshPromise = refreshData();
+        }
+        return cachedData;
+    }
+
+    if (!refreshPromise) {
+        refreshPromise = refreshData();
+    }
+
+    return refreshPromise;
+}
+
+async function refreshData() {
+    try {
+        const response = await get_wix_services(wixData_url_get_FullData);
+        cachedData = response.data;
+        lastFetchTime = Date.now();
+        refreshPromise = null;
+        return cachedData;
+    } catch (error) {
+        refreshPromise = null;
+        console.error("Erreur lors du refresh :", error);
+        return cachedData || [];
+    }
+}
 
 //console.log(await get_orderById('0a5ad329-d5cd-40d2-ace4-5d25fae1f758'))
 //console.log(await all_order())
 //console.log(await create_order_new())
 //console.log(await get_orderByNumber("11468"))
 //console.log(await all_order_FullData())
-
-export async function all_order_FullData() {
-    return (await get_wix_services(wixData_url_get_FullData)).data
-}
 
 export async function insert_order(order) {
     return (await post_wix_services(wixData_url_post + "insert/", order)).data

@@ -5,7 +5,44 @@ import { get_wix_services, post_wix_services } from '../utils/wixData/wixHttp.js
 let wixData_url_get = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/"
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/ebillet/"
 let collection_name = "Reports"
-let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/"+collection_name+"/"
+let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/"
+
+let cachedData = null;
+let lastFetchTime = 0;
+let refreshPromise = null;
+const CACHE_DURATION = 5 * 60 * 1000;
+
+export async function all_ebillet_FullData() {
+    const now = Date.now();
+    const hasCache = cachedData && (now - lastFetchTime) < CACHE_DURATION * 2;
+    if (hasCache) {
+        if ((now - lastFetchTime) > CACHE_DURATION && !refreshPromise) {
+            refreshPromise = refreshData();
+        }
+        return cachedData;
+    }
+
+    if (!refreshPromise) {
+        refreshPromise = refreshData();
+    }
+
+    return refreshPromise;
+}
+
+async function refreshData() {
+    try {
+        const response = await get_wix_services(wixData_url_get_FullData);
+        cachedData = response.data;
+        lastFetchTime = Date.now();
+        refreshPromise = null;
+        return cachedData;
+    } catch (error) {
+        refreshPromise = null;
+        console.error("Erreur lors du refresh :", error);
+        return cachedData || [];
+    }
+}
+
 
 //console.log(await update_ebillet())
 //console.log(await get_ebilletByidArticle("27f91f30-a07d-005f-6b44-894cd81c9b2d"))
@@ -13,27 +50,6 @@ let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/"+col
 //console.log(await get_ebilletById('6650005f-61b4-497f-8cca-2e8b08299fe3'))
 //console.log(await all_ebillet())
 //console.log(await get_All_ebilletByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
-
-let cachedData = null;
-let lastFetchTime = 0;
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes cache
-
-export async function all_ebillet_FullData() {
-    const now = Date.now();
-    
-    // Return cached data if it's still valid
-    if (cachedData && (now - lastFetchTime) < CACHE_DURATION) {
-        return cachedData;
-    }
-
-    // Fetch new data
-    const response = await get_wix_services(wixData_url_get_FullData);
-    cachedData = response.data;
-    lastFetchTime = now;
-    
-    return cachedData;
-}
-
 //console.log(await all_ebillet_FullData())
 
 export async function update_ebillet(ebillet) {
