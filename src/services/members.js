@@ -2,12 +2,13 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import { get_wix_services } from '../utils/wixData/wixHttp.js'
 ///import { all_members,get_membersById,get_membersByEmail } from '../services/ebillets.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/"
-let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/Membre_everyone/"
+let collection_name = "Membre_everyone"
+let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/"+collection_name+"/"
 
 //console.log(await get_membersByEmail("quiquempoisaudrey@yahoo.fr"))
 //console.log(await get_membersById('6e5646a3-697e-4a7f-8d33-53749be48815'))
 //console.log(((await all_members()).data))
-//console.log(((await all_members_FullData()).data))
+//console.log(await all_members_FullData())
 
 export async function all_members_FullData() {
     return (await get_wix_services(wixData_url_get_FullData)).data

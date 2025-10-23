@@ -1,6 +1,7 @@
 import { get_wix_services } from '../utils/wixData/wixHttp.js'
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_partenaire/"
-let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/Partenaire_test/"
+let collection_name = "Partenaire_test"
+let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/"+collection_name+"/"
 
 //import { all_partenaire,get_partenaireByIdEbillet } from '../services/partenaires.js';
 

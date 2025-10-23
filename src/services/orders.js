@@ -7,7 +7,8 @@ import { all_ebillet, get_ebilletById, get_ebilletByRef, update_ebillet, get_ebi
 ///import { all_order,get_orderById,insert_order,get_orderByNumber,create_order_new} from '../services/orders.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_order/"
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/order/"
-let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/Orders_everyone/"
+let collection_name = "Orders_everyone"
+let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/"+collection_name+"/"
 
 //console.log(await get_orderById('0a5ad329-d5cd-40d2-ace4-5d25fae1f758'))
 //console.log(await all_order())

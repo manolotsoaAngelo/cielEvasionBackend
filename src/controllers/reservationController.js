@@ -23,8 +23,19 @@ export async function get_all_reservation_byPartenaire(req, res) {
 export async function get_reservation_ContrePropositionByIdebillet(req, res) {
     postById(req, res, "ebillet")
 }
+
 export async function get_reservation_ContrePropositionByIdpartenaire(req, res) {
     postById(req, res, "partenaire")
+}
+
+export async function get_all_reservation_ContreProposition(req, res) {
+    let all_reservation_data = await all_reservation_ContreProposition();
+    res.json(compressed_obj(all_reservation_data));
+}
+
+export async function get_all_reservation(req, res) {
+    let all_reservation_data = await all_reservation();
+    res.json(compressed_obj(all_reservation_data));
 }
 
 function post(req, res) {
@@ -42,15 +53,4 @@ async function postById(req, res, type) {
         result = await reservation_ContrePropositionByIdebillet(value._id)
     }
     res.status(201).json(compressed_obj(result));
-}
-
-
-export async function get_all_reservation_ContreProposition(req, res) {
-    let all_reservation_data = await all_reservation_ContreProposition();
-    res.json(compressed_obj(all_reservation_data));
-}
-
-export async function get_all_reservation(req, res) {
-    let all_reservation_data = await all_reservation();
-    res.json(compressed_obj(all_reservation_data));
 }
