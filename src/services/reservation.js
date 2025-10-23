@@ -17,7 +17,7 @@ let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 //console.log(await reservation_ContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await reservation_ContrePropositionByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
 //console.log(await all_reservation_byPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
-//console.log(await all_reservation())
+console.log(await all_reservation())
 
 export async function all_reservation() {
     return reservation(await all_ebillet_FullData())
