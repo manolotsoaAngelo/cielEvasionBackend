@@ -42,7 +42,7 @@ export async function all_reservation_reserver() {
 }
 
 export async function reservation_enattenteByIdpartenaire(id) {
-    return enattente(await all_reservation_byPartenaire(id))
+    return tri_ebilletByASC_Date(enattente(await all_reservation_byPartenaire(id)))
 }
 
 export async function reservation_enattenteByIdebillet(id) {
@@ -50,7 +50,7 @@ export async function reservation_enattenteByIdebillet(id) {
 }
 
 export async function all_reservation_enattente() {
-    return enattente(await all_reservation())
+    return tri_ebilletByASC_Date(enattente(await all_reservation()))
 }
 
 export async function all_reservation() {
