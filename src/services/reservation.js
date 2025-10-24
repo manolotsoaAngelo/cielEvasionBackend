@@ -23,6 +23,11 @@ let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 //console.log(await all_reservation_byPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await all_reservation())
 //console.log(await all_reservation_reserver())
+//console.log(await reservation_reserverByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
+//console.log(await reservation_reserverByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await reservation_enattenteByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await reservation_enattenteByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
+//console.log(await all_reservation_enattente())
 
 export async function reservation_reserverByIdebillet(id) {
     return (await all_reservation_reserver()).find(item => item._id === id)
