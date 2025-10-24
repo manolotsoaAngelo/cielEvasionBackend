@@ -4,7 +4,6 @@ import {
     reservation_ContrePropositionByIdebillet,
     reservation_ContrePropositionByIdpartenaire,
     all_reservation_ContreProposition,
-    all_reservation_FullData,
     all_reservation_byPartenaire,
     all_reservation_enattente,
     reservation_enattenteByIdebillet,
