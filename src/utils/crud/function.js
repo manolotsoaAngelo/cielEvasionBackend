@@ -19,8 +19,8 @@ export function tri_ebilletByASC_Date(array_result) {
     return [...array_result].sort((a, b) => {
         const dateA = new Date(a.datePriseRdvClient).getTime();
         const dateB = new Date(b.datePriseRdvClient).getTime();
-        if (dateA < dateB) return -1;
-        if (dateA > dateB) return 1;
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
         return 0;
     });
 }
