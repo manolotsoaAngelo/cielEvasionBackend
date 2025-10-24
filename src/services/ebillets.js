@@ -13,7 +13,7 @@ let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
 export  function init_cachedData_ebillet(valeur) {
-    cachedData = valeur
+    //cachedData = valeur
 }
 
 export async function all_ebillet_FullData() {
