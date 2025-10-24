@@ -26,7 +26,7 @@ export function decrypter(message) {
 
 /// /api/ebillets/getAllEbillets : L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
 /// /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
-/// 
+///
 /*
 GET reservation
 /api/reservation/getAllreservation : L2FwaS9yZXNlcnZhdGlvbi9nZXRBbGxyZXNlcnZhdGlvbg==
@@ -35,6 +35,12 @@ POST reservation
 /api/reservation/get_reservation_ContrePropositionByIdebillet : L2FwaS9yZXNlcnZhdGlvbi9nZXRfcmVzZXJ2YXRpb25fQ29udHJlUHJvcG9zaXRpb25CeUlkZWJpbGxldA==
 /api/reservation/get_reservation_ContrePropositionByIdpartenaire : L2FwaS9yZXNlcnZhdGlvbi9nZXRfcmVzZXJ2YXRpb25fQ29udHJlUHJvcG9zaXRpb25CeUlkcGFydGVuYWlyZQ==
 /api/reservation/get_all_reservation_byPartenaire : L2FwaS9yZXNlcnZhdGlvbi9nZXRfYWxsX3Jlc2VydmF0aW9uX2J5UGFydGVuYWlyZQo=
+/api/reservation/get_all_reservation_enattente : L2FwaS9yZXNlcnZhdGlvbi9nZXRfYWxsX3Jlc2VydmF0aW9uX2J5UGFydGVuYWlyZQ==
+/api/reservation/get_all_reservation_enattenteByIdpartenaire : L2FwaS9yZXNlcnZhdGlvbi9nZXRfYWxsX3Jlc2VydmF0aW9uX2J5UGFydGVuYWlyZQo=
+/api/reservation/get_reservation_enattenteByIdebillet : L2FwaS9yZXNlcnZhdGlvbi9nZXRfcmVzZXJ2YXRpb25fZW5hdHRlbnRlQnlJZGViaWxldAo=
+/api/reservation/getAllreservation_reserver : L2FwaS9yZXNlcnZhdGlvbi9nZXRBbGxyZXNlcnZhdGlvbl9yZXNlcnZQZXIK
+/api/reservation/get_all_reservation_reserverByIdpartenaire : L2FwaS9yZXNlcnZhdGlvbi9nZXRfYWxsX3Jlc2VydmF0aW9uX3Jlc2VydmVyQnlJZHBhcnRlbmFpcmUK
+/api/reservation/get_reservation_reserverByIdebillet : L2FwaS9yZXNlcnZhdGlvbi9nZXRfcmVzZXJ2YXRpb25fcmVzZXJ2YXRpb25CeUlkZWJpbGxldA==
 
 */
 /// /api/function/runFunction : L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==

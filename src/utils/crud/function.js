@@ -1,4 +1,19 @@
-///import { tri_reportByASC_ref,tri_ebilletByASC_ref,tri_ebilletByDate} from '../utils/crud/function.js';
+/*
+import { tri_reportByASC_ref,
+tri_ebilletByASC_ref,
+tri_ebilletByDate,
+tri_ebilletByASC_Date_rdv
+} from '../utils/crud/function.js';
+*/
+export function tri_ebilletByASC_Date_rdv(array_result) {
+    return [...array_result].sort((a, b) => {
+        const dateA = new Date(a.rdv).getTime();
+        const dateB = new Date(b.rdv).getTime();
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
+        return 0;
+    });
+}
 
 export function tri_ebilletByASC_Date(array_result) {
     return [...array_result].sort((a, b) => {

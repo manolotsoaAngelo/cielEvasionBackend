@@ -5,11 +5,53 @@ import {
     reservation_ContrePropositionByIdpartenaire,
     all_reservation_ContreProposition,
     all_reservation_FullData,
-    all_reservation_byPartenaire
+    all_reservation_byPartenaire,
+    all_reservation_enattente,
+    reservation_enattenteByIdebillet,
+    reservation_enattenteByIdpartenaire,
+    all_reservation_reserver,
+    reservation_reserverByIdebillet,
+    reservation_reserverByIdpartenaire
+
 } from '../services/reservation.js';
 
+export async function get_reservation_reserverByIdebillet(req, res) {
+    let value = post(req, res)
+    let result = await reservation_reserverByIdebillet(value._id)
+    res.status(201).json(compressed_obj(result));
+}
+
+export async function get_all_reservation_reserverByIdpartenaire(req, res) {
+    let value = post(req, res)
+    let result = await reservation_reserverByIdpartenaire(value._id)
+    res.status(201).json(compressed_obj(result));
+}
+
+
+export async function get_all_reservation_reserver(req, res) {
+    let result = await all_reservation_reserver()
+    res.status(201).json(compressed_obj(result));
+}
+
+export async function get_all_reservation_enattenteByIdpartenaire(req, res) {
+    let value = post(req, res)
+    let result = await reservation_enattenteByIdpartenaire(value._id)
+    res.status(201).json(compressed_obj(result));
+}
+
+export async function get_reservation_enattenteByIdebillet(req, res) {
+    let value = post(req, res)
+    let result = await reservation_enattenteByIdebillet(value._id)
+    res.status(201).json(compressed_obj(result));
+}
+
+export async function get_all_reservation_enattente(req, res) {
+    let result = await all_reservation_enattente()
+    res.status(201).json(compressed_obj(result));
+}
+
 export async function get_all_reservation_byId(req, res) {
-    let value = req
+    let value = post(req, res)
     let result = await all_reservation_byPartenaire(value._id)
     res.status(201).json(compressed_obj(result));
 }

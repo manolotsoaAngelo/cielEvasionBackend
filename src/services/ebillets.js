@@ -12,7 +12,7 @@ let lastFetchTime = 0;
 let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
-export  function init_cachedData_ebillet(valeur) {
+export function init_cachedData_ebillet(valeur) {
     cachedData = valeur
 }
 
