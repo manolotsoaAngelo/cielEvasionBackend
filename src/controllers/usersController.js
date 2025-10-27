@@ -3,7 +3,7 @@ import UsersService from '../services/users.js';
 
 //console.log(await UsersService.getAll());
 //console.log(await UsersService.getById("6e5646a3-697e-4a7f-8d33-53749be48815"));
-//console.log(await UsersService.getByEmail("quiquempoisaudrey@yahoo.fr"));
+console.log(await UsersService.getByEmail("quiquempoisaudrey@yahoo.fr"));
 
 export async function get_all_users(req, res) {
     let all_members_data = await UsersService.getAll();

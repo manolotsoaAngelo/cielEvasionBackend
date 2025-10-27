@@ -23,8 +23,9 @@ class UsersService {
   }
 
   async getById(id) {
-    await this._initPromise;
-    return this.data.find(item => item._id === id);
+    return (await get_wix_services(wixData_url + "_id/" + id)).data;
+    //await this._initPromise;
+    //return this.data.find(item => item._id === id);
   }
 
   async getByEmail(email) {
