@@ -1,6 +1,6 @@
 
 //import UsersService from '../services/users.js';
-
+import { get_wix_services } from "../utils/wixData/wixHttp.js";
 import { FullData } from '../utils/fullData/users.js';
 
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/";
