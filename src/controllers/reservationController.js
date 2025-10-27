@@ -1,62 +1,61 @@
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
-import {
-    all_reservation,
-    reservation_ContrePropositionByIdebillet,
-    reservation_ContrePropositionByIdpartenaire,
-    all_reservation_ContreProposition,
-    all_reservation_byPartenaire,
-    all_reservation_enattente,
-    reservation_enattenteByIdebillet,
-    reservation_enattenteByIdpartenaire,
-    all_reservation_reserver,
-    reservation_reserverByIdebillet,
-    reservation_reserverByIdpartenaire
-} from '../services/reservation.js';
+
+import ReservationService from '../services/reservation.js';
+
+//console.log(await ReservationService.getAllReservationReserver());
+//console.log(await ReservationService.getAllReservationContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await ReservationService.getReservationContrePropositionByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
+//console.log(await ReservationService.getAllReservationByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await ReservationService.getAll())
+//console.log(await ReservationService.getReservationReserverByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
+//console.log(await ReservationService.getAllReservationReserverByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await ReservationService.getAllReservationEnattenteByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await ReservationService.getReservationEnattenteByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
+//console.log(await ReservationService.getAllReservationEnattente())
 
 export async function get_reservation_reserverByIdebillet(req, res) {
     let value = post(req, res)
-    let result = await reservation_reserverByIdebillet(value._id)
+    let result = await ReservationService.getReservationReserverByIdebillet(value._id)
     res.status(201).json(compressed_obj(result));
 }
 
 export async function get_all_reservation_reserverByIdpartenaire(req, res) {
     let value = post(req, res)
-    let result = await reservation_reserverByIdpartenaire(value._id)
+    let result = await ReservationService.getAllReservationReserverByIdpartenaire(value._id)
     res.status(201).json(compressed_obj(result));
 }
 
-
 export async function get_all_reservation_reserver(req, res) {
-    let result = await all_reservation_reserver()
+    let result = await ReservationService.getAllReservationReserver()
     res.json(compressed_obj(result));
 }
 
 export async function get_all_reservation_enattenteByIdpartenaire(req, res) {
     let value = post(req, res)
-    let result = await reservation_enattenteByIdpartenaire(value._id)
+    let result = await ReservationService.getAllReservationEnattenteByIdpartenaire(value._id)
     res.status(201).json(compressed_obj(result));
 }
 
 export async function get_reservation_enattenteByIdebillet(req, res) {
     let value = post(req, res)
-    let result = await reservation_enattenteByIdebillet(value._id)
+    let result = await ReservationService.getReservationEnattenteByIdebillet(value._id)
     res.status(201).json(compressed_obj(result));
 }
 
 export async function get_all_reservation_enattente(req, res) {
-    let result = await all_reservation_enattente()
+    let result = await ReservationService.getAllReservationEnattente()
     res.json(compressed_obj(result));
 }
 
 export async function get_all_reservation_byId(req, res) {
     let value = post(req, res)
-    let result = await all_reservation_byPartenaire(value._id)
+    let result = await ReservationService.getAllReservationById(value._id)
     res.status(201).json(compressed_obj(result));
 }
 
 export async function get_all_reservation_byPartenaire(req, res) {
     let value = post(req, res)
-    let result = await all_reservation_byPartenaire(value._id)
+    let result = await ReservationService.getAllReservationByPartenaire(value._id)
     res.status(201).json(compressed_obj(result));
 }
 
@@ -69,12 +68,12 @@ export async function get_reservation_ContrePropositionByIdpartenaire(req, res) 
 }
 
 export async function get_all_reservation_ContreProposition(req, res) {
-    let result = await all_reservation_ContreProposition();
+    let result = await ReservationService.getAllReservationContreProposition();
     res.json(compressed_obj(result));
 }
 
 export async function get_all_reservation(req, res) {
-    let result = await all_reservation();
+    let result = await ReservationService.getAll();
     res.json(compressed_obj(result));
 }
 
@@ -88,9 +87,9 @@ async function postById(req, res, type) {
     let value = post(req, res)
     let result
     if (type === "partenaire") {
-        result = await reservation_ContrePropositionByIdpartenaire(value._id)
+        result = await ReservationService.getReservationContrePropositionByIdpartenaire(value._id)
     } else if (type === "ebillet") {
-        result = await reservation_ContrePropositionByIdebillet(value._id)
+        result = await ReservationService.getReservationContrePropositionByIdebillet(value._id)
     }
     res.status(201).json(compressed_obj(result));
 }

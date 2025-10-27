@@ -6,9 +6,9 @@ import {
     chaine_opt,
     opt_reportByRef
 } from '../utils/tinyFunction/tinyFunction.js';
-import { all_order, get_orderById, insert_order, get_orderByNumber, create_order_new } from '../services/orders.js';
-import { init_cachedData_ebillet } from '../services/ebillets.js';
+import { init_cachedData_ebillet } from '../utils/fullData/ebillets.js';
 
+import OrdersService from "../services/orders.js";
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -27,7 +27,7 @@ export async function runFunction(req, res) {
             break;
         ///Orders
         case 'create_order_new':
-            result = await create_order_new(value.valeur)
+            result = await OrdersService.create(value.valeur)
             break;
         case 'tri_reportByASC_ref':
             result = await tri_reportByASC_ref(value.valeur)

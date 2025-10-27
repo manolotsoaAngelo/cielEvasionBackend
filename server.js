@@ -3,7 +3,6 @@ import ebilletsRoutes from "./src/routes/ebillets.js";
 import reservationController from "./src/routes/reservation.js";
 import functionController from "./src/routes/function.js";
 import ordersController from "./src/routes/orders.js";
-import membersController from "./src/routes/members.js";
 import partenairesController from "./src/routes/partenaires.js";
 import usersController from "./src/routes/users.js";
 
@@ -19,7 +18,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/ebillets", ebilletsRoutes);
 app.use("/api/reservation", reservationController);
-app.use("/api/members", membersController);
 app.use("/api/function", functionController);
 app.use("/api/orders", ordersController);
 app.use("/api/partenaires", partenairesController);
