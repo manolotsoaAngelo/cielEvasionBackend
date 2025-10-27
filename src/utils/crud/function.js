@@ -1,10 +1,11 @@
 /*
-import { tri_reportByASC_ref,
-tri_ebilletByASC_ref,
-tri_ebilletByDate,
-tri_ebilletByDEC_Date_Byrdv,
-create_order_new
-} from '../utils/crud/function.js';
+import {
+  tri_reportByASC_ref,
+  tri_ebilletByASC_ref,
+  tri_ebilletByASC_Date,
+  tri_ebilletByDEC_Date_Byrdv,
+  create_order_new
+} from "../utils/crud/function.js";
 */
 
 import EbilletsService from "../../services/ebillets.js";
