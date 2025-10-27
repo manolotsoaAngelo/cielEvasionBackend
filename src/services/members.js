@@ -1,5 +1,6 @@
 import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
 import { get_wix_services } from '../utils/wixData/wixHttp.js'
+
 ///import { all_members,get_membersById,get_membersByEmail } from '../services/ebillets.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/"
 let collection_name = "Membre_everyone"

@@ -26,6 +26,12 @@ export function decrypter(message) {
 
 /// /api/ebillets/getAllEbillets : L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
 /// /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
+/*
+    /api/users/getAllUsers : L2FwaS91c2Vycy9nZXRBbGxVc2Vycw==
+    /api/users/getUserByEmail : L2FwaS91c2Vycy9nZXRVc2VyQnlFbWFpbA==
+    /api/users/getUserById : L2FwaS91c2Vycy9nZXRVc2VyQnlJZA==
+
+*/
 ///
 /*
 GET reservation
