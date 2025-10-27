@@ -22,7 +22,6 @@ export async function get_userById(req, res) {
     res.status(201).json(compressed_obj(result));
 }
 
-
 function post(req, res) {
     const { data } = (req.body);
     if (!data) return res.status(400).json({ error: "données requis" });

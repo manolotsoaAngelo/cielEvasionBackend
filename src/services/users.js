@@ -1,4 +1,7 @@
-import { all_members_FullData } from './members.js';
+import { FullData } from '../utils/fullData/users.js';
+
+let collection_name = "Membre_everyone"
+let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/"
 
 class UsersService {
   constructor() {
@@ -7,7 +10,7 @@ class UsersService {
   }
 
   async _init() {
-    this.data = await all_members_FullData();
+    this.data = await FullData(wixData_url_get_FullData);
   }
 
   async getAll() {

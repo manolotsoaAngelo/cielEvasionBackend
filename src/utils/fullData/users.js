@@ -1,4 +1,4 @@
-import { get_wix_services } from '../utils/wixData/wixHttp.js'
+import { get_wix_services } from '../wixData/wixHttp.js'
 
 let cachedData = null;
 let lastFetchTime = 0;
