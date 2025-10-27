@@ -3,15 +3,16 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import ReservationService from '../services/reservation.js';
 
 //console.log(await ReservationService.getAllReservationReserver());
+//console.log(await ReservationService.getAll())
+//console.log(await ReservationService.getAllReservationEnattente())
+//console.log(await ReservationService.getAllReservationContreProposition())
 //console.log(await ReservationService.getAllReservationContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await ReservationService.getReservationContrePropositionByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
 //console.log(await ReservationService.getAllReservationByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
-//console.log(await ReservationService.getAll())
 //console.log(await ReservationService.getReservationReserverByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
 //console.log(await ReservationService.getAllReservationReserverByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await ReservationService.getAllReservationEnattenteByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await ReservationService.getReservationEnattenteByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
-//console.log(await ReservationService.getAllReservationEnattente())
 
 export async function get_reservation_reserverByIdebillet(req, res) {
     let value = post(req, res)
@@ -87,7 +88,7 @@ async function postById(req, res, type) {
     let value = post(req, res)
     let result
     if (type === "partenaire") {
-        result = await ReservationService.getReservationContrePropositionByIdpartenaire(value._id)
+        result = await ReservationService.getAllReservationContrePropositionByIdpartenaire(value._id)
     } else if (type === "ebillet") {
         result = await ReservationService.getReservationContrePropositionByIdebillet(value._id)
     }
