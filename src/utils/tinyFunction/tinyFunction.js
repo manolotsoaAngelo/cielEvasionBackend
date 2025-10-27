@@ -6,7 +6,7 @@ import { chaine_opt_partenaire,
  opt_reportByRef} from '../utils/tinyFunction/tinyFunction.js';
 */
 
-console.log(await opt_reportByRef("E10917-2"))
+//console.log(await opt_reportByRef("E10917-2"))
 //console.log(await chaine_opt_partenaire("E10917-2"))
 //console.log(await chaine_opt("E10917-2"))
 
