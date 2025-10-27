@@ -26,7 +26,7 @@ export async function runFunction(req, res) {
             break;
         ///Orders
         case 'create_order_new':
-            //result = await OrdersService.create(value.valeur)
+            result = await OrdersService.create(value.valeur)
             break;
         case 'tri_reportByASC_ref':
             result = await tri_reportByASC_ref(value.valeur)
