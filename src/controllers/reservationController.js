@@ -11,7 +11,6 @@ import {
     all_reservation_reserver,
     reservation_reserverByIdebillet,
     reservation_reserverByIdpartenaire
-
 } from '../services/reservation.js';
 
 export async function get_reservation_reserverByIdebillet(req, res) {
