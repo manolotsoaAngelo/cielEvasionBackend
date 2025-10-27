@@ -3,6 +3,7 @@
 
 import { FullData } from '../utils/fullData/users.js';
 
+let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/";
 let collection_name = "Membre_everyone"
 let wixData_url_get_FullData = "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/"
 
@@ -13,7 +14,7 @@ class UsersService {
   }
 
   async _init() {
-    this.data = await FullData(wixData_url_get_FullData);
+    this.data = await FullData(wixData_url);
   }
 
   async getAll() {

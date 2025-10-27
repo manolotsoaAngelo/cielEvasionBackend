@@ -28,7 +28,7 @@ class OrdersService {
     this._initPromise = this._init();
   }
   async _init() {
-    this.data = await FullData(wixData_url_get_FullData);
+    this.data = await FullData(wixData_url);
   }
   async getAll() {
     await this._initPromise;
