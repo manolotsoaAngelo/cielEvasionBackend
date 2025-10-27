@@ -7,10 +7,10 @@ create_order_new
 } from '../utils/crud/function.js';
 */
 
-import EbilletsService from "../services/ebillets.js";
-import UsersService from "../services/users.js";
-import OrdersService from "../services/orders.js";
-import PartenairesService from "../services/partenaires.js";
+import EbilletsService from "../../services/ebillets.js";
+import UsersService from "../../services/users.js";
+import OrdersService from "../../services/orders.js";
+import PartenairesService from "../../services/partenaires.js";
 
 export function tri_ebilletByDEC_Date_Byrdv(array_result) {
     return [...array_result].sort((a, b) => {
