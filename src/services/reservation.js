@@ -9,19 +9,48 @@ import {
     update_ebillet
 } from './ebillets.js';
 
-import { tri_reportByASC_ref,tri_ebilletByASC_ref,tri_ebilletByASC_Date} from '../utils/crud/function.js';
+import {
+    tri_reportByASC_ref,
+    tri_ebilletByASC_ref,
+    tri_ebilletByASC_Date,
+    tri_ebilletByDEC_Date_Byrdv
+} from '../utils/crud/function.js';
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_reservation"
 
-//console.log(await all_reservation_FullData())
 //console.log(await all_reservation_ContreProposition())
 //console.log(await reservation_ContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await reservation_ContrePropositionByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
-//console.log(await all_reservation_byPartenaire())
+//console.log(await all_reservation_byPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await all_reservation())
+//console.log(await all_reservation_reserver())
+//console.log(await reservation_reserverByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
+//console.log(await reservation_reserverByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await reservation_enattenteByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await reservation_enattenteByIdebillet("9d2f2b55-6ddb-48f6-98b3-94a2955331408d2bb6bf-74fd-4666-8dfb-8e0876346cb3D10742-11"))
 //console.log(await all_reservation_enattente())
 
+export async function reservation_reserverByIdebillet(id) {
+    return (await all_reservation_reserver()).find(item => item._id === id)
+}
+
+export async function reservation_reserverByIdpartenaire(id) {
+    return tri_ebilletByDEC_Date_Byrdv(reserver(await all_reservation_byPartenaire(id)))
+}
+
+export async function all_reservation_reserver() {
+    return tri_ebilletByDEC_Date_Byrdv(reserver(await all_reservation()))
+}
+
+export async function reservation_enattenteByIdpartenaire(id) {
+    return tri_ebilletByASC_Date(enattente(await all_reservation_byPartenaire(id)))
+}
+
+export async function reservation_enattenteByIdebillet(id) {
+    return (await all_reservation_enattente()).find(item => item._id === id)
+}
+
 export async function all_reservation_enattente() {
-    return enattente(reservation(await all_ebillet_FullData()))
+    return tri_ebilletByASC_Date(enattente(await all_reservation()))
 }
 
 export async function all_reservation() {
@@ -70,10 +99,4 @@ function contreProposition(data) {
         !item.rdv &&
         (item.contrepropositionDate1 || item.contrepropositionDate2 || item.contrepropositionDate3)
     ));
-}
-
-export async function all_reservation_FullData() {
-    let full_data = await all_ebillet_FullData()
-    let reservations = full_data.filter(item => item.statut_reservation === "en attente" || (item.rdv_sup_now === true && item.statut_reservation === "reserver"))
-    return tri_reportByASC_ref(reservations)
 }
