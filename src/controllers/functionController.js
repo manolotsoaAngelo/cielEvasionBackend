@@ -15,7 +15,6 @@ import OrdersService from "../services/orders.js";
 ///import { services_post, services_get } from 'backend/modules/server/server'
 ///return await services_post("L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==", { typeFunction: 'opt_reportByRef', valeur: ref })
 
-
 export async function runFunction(req, res) {
     const { data } = (req.body);
     if (!data) return res.status(400).json({ error: "données requis" });
@@ -27,7 +26,7 @@ export async function runFunction(req, res) {
             break;
         ///Orders
         case 'create_order_new':
-            result = await OrdersService.create(value.valeur)
+            //result = await OrdersService.create(value.valeur)
             break;
         case 'tri_reportByASC_ref':
             result = await tri_reportByASC_ref(value.valeur)
