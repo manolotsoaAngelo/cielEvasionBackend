@@ -5,6 +5,7 @@ import functionController from "./src/routes/function.js";
 import ordersController from "./src/routes/orders.js";
 import membersController from "./src/routes/members.js";
 import partenairesController from "./src/routes/partenaires.js";
+import usersController from "./src/routes/users.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ app.use("/api/members", membersController);
 app.use("/api/function", functionController);
 app.use("/api/orders", ordersController);
 app.use("/api/partenaires", partenairesController);
+app.use("/api/users", usersController);
 
 app.use((req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
