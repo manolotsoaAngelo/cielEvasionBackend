@@ -10,9 +10,9 @@ import {
   opt_reportByRef
 } from "../utils/tinyFunction/tinyFunction.js";
 import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
-import { init_cachedData_orders } from "../utils/fullData/ebillets.js";
-import { init_cachedData_partenaire } from "../utils/fullData/ebillets.js";
-import { init_cachedData_users } from "../utils/fullData/ebillets.js";
+import { init_cachedData_orders } from "../utils/fullData/orders.js";
+import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
+import { init_cachedData_users } from "../utils/fullData/users.js";
 
 import OrdersService from "../services/orders.js";
 
