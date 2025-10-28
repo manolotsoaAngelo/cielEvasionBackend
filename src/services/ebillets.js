@@ -21,9 +21,10 @@ class EbilletsService {
   async _init() {
     this.data = await FullData(wixData_url_get_FullData);
   }
-  
+
   async refresh() {
     this.data = await FullData(wixData_url_get_FullData);
+    this._initPromise = Promise.resolve();
     return this.data;
   }
 
