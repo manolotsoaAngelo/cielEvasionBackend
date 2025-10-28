@@ -7,23 +7,20 @@ import {
 } from "../utils/wixData/wixHttp.js";
 import { FullData } from "../utils/fullData/ebillets.js";
 
+let wixData_url_get = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/";
+let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/ebillet/";
+let collection_name = "Reports";
+let wixData_url_get_FullData =
+  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+
 class EbilletsService {
   constructor() {
     this.data = [];
     this._initPromise = this._init();
-    this.wixData_url_get = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/";
-    this.wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/ebillet/";
-    let collection_name = "Reports";
-    this.wixData_url_get_FullData =
-      "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
   }
 
   async _init() {
-    this.data = await FullData(this.wixData_url_get_FullData);
-  }
-
-  async getUrlFullData() {
-    return this.wixData_url_get_FullData
+    this.data = await FullData(wixData_url_get_FullData);
   }
 
   async getAll() {
@@ -37,12 +34,12 @@ class EbilletsService {
   }
 
   async updateEbillet(ebillet) {
-    return (await post_wix_services(this.wixData_url_post + "update/", ebillet))
+    return (await post_wix_services(wixData_url_post + "update/", ebillet))
       .data;
   }
 
   async getByidArticle(idArticle) {
-    return (await get_wix_services(this.wixData_url_get + "_idArticle/" + idArticle))
+    return (await get_wix_services(wixData_url_get + "_idArticle/" + idArticle))
       .data;
   }
 
@@ -53,7 +50,7 @@ class EbilletsService {
 
   async getAllEbilletByPartenaire(idPartenaire) {
     return (
-      await get_wix_services(this.wixData_url_get + "partenaire/" + idPartenaire)
+      await get_wix_services(wixData_url_get + "partenaire/" + idPartenaire)
     ).data;
   }
 }
