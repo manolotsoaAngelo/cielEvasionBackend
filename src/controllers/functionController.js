@@ -15,6 +15,7 @@ import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 import { init_cachedData_users } from "../utils/fullData/users.js";
 
 import OrdersService from "../services/orders.js";
+import EbilletsService from '../services/ebillets.js';
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -28,6 +29,7 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
+    await  EbilletsService.refresh()
       await init_cachedData_ebillet(value.valeur)
       await init_cachedData_orders(value.valeur)
       await init_cachedData_partenaire(value.valeur)

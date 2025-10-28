@@ -1,4 +1,3 @@
-
 ///import EbilletsService from "../services/ebillets.js";
 
 import {
@@ -21,6 +20,11 @@ class EbilletsService {
 
   async _init() {
     this.data = await FullData(wixData_url_get_FullData);
+  }
+  
+  async refresh() {
+    this.data = await FullData(wixData_url_get_FullData);
+    return this.data;
   }
 
   async getAll() {
