@@ -12,7 +12,7 @@ export function init_cachedData_ebillet(valeur) {
 }
 
 export async function FullData(wixData_url_get_FullData) {
-    return await get_wix_services(wixData_url_get_FullData);
+    return (await get_wix_services(wixData_url_get_FullData)).data;
     /*
     const now = Date.now();
     const hasCache = cachedData && (now - lastFetchTime) < CACHE_DURATION * 2;
