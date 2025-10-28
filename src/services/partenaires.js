@@ -11,21 +11,15 @@ let wixData_url_get_FullData =
 class PartenairesService {
   constructor() {
     this.data = [];
-    this._initPromise = this._init();
-  }
-
-  async _init() {
-    this.data = await FullData(wixData_url_get_FullData);
   }
 
   async getAll() {
-    await this._initPromise;
-    return this.data;
+    return await FullData(wixData_url_get_FullData);
   }
 
   async getById(id) {
     await this._initPromise;
-    return this.data.find((item) => item._id === id);
+    return (await this.getAll()).find((item) => item._id === id);
   }
   async getByIdEbillet(IdEbillet) {
     return (await get_wix_services(wixData_url + "_idEbillet/" + IdEbillet))

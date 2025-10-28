@@ -3,7 +3,7 @@ import { compressed_obj, decompressed_obj } from '../utils/compression/compressi
 import ReservationService from '../services/reservation.js';
 
 //console.log(await ReservationService.getAllReservationReserver());
-console.log(await ReservationService.getAll())
+//console.log(await ReservationService.getAll())
 //console.log(await ReservationService.getAllReservationEnattente())
 //console.log(await ReservationService.getAllReservationContreProposition())
 //console.log(await ReservationService.getAllReservationContrePropositionByIdpartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))

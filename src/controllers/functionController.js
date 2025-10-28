@@ -7,7 +7,7 @@ import { crypter, decrypter } from "../utils/cryptographie/cryptographie.js";
 import {
   chaine_opt_partenaire,
   chaine_opt,
-  opt_reportByRef
+  opt_reportByRef,
 } from "../utils/tinyFunction/tinyFunction.js";
 import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
 import { init_cachedData_orders } from "../utils/fullData/orders.js";
@@ -15,7 +15,6 @@ import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 import { init_cachedData_users } from "../utils/fullData/users.js";
 
 import OrdersService from "../services/orders.js";
-import EbilletsService from '../services/ebillets.js';
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -29,10 +28,10 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
-      await init_cachedData_ebillet(value.valeur)
-      await init_cachedData_orders(value.valeur)
-      await init_cachedData_partenaire(value.valeur)
-      await init_cachedData_users(value.valeur)
+      init_cachedData_ebillet();
+      init_cachedData_orders();
+      init_cachedData_partenaire();
+      init_cachedData_users();
       break;
     ///Orders
     case "create_order_new":

@@ -1,4 +1,3 @@
-
 //import OrdersService from "../services/orders.js";
 
 import {
@@ -10,10 +9,9 @@ import {
   tri_ebilletByASC_ref,
   tri_ebilletByASC_Date,
   tri_ebilletByDEC_Date_Byrdv,
-  create_order_new
+  create_order_new,
 } from "../utils/crud/function.js";
 import { FullData } from "../utils/fullData/orders.js";
-
 
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_order/";
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/order/";
@@ -25,18 +23,13 @@ let wixData_url_get_FullData =
 class OrdersService {
   constructor() {
     this.data = [];
-    this._initPromise = this._init();
-  }
-  async _init() {
-    this.data = await FullData(wixData_url);
   }
   async getAll() {
-    await this._initPromise;
-    return this.data;
+    return await FullData(wixData_url);
   }
   async getById(id) {
     await this._initPromise;
-    return this.data.find((item) => item._id === id);
+    return (await this.getAll()).find((item) => item._id === id);
   }
   async insert(order) {
     return (await post_wix_services(wixData_url_post + "insert/", order)).data;
