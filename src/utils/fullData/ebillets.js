@@ -5,11 +5,10 @@ let lastFetchTime = 0;
 let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
-export async function init_cachedData_ebillet(valeur) {
-    let collection_name = "Reports";
-let wixData_url_get_FullData =
-  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
-   return await  refreshData(wixData_url_get_FullData);
+export function init_cachedData_ebillet(valeur) {
+     cachedData = null;
+ lastFetchTime = 0;
+ refreshPromise = null;
 }
 
 export async function FullData(wixData_url_get_FullData) {
