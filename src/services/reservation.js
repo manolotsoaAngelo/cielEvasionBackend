@@ -59,11 +59,9 @@ class ReservationService {
   }
 
   async getAllReservationReserver() {
-    await this._initPromise;
     return tri_ebilletByDEC_Date_Byrdv(reserver(await this.getAll()));
   }
   async getAllReservationEnattente() {
-    await this._initPromise;
     return tri_ebilletByDEC_Date_Byrdv(enattente(await this.getAll()));
   }
   async getAllReservationContreProposition() {
