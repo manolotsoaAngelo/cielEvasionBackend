@@ -21,13 +21,6 @@ import OrdersService from "../services/orders.js";
 ///import { services_post, services_get } from 'backend/modules/server/server'
 ///return await services_post("L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==", { typeFunction: 'opt_reportByRef', valeur: ref })
 
-function init_cachedData(valeur) {
-  init_cachedData_ebillet(valeur);
-  init_cachedData_orders(valeur);
-  init_cachedData_partenaire(valeur);
-  init_cachedData_users(valeur);
-}
-
 export async function runFunction(req, res) {
   const { data } = req.body;
   if (!data) return res.status(400).json({ error: "données requis" });
@@ -35,7 +28,7 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
-      result = init_cachedData(value.valeur);
+      result = [init_cachedData_ebillet(value.valeur), init_cachedData_orders(value.valeur), init_cachedData_partenaire(value.valeur), init_cachedData_users(value.valeur)];
       break;
     ///Orders
     case "create_order_new":
