@@ -5,6 +5,10 @@ let lastFetchTime = 0;
 let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
+export function init_cachedData_orders(valeur) {
+    cachedData = valeur
+}
+
 export async function FullData(wixData_url_get_FullData) {
     const now = Date.now();
     const hasCache = cachedData && (now - lastFetchTime) < CACHE_DURATION * 2;
