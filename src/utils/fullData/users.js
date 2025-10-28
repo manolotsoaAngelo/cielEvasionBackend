@@ -6,7 +6,10 @@ let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
 export function init_cachedData_users(valeur) {
-   return cachedData = valeur
+    cachedData = null;
+ lastFetchTime = 0;
+ refreshPromise = null;
+   return  valeur
 }
 
 export async function FullData(wixData_url_get_FullData) {
