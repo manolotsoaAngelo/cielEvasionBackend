@@ -31,7 +31,7 @@ class EbilletsService {
   }
 
   async getById(id) {
-    await this._initPromise;
+    //await this._initPromise;
     return (await this.getAll()).find((item) => item._id === id);
   }
 
@@ -46,7 +46,7 @@ class EbilletsService {
   }
 
   async getByRef(ref) {
-    await this._initPromise;
+    //await this._initPromise;
     return (await this.getAll()).find((item) => item.ref === ref);
   }
 
