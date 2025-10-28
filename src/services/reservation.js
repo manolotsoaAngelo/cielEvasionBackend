@@ -47,32 +47,19 @@ function reservation(data) {
 class ReservationService {
   constructor() {
     this.data = [];
-    //this._initPromise = this._init();
-  }
-/*
-  async _init() {
-    this.data = reservation(await EbilletsService.getAll());
-  }
-*/
-  async _data() {
-    return reservation(await EbilletsService.getAll());
   }
 
   async getAll() {
-    //await this._initPromise;
-    return await this._data;
+    return reservation(await EbilletsService.getAll());
   }
 
   async getAllReservationReserver() {
-    //await this._initPromise;
     return tri_ebilletByDEC_Date_Byrdv(reserver(await this.getAll()));
   }
   async getAllReservationEnattente() {
-    //await this._initPromise;
     return tri_ebilletByDEC_Date_Byrdv(enattente(await this.getAll()));
   }
   async getAllReservationContreProposition() {
-    //await this._initPromise;
     return tri_ebilletByASC_Date(contreProposition(await this.getAll()));
   }
   async getAllReservationByPartenaire(id_partenaire) {

@@ -15,23 +15,13 @@ let wixData_url_get_FullData =
 class EbilletsService {
   constructor() {
     this.data = [];
-    //this._initPromise = this._init();
-  }
-/*
-  async _init() {
-    this.data = await FullData(wixData_url_get_FullData);
-  }
-  */
-  async _data() {
-    return await FullData(wixData_url_get_FullData);
   }
 
   async getAll() {
-    return await this._data();
+    return await FullData(wixData_url_get_FullData);
   }
 
   async getById(id) {
-    //await this._initPromise;
     return (await this.getAll()).find((item) => item._id === id);
   }
 
@@ -46,7 +36,6 @@ class EbilletsService {
   }
 
   async getByRef(ref) {
-    //await this._initPromise;
     return (await this.getAll()).find((item) => item.ref === ref);
   }
 
