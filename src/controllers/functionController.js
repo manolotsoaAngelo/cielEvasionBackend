@@ -28,7 +28,7 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
-      result = [init_cachedData_ebillet(value.valeur), init_cachedData_orders(value.valeur), init_cachedData_partenaire(value.valeur), init_cachedData_users(value.valeur)];
+      result = [await init_cachedData_ebillet(value.valeur),await init_cachedData_orders(value.valeur),await init_cachedData_partenaire(value.valeur),await init_cachedData_users(value.valeur)];
       break;
     ///Orders
     case "create_order_new":
