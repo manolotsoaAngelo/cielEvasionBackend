@@ -27,12 +27,12 @@ class EbilletsService {
   }
 
   async getAll() {
-    return this._data();
+    return await this._data();
   }
 
   async getById(id) {
     await this._initPromise;
-    return (this.getAll()).find((item) => item._id === id);
+    return (await this.getAll()).find((item) => item._id === id);
   }
 
   async updateEbillet(ebillet) {
@@ -47,7 +47,7 @@ class EbilletsService {
 
   async getByRef(ref) {
     await this._initPromise;
-    return (this.getAll()).find((item) => item.ref === ref);
+    return (await this.getAll()).find((item) => item.ref === ref);
   }
 
   async getAllEbilletByPartenaire(idPartenaire) {
