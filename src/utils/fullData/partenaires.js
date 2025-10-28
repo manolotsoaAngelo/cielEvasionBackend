@@ -6,6 +6,9 @@ let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
 export async function init_cachedData_partenaire(valeur) {
+    let collection_name = "Partenaire_test";
+let wixData_url_get_FullData =
+  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
     return await refreshData(wixData_url_get_FullData);
 }
 
