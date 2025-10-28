@@ -5,12 +5,12 @@ let lastFetchTime = 0;
 let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
-export function init_cachedData_ebillet(valeur) {
-     cachedData = null;
- lastFetchTime = 0;
- refreshPromise = null;
-}
 */
+export function init_cachedData_ebillet(valeur) {
+     //cachedData = null;
+ //lastFetchTime = 0;
+ ///refreshPromise = null;
+}
 export async function FullData(wixData_url_get_FullData) {
     return (await get_wix_services(wixData_url_get_FullData)).data;
     /*
