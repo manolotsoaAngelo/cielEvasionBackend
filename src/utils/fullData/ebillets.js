@@ -1,5 +1,5 @@
 import { get_wix_services } from '../wixData/wixHttp.js'
-
+/*
 let cachedData = null;
 let lastFetchTime = 0;
 let refreshPromise = null;
@@ -10,7 +10,7 @@ export function init_cachedData_ebillet(valeur) {
  lastFetchTime = 0;
  refreshPromise = null;
 }
-
+*/
 export async function FullData(wixData_url_get_FullData) {
     return (await get_wix_services(wixData_url_get_FullData)).data;
     /*
@@ -30,7 +30,7 @@ export async function FullData(wixData_url_get_FullData) {
     return refreshPromise;
     */
 }
-
+/*
 async function refreshData(wixData_url_get_FullData) {
     try {
         const response = await get_wix_services(wixData_url_get_FullData);
@@ -44,3 +44,4 @@ async function refreshData(wixData_url_get_FullData) {
         return cachedData || [];
     }
 }
+*/
