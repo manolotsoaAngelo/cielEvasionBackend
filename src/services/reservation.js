@@ -71,7 +71,6 @@ class ReservationService {
     return tri_ebilletByASC_Date(contreProposition(this.data));
   }
   async getAllReservationByPartenaire(id_partenaire) {
-    await this._initPromise;
     return reservation(
       await EbilletsService.getAllEbilletByPartenaire(id_partenaire)
     );
