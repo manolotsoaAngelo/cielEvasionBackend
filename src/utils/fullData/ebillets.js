@@ -1,19 +1,15 @@
 import { get_wix_services } from '../wixData/wixHttp.js'
-/*
+
 let cachedData = null;
 let lastFetchTime = 0;
 let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
-*/
 export function init_cachedData_ebillet(valeur) {
-     //cachedData = null;
- //lastFetchTime = 0;
- ///refreshPromise = null;
+   return cachedData = valeur
 }
+
 export async function FullData(wixData_url_get_FullData) {
-    return (await get_wix_services(wixData_url_get_FullData)).data;
-    /*
     const now = Date.now();
     const hasCache = cachedData && (now - lastFetchTime) < CACHE_DURATION * 2;
     if (hasCache) {
@@ -28,9 +24,8 @@ export async function FullData(wixData_url_get_FullData) {
     }
 
     return refreshPromise;
-    */
 }
-/*
+
 async function refreshData(wixData_url_get_FullData) {
     try {
         const response = await get_wix_services(wixData_url_get_FullData);
@@ -44,4 +39,3 @@ async function refreshData(wixData_url_get_FullData) {
         return cachedData || [];
     }
 }
-*/

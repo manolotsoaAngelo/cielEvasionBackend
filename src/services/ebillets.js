@@ -15,30 +15,24 @@ let wixData_url_get_FullData =
 class EbilletsService {
   constructor() {
     this.data = [];
-    this._initPromise = this._init();
+    //this._initPromise = this._init();
   }
-
+/*
   async _init() {
     this.data = await FullData(wixData_url_get_FullData);
   }
-
-  async refresh() {
-    this._initPromise = (async () => {
-      this.data = await FullData(wixData_url_get_FullData);
-    })();
-
-    await this._initPromise;
-    return this.data;
+  */
+  async _data() {
+    return await FullData(wixData_url_get_FullData);
   }
 
   async getAll() {
-    await this._initPromise;
-    return this.data;
+    return this._data();
   }
 
   async getById(id) {
     await this._initPromise;
-    return this.data.find((item) => item._id === id);
+    return this.getAll().find((item) => item._id === id);
   }
 
   async updateEbillet(ebillet) {
@@ -53,7 +47,7 @@ class EbilletsService {
 
   async getByRef(ref) {
     await this._initPromise;
-    return this.data.find((item) => item.ref === ref);
+    return this.getAll().find((item) => item.ref === ref);
   }
 
   async getAllEbilletByPartenaire(idPartenaire) {
