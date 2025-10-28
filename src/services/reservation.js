@@ -59,15 +59,19 @@ class ReservationService {
   }
 
   async getAllReservationReserver() {
-    return tri_ebilletByDEC_Date_Byrdv(reserver(await this.getAll()));
+    await this._initPromise;
+    return tri_ebilletByDEC_Date_Byrdv(reserver(this.data));
   }
   async getAllReservationEnattente() {
-    return tri_ebilletByDEC_Date_Byrdv(enattente(await this.getAll()));
+    await this._initPromise;
+    return tri_ebilletByDEC_Date_Byrdv(enattente(this.data));
   }
   async getAllReservationContreProposition() {
-    return tri_ebilletByASC_Date(contreProposition(await this.getAll()));
+    await this._initPromise;
+    return tri_ebilletByASC_Date(contreProposition(this.data));
   }
   async getAllReservationByPartenaire(id_partenaire) {
+    await this._initPromise;
     return reservation(
       await EbilletsService.getAllEbilletByPartenaire(id_partenaire)
     );
