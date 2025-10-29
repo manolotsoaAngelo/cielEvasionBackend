@@ -32,26 +32,6 @@ export function decrypter(message) {
     /api/users/getUserById : L2FwaS91c2Vycy9nZXRVc2VyQnlJZA==
 
 */
-<<<<<<< HEAD
-
-/*
-
-import { services_post, services_get } from 'backend/modules/server/server'
-
-export async function crypter(message) {
-    if (message) {
-        return await services_post("L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==", { typeFunction: "crypter", valeur: message })
-    }
-}
-
-export async function decrypter(message) {
-    if (message) {
-        return await services_post("L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==", { typeFunction: "decrypter", valeur: message })
-    }
-}
-
-*/
-=======
 ///
 /*
 GET reservation
@@ -72,4 +52,3 @@ POST reservation
 /// /api/function/runFunction : L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==
 /// /api/members/getAllMembers : L2FwaS9tZW1iZXJzL2dldEFsbE1lbWJlcnM=
 /// /api/partenaires/getAllpartenaires : L2FwaS9wYXJ0ZW5haXJlcy9nZXRBbGxwYXJ0ZW5haXJlcw==
->>>>>>> f32b7916dea8173491d1638044130bdf4d8c2511
