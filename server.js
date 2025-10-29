@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
 
+app.get("/ping", (req, res) => res.json({ status: "ok" }));
 app.get("/", (req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
-  //res.send("404 not found");
 });
 
 app.use("/api/ebillets", ebilletsRoutes);
