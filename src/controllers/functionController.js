@@ -28,10 +28,12 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
-      init_cachedData_ebillet();
-      init_cachedData_orders();
-      init_cachedData_partenaire();
-      init_cachedData_users();
+      return {
+        init_cachedData_ebillet: init_cachedData_ebillet(),
+        init_cachedData_orders: init_cachedData_orders(),
+        init_cachedData_partenaire: init_cachedData_partenaire(),
+        init_cachedData_users: init_cachedData_users(),
+      };
       break;
     ///Orders
     case "create_order_new":

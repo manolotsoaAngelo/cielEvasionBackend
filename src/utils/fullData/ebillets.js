@@ -9,6 +9,7 @@ export function init_cachedData_ebillet() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
+  return { cachedData:cachedData,lastFetchTime:lastFetchTime,refreshPromise:refreshPromise}
 }
 
 export async function FullData(wixData_url_get_FullData) {

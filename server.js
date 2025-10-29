@@ -11,9 +11,24 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
 
-app.get("/ping", (req, res) => res.json({ status: "ok" }));
 app.get("/", (req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
+});
+
+app.get("/ping", (req, res) => {
+  res.status(200).json({
+    status: "ok",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString(),
+  });
+});
+
+app.get("/health", async (req, res) => {
+  try {
+    res.status(200).json({ healthy: true });
+  } catch (err) {
+    res.status(500).json({ healthy: false, error: err.message });
+  }
 });
 
 app.use("/api/ebillets", ebilletsRoutes);
