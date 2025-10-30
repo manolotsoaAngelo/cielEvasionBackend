@@ -16,10 +16,19 @@ app.get("/", (req, res) => {
 });
 
 app.get("/ping", (req, res) => {
+  function formatDuration(seconds) {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    return `${h}h ${m}m ${s}s`;
+  }
+
   res.status(200).json({
     status: "ok",
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString(),
+    uptime: formatDuration(process.uptime()),
+    timestamp: new Date().toLocaleString("fr-FR", {
+      timeZone: "Indian/Antananarivo",
+    }),
   });
 });
 
