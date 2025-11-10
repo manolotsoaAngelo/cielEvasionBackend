@@ -44,6 +44,12 @@ class EbilletsService {
       await get_wix_services(wixData_url_get + "partenaire/" + idPartenaire)
     ).data;
   }
+  async getAllEbilletFactureByPartenaire(idPartenaire) {
+    let now = new Date().getTime();
+    return (await this.getAll()).filter(
+      (item) => item.bonFacture && new Date(item.reglementPrevu).getTime() > now
+    );
+  }
 }
 
 export default new EbilletsService();

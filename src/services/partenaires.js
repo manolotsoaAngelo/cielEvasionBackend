@@ -18,7 +18,6 @@ class PartenairesService {
   }
 
   async getById(id) {
-    await this._initPromise;
     return (await this.getAll()).find((item) => item._id === id);
   }
   async getByIdEbillet(IdEbillet) {

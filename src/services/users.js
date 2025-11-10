@@ -21,7 +21,6 @@ class UsersService {
   }
 
   async getByEmail(email) {
-    await this._initPromise;
     return this.data.find((item) => item.loginEmail === email);
   }
 }

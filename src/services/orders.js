@@ -28,7 +28,6 @@ class OrdersService {
     return await FullData(wixData_url);
   }
   async getById(id) {
-    await this._initPromise;
     return (await this.getAll()).find((item) => item._id === id);
   }
   async insert(order) {

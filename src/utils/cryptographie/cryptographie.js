@@ -1,15 +1,15 @@
 //import { crypter, decrypter } from '../utils/cryptographie/cryptographie.js'
 
 export function crypter(message) {
-    if (message) {
-        return btoa(message);
-    }
+  if (message) {
+    return btoa(message);
+  }
 }
 
 export function decrypter(message) {
-    if (message) {
-        return atob(message);
-    }
+  if (message) {
+    return atob(message);
+  }
 }
 
 //let crypt = crypter('/api/reservation/get_reservation_enattenteByIdebillet')
@@ -24,7 +24,7 @@ export function decrypter(message) {
 /// https://cielevasionbackend.onrender.com : aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t
 
 
-/// /api/ebillets/getAllEbillets : L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
+
 /// /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
 /*
     /api/users/getAllUsers : L2FwaS91c2Vycy9nZXRBbGxVc2Vycw==
@@ -33,6 +33,15 @@ export function decrypter(message) {
 
 */
 ///
+/*
+GET ebillet
+/// /api/ebillets/getAllEbillets : L2FwaS9lYmlsbGV0cy9nZXRBbGxFYmlsbGV0cw==
+
+POST ebillet
+
+/api/ebillets/get_All_Ebillet_Facture_ByPartenaire : L2FwaS9lYmlsbGV0cy9nZXRfQWxsX0ViaWxsZXRfRmFjdHVyZV9CeVBhcnRlbmFpcmU=
+
+*/
 /*
 GET reservation
 /api/reservation/getAllreservation : L2FwaS9yZXNlcnZhdGlvbi9nZXRBbGxyZXNlcnZhdGlvbg==
