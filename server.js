@@ -6,10 +6,22 @@ import ordersController from "./src/routes/orders.js";
 import partenairesController from "./src/routes/partenaires.js";
 import usersController from "./src/routes/users.js";
 
+import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
+import { init_cachedData_orders } from "../utils/fullData/orders.js";
+import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
+import { init_cachedData_users } from "../utils/fullData/users.js";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
+
+(async () => {
+  init_cachedData_ebillet();
+  init_cachedData_orders();
+  init_cachedData_partenaire();
+  init_cachedData_users();
+})();
 
 app.get("/", (req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
