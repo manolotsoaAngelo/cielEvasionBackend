@@ -9,7 +9,7 @@ export function init_cachedData_users() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
-  refreshData("https://ciel-evasion.fr/_functions/WixData/all_member/");
+  //refreshData("https://ciel-evasion.fr/_functions/WixData/all_member/");
   return { cachedData:cachedData,lastFetchTime:lastFetchTime,refreshPromise:refreshPromise}
 }
 
