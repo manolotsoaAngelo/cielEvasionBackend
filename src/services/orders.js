@@ -12,7 +12,7 @@ import {
   create_order_new,
 } from "../utils/crud/function.js";
 import { FullData } from "../utils/fullData/orders.js";
-
+import { init_cachedData_orders } from "../utils/fullData/orders.js";
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_order/";
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/order/";
 
@@ -23,6 +23,7 @@ let wixData_url_get_FullData =
 class OrdersService {
   constructor() {
     this.data = [];
+    init_cachedData_orders()
   }
   async getAll() {
     return await FullData(wixData_url);

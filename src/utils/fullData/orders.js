@@ -9,9 +9,35 @@ export function init_cachedData_orders() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
+  refreshData(wixData_url_get_FullData);
   return { cachedData:cachedData,lastFetchTime:lastFetchTime,refreshPromise:refreshPromise}
 }
 
+export async function FullData(wixData_url_get_FullData) {
+  if (cachedData) {
+    return cachedData;
+  }
+  if (!refreshPromise) {
+    refreshPromise = refreshData(wixData_url_get_FullData);
+  }
+  return refreshPromise;
+}
+
+export async function refreshData(wixData_url_get_FullData) {
+  try {
+    const response = await get_wix_services(wixData_url_get_FullData);
+    if (response?.data) {
+      cachedData = response.data;
+    }
+  } catch (error) {
+    console.error("Erreur lors du refresh :", error);
+  } finally {
+    refreshPromise = null;
+  }
+  return cachedData || [];
+}
+
+/*
 export async function FullData(wixData_url_get_FullData) {
   const now = Date.now();
   const hasCache = cachedData && now - lastFetchTime < CACHE_DURATION * 2;
@@ -42,3 +68,4 @@ async function refreshData(wixData_url_get_FullData) {
     return cachedData || [];
   }
 }
+*/
