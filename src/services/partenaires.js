@@ -4,9 +4,6 @@ import { get_wix_services } from "../utils/wixData/wixHttp.js";
 import { FullData } from "../utils/fullData/partenaires.js";
 import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_partenaire/";
-let collection_name = "Partenaire_test";
-let wixData_url_get_FullData =
-  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
 class PartenairesService {
   constructor() {
@@ -15,7 +12,7 @@ class PartenairesService {
   }
 
   async getAll() {
-    return await FullData(wixData_url_get_FullData);
+    return await FullData();
   }
 
   async getById(id) {

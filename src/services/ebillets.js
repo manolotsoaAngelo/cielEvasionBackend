@@ -8,9 +8,7 @@ import { FullData } from "../utils/fullData/ebillets.js";
 import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
 let wixData_url_get = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/";
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/ebillet/";
-let collection_name = "Reports";
-let wixData_url_get_FullData =
-  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+
 
 class EbilletsService {
   constructor() {
@@ -19,7 +17,7 @@ class EbilletsService {
   }
 
   async getAll() {
-    return await FullData(wixData_url_get_FullData);
+    return await FullData();
   }
 
   async getById(id) {

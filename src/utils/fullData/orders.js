@@ -9,7 +9,7 @@ export function init_cachedData_orders() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
-  refreshData(wixData_url_get_FullData);
+  refreshData("https://ciel-evasion.fr/_functions/WixData/all_order/");
   return { cachedData:cachedData,lastFetchTime:lastFetchTime,refreshPromise:refreshPromise}
 }
 
