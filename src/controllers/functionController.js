@@ -9,7 +9,7 @@ import {
   chaine_opt,
   opt_reportByRef,
 } from "../utils/tinyFunction/tinyFunction.js";
-import { init_cachedData_ebillet   } from "../utils/fullData/ebillets.js";
+import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
 import { init_cachedData_orders } from "../utils/fullData/orders.js";
 import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 import { init_cachedData_users } from "../utils/fullData/users.js";
@@ -31,18 +31,42 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
+      switch (value.valeur) {
+        case "ebillets":
+          result = {
+            init_cachedData_ebillet: init_cachedData_ebillet(),
+          };
+          EbilletsService.refresh();
+          break;
+        case "orders":
+          result = {
+            init_cachedData_orders: init_cachedData_orders(),
+          };
+          OrdersService.refresh();
+          break;
+        case "partenaires":
+          result = {
+            init_cachedData_partenaire: init_cachedData_partenaire(),
+          };
+          PartenairesService.refresh();
+          break;
+        case "users":
+          result = {
+            init_cachedData_users: init_cachedData_users(),
+          };
+          UsersService.refresh();
+          break;
+        default:
+          break;
+      }
+      /*
       result = {
         init_cachedData_ebillet: init_cachedData_ebillet(),
         init_cachedData_orders: init_cachedData_orders(),
         init_cachedData_partenaire: init_cachedData_partenaire(),
         init_cachedData_users: init_cachedData_users(),
       };
-      await Promise.all([
-        EbilletsService.refresh(),
-        OrdersService.refresh(),
-        PartenairesService.refresh(),
-        UsersService.refresh(),
-      ]);
+*/
       break;
     ///Orders
     case "create_order_new":
