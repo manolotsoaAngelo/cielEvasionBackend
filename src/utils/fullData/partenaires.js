@@ -13,7 +13,7 @@ export function init_cachedData_partenaire() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
-  //refreshData();
+  refreshData();
   return {
     cachedData: cachedData,
     lastFetchTime: lastFetchTime,
@@ -26,7 +26,7 @@ export async function FullData() {
     return cachedData;
   }
   if (!refreshPromise) {
-    refreshPromise = refreshData();
+    refreshPromise = await refreshData();
   }
   return refreshPromise;
 }

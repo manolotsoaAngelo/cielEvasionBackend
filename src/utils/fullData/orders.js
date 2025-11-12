@@ -9,7 +9,7 @@ export function init_cachedData_orders() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
-  //refreshData("https://ciel-evasion.fr/_functions/WixData/all_order/");
+  refreshData("https://ciel-evasion.fr/_functions/WixData/all_order/");
   return { cachedData:cachedData,lastFetchTime:lastFetchTime,refreshPromise:refreshPromise}
 }
 
@@ -18,7 +18,7 @@ export async function FullData(wixData_url_get_FullData) {
     return cachedData;
   }
   if (!refreshPromise) {
-    refreshPromise = refreshData(wixData_url_get_FullData);
+    refreshPromise = await refreshData(wixData_url_get_FullData);
   }
   return refreshPromise;
 }
