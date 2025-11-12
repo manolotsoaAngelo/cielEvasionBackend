@@ -26,7 +26,7 @@ export async function FullData(wixData_url_get_FullData) {
 export async function refreshData(wixData_url_get_FullData) {
   try {
     const response = await get_wix_services(wixData_url_get_FullData);
-    if (response?.data) {
+    if (response.data) {
       cachedData = response.data;
     }
   } catch (error) {
