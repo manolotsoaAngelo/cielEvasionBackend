@@ -2,13 +2,11 @@
 
 import { get_wix_services } from "../utils/wixData/wixHttp.js";
 import { FullData } from "../utils/fullData/partenaires.js";
-import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_partenaire/";
 
 class PartenairesService {
   constructor() {
     this.data = [];
-    init_cachedData_partenaire()
   }
 
   async getAll() {
