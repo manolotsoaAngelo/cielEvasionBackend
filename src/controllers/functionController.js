@@ -9,12 +9,15 @@ import {
   chaine_opt,
   opt_reportByRef,
 } from "../utils/tinyFunction/tinyFunction.js";
-import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
+import { init_cachedData_ebillet   } from "../utils/fullData/ebillets.js";
 import { init_cachedData_orders } from "../utils/fullData/orders.js";
 import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 import { init_cachedData_users } from "../utils/fullData/users.js";
 
+import EbilletsService from "../services/ebillets.js";
 import OrdersService from "../services/orders.js";
+import PartenairesService from "../services/partenaires.js";
+import UsersService from "../services/users.js";
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -28,6 +31,12 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
+      await Promise.all([
+        EbilletsService.refresh(),
+        OrdersService.refresh(),
+        PartenairesService.refresh(),
+        UsersService.refresh(),
+      ]);
       result = {
         init_cachedData_ebillet: init_cachedData_ebillet(),
         init_cachedData_orders: init_cachedData_orders(),

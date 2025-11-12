@@ -5,15 +5,21 @@ import {
   post_wix_services,
 } from "../utils/wixData/wixHttp.js";
 import { FullData } from "../utils/fullData/ebillets.js";
+import {
+  init_cachedData_ebillet,
+  refreshData,
+} from "../utils/fullData/ebillets.js";
+
 let wixData_url_get = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/";
 let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/ebillet/";
-
 
 class EbilletsService {
   constructor() {
     this.data = [];
   }
-
+  async refresh() {
+    return await refreshData();
+  }
   async getAll() {
     return await FullData();
   }

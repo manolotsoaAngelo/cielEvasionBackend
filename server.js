@@ -6,10 +6,10 @@ import ordersController from "./src/routes/orders.js";
 import partenairesController from "./src/routes/partenaires.js";
 import usersController from "./src/routes/users.js";
 
-import { init_cachedData_ebillet } from "./src/utils/fullData/ebillets.js";
-import { init_cachedData_orders } from "./src/utils/fullData/orders.js";
-import { init_cachedData_partenaire } from "./src/utils/fullData/partenaires.js";
-import { init_cachedData_users } from "./src/utils/fullData/users.js";
+import EbilletsService from "./src/services/ebillets.js";
+import OrdersService from "./src/services/orders.js";
+import PartenairesService from "./src/services/partenaires.js";
+import UsersService from "./src/services/users.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,10 +17,12 @@ app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
 
 process.nextTick(async () => {
-  init_cachedData_ebillet();
-  init_cachedData_orders();
-  init_cachedData_partenaire();
-  init_cachedData_users();
+  await Promise.all([
+    EbilletsService.refresh(),
+    OrdersService.refresh(),
+    PartenairesService.refresh(),
+    UsersService.refresh(),
+  ]);
 });
 
 app.get("/", (req, res) => {

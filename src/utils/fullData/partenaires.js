@@ -1,5 +1,9 @@
 import { get_wix_services } from "../wixData/wixHttp.js";
-
+/*
+import { init_cachedData_partenaire,
+  refresh_partenaire
+ } from "../utils/fullData/partenaires.js";
+*/
 let cachedData = null;
 let lastFetchTime = 0;
 let refreshPromise = null;
@@ -13,14 +17,15 @@ export function init_cachedData_partenaire() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
-  //refreshData();
   return {
     cachedData: cachedData,
     lastFetchTime: lastFetchTime,
     refreshPromise: refreshPromise,
   };
 }
-
+export async function refresh_partenaire() {
+  await refreshData();
+}
 export async function FullData() {
   if (cachedData) {
     return cachedData;

@@ -1,5 +1,9 @@
 import { get_wix_services } from "../wixData/wixHttp.js";
-
+/*
+import { init_cachedData_orders,
+  refresh_orders
+ } from "../utils/fullData/orders.js";
+*/
 let cachedData = null;
 let lastFetchTime = 0;
 let refreshPromise = null;
@@ -9,8 +13,11 @@ export function init_cachedData_orders() {
   cachedData = null;
   lastFetchTime = 0;
   refreshPromise = null;
-  //refreshData("https://ciel-evasion.fr/_functions/WixData/all_order/");
-  return { cachedData:cachedData,lastFetchTime:lastFetchTime,refreshPromise:refreshPromise}
+  return {
+    cachedData: cachedData,
+    lastFetchTime: lastFetchTime,
+    refreshPromise: refreshPromise,
+  };
 }
 
 export async function FullData(wixData_url_get_FullData) {
