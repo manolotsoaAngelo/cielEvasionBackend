@@ -31,18 +31,18 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
     case "init_cachedData":
-      await Promise.all([
-        EbilletsService.refresh(),
-        OrdersService.refresh(),
-        PartenairesService.refresh(),
-        UsersService.refresh(),
-      ]);
       result = {
         init_cachedData_ebillet: init_cachedData_ebillet(),
         init_cachedData_orders: init_cachedData_orders(),
         init_cachedData_partenaire: init_cachedData_partenaire(),
         init_cachedData_users: init_cachedData_users(),
       };
+      await Promise.all([
+        EbilletsService.refresh(),
+        OrdersService.refresh(),
+        PartenairesService.refresh(),
+        UsersService.refresh(),
+      ]);
       break;
     ///Orders
     case "create_order_new":
