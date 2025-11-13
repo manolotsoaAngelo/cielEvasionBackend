@@ -1,5 +1,5 @@
 import express from "express";
-import { get_all_partenaire} from "../controllers/partenairesController.js";
+import { get_all_partenaire } from "../controllers/partenairesController.js";
 
 const router = express.Router();
 

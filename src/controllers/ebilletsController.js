@@ -13,9 +13,11 @@ import EbilletsService from "../services/ebillets.js";
 //console.log(await EbilletsService.getAllEbilletFactureByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 
 export async function get_All_Ebillet_Facture_ByPartenaire(req, res) {
-    let value = post(req, res)
-    let result = await EbilletsService.getAllEbilletFactureByPartenaire(value._id)
-    res.status(201).json(compressed_obj(result));
+  let value = post(req, res);
+  let result = await EbilletsService.getAllEbilletFactureByPartenaire(
+    value._id
+  );
+  res.status(201).json(compressed_obj(result));
 }
 
 export async function get_all_ebillet(req, res) {
@@ -24,7 +26,7 @@ export async function get_all_ebillet(req, res) {
 }
 
 function post(req, res) {
-    const { data } = (req.body);
-    if (!data) return res.status(400).json({ error: "données requis" });
-    return decompressed_obj(data)
+  const { data } = req.body;
+  if (!data) return res.status(400).json({ error: "données requis" });
+  return decompressed_obj(data);
 }

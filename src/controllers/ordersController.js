@@ -1,4 +1,7 @@
-import { compressed_obj, decompressed_obj } from '../utils/compression/compression.js'
+import {
+  compressed_obj,
+  decompressed_obj,
+} from "../utils/compression/compression.js";
 
 import OrdersService from "../services/orders.js";
 
@@ -7,6 +10,6 @@ import OrdersService from "../services/orders.js";
 //console.log(await OrdersService.getByNumber("11468"))
 
 export async function get_all_order(req, res) {
-    let all_order_data = await OrdersService.getAll()
-    res.json(compressed_obj(all_order_data));
+  let all_order_data = await OrdersService.getAll();
+  res.json(compressed_obj(all_order_data));
 }

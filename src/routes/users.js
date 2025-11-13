@@ -1,8 +1,9 @@
 import express from "express";
-import { get_all_users,
-    get_userByEmail,
-    get_userById
- } from "../controllers/usersController.js";
+import {
+  get_all_users,
+  get_userByEmail,
+  get_userById,
+} from "../controllers/usersController.js";
 
 const router = express.Router();
 

@@ -14,53 +14,53 @@ import OrdersService from "../../services/orders.js";
 import PartenairesService from "../../services/partenaires.js";
 
 export function tri_ebilletByDEC_Date_Byrdv(array_result) {
-    return [...array_result].sort((a, b) => {
-        const dateA = new Date(a.rdv).getTime();
-        const dateB = new Date(b.rdv).getTime();
-        if (dateA < dateB) return -1;
-        if (dateA > dateB) return 1;
-        return 0;
-    });
+  return [...array_result].sort((a, b) => {
+    const dateA = new Date(a.rdv).getTime();
+    const dateB = new Date(b.rdv).getTime();
+    if (dateA < dateB) return -1;
+    if (dateA > dateB) return 1;
+    return 0;
+  });
 }
 
 export function tri_ebilletByASC_Date(array_result) {
-    return [...array_result].sort((a, b) => {
-        const dateA = new Date(a.datePriseRdvClient).getTime();
-        const dateB = new Date(b.datePriseRdvClient).getTime();
-        if (dateA > dateB) return -1;
-        if (dateA < dateB) return 1;
-        return 0;
-    });
+  return [...array_result].sort((a, b) => {
+    const dateA = new Date(a.datePriseRdvClient).getTime();
+    const dateB = new Date(b.datePriseRdvClient).getTime();
+    if (dateA > dateB) return -1;
+    if (dateA < dateB) return 1;
+    return 0;
+  });
 }
 
 export function tri_ebilletByASC_ref(array_result) {
-    array_result.sort((a, b) => {
-        if (a.ref < b.ref) return -1;
-        if (a.ref > b.ref) return 1;
-        return 0;
-    });
-    return array_result
+  array_result.sort((a, b) => {
+    if (a.ref < b.ref) return -1;
+    if (a.ref > b.ref) return 1;
+    return 0;
+  });
+  return array_result;
 }
 
 export function tri_reportByASC_ref(result) {
-    let array_result = []
-    let seen = new Set();
-    for (let item of result) {
-        let array_ref = [];
-        let [prefixA] = item.ref.split("-");
-        for (let itemB of result) {
-            let [prefixB] = itemB.ref.split("-");
-            if (prefixA === prefixB && !array_ref.includes(itemB)) {
-                array_ref.push(itemB);
-            }
-        }
-        array_ref.sort((a, b) => a.ref.localeCompare(b.ref));
-        if (!seen.has(prefixA)) {
-            array_result = array_result.concat(array_ref);
-            seen.add(prefixA);
-        }
+  let array_result = [];
+  let seen = new Set();
+  for (let item of result) {
+    let array_ref = [];
+    let [prefixA] = item.ref.split("-");
+    for (let itemB of result) {
+      let [prefixB] = itemB.ref.split("-");
+      if (prefixA === prefixB && !array_ref.includes(itemB)) {
+        array_ref.push(itemB);
+      }
     }
-    return array_result
+    array_ref.sort((a, b) => a.ref.localeCompare(b.ref));
+    if (!seen.has(prefixA)) {
+      array_result = array_result.concat(array_ref);
+      seen.add(prefixA);
+    }
+  }
+  return array_result;
 }
 
 export async function create_order_new(wixData) {
