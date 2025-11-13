@@ -1,1 +1,8 @@
+# .gitignore
+node_modules/
+backup_wix/
+.env
+.vscode/
+*.log
+.DS_Store
 .vercel
