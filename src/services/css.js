@@ -5,16 +5,17 @@ import { init_cachedData_users, refreshData } from "../utils/fullData/users.js";
 let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/";
 let collection_name = "Membre_everyone";
 let wixData_url_get_FullData =
-    "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
 class CssService {
-    constructor() {
-    }
-    async partenaires_header_footer_body_fix() {
-      //"https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix"
-      ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix">
+  constructor() {
+  }
+  async partenaires_header_footer_body_fix() {
+    //"https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix"
+    ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix">
 
-      let css = `<style>
+    let css = ```css
+<style>
 #comp-mdiw6s9o,
 #comp-m59ic5d3,
 #comp-m56uvovw,
@@ -51,9 +52,10 @@ class CssService {
 html {
   scroll-behavior: smooth;
 }
-</style>`
-        return css
-    }
+</style>
+```
+    return css
+  }
 }
 
 export default new CssService();
