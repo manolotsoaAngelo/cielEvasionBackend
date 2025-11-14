@@ -62,13 +62,15 @@ html {
 
     let css = `#comp-kzoe4jn2,
 #comp-lqsklqfp,
-#comp-kzoe4jnh{
+#comp-kzoe4jnh {
   position: fixed !important;
   top: 0;
   left: 0;
-  width: 100%;
-  z-index: 10000;
-  background: inherit;
+  width: 100% !important;
+  z-index: 10000 !important;
+  background: transparent !important;
+}
+
 `
     return css
   }
