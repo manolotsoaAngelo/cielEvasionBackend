@@ -14,9 +14,7 @@ import EbilletsService from "../services/ebillets.js";
 
 export async function get_All_Ebillet_Facture_ByPartenaire(req, res) {
   let value = post(req, res);
-  let result = await EbilletsService.getAllEbilletFactureByPartenaire(
-    value._id
-  );
+  let result = await EbilletsService.getAllEbilletFactureByPartenaire(value._id);
   res.status(201).json(compressed_obj(result));
 }
 

@@ -10,7 +10,6 @@ let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_partenaire/";
 
 class PartenairesService {
   constructor() {
-    this.data = [];
   }
   async refresh() {
     return await refreshData();
@@ -23,8 +22,7 @@ class PartenairesService {
     return (await this.getAll()).find((item) => item._id === id);
   }
   async getByIdEbillet(IdEbillet) {
-    return (await get_wix_services(wixData_url + "_idEbillet/" + IdEbillet))
-      .data;
+    return (await get_wix_services(wixData_url + "_idEbillet/" + IdEbillet)).data;
   }
 }
 

@@ -11,28 +11,15 @@ import {
 import EbilletsService from "../services/ebillets.js";
 
 function enattente(data) {
-  return data.filter(
-    (item) =>
-      item.statut_reservation === "en attente" && item.datePriseRdvClient
-  );
+  return data.filter((item) => item.statut_reservation === "en attente" && item.datePriseRdvClient);
 }
 
 function reserver(data) {
-  return data.filter(
-    (item) =>
-      item.rdv_sup_now === true && item.statut_reservation === "reserver"
-  );
+  return data.filter((item) => item.rdv_sup_now === true && item.statut_reservation === "reserver");
 }
 
 function contreProposition(data) {
-  return data.filter(
-    (item) =>
-      item.statut_reservation === "reserver" &&
-      !item.rdv &&
-      (item.contrepropositionDate1 ||
-        item.contrepropositionDate2 ||
-        item.contrepropositionDate3)
-  );
+  return data.filter((item) => item.statut_reservation === "reserver" && !item.rdv && (item.contrepropositionDate1 || item.contrepropositionDate2 || item.contrepropositionDate3));
 }
 
 function reservation(data) {
@@ -45,7 +32,6 @@ function reservation(data) {
 
 class ReservationService {
   constructor() {
-    this.data = [];
   }
 
   async getAll() {
@@ -62,41 +48,27 @@ class ReservationService {
     return tri_ebilletByASC_Date(contreProposition(await this.getAll()));
   }
   async getAllReservationByPartenaire(id_partenaire) {
-    return reservation(
-      await EbilletsService.getAllEbilletByPartenaire(id_partenaire)
-    );
+    return reservation(await EbilletsService.getAllEbilletByPartenaire(id_partenaire));
   }
 
   async getAllReservationReserverByIdpartenaire(id_partenaire) {
-    return tri_ebilletByDEC_Date_Byrdv(
-      reserver(await this.getAllReservationByPartenaire(id_partenaire))
-    );
+    return tri_ebilletByDEC_Date_Byrdv(reserver(await this.getAllReservationByPartenaire(id_partenaire)));
   }
   async getAllReservationEnattenteByIdpartenaire(id_partenaire) {
-    return tri_ebilletByASC_Date(
-      enattente(await this.getAllReservationByPartenaire(id_partenaire))
-    );
+    return tri_ebilletByASC_Date(enattente(await this.getAllReservationByPartenaire(id_partenaire)));
   }
   async getAllReservationContrePropositionByIdpartenaire(id_partenaire) {
-    return tri_ebilletByASC_Date(
-      contreProposition(await this.getAllReservationByPartenaire(id_partenaire))
-    );
+    return tri_ebilletByASC_Date(contreProposition(await this.getAllReservationByPartenaire(id_partenaire)));
   }
 
   async getReservationReserverByIdebillet(id) {
-    return (await this.getAllReservationReserver()).find(
-      (item) => item._id === id
-    );
+    return (await this.getAllReservationReserver()).find((item) => item._id === id);
   }
   async getReservationEnattenteByIdebillet(id) {
-    return (await this.getAllReservationEnattente()).find(
-      (item) => item._id === id
-    );
+    return (await this.getAllReservationEnattente()).find((item) => item._id === id);
   }
   async getReservationContrePropositionByIdebillet(id) {
-    return (await this.getAllReservationContreProposition()).find(
-      (item) => item._id === id
-    );
+    return (await this.getAllReservationContreProposition()).find((item) => item._id === id);
   }
 }
 

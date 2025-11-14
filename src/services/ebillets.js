@@ -15,7 +15,6 @@ let wixData_url_post = "https://ciel-evasion.fr/_functions/WixData/ebillet/";
 
 class EbilletsService {
   constructor() {
-    this.data = [];
   }
   async refresh() {
     return await refreshData();
@@ -29,13 +28,11 @@ class EbilletsService {
   }
 
   async updateEbillet(ebillet) {
-    return (await post_wix_services(wixData_url_post + "update/", ebillet))
-      .data;
+    return (await post_wix_services(wixData_url_post + "update/", ebillet)).data;
   }
 
   async getByidArticle(idArticle) {
-    return (await get_wix_services(wixData_url_get + "_idArticle/" + idArticle))
-      .data;
+    return (await get_wix_services(wixData_url_get + "_idArticle/" + idArticle)).data;
   }
 
   async getByRef(ref) {
@@ -43,15 +40,11 @@ class EbilletsService {
   }
 
   async getAllEbilletByPartenaire(idPartenaire) {
-    return (
-      await get_wix_services(wixData_url_get + "partenaire/" + idPartenaire)
-    ).data;
+    return (await get_wix_services(wixData_url_get + "partenaire/" + idPartenaire)).data;
   }
   async getAllEbilletFactureByPartenaire(idPartenaire) {
     let now = new Date().getTime();
-    return (await this.getAll()).filter(
-      (item) => item.bonFacture && new Date(item.reglementPrevu).getTime() > now
-    );
+    return (await this.getAll()).filter((item) => item.bonFacture && new Date(item.reglementPrevu).getTime() > now);
   }
 }
 

@@ -9,7 +9,6 @@ let wixData_url_get_FullData =
 
 class UsersService {
   constructor() {
-    this.data = [];
   }
   async refresh() {
     return await refreshData(wixData_url);
@@ -23,7 +22,7 @@ class UsersService {
   }
 
   async getByEmail(email) {
-    return this.data.find((item) => item.loginEmail === email);
+    return (await this.getAll()).find((item) => item.loginEmail === email);
   }
 }
 

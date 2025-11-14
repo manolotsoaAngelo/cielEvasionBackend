@@ -25,7 +25,6 @@ let wixData_url_get_FullData =
 
 class OrdersService {
   constructor() {
-    this.data = [];
   }
   async refresh() {
     return await refreshData(wixData_url);

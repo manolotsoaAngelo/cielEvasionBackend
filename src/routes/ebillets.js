@@ -9,9 +9,6 @@ const router = express.Router();
 // GET all Ebillets
 router.get("/getAllEbillets", get_all_ebillet);
 
-router.post(
-  "/get_All_Ebillet_Facture_ByPartenaire",
-  get_All_Ebillet_Facture_ByPartenaire
-);
+router.post("/get_All_Ebillet_Facture_ByPartenaire",get_All_Ebillet_Facture_ByPartenaire);
 
 export default router;
