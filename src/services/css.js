@@ -72,8 +72,6 @@ html {
 #comp-lvw159ib,
 #comp-lvw159id,
 #comp-lvw159if {
-  padding-top: calc(120px + 80px); /* 120px original + hauteur approximative du fake header */
-  padding-bottom: 100px;
   box-sizing: border-box;
 }
 
