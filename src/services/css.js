@@ -69,7 +69,11 @@ html {
   background: inherit;
 }
 
-#comp-lvw159ib,
+#comp-lvw159ib {
+  padding-top: calc(120px + 80px);
+  box-sizing: border-box;
+}
+
 #comp-lvw159id,
 #comp-lvw159if {
   box-sizing: border-box;
