@@ -11,9 +11,10 @@ export function decrypter(message) {
     return atob(message);
   }
 }
-
+/*
 let crypt = crypter('/api/css/get_css_importateur_header_fix')
 console.log(crypt)
+*/
 //console.log(decrypter("aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t"))
 
 /*
