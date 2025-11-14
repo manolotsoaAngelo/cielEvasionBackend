@@ -60,8 +60,8 @@ html {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
 
-    let css = `#comp-kzoe4jn2
-#comp-lqsklqfp
+    let css = `#comp-kzoe4jn2,
+#comp-lqsklqfp,
 #comp-kzoe4jnh{
   position: fixed !important;
   top: 0;
