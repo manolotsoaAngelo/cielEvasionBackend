@@ -60,17 +60,28 @@ html {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
 
-    let css = `#comp-kzoe4jn2,
-#comp-lqsklqfp,
-#comp-kzoe4jnh {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  z-index: 10000 !important;
-  background: transparent !important;
+    let css = `
+    #comp-kzoe4jn2.initial-state,
+#comp-lqsklqfp.initial-state,
+#comp-kzoe4jnh.initial-state {
+    position: static;
+    top: auto;
+    left: auto;
+    width: auto;
+    z-index: auto;
+    background: inherit;
 }
 
+#comp-kzoe4jn2.fixed-header,
+#comp-lqsklqfp.fixed-header,
+#comp-kzoe4jnh.fixed-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+}
 `
     return css
   }
