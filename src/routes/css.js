@@ -1,10 +1,11 @@
 import express from "express";
-import { get_css_partenaires } from "../controllers/cssController.js";
+import { get_css_partenaires_header_footer_body_fix,get_css_importateur_header_fix} from "../controllers/cssController.js";
 
 const router = express.Router();
 
 // GET all css_partenaires
-///https://ciel-evasion-backend.vercel.app/api/partenaires/get_css_partenaires
-router.get("/get_css_partenaires", get_css_partenaires);
+///https://ciel-evasion-backend.vercel.app/api/partenaires/get_css_partenaires_header_footer_body_fix
+router.get("/get_css_partenaires_header_footer_body_fix", get_css_partenaires_header_footer_body_fix);
+router.get("/get_css_importateur_header_fix", get_css_importateur_header_fix);
 
 export default router;

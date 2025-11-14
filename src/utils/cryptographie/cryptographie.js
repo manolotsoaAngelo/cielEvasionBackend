@@ -12,8 +12,8 @@ export function decrypter(message) {
   }
 }
 
-//let crypt = crypter('/api/css/get_css_partenaires')
-//console.log(crypt)
+let crypt = crypter('/api/css/get_css_importateur_header_fix')
+console.log(crypt)
 //console.log(decrypter("aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t"))
 
 /*
@@ -32,7 +32,8 @@ export function decrypter(message) {
 
     CSS 
 
-    /api/css/get_css_partenaires : L2FwaS9jc3MvZ2V0X2Nzc19wYXJ0ZW5haXJlcw==
+    /api/css/get_css_partenaires_header_footer_body_fix : L2FwaS9jc3MvZ2V0X2Nzc19wYXJ0ZW5haXJlc19oZWFkZXJfZm9vdGVyX2JvZHlfZml4
+    /api/css/get_css_importateur_header_fix : L2FwaS9jc3MvZ2V0X2Nzc19pbXBvcnRhdGV1cl9oZWFkZXJfZml4
 */
 
 

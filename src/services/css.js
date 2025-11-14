@@ -10,11 +10,11 @@ let wixData_url_get_FullData =
 class CssService {
   constructor() {
   }
+
   async partenaires_header_footer_body_fix() {
-    //"https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix"
-    ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix">
-    ///<style data-url="https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix"></style>
-    
+    //"https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix"
+    ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix">
+
     let css = `
 #comp-mdiw6s9o,
 #comp-m59ic5d3,
@@ -52,6 +52,23 @@ class CssService {
 html {
   scroll-behavior: smooth;
 }
+`
+    return css
+  }
+
+  async importateur_header_fix() {
+    //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
+    ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
+
+    let css = `#comp-kzoe4jn2
+#comp-lqsklqfp
+#comp-kzoe4jnh{
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: inherit;
 `
     return css
   }
