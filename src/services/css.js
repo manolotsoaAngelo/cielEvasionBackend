@@ -69,7 +69,7 @@ html {
     z-index: 10000;
     background: inherit;
 }
-    #comp-mceqgvd0,
+    
 #comp-lvw159ib,
 #comp-lvw159id,
 #comp-lvw159if {
