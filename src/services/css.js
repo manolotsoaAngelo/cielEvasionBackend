@@ -11,10 +11,47 @@ class CssService {
     constructor() {
     }
     async partenaires_header_footer_body_fix() {
-      //"https://ciel-evasion.fr/_functions/get_WixCss/partenaires_header_footer_body_fix"
-      ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/get_WixCss/partenaires_header_footer_body_fix">
+      //"https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix"
+      ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix">
 
-      let css="<style>\n#comp-mdiw6s9o,\n#comp-m59ic5d3,\n#comp-m56uvovw,\n#comp-mdzn7y3o {\n  position: fixed !important;\n  top: 0;\n  left: 0;\n  width: 100%;\n  z-index: 10000;\n  background: inherit;\n}\n\n#comp-mdiw7w5g2,\n#comp-m59ieqh9,\n#comp-m59ob8a72,\n#comp-mdznowf0 {\n  position: fixed !important;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  z-index: 10000;\n  background: inherit;\n}\n\n#comp-mceqgvd0,\n#comp-m59icq1u,\n#comp-m56rqvpq,\n#comp-mdznalu2 {\n  padding-top: 120px;\n  padding-bottom: 100px;\n  box-sizing: border-box;\n}\n\nhtml {\n  scroll-behavior: smooth;\n}\n</style>";
+      let css = `<style>
+#comp-mdiw6s9o,
+#comp-m59ic5d3,
+#comp-m56uvovw,
+#comp-mdzn7y3o {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: inherit;
+}
+
+#comp-mdiw7w5g2,
+#comp-m59ieqh9,
+#comp-m59ob8a72,
+#comp-mdznowf0 {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: inherit;
+}
+
+#comp-mceqgvd0,
+#comp-m59icq1u,
+#comp-m56rqvpq,
+#comp-mdznalu2 {
+  padding-top: 120px;
+  padding-bottom: 100px;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+</style>`
         return css
     }
 }
