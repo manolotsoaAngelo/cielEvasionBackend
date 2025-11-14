@@ -61,9 +61,7 @@ html {
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
 
     let css = `
-    #comp-kzoe4jn2,
-#comp-lqsklqfp,
-#comp-kzoe4jnh {
+    #comp-kzoe4jn2 {
     position: fixed !important;
     top: 0;
     left: 0;
