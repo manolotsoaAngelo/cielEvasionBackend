@@ -14,7 +14,7 @@ class CssService {
     //"https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/partenaires_header_footer_body_fix">
 
-    let css = ```css
+    let css = `
 <style>
 #comp-mdiw6s9o,
 #comp-m59ic5d3,
@@ -53,7 +53,7 @@ html {
   scroll-behavior: smooth;
 }
 </style>
-```
+`
     return css
   }
 }
