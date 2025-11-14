@@ -6,6 +6,7 @@ import functionController from "./src/routes/function.js";
 import ordersController from "./src/routes/orders.js";
 import partenairesController from "./src/routes/partenaires.js";
 import usersController from "./src/routes/users.js";
+import cssController from "./src/routes/css.js";
 
 import EbilletsService from "./src/services/ebillets.js";
 import OrdersService from "./src/services/orders.js";
@@ -61,6 +62,7 @@ app.use("/api/function", functionController);
 app.use("/api/orders", ordersController);
 app.use("/api/partenaires", partenairesController);
 app.use("/api/users", usersController);
+app.use("/api/css", cssController);
 
 app.use((req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
