@@ -59,8 +59,11 @@ html {
   async importateur_header_fix() {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
+    ///Head : comp-mhytj3e7
+    ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if
 
-    let css = `#comp-mhytj3e7 {
+    let css = `
+    #comp-mhytj3e7,#comp-mi2u0prw {
   position: fixed !important;
   top: 0;
   left: 0;
@@ -69,7 +72,7 @@ html {
   background: inherit;
 }
 
-#comp-lvw159ib {
+#comp-lvw159ib,#comp-lvw159l6 {
   padding-top: calc(120px + 80px);
   box-sizing: border-box;
 }
