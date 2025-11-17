@@ -73,7 +73,7 @@ html {
 }
 
 #comp-lvw159ib,#comp-lvw159l6 {
-  padding-top: calc(120px + 80px + 20px);
+  padding-top: calc(120px + 80px + 10px);
   box-sizing: border-box;
 }
 
