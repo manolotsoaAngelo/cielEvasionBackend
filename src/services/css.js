@@ -45,7 +45,6 @@ class CssService {
 #comp-m56rqvpq,
 #comp-mdznalu2 {
   padding-top: 120px;
-  padding-bottom: 100px;
   box-sizing: border-box;
 }
 
