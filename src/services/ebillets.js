@@ -44,7 +44,12 @@ class EbilletsService {
   }
   async getAllEbilletFactureByPartenaire(idPartenaire) {
     let now = new Date().getTime();
-    return (await this.getAll()).filter((item) => item.bonFacture && new Date(item.reglementPrevu).getTime() > now);
+    let allEbilletByPartenaire = await this.getAllEbilletByPartenaire(idPartenaire)
+    if (allEbilletByPartenaire.length>0) {
+      return (allEbilletByPartenaire).filter((item) => item.bonFacture && new Date(item.reglementPrevu).getTime() > now);
+    } else {
+      return null
+    }
   }
 }
 
