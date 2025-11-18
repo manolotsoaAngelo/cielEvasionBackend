@@ -16,37 +16,109 @@ class CssService {
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix">
 
     let css = `
-#comp-mdiw6s9o,
-#comp-m59ic5d3,
-#comp-m56uvovw,
-#comp-mdzn7y3o {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10000;
-  background: inherit;
+@media (min-width: 1025px) {
+  #comp-mdiw6s9o,
+  #comp-m59ic5d3,
+  #comp-m56uvovw,
+  #comp-mdzn7y3o {
+    position: fixed !important;
+    inset: 0 auto auto 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+    transform: translateZ(0);
+  }
+
+  #comp-mdiw7w5g2,
+  #comp-m59ieqh9,
+  #comp-m59ob8a72,
+  #comp-mdznowf0 {
+    position: fixed !important;
+    inset: auto auto 0 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+    transform: translateZ(0);
+  }
+
+  #comp-mceqgvd0,
+  #comp-m59icq1u,
+  #comp-m56rqvpq,
+  #comp-mdznalu2 {
+    padding-top: 120px;
+    padding-bottom: 25px;
+    box-sizing: border-box;
+  }
 }
 
-#comp-mdiw7w5g2,
-#comp-m59ieqh9,
-#comp-m59ob8a72,
-#comp-mdznowf0 {
-  position: fixed !important;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10000;
-  background: inherit;
+@media (max-width: 1024px) {
+  #comp-mdiw6s9o,
+  #comp-m59ic5d3,
+  #comp-m56uvovw,
+  #comp-mdzn7y3o {
+    position: fixed !important;
+    inset: 0 auto auto 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+    transform: translateZ(0);
+  }
+
+  #comp-mdiw7w5g2,
+  #comp-m59ieqh9,
+  #comp-m59ob8a72,
+  #comp-mdznowf0 {
+    position: fixed !important;
+    inset: auto auto 0 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+    transform: translateZ(0);
+  }
+
+  #comp-mceqgvd0,
+  #comp-m59icq1u,
+  #comp-m56rqvpq,
+  #comp-mdznalu2 {
+    padding-top: 90px;
+    padding-bottom: 20px;
+    box-sizing: border-box;
+  }
 }
 
-#comp-mceqgvd0,
-#comp-m59icq1u,
-#comp-m56rqvpq,
-#comp-mdznalu2 {
-  padding-top: 120px;
-  padding-bottom: 25px;
-  box-sizing: border-box;
+@media (max-width: 640px) {
+  #comp-mdiw6s9o,
+  #comp-m59ic5d3,
+  #comp-m56uvovw,
+  #comp-mdzn7y3o {
+    position: fixed !important;
+    inset: 0 auto auto 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+    transform: translateZ(0);
+  }
+
+  #comp-mdiw7w5g2,
+  #comp-m59ieqh9,
+  #comp-m59ob8a72,
+  #comp-mdznowf0 {
+    position: fixed !important;
+    inset: auto auto 0 0;
+    width: 100%;
+    z-index: 10000;
+    background: inherit;
+    transform: translateZ(0);
+  }
+
+  #comp-mceqgvd0,
+  #comp-m59icq1u,
+  #comp-m56rqvpq,
+  #comp-mdznalu2 {
+    padding-top: 70px;
+    padding-bottom: 18px;
+    box-sizing: border-box;
+  }
 }
 
 html {
