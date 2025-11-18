@@ -14,9 +14,10 @@ class CssService {
   async partenaires_header_footer_body_fix() {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix">
+    ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix" defer></script>
 
     let css = `
-///HEAD
+    const cssContent = \`
 #comp-mdiw6s9o,
 #comp-m59ic5d3,
 #comp-m56uvovw,
@@ -28,9 +29,6 @@ class CssService {
   z-index: 10000;
   background: inherit;
 }
-
-///FOOTER
-
 #comp-mdiw7w5g2,
 #comp-m59ieqh9,
 #comp-m59ob8a72,
@@ -42,21 +40,61 @@ class CssService {
   z-index: 10000;
   background: inherit;
 }
-
-///Contenue
-
 #comp-mceqgvd0,
 #comp-m59icq1u,
 #comp-m56rqvpq,
 #comp-mdznalu2 {
-  padding-top: 120px;
-  padding-bottom: 25px;
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
 }
+body {
+  margin: 0;
+}
+\`;
+
+const styleTag = document.createElement('style');
+styleTag.textContent = cssContent;
+document.head.appendChild(styleTag);
+
+function adjustContentPadding() {
+    const headers = [
+        document.getElementById("comp-mdiw6s9o"),
+        document.getElementById("comp-m59ic5d3"),
+        document.getElementById("comp-m56uvovw"),
+        document.getElementById("comp-mdzn7y3o")
+    ];
+    const footers = [
+        document.getElementById("comp-mdiw7w5g2"),
+        document.getElementById("comp-m59ieqh9"),
+        document.getElementById("comp-m59ob8a72"),
+        document.getElementById("comp-mdznowf0")
+    ];
+    const contents = [
+        document.getElementById("comp-mceqgvd0"),
+        document.getElementById("comp-m59icq1u"),
+        document.getElementById("comp-m56rqvpq"),
+        document.getElementById("comp-mdznalu2")
+    ];
+
+    let maxHeaderHeight = 0;
+    let maxFooterHeight = 0;
+
+    headers.forEach(h => { if(h) maxHeaderHeight = Math.max(maxHeaderHeight, h.offsetHeight); });
+    footers.forEach(f => { if(f) maxFooterHeight = Math.max(maxFooterHeight, f.offsetHeight); });
+
+    contents.forEach(c => {
+        if(c) {
+            c.style.paddingTop = maxHeaderHeight + "px";
+            c.style.paddingBottom = maxFooterHeight + "px";
+        }
+    });
+}
+
+window.addEventListener("load", adjustContentPadding);
+window.addEventListener("resize", adjustContentPadding);
+
 `
     return css
   }
