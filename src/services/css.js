@@ -59,56 +59,41 @@ styleTag.textContent = cssContent;
 document.head.appendChild(styleTag);
 
 function adjustContentPadding() {
-  const headers = [
-    document.getElementById("comp-mdiw6s9o"),
-    document.getElementById("comp-m59ic5d3"),
-    document.getElementById("comp-m56uvovw"),
-    document.getElementById("comp-mdzn7y3o")
-  ];
-  const footers = [
-    document.getElementById("comp-mdiw7w5g2"),
-    document.getElementById("comp-m59ieqh9"),
-    document.getElementById("comp-m59ob8a72"),
-    document.getElementById("comp-mdznowf0")
-  ];
-  const contents = [
-    document.getElementById("comp-mceqgvd0"),
-    document.getElementById("comp-m59icq1u"),
-    document.getElementById("comp-m56rqvpq"),
-    document.getElementById("comp-mdznalu2")
-  ];
+    const headers = [
+        document.getElementById("comp-mdiw6s9o"),
+        document.getElementById("comp-m59ic5d3"),
+        document.getElementById("comp-m56uvovw"),
+        document.getElementById("comp-mdzn7y3o")
+    ];
+    const footers = [
+        document.getElementById("comp-mdiw7w5g2"),
+        document.getElementById("comp-m59ieqh9"),
+        document.getElementById("comp-m59ob8a72"),
+        document.getElementById("comp-mdznowf0")
+    ];
+    const contents = [
+        document.getElementById("comp-mceqgvd0"),
+        document.getElementById("comp-m59icq1u"),
+        document.getElementById("comp-m56rqvpq"),
+        document.getElementById("comp-mdznalu2")
+    ];
 
-  let maxHeaderHeight = 0;
-  let maxFooterHeight = 0;
+    let maxHeaderHeight = 0;
+    let maxFooterHeight = 0;
 
-  headers.forEach(h => { if(h) maxHeaderHeight = Math.max(maxHeaderHeight, h.offsetHeight); });
-  footers.forEach(f => { if(f) maxFooterHeight = Math.max(maxFooterHeight, f.offsetHeight); });
+    headers.forEach(h => { if(h) maxHeaderHeight = Math.max(maxHeaderHeight, h.offsetHeight); });
+    footers.forEach(f => { if(f) maxFooterHeight = Math.max(maxFooterHeight, f.offsetHeight); });
 
-  contents.forEach(c => {
-    if(c) {
-      c.style.paddingTop = maxHeaderHeight + "px";
-      c.style.paddingBottom = maxFooterHeight + "px";
-    }
-  });
+    contents.forEach(c => {
+        if(c) {
+            c.style.paddingTop = maxHeaderHeight + "px";
+            c.style.paddingBottom = maxFooterHeight + "px";
+        }
+    });
 }
 
-function checkElements() {
-  const allExist = [
-    "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o",
-    "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0",
-    "comp-mceqgvd0","comp-m59icq1u","comp-m56rqvpq","comp-mdznalu2"
-  ].every(id => document.getElementById(id));
-
-  if(allExist) {
-    adjustContentPadding();
-    window.addEventListener("resize", adjustContentPadding);
-    observer.disconnect();
-  }
-}
-
-const observer = new MutationObserver(checkElements);
-observer.observe(document.body, { childList: true, subtree: true });
-checkElements();
+window.addEventListener("load", adjustContentPadding);
+window.addEventListener("resize", adjustContentPadding);
 
 `
     return css
