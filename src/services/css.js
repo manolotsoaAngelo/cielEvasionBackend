@@ -15,7 +15,8 @@ class CssService {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix">
 
-    let css = `/* HEADER FIXE */
+    let css = `
+///HEAD
 #comp-mdiw6s9o,
 #comp-m59ic5d3,
 #comp-m56uvovw,
@@ -28,7 +29,8 @@ class CssService {
   background: inherit;
 }
 
-/* FOOTER FIXE */
+///FOOTER
+
 #comp-mdiw7w5g2,
 #comp-m59ieqh9,
 #comp-m59ob8a72,
@@ -41,22 +43,20 @@ class CssService {
   background: inherit;
 }
 
-/* CONTENU */
+///Contenue
+
 #comp-mceqgvd0,
 #comp-m59icq1u,
 #comp-m56rqvpq,
 #comp-mdznalu2 {
+  padding-top: 120px;
+  padding-bottom: 25px;
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
 }
-
-body {
-  margin: 0;
-}
-
 `
     return css
   }
