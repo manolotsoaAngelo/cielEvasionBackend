@@ -46,12 +46,8 @@ class CssService {
 #comp-mdznalu2 {
   box-sizing: border-box;
 }
-html {
-  scroll-behavior: smooth;
-}
-body {
-  margin: 0;
-}
+html { scroll-behavior: smooth; }
+body { margin: 0; }
 \`;
 
 const styleTag = document.createElement('style');
@@ -60,23 +56,14 @@ document.head.appendChild(styleTag);
 
 function adjustContentPadding() {
     const headers = [
-        document.getElementById("comp-mdiw6s9o"),
-        document.getElementById("comp-m59ic5d3"),
-        document.getElementById("comp-m56uvovw"),
-        document.getElementById("comp-mdzn7y3o")
-    ];
+        "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o"
+    ].map(id => document.getElementById(id));
     const footers = [
-        document.getElementById("comp-mdiw7w5g2"),
-        document.getElementById("comp-m59ieqh9"),
-        document.getElementById("comp-m59ob8a72"),
-        document.getElementById("comp-mdznowf0")
-    ];
+        "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0"
+    ].map(id => document.getElementById(id));
     const contents = [
-        document.getElementById("comp-mceqgvd0"),
-        document.getElementById("comp-m59icq1u"),
-        document.getElementById("comp-m56rqvpq"),
-        document.getElementById("comp-mdznalu2")
-    ];
+        "comp-mceqgvd0","comp-m59icq1u","comp-m56rqvpq","comp-mdznalu2"
+    ].map(id => document.getElementById(id));
 
     let maxHeaderHeight = 0;
     let maxFooterHeight = 0;
@@ -91,6 +78,29 @@ function adjustContentPadding() {
         }
     });
 }
+
+const retryInterval = setInterval(() => {
+    adjustContentPadding();
+    const allLoaded =
+        document.getElementById("comp-mdiw6s9o") &&
+        document.getElementById("comp-mdiw7w5g2") &&
+        document.getElementById("comp-mceqgvd0");
+    if (allLoaded) clearInterval(retryInterval);
+}, 200);
+
+const resizeObserver = new ResizeObserver(() => {
+    adjustContentPadding();
+});
+
+setTimeout(() => {
+    [
+        "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o",
+        "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0"
+    ].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) resizeObserver.observe(el);
+    });
+}, 1500);
 
 window.addEventListener("load", adjustContentPadding);
 window.addEventListener("resize", adjustContentPadding);
