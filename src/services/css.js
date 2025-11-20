@@ -45,7 +45,11 @@ class CssService {
 #comp-m56rqvpq,
 #comp-mdznalu2 {
   box-sizing: border-box;
+  min-height: 100vh !important;
+  height: auto !important;
+  width: 100% !important;
 }
+
 html { scroll-behavior: smooth; }
 body { margin: 0; }
 \`;
