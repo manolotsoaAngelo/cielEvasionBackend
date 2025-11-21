@@ -1,19 +1,12 @@
-//import UsersService from '../services/users.js';
-import { get_wix_services } from "../utils/wixData/wixHttp.js";
-import { FullData } from "../utils/fullData/users.js";
-import { init_cachedData_users, refreshData } from "../utils/fullData/users.js";
-let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/";
-let collection_name = "Membre_everyone";
-let wixData_url_get_FullData =
-  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
-
+/*
+import CssService from "../services/css.js";
+*/
 class CssService {
   constructor() {
   }
 
   async partenaires_header_footer_body_fix() {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix"
-    ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix">
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_partenaires_header_footer_body_fix" defer></script>
 
     let css = `
@@ -108,9 +101,8 @@ setTimeout(() => {
 
 window.addEventListener("load", adjustContentPadding);
 window.addEventListener("resize", adjustContentPadding);
-
 `
-    return css
+    return css.replace(/\s+/g, " ")
   }
 
   async importateur_header_fix() {
@@ -144,7 +136,7 @@ html {
 }
 
 `
-    return css
+    return css.replace(/\s+/g, " ")
   }
 }
 
