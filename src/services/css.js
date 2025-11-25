@@ -102,11 +102,6 @@ setTimeout(() => {
 window.addEventListener("load", adjustContentPadding);
 window.addEventListener("resize", adjustContentPadding);
 
-onNavigated(() => {
-  window.addEventListener("load", adjustContentPadding);
-window.addEventListener("resize", adjustContentPadding);
-});
-
 function onNavigated(callback) {
   let lastUrl = location.href;
 
@@ -131,6 +126,10 @@ function onNavigated(callback) {
     }
   }, 300);
 }
+
+onNavigated(() => {
+  adjustContentPadding();
+});
 `
     return css.replace(/\s+/g, " ")
   }
