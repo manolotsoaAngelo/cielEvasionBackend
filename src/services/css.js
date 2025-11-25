@@ -101,6 +101,36 @@ setTimeout(() => {
 
 window.addEventListener("load", adjustContentPadding);
 window.addEventListener("resize", adjustContentPadding);
+
+onNavigated(() => {
+  window.addEventListener("load", adjustContentPadding);
+window.addEventListener("resize", adjustContentPadding);
+});
+
+function onNavigated(callback) {
+  let lastUrl = location.href;
+
+  const push = history.pushState;
+  history.pushState = function() {
+    push.apply(history, arguments);
+    callback();
+  };
+
+  const replace = history.replaceState;
+  history.replaceState = function() {
+    replace.apply(history, arguments);
+    callback();
+  };
+
+  window.addEventListener("popstate", callback);
+
+  setInterval(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      callback();
+    }
+  }, 300);
+}
 `
     return css.replace(/\s+/g, " ")
   }
