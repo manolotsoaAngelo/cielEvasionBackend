@@ -127,14 +127,25 @@ function onNavigated(callback) {
   }, 300);
 }
 
-onNavigated(() => {
-  initMyHead();
-});
-
-function initMyHead() {
-  console.log("Head rechargé");
+function runWhenReady(fn) {
+  let timeout;
+  const observer = new MutationObserver(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      observer.disconnect();
+      fn();
+    }, 100);
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
+onNavigated(() => {
+  window.addEventListener("load", () => {
+    runWhenReady(adjustContentPadding);
+  });
+
+  runWhenReady(adjustContentPadding);
+});
 
 `
     return css.replace(/\s+/g, " ")
