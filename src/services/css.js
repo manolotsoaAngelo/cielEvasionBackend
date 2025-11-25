@@ -128,8 +128,14 @@ function onNavigated(callback) {
 }
 
 onNavigated(() => {
-  adjustContentPadding();
+  initMyHead();
 });
+
+function initMyHead() {
+  console.log("Head rechargé");
+}
+
+
 `
     return css.replace(/\s+/g, " ")
   }
