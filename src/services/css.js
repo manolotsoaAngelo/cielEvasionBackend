@@ -146,8 +146,8 @@ onNavigated(() => {
 
   runWhenReady(adjustContentPadding);
 });
-
 `
+
     return css.replace(/\s+/g, " ")
   }
 
@@ -157,8 +157,10 @@ onNavigated(() => {
     ///Head : comp-mhytj3e7
     ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if
 
-    let css = `
-    #comp-mhytj3e7,#comp-mi2u0prw {
+    ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
+
+    let css = `let css = \`
+#comp-mhytj3e7 {
   position: fixed !important;
   top: 0;
   left: 0;
@@ -167,19 +169,67 @@ onNavigated(() => {
   background: inherit;
 }
 
-#comp-lvw159ib,#comp-lvw159l6 {
-  padding-top: calc(120px + 80px + 20px);
-  box-sizing: border-box;
-}
-
+#comp-lvw159ib,
 #comp-lvw159id,
 #comp-lvw159if {
   box-sizing: border-box;
+  min-height: 100vh !important;
+  height: auto !important;
+  width: 100% !important;
 }
 
-html {
-  scroll-behavior: smooth;
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+\`;
+
+const styleTag=document.createElement('style');
+styleTag.textContent=css;
+document.head.appendChild(styleTag);
+
+function adjustContentPadding(){
+  const header=document.getElementById("comp-mhytj3e7");
+  const contents=["comp-lvw159ib","comp-lvw159id","comp-lvw159if"].map(id=>document.getElementById(id));
+  const h=header?header.offsetHeight:0;
+  contents.forEach(c=>{if(c)c.style.paddingTop=h+"px";});
 }
+
+const retry=setInterval(()=>{
+  adjustContentPadding();
+  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(retry);
+},200);
+
+const ro=new ResizeObserver(()=>adjustContentPadding());
+setTimeout(()=>{
+  const h=document.getElementById("comp-mhytj3e7");
+  if(h)ro.observe(h);
+},1500);
+
+window.addEventListener("load",adjustContentPadding);
+window.addEventListener("resize",adjustContentPadding);
+
+function onNavigated(cb){
+  let u=location.href;
+  const p=history.pushState;
+  history.pushState=function(){p.apply(history,arguments);cb();};
+  const r=history.replaceState;
+  history.replaceState=function(){r.apply(history,arguments);cb();};
+  window.addEventListener("popstate",cb);
+  setInterval(()=>{if(location.href!==u){u=location.href;cb();}},300);
+}
+
+function runWhenReady(fn){
+  let t;
+  const o=new MutationObserver(()=>{
+    clearTimeout(t);
+    t=setTimeout(()=>{o.disconnect();fn();},100);
+  });
+  o.observe(document.body,{childList:true,subtree:true});
+}
+
+onNavigated(()=>{
+  window.addEventListener("load",()=>{runWhenReady(adjustContentPadding);});
+  runWhenReady(adjustContentPadding);
+});
 
 `
     return css.replace(/\s+/g, " ")
