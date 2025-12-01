@@ -154,13 +154,14 @@ onNavigated(() => {
   async importateur_header_fix() {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
-    ///Head : comp-mhytj3e7
-    ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if
+    ///Head : comp-mhytj3e7,comp-mi2u0prw
+    ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if,comp-lvw159l6
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
 
     let css = `let css = \`
-#comp-mhytj3e7 {
+#comp-mhytj3e7,
+#comp-mi2u0prw {
   position: fixed !important;
   top: 0;
   left: 0;
@@ -171,7 +172,8 @@ onNavigated(() => {
 
 #comp-lvw159ib,
 #comp-lvw159id,
-#comp-lvw159if {
+#comp-lvw159if,
+#comp-lvw159l6 {
   box-sizing: border-box;
   min-height: 100vh !important;
   height: auto !important;
@@ -187,10 +189,11 @@ styleTag.textContent=css;
 document.head.appendChild(styleTag);
 
 function adjustContentPadding(){
-  const header=document.getElementById("comp-mhytj3e7");
-  const contents=["comp-lvw159ib","comp-lvw159id","comp-lvw159if"].map(id=>document.getElementById(id));
-  const h=header?header.offsetHeight:0;
-  contents.forEach(c=>{if(c)c.style.paddingTop=h+"px";});
+  const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
+  const contents=["comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"].map(id=>document.getElementById(id));
+  let head=0;
+  headers.forEach(h=>{if(h)head=Math.max(head,h.offsetHeight)});
+  contents.forEach(c=>{if(c)c.style.paddingTop=head+"px";});
 }
 
 const retry=setInterval(()=>{
@@ -200,8 +203,10 @@ const retry=setInterval(()=>{
 
 const ro=new ResizeObserver(()=>adjustContentPadding());
 setTimeout(()=>{
-  const h=document.getElementById("comp-mhytj3e7");
-  if(h)ro.observe(h);
+  ["comp-mhytj3e7","comp-mi2u0prw"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)ro.observe(el);
+  });
 },1500);
 
 window.addEventListener("load",adjustContentPadding);
