@@ -158,8 +158,8 @@ onNavigated(() => {
     ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if,comp-lvw159l6
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
-
-    let css = `let css = \`
+    let css = `
+const cssContent = \`
 #comp-mhytj3e7,
 #comp-mi2u0prw {
   position: fixed !important;
@@ -169,7 +169,6 @@ onNavigated(() => {
   z-index: 10000;
   background: inherit;
 }
-
 #comp-lvw159ib,
 #comp-lvw159id,
 #comp-lvw159if,
@@ -179,63 +178,101 @@ onNavigated(() => {
   height: auto !important;
   width: 100% !important;
 }
-
 html { scroll-behavior: smooth; }
 body { margin: 0; }
 \`;
 
-const styleTag=document.createElement('style');
-styleTag.textContent=css;
+const styleTag = document.createElement('style');
+styleTag.textContent = cssContent;
 document.head.appendChild(styleTag);
 
-function adjustContentPadding(){
-  const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
-  const contents=["comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"].map(id=>document.getElementById(id));
-  let head=0;
-  headers.forEach(h=>{if(h)head=Math.max(head,h.offsetHeight)});
-  contents.forEach(c=>{if(c)c.style.paddingTop=head+"px";});
+function adjustContentPadding() {
+    const headers = [
+        "comp-mhytj3e7","comp-mi2u0prw"
+    ].map(id => document.getElementById(id));
+    const contents = [
+        "comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"
+    ].map(id => document.getElementById(id));
+
+    let maxHeaderHeight = 0;
+
+    headers.forEach(h => { if(h) maxHeaderHeight = Math.max(maxHeaderHeight, h.offsetHeight); });
+
+    contents.forEach(c => {
+        if(c) {
+            c.style.paddingTop = maxHeaderHeight + "px";
+        }
+    });
 }
 
-const retry=setInterval(()=>{
-  adjustContentPadding();
-  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(retry);
-},200);
+const retryInterval = setInterval(() => {
+    adjustContentPadding();
+    const allLoaded =
+        document.getElementById("comp-mhytj3e7") &&
+        document.getElementById("comp-lvw159ib");
+    if (allLoaded) clearInterval(retryInterval);
+}, 200);
 
-const ro=new ResizeObserver(()=>adjustContentPadding());
-setTimeout(()=>{
-  ["comp-mhytj3e7","comp-mi2u0prw"].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el)ro.observe(el);
-  });
-},1500);
-
-window.addEventListener("load",adjustContentPadding);
-window.addEventListener("resize",adjustContentPadding);
-
-function onNavigated(cb){
-  let u=location.href;
-  const p=history.pushState;
-  history.pushState=function(){p.apply(history,arguments);cb();};
-  const r=history.replaceState;
-  history.replaceState=function(){r.apply(history,arguments);cb();};
-  window.addEventListener("popstate",cb);
-  setInterval(()=>{if(location.href!==u){u=location.href;cb();}},300);
-}
-
-function runWhenReady(fn){
-  let t;
-  const o=new MutationObserver(()=>{
-    clearTimeout(t);
-    t=setTimeout(()=>{o.disconnect();fn();},100);
-  });
-  o.observe(document.body,{childList:true,subtree:true});
-}
-
-onNavigated(()=>{
-  window.addEventListener("load",()=>{runWhenReady(adjustContentPadding);});
-  runWhenReady(adjustContentPadding);
+const resizeObserver = new ResizeObserver(() => {
+    adjustContentPadding();
 });
 
+setTimeout(() => {
+    [
+        "comp-mhytj3e7","comp-mi2u0prw"
+    ].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) resizeObserver.observe(el);
+    });
+}, 1500);
+
+window.addEventListener("load", adjustContentPadding);
+window.addEventListener("resize", adjustContentPadding);
+
+function onNavigated(callback) {
+  let lastUrl = location.href;
+
+  const push = history.pushState;
+  history.pushState = function() {
+    push.apply(history, arguments);
+    callback();
+  };
+
+  const replace = history.replaceState;
+  history.replaceState = function() {
+    replace.apply(history, arguments);
+    callback();
+  };
+
+  window.addEventListener("popstate", callback);
+
+  setInterval(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      callback();
+    }
+  }, 300);
+}
+
+function runWhenReady(fn) {
+  let timeout;
+  const observer = new MutationObserver(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      observer.disconnect();
+      fn();
+    }, 100);
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+onNavigated(() => {
+  window.addEventListener("load", () => {
+    runWhenReady(adjustContentPadding);
+  });
+
+  runWhenReady(adjustContentPadding);
+});
 `
     return css.replace(/\s+/g, " ")
   }
