@@ -19,7 +19,7 @@ function reserver(data) {
 }
 
 function contreProposition(data) {
-  return data.filter((item) => item.statut_reservation === "contreProposition" && !item.rdv && (item.contrepropositionDate1 || item.contrepropositionDate2 || item.contrepropositionDate3));
+  return data.filter((item) => item.statut_reservation === "contreproposition" && !item.rdv && (item.contrepropositionDate1 || item.contrepropositionDate2 || item.contrepropositionDate3));
 }
 
 function reservation(data) {
