@@ -164,7 +164,7 @@ onNavigated(() => {
 #comp-mi2u0prw {
   position:fixed!important;
   top:0;left:0;
-  width:100%;
+  width:400%;
   z-index:10000;
   background:inherit;
 }
@@ -175,7 +175,7 @@ onNavigated(() => {
   box-sizing:border-box;
   min-height:100vh!important;
   height:auto!important;
-  width:100%!important;
+  width:500%!important;
 }
 html{scroll-behavior:smooth;}
 body{margin:0;}
