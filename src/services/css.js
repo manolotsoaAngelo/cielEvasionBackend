@@ -158,8 +158,13 @@ onNavigated(() => {
     ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if,comp-lvw159l6
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
-    let css = `
-const cssContent = \`
+
+    let css = `const styleTag = document.createElement('style');
+styleTag.textContent = \`
+#comp-mdiw6s9o,
+#comp-m59ic5d3,
+#comp-m56uvovw,
+#comp-mdzn7y3o,
 #comp-mhytj3e7,
 #comp-mi2u0prw {
   position: fixed !important;
@@ -169,6 +174,21 @@ const cssContent = \`
   z-index: 10000;
   background: inherit;
 }
+#comp-mdiw7w5g2,
+#comp-m59ieqh9,
+#comp-m59ob8a72,
+#comp-mdznowf0 {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: inherit;
+}
+#comp-mceqgvd0,
+#comp-m59icq1u,
+#comp-m56rqvpq,
+#comp-mdznalu2,
 #comp-lvw159ib,
 #comp-lvw159id,
 #comp-lvw159if,
@@ -181,26 +201,29 @@ const cssContent = \`
 html { scroll-behavior: smooth; }
 body { margin: 0; }
 \`;
-
-const styleTag = document.createElement('style');
-styleTag.textContent = cssContent;
 document.head.appendChild(styleTag);
 
 function adjustContentPadding() {
     const headers = [
-        "comp-mhytj3e7","comp-mi2u0prw"
+        "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o","comp-mhytj3e7","comp-mi2u0prw"
+    ].map(id => document.getElementById(id));
+    const footers = [
+        "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0"
     ].map(id => document.getElementById(id));
     const contents = [
-        "comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"
+        "comp-mceqgvd0","comp-m59icq1u","comp-m56rqvpq","comp-mdznalu2","comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"
     ].map(id => document.getElementById(id));
 
     let maxHeaderHeight = 0;
+    let maxFooterHeight = 0;
 
     headers.forEach(h => { if(h) maxHeaderHeight = Math.max(maxHeaderHeight, h.offsetHeight); });
+    footers.forEach(f => { if(f) maxFooterHeight = Math.max(maxFooterHeight, f.offsetHeight); });
 
     contents.forEach(c => {
         if(c) {
             c.style.paddingTop = maxHeaderHeight + "px";
+            c.style.paddingBottom = maxFooterHeight + "px";
         }
     });
 }
@@ -209,6 +232,7 @@ const retryInterval = setInterval(() => {
     adjustContentPadding();
     const allLoaded =
         document.getElementById("comp-mhytj3e7") &&
+        document.getElementById("comp-mi2u0prw") &&
         document.getElementById("comp-lvw159ib");
     if (allLoaded) clearInterval(retryInterval);
 }, 200);
@@ -219,7 +243,8 @@ const resizeObserver = new ResizeObserver(() => {
 
 setTimeout(() => {
     [
-        "comp-mhytj3e7","comp-mi2u0prw"
+        "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o","comp-mhytj3e7","comp-mi2u0prw",
+        "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0"
     ].forEach(id => {
         const el = document.getElementById(id);
         if (el) resizeObserver.observe(el);
@@ -231,21 +256,17 @@ window.addEventListener("resize", adjustContentPadding);
 
 function onNavigated(callback) {
   let lastUrl = location.href;
-
   const push = history.pushState;
   history.pushState = function() {
     push.apply(history, arguments);
     callback();
   };
-
   const replace = history.replaceState;
   history.replaceState = function() {
     replace.apply(history, arguments);
     callback();
   };
-
   window.addEventListener("popstate", callback);
-
   setInterval(() => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
@@ -270,10 +291,10 @@ onNavigated(() => {
   window.addEventListener("load", () => {
     runWhenReady(adjustContentPadding);
   });
-
   runWhenReady(adjustContentPadding);
 });
 `
+
     return css.replace(/\s+/g, " ")
   }
 }
