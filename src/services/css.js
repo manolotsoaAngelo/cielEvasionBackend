@@ -162,50 +162,81 @@ onNavigated(() => {
     let css = `const cssContent = \`
 #comp-mhytj3e7,
 #comp-mi2u0prw {
-  position:fixed!important;
-  top:0;left:0;
-  width:100%;
-  z-index:10000;
-  background:inherit;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  background: inherit;
 }
+
+/* CONTENUS : AUCUN PADDING GLOBAL */
 #comp-lvw159ib,
 #comp-lvw159id,
 #comp-lvw159if,
 #comp-lvw159l6 {
-  box-sizing:border-box;
-  min-height:100vh!important;
-  height:auto!important;
-  width:100%!important;
+  box-sizing: border-box;
+  min-height: 100vh !important;
+  height: auto !important;
+  width: 100% !important;
+  padding: 0 !important;
 }
-html{scroll-behavior:smooth;}
-body{margin:0;}
+
+html { scroll-behavior: smooth; }
+body { margin: 0; }
 \`;
 
-const style=document.createElement("style");
-style.textContent=cssContent;
+const style = document.createElement("style");
+style.textContent = cssContent;
 document.head.appendChild(style);
 
-function adjust(){
-  const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
-  const contents=["comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"].map(id=>document.getElementById(id));
-  let h=0;headers.forEach(e=>{if(e)h=Math.max(h,e.offsetHeight)});
-  contents.forEach(c=>{if(c){c.style.paddingTop=h+"px"}});
+function adjust() {
+  const headers = [
+    "comp-mhytj3e7",
+    "comp-mi2u0prw"
+  ].map(id => document.getElementById(id)).filter(Boolean);
+
+  const contents = [
+    "comp-lvw159ib",
+    "comp-lvw159id",
+    "comp-lvw159if",
+    "comp-lvw159l6"
+  ].map(id => document.getElementById(id)).filter(Boolean);
+
+  let headerHeight = 0;
+  headers.forEach(h => {
+    headerHeight = Math.max(headerHeight, h.offsetHeight);
+  });
+
+  contents.forEach(c => {
+    c.style.paddingTop = headerHeight + "px"; // ✅ SEULEMENT le top
+  });
 }
 
-const init=setInterval(()=>{
+const init = setInterval(() => {
   adjust();
-  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(init)
-},200);
+  if (
+    document.getElementById("comp-mhytj3e7") &&
+    document.getElementById("comp-lvw159ib")
+  ) clearInterval(init);
+}, 200);
 
-window.addEventListener("load",adjust);
-window.addEventListener("resize",adjust);
+window.addEventListener("load", adjust);
+window.addEventListener("resize", adjust);
 
-function runReady(fn){
+function runReady(fn) {
   let t;
-  const o=new MutationObserver(()=>{clearTimeout(t);t=setTimeout(()=>{o.disconnect();fn()},100)});
-  o.observe(document.body,{childList:true,subtree:true});
+  const o = new MutationObserver(() => {
+    clearTimeout(t);
+    t = setTimeout(() => {
+      o.disconnect();
+      fn();
+    }, 100);
+  });
+  o.observe(document.body, { childList: true, subtree: true });
 }
 runReady(adjust);
+
 
 `
 
