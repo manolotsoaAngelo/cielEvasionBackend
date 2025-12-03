@@ -155,7 +155,7 @@ onNavigated(() => {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
     ///Head : comp-mhytj3e7,comp-mi2u0prw
-    ///Contenu : comp-lvw159ib, comp-lvw159id, comp-lvw159if,comp-lvw159l6
+    ///Contenu : comp-lvw159ib,comp-lvw159l6 ,comp-lvw159id, comp-lvw159if
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
 
@@ -169,8 +169,6 @@ onNavigated(() => {
   background:inherit;
 }
 #comp-lvw159ib,
-#comp-lvw159id,
-#comp-lvw159if,
 #comp-lvw159l6 {
   box-sizing:border-box;
   min-height:100vh!important;
@@ -187,7 +185,7 @@ document.head.appendChild(style);
 
 function adjust(){
   const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
-  const contents=["comp-lvw159ib","comp-lvw159id","comp-lvw159if","comp-lvw159l6"].map(id=>document.getElementById(id));
+  const contents=["comp-lvw159ib","comp-lvw159l6"].map(id=>document.getElementById(id));
   let h=0;headers.forEach(e=>{if(e)h=Math.max(h,e.offsetHeight)});
 }
 
