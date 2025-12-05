@@ -12,6 +12,12 @@ import EbilletsService from "../services/ebillets.js";
 //console.log(await EbilletsService.getAllEbilletByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 //console.log(await EbilletsService.getAllEbilletFactureByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
 
+export async function get_All_Ebillet_Facture(req, res) {
+  let value = post(req, res);
+  let result = await EbilletsService.getAllEbilletFacture();
+  res.status(201).json(compressed_obj(result));
+}
+
 export async function get_All_Ebillet_Facture_ByPartenaire(req, res) {
   let value = post(req, res);
   let result = await EbilletsService.getAllEbilletFactureByPartenaire(value._id);

@@ -11,10 +11,10 @@ export function decrypter(message) {
     return atob(message);
   }
 }
-/*
-let crypt = crypter('/api/css/get_css_importateur_header_fix')
+
+let crypt = crypter('/api/ebillets/get_All_Ebillet_Facture')
 console.log(crypt)
-*/
+
 //console.log(decrypter("aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t"))
 
 /*
@@ -46,6 +46,8 @@ GET ebillet
 POST ebillet
 
 /api/ebillets/get_All_Ebillet_Facture_ByPartenaire : L2FwaS9lYmlsbGV0cy9nZXRfQWxsX0ViaWxsZXRfRmFjdHVyZV9CeVBhcnRlbmFpcmU=
+
+/api/ebillets/get_All_Ebillet_Facture : L2FwaS9lYmlsbGV0cy9nZXRfQWxsX0ViaWxsZXRfRmFjdHVyZQ==
 
 */
 /*

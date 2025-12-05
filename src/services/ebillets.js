@@ -51,6 +51,15 @@ class EbilletsService {
       return null
     }
   }
+  async getAllEbilletFacture() {
+    let now = new Date().getTime();
+    let allEbillet = await this.getAll()
+    if (allEbillet.length>0) {
+      return (allEbillet).filter((item) => item.bonFacture && new Date(item.reglementPrevu).getTime() > now);
+    } else {
+      return null
+    }
+  }
 }
 
 export default new EbilletsService();

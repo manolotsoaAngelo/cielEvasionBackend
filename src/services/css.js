@@ -204,7 +204,6 @@ function runReady(fn){
   o.observe(document.body,{childList:true,subtree:true});
 }
 runReady(adjust);
-
 `
 
     return css.replace(/\s+/g, " ")
