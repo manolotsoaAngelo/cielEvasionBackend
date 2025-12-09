@@ -13,11 +13,13 @@ import { init_cachedData_ebillet } from "../utils/fullData/ebillets.js";
 import { init_cachedData_orders } from "../utils/fullData/orders.js";
 import { init_cachedData_partenaire } from "../utils/fullData/partenaires.js";
 import { init_cachedData_users } from "../utils/fullData/users.js";
+import { init_cachedData_avis } from "../utils/fullData/avis.js";
 
 import EbilletsService from "../services/ebillets.js";
 import OrdersService from "../services/orders.js";
 import PartenairesService from "../services/partenaires.js";
 import UsersService from "../services/users.js";
+import CssService from "../services/css.js";
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -55,6 +57,12 @@ export async function runFunction(req, res) {
             init_cachedData_users: init_cachedData_users(),
           };
           UsersService.refresh();
+          break;
+          case "avis":
+          result = {
+            init_cachedData_avis: init_cachedData_avis(),
+          };
+          CssService.refresh_avis();
           break;
         default:
           break;
