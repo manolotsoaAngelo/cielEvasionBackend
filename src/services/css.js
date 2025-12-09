@@ -1,8 +1,32 @@
 /*
 import CssService from "../services/css.js";
 */
+import fs from "fs";
+
+import {
+  FullData, init_cachedData_avis,
+  refreshData,
+} from "../utils/fullData/avis.js";
 class CssService {
   constructor() {
+  }
+
+  async refresh_avis() {
+    return await refreshData();
+  }
+  async getAll_avis() {
+    return await FullData();
+  }
+
+  async avis_Client_full_body() {
+        ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_avis_Client_full_body_Byserver" defer></script>
+
+    let htmlString = fs.readFileSync("src/utils/css/avis/avis_html_v1.html", "utf8");
+        let all_avis = await this.getAll_avis();
+        let script = `<script>
+        const reviews = ${JSON.stringify(all_avis)};
+        </script>`;
+    return (script + htmlString).replace(/\s+/g, " ")
   }
 
   async partenaires_header_footer_body_fix() {

@@ -1,5 +1,8 @@
 import express from "express";
-import { get_css_partenaires_header_footer_body_fix,get_css_importateur_header_fix} from "../controllers/cssController.js";
+import { get_css_partenaires_header_footer_body_fix
+    ,get_css_importateur_header_fix
+, get_avis_Client_full_body
+} from "../controllers/cssController.js";
 
 const router = express.Router();
 
@@ -7,5 +10,6 @@ const router = express.Router();
 ///https://ciel-evasion-backend.vercel.app/api/css/get_css_partenaires_header_footer_body_fix
 router.get("/get_css_partenaires_header_footer_body_fix", get_css_partenaires_header_footer_body_fix);
 router.get("/get_css_importateur_header_fix", get_css_importateur_header_fix);
+router.get("/get_avis_Client_full_body", get_avis_Client_full_body);
 
 export default router;

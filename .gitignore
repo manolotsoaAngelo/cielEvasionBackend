@@ -1,6 +1,7 @@
 # .gitignore
 node_modules/
 backup_wix/utils
+backup_wix/test
 .env
 .vscode/
 *.log

@@ -11,10 +11,10 @@ export function decrypter(message) {
     return atob(message);
   }
 }
-
-let crypt = crypter('/api/ebillets/get_All_Ebillet_Facture')
+/*
+let crypt = crypter('/api/css/get_avis_Client_full_body')
 console.log(crypt)
-
+*/
 //console.log(decrypter("aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t"))
 
 /*
@@ -35,6 +35,7 @@ console.log(crypt)
 
     /api/css/get_css_partenaires_header_footer_body_fix : L2FwaS9jc3MvZ2V0X2Nzc19wYXJ0ZW5haXJlc19oZWFkZXJfZm9vdGVyX2JvZHlfZml4
     /api/css/get_css_importateur_header_fix : L2FwaS9jc3MvZ2V0X2Nzc19pbXBvcnRhdGV1cl9oZWFkZXJfZml4
+    /api/css/get_avis_Client_full_body : L2FwaS9jc3MvZ2V0X2F2aXNfQ2xpZW50X2Z1bGxfYm9keQ==
 */
 
 
