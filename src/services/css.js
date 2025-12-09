@@ -19,12 +19,12 @@ class CssService {
   }
 
   async avis_Client_full_body() {
-        ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_avis_Client_full_body_Byserver" defer></script>
+    ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_avis_Client_full_body_Byserver" defer></script>
 
     let htmlString = fs.readFileSync("src/utils/css/avis/avis_html_v1.html", "utf8");
-        let all_avis = await this.getAll_avis();
-        let script = `<script>
-        const reviews = ${JSON.stringify(all_avis)};
+    let all_avis = await this.getAll_avis();
+    let script = `<script>
+        const reviews = ${all_avis};
         </script>`;
     return (script + htmlString).replace(/\s+/g, " ")
   }
