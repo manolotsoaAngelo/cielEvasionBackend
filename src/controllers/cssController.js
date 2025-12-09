@@ -8,7 +8,7 @@ import CssService from "../services/css.js";
 
 //console.log(await CssService.partenaires_header_footer_body_fix())
 //console.log(await CssService.importateur_header_fix())
-//console.log((await CssService.getAll_avis())[0])
+//console.log((await CssService.getAll_avis()))
 //console.log((await CssService.getAll_avis())[0].images)
 //console.log(await CssService.avis_Client_full_body())
 
