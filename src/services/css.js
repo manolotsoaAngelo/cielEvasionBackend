@@ -26,8 +26,7 @@ class CssService {
     let script = `<!DOCTYPE html><script>
         const reviews = ${JSON.stringify(all_avis)};
         </script>`;
-    return script + htmlString
-    //return script
+    return (script + htmlString).replace(/\s+/g, " ")
   }
 
   async partenaires_header_footer_body_fix() {
