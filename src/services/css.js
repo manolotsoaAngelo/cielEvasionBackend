@@ -23,12 +23,10 @@ class CssService {
 
     let htmlString = fs.readFileSync("src/utils/css/avis/avis_html_v1.html", "utf8");
     let all_avis = await this.getAll_avis();
-    let script = `<!DOCTYPE html><script>
-/*
+    let script = `<script>
         const reviews = ${JSON.stringify(all_avis)};
-        */
         </script>`;
-    return script + htmlString
+    return script
     //return script
   }
 
