@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Widget Reviews - Carrousel</title>
+    <title>Avis clients</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -51,6 +53,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -114,9 +117,17 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .carousel-container {
@@ -200,10 +211,21 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .badge-google { background: #4285F4; }
-        .badge-facebook { background: #1877F2; }
-        .badge-trustpilot { background: #00B67A; }
-        .badge-website { background: #FF6B6B; }
+        .badge-google {
+            background: #4285F4;
+        }
+
+        .badge-facebook {
+            background: #1877F2;
+        }
+
+        .badge-trustpilot {
+            background: #00B67A;
+        }
+
+        .badge-website {
+            background: #FF6B6B;
+        }
 
         .reviewer-details h3 {
             color: #333;
@@ -431,6 +453,7 @@
                 opacity: 0;
                 transform: translateY(-30px) scale(0.95);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
@@ -646,6 +669,7 @@
                 opacity: 0;
                 transform: scale(0.9);
             }
+
             to {
                 opacity: 1;
                 transform: scale(1);
@@ -679,9 +703,11 @@
             .review-card {
                 flex: 0 0 calc(100% / 2 - 30px);
             }
+
             .review-images {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .modal-images-grid {
                 grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             }
@@ -692,39 +718,50 @@
                 flex: 0 0 calc(100% - 30px);
                 min-height: 420px;
             }
+
             .carousel-track {
                 padding: 0 40px;
             }
+
             .carousel-nav {
                 width: 40px;
                 height: 40px;
             }
+
             .reviews-header h1 {
                 font-size: 2.2rem;
             }
+
             .modal-content {
                 width: 98%;
                 max-height: 85vh;
             }
-            .modal-header, .modal-body {
+
+            .modal-header,
+            .modal-body {
                 padding: 20px;
             }
+
             .modal-header-info {
                 gap: 15px;
             }
+
             .modal-avatar {
                 width: 70px;
                 height: 70px;
             }
+
             .modal-badge {
                 width: 30px;
                 height: 30px;
                 font-size: 0.9rem;
             }
+
             .modal-images-grid {
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 12px;
             }
+
             .review-images {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -734,57 +771,70 @@
             .carousel-track {
                 padding: 0 20px;
             }
+
             .review-card {
                 padding: 20px;
                 margin: 0 10px;
                 min-height: 400px;
             }
+
             .reviewer-avatar {
                 width: 60px;
                 height: 60px;
             }
+
             .reviewer-badge {
                 width: 24px;
                 height: 24px;
                 font-size: 0.7rem;
             }
+
             .modal-header-info {
                 flex-direction: column;
                 text-align: center;
                 gap: 10px;
             }
+
             .modal-avatar {
                 width: 60px;
                 height: 60px;
             }
+
             .modal-badge {
                 width: 25px;
                 height: 25px;
                 font-size: 0.8rem;
             }
+
             .modal-images-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
+
             .review-images {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .reviews-header h1 {
                 font-size: 1.8rem;
             }
+
             .subtitle:before,
             .subtitle:after {
                 width: 30px;
             }
+
             .subtitle:before {
                 left: -30px;
             }
+
             .subtitle:after {
                 right: -30px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="reviews-container">
         <div class="reviews-header">
@@ -806,13 +856,13 @@
             <button class="carousel-nav prev" id="prevBtn">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            
+
             <div class="carousel-track" id="carouselTrack"></div>
-            
+
             <button class="carousel-nav next" id="nextBtn">
                 <i class="fas fa-chevron-right"></i>
             </button>
-            
+
             <div class="carousel-indicators" id="carouselIndicators"></div>
         </div>
     </div>
@@ -835,10 +885,10 @@
                 </div>
                 <button class="close-modal" id="closeModal">&times;</button>
             </div>
-            
+
             <div class="modal-body">
                 <div class="modal-review-content" id="modalReviewContent"></div>
-                
+
                 <div class="modal-images-container" id="modalImagesContainer">
                     <div class="modal-images-title">
                         <i class="fas fa-images"></i>
@@ -874,7 +924,7 @@
         }
 
         function getSourceIcon(source) {
-            switch(source) {
+            switch (source) {
                 case 'google': return '<i class="fab fa-google"></i>';
                 case 'facebook': return '<i class="fab fa-facebook-f"></i>';
                 case 'trustpilot': return '<i class="fas fa-star"></i>';
@@ -884,7 +934,7 @@
         }
 
         function getBadgeClass(source) {
-            switch(source) {
+            switch (source) {
                 case 'google': return 'badge-google';
                 case 'facebook': return 'badge-facebook';
                 case 'trustpilot': return 'badge-trustpilot';
@@ -892,104 +942,104 @@
                 default: return 'badge-website';
             }
         }
-/*
-        const reviews = [
-            {
-                id: 1,
-                name: "Marie Dupont",
-                profilePic: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
-                rating: 5,
-                date: "2024-02-15",
-                content: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement. Le produit est arrivé bien emballé et en parfait état. La qualité est au rendez-vous et correspond parfaitement à la description. Je suis vraiment satisfaite de mon achat et n'hésiterai pas à recommander cette boutique à mes proches. L'expérience client était fluide du début à la fin.",
-                shortContent: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement. Le produit est arrivé bien emballé et en parfait état...",
-                images: [
-                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
-                ],
-                source: "google",
-                sourceName: "Google"
-            },
-            {
-                id: 2,
-                name: "Pierre Martin",
-                profilePic: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
-                rating: 5,
-                date: "2024-02-10",
-                content: "Produit de haute qualité, livraison rapide. Je suis très satisfait de mon achat. L'interface est intuitive et les fonctionnalités répondent parfaitement à mes besoins. Le support technique m'a aidé à configurer certains paramètres et était très compétent. Je constate déjà une amélioration significative de ma productivité depuis que j'utilise ce service.",
-                shortContent: "Produit de haute qualité, livraison rapide. Je suis très satisfait de mon achat. L'interface est intuitive et les fonctionnalités répondent parfaitement...",
-                images: [
-                    "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&h=600&fit=crop"
-                ],
-                source: "facebook",
-                sourceName: "Facebook"
-            },
-            {
-                id: 3,
-                name: "Sophie Leroy",
-                profilePic: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
-                rating: 4,
-                date: "2024-01-25",
-                content: "Très bon service client. Petit bémol sur le délai de livraison mais sinon parfait. La qualité du produit est excellente et le rapport qualité-prix est convenable. J'ai apprécié la transparence sur les délais de livraison et les mises à jour régulières. Je recommande tout de même ce produit pour ceux qui ne sont pas pressés.",
-                shortContent: "Très bon service client. Petit bémol sur le délai de livraison mais sinon parfait. La qualité du produit est excellente et le rapport qualité-prix...",
-                images: [
-                    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop"
-                ],
-                source: "trustpilot",
-                sourceName: "Trustpilot"
-            },
-            {
-                id: 4,
-                name: "Thomas Bernard",
-                profilePic: "https://images.unsplash.com/photo-1507591064344-4c6ce005-128?w=400&h=400&fit=crop&crop=face",
-                rating: 5,
-                date: "2024-01-15",
-                content: "Exactement ce que je cherchais. Fonctionnalités excellentes et interface intuitive. La prise en main a été rapide et j'ai pu commencer à utiliser le produit immédiatement. Les tutoriels intégrés sont très utiles pour les débutants. Après deux semaines d'utilisation, je peux dire que cet achat a été un excellent investissement pour mon entreprise.",
-                shortContent: "Exactement ce que je cherchais. Fonctionnalités excellentes et interface intuitive. La prise en main a été rapide et j'ai pu commencer à utiliser...",
-                images: [
-                    "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=600&fit=crop"
-                ],
-                source: "google",
-                sourceName: "Google"
-            },
-            {
-                id: 5,
-                name: "Julie Petit",
-                profilePic: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop&crop=face",
-                rating: 5,
-                date: "2023-12-20",
-                content: "Support technique très compétent. Ils m'ont aidé à résoudre mon problème rapidement. J'avais un souci de configuration et en moins de 10 minutes au téléphone, tout était réglé. La personne au support était patiente et pédagogique. Je me sens en confiance pour utiliser ce service sur le long terme.",
-                shortContent: "Support technique très compétent. Ils m'ont aidé à résoudre mon problème rapidement. J'avais un souci de configuration et en moins de 10 minutes...",
-                images: [
-                    "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
-                    "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&h=600&fit=crop"
-                ],
-                source: "website",
-                sourceName: "Notre Site"
-            },
-            {
-                id: 6,
-                name: "Jean Moreau",
-                profilePic: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
-                rating: 4,
-                date: "2024-03-01",
-                content: "Produit de qualité, service client réactif. J'ai eu une question sur l'utilisation et l'équipe m'a répondu en moins d'une heure. Le produit correspond parfaitement à mes attentes et je le recommande sans hésitation.",
-                shortContent: "Produit de qualité, service client réactif. J'ai eu une question sur l'utilisation et l'équipe m'a répondu en moins d'une heure...",
-                images: [
-                    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&h=600&fit=crop"
-                ],
-                source: "facebook",
-                sourceName: "Facebook"
-            }
-        ];
-*/
+        /*
+                const reviews = [
+                    {
+                        id: 1,
+                        name: "Marie Dupont",
+                        profilePic: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
+                        rating: 5,
+                        date: "2024-02-15",
+                        content: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement. Le produit est arrivé bien emballé et en parfait état. La qualité est au rendez-vous et correspond parfaitement à la description. Je suis vraiment satisfaite de mon achat et n'hésiterai pas à recommander cette boutique à mes proches. L'expérience client était fluide du début à la fin.",
+                        shortContent: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement. Le produit est arrivé bien emballé et en parfait état...",
+                        images: [
+                            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop"
+                        ],
+                        source: "google",
+                        sourceName: "Google"
+                    },
+                    {
+                        id: 2,
+                        name: "Pierre Martin",
+                        profilePic: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+                        rating: 5,
+                        date: "2024-02-10",
+                        content: "Produit de haute qualité, livraison rapide. Je suis très satisfait de mon achat. L'interface est intuitive et les fonctionnalités répondent parfaitement à mes besoins. Le support technique m'a aidé à configurer certains paramètres et était très compétent. Je constate déjà une amélioration significative de ma productivité depuis que j'utilise ce service.",
+                        shortContent: "Produit de haute qualité, livraison rapide. Je suis très satisfait de mon achat. L'interface est intuitive et les fonctionnalités répondent parfaitement...",
+                        images: [
+                            "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&h=600&fit=crop"
+                        ],
+                        source: "facebook",
+                        sourceName: "Facebook"
+                    },
+                    {
+                        id: 3,
+                        name: "Sophie Leroy",
+                        profilePic: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
+                        rating: 4,
+                        date: "2024-01-25",
+                        content: "Très bon service client. Petit bémol sur le délai de livraison mais sinon parfait. La qualité du produit est excellente et le rapport qualité-prix est convenable. J'ai apprécié la transparence sur les délais de livraison et les mises à jour régulières. Je recommande tout de même ce produit pour ceux qui ne sont pas pressés.",
+                        shortContent: "Très bon service client. Petit bémol sur le délai de livraison mais sinon parfait. La qualité du produit est excellente et le rapport qualité-prix...",
+                        images: [
+                            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&h=600&fit=crop"
+                        ],
+                        source: "trustpilot",
+                        sourceName: "Trustpilot"
+                    },
+                    {
+                        id: 4,
+                        name: "Thomas Bernard",
+                        profilePic: "https://images.unsplash.com/photo-1507591064344-4c6ce005-128?w=400&h=400&fit=crop&crop=face",
+                        rating: 5,
+                        date: "2024-01-15",
+                        content: "Exactement ce que je cherchais. Fonctionnalités excellentes et interface intuitive. La prise en main a été rapide et j'ai pu commencer à utiliser le produit immédiatement. Les tutoriels intégrés sont très utiles pour les débutants. Après deux semaines d'utilisation, je peux dire que cet achat a été un excellent investissement pour mon entreprise.",
+                        shortContent: "Exactement ce que je cherchais. Fonctionnalités excellentes et interface intuitive. La prise en main a été rapide et j'ai pu commencer à utiliser...",
+                        images: [
+                            "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=600&fit=crop"
+                        ],
+                        source: "google",
+                        sourceName: "Google"
+                    },
+                    {
+                        id: 5,
+                        name: "Julie Petit",
+                        profilePic: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop&crop=face",
+                        rating: 5,
+                        date: "2023-12-20",
+                        content: "Support technique très compétent. Ils m'ont aidé à résoudre mon problème rapidement. J'avais un souci de configuration et en moins de 10 minutes au téléphone, tout était réglé. La personne au support était patiente et pédagogique. Je me sens en confiance pour utiliser ce service sur le long terme.",
+                        shortContent: "Support technique très compétent. Ils m'ont aidé à résoudre mon problème rapidement. J'avais un souci de configuration et en moins de 10 minutes...",
+                        images: [
+                            "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&h=600&fit=crop",
+                            "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&h=600&fit=crop"
+                        ],
+                        source: "website",
+                        sourceName: "Notre Site"
+                    },
+                    {
+                        id: 6,
+                        name: "Jean Moreau",
+                        profilePic: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+                        rating: 4,
+                        date: "2024-03-01",
+                        content: "Produit de qualité, service client réactif. J'ai eu une question sur l'utilisation et l'équipe m'a répondu en moins d'une heure. Le produit correspond parfaitement à mes attentes et je le recommande sans hésitation.",
+                        shortContent: "Produit de qualité, service client réactif. J'ai eu une question sur l'utilisation et l'équipe m'a répondu en moins d'une heure...",
+                        images: [
+                            "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&h=600&fit=crop"
+                        ],
+                        source: "facebook",
+                        sourceName: "Facebook"
+                    }
+                ];
+        */
         let currentIndex = 0;
         let cardsPerView = 3;
 
@@ -1012,27 +1062,27 @@
         function generateCarousel() {
             const carouselTrack = document.getElementById('carouselTrack');
             const indicatorsContainer = document.getElementById('carouselIndicators');
-            
+
             carouselTrack.innerHTML = '';
             indicatorsContainer.innerHTML = '';
-            
+
             updateCardsPerView();
-            
+
             reviews.forEach((review, index) => {
                 const reviewCard = document.createElement('div');
                 reviewCard.className = 'review-card';
-                
+
                 const showReadMore = review.content.length > 150;
                 const displayContent = showReadMore ? review.shortContent : review.content;
                 const relativeDate = getRelativeDate(review.date);
                 const badgeClass = getBadgeClass(review.source);
                 const sourceIcon = getSourceIcon(review.source);
-                
+
                 let imagesHTML = '';
                 if (review.images && review.images.length > 0) {
                     const imageCount = review.images.length;
                     const displayImages = review.images.slice(0, 4);
-                    
+
                     imagesHTML = `
                         <div class="review-images">
                             ${displayImages.map((img, imgIndex) => `
@@ -1041,14 +1091,14 @@
                                     <div class="image-overlay">
                                         <div class="image-overlay-text">Voir l'avis complet</div>
                                     </div>
-                                    ${imgIndex === 3 && imageCount > 4 ? 
-                                        `<div class="image-counter">+${imageCount - 4}</div>` : ''}
+                                    ${imgIndex === 3 && imageCount > 4 ?
+                            `<div class="image-counter">+${imageCount - 4}</div>` : ''}
                                 </div>
                             `).join('')}
                         </div>
                     `;
                 }
-                
+
                 reviewCard.innerHTML = `
                     <div class="review-header">
                         <div class="reviewer-info">
@@ -1073,17 +1123,17 @@
                     
                     ${imagesHTML}
                     
-                    ${showReadMore ? 
+                    ${showReadMore ?
                         `<button class="read-more-btn" data-review-id="${review.id}">
                             <i class="fas fa-external-link-alt"></i> Lire la suite
-                        </button>` 
+                        </button>`
                         : ''
                     }
                 `;
-                
+
                 carouselTrack.appendChild(reviewCard);
             });
-            
+
             const totalSlides = Math.ceil(reviews.length / cardsPerView);
             for (let i = 0; i < totalSlides; i++) {
                 const indicator = document.createElement('div');
@@ -1094,7 +1144,7 @@
                 });
                 indicatorsContainer.appendChild(indicator);
             }
-            
+
             updateCarousel();
             addEventListeners();
         }
@@ -1103,10 +1153,10 @@
             const carouselTrack = document.getElementById('carouselTrack');
             const cardWidth = document.querySelector('.review-card')?.offsetWidth || 400;
             const translateX = -currentIndex * cardWidth * cardsPerView;
-            
+
             carouselTrack.style.transition = 'transform 0.5s ease-in-out';
             carouselTrack.style.transform = `translateX(${translateX}px)`;
-            
+
             document.querySelectorAll('.indicator').forEach((indicator, index) => {
                 indicator.classList.toggle('active', index === currentIndex);
             });
@@ -1132,16 +1182,16 @@
         function addEventListeners() {
             document.getElementById('nextBtn').addEventListener('click', nextSlide);
             document.getElementById('prevBtn').addEventListener('click', prevSlide);
-            
+
             document.querySelectorAll('.read-more-btn').forEach(button => {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function () {
                     const reviewId = parseInt(this.getAttribute('data-review-id'));
                     openReviewModal(reviewId);
                 });
             });
-            
+
             document.querySelectorAll('.review-image-container').forEach(container => {
-                container.addEventListener('click', function(e) {
+                container.addEventListener('click', function (e) {
                     e.stopPropagation();
                     const reviewId = this.getAttribute('data-review-id');
                     if (reviewId) openReviewModal(parseInt(reviewId));
@@ -1152,23 +1202,23 @@
         function openReviewModal(reviewId) {
             const review = reviews.find(r => r.id === reviewId);
             if (!review) return;
-            
+
             document.getElementById('modalReviewerName').textContent = review.name;
             document.getElementById('modalProfilePic').src = review.profilePic;
             document.getElementById('modalProfilePic').alt = review.name;
             document.getElementById('modalRating').innerHTML = generateStars(review.rating);
             document.getElementById('modalDate').textContent = getRelativeDate(review.date);
             document.getElementById('modalReviewContent').textContent = review.content;
-            
+
             const modalBadge = document.getElementById('modalBadge');
             modalBadge.className = `modal-badge ${getBadgeClass(review.source)}`;
             modalBadge.innerHTML = getSourceIcon(review.source);
             modalBadge.title = review.sourceName;
-            
+
             const imagesContainer = document.getElementById('modalImagesContainer');
             const imagesGrid = document.getElementById('modalImages');
             imagesGrid.innerHTML = '';
-            
+
             if (review.images && review.images.length > 0) {
                 review.images.forEach((image, index) => {
                     const container = document.createElement('div');
@@ -1184,7 +1234,7 @@
                 });
                 imagesContainer.style.display = 'block';
             } else imagesContainer.style.display = 'none';
-            
+
             document.getElementById('reviewModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
         }
@@ -1194,37 +1244,37 @@
             document.getElementById('imageModal').style.display = 'flex';
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             generateCarousel();
-            
-            document.getElementById('closeModal').addEventListener('click', function() {
+
+            document.getElementById('closeModal').addEventListener('click', function () {
                 document.getElementById('reviewModal').style.display = 'none';
                 document.body.style.overflow = 'auto';
             });
-            
-            document.getElementById('reviewModal').addEventListener('click', function(e) {
+
+            document.getElementById('reviewModal').addEventListener('click', function (e) {
                 if (e.target === this) {
                     this.style.display = 'none';
                     document.body.style.overflow = 'auto';
                 }
             });
-            
-            document.getElementById('closeImageModal').addEventListener('click', function() {
+
+            document.getElementById('closeImageModal').addEventListener('click', function () {
                 document.getElementById('imageModal').style.display = 'none';
             });
-            
-            document.getElementById('imageModal').addEventListener('click', function(e) {
+
+            document.getElementById('imageModal').addEventListener('click', function (e) {
                 if (e.target === this || e.target.id === 'fullSizeImage') {
                     this.style.display = 'none';
                 }
             });
-            
-            window.addEventListener('resize', function() {
+
+            window.addEventListener('resize', function () {
                 updateCardsPerView();
                 generateCarousel();
             });
-            
-            document.addEventListener('keydown', function(e) {
+
+            document.addEventListener('keydown', function (e) {
                 if (document.getElementById('reviewModal').style.display === 'flex') {
                     if (e.key === 'Escape') {
                         document.getElementById('reviewModal').style.display = 'none';
@@ -1237,9 +1287,9 @@
                     if (e.key === 'ArrowLeft') prevSlide();
                 }
             });
-            
+
             setInterval(() => {
-                if (document.getElementById('reviewModal').style.display !== 'flex' && 
+                if (document.getElementById('reviewModal').style.display !== 'flex' &&
                     document.getElementById('imageModal').style.display !== 'flex') {
                     nextSlide();
                 }
@@ -1247,4 +1297,5 @@
         });
     </script>
 </body>
+
 </html>
