@@ -1,4 +1,5 @@
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,10 +56,19 @@
         .carousel-container {
             position: relative;
             padding: 0 50px;
+            overflow: hidden;
         }
 
-        @media (max-width: 768px) {
-            .carousel-container { padding: 0 20px; }
+        @media (max-width: 1400px) {
+            .carousel-container {
+                padding: 0 30px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .carousel-container {
+                padding: 0 20px;
+            }
         }
 
         .review-card {
@@ -67,27 +77,32 @@
             border: none;
             box-shadow: var(--card-shadow);
             height: 100%;
-            transition: transform 0.3s ease;
-            padding: 25px;
-            margin: 10px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            padding: 20px;
+            margin: 0 5px;
+            display: flex;
+            flex-direction: column;
         }
 
-        .review-card:hover { transform: translateY(-5px); }
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
 
         .review-header {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
         }
 
         .reviewer-avatar {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             overflow: hidden;
             border: 3px solid white;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-            margin-right: 15px;
+            margin-right: 12px;
             flex-shrink: 0;
         }
 
@@ -97,55 +112,109 @@
             object-fit: cover;
         }
 
-        .reviewer-info { flex-grow: 1; }
+        .reviewer-info {
+            flex-grow: 1;
+            min-width: 0;
+        }
 
         .reviewer-info h5 {
-            margin: 0 0 5px 0;
+            margin: 0 0 3px 0;
             color: #333;
             font-weight: 600;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
         }
 
         .review-date {
             color: var(--secondary-color);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+            font-size: 0.8rem;
+            margin-bottom: 3px;
         }
 
-        .review-rating { color: var(--accent-color); font-size: 0.9rem; }
+        .review-rating-source {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            flex-shrink: 0;
+        }
+
+        .review-rating {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
 
         .review-source {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 2px 8px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
-            margin-top: 5px;
+            white-space: nowrap;
         }
 
-        .source-google { background-color: #4285f4; color: white; }
-        .source-facebook { background-color: #1877f2; color: white; }
-        .source-trustpilot { background-color: #00b67a; color: white; }
-        .source-website { background-color: #6c757d; color: white; }
+        .source-google {
+            background-color: #4285f4;
+            color: white;
+        }
+
+        .source-facebook {
+            background-color: #1877f2;
+            color: white;
+        }
+
+        .source-trustpilot {
+            background-color: #00b67a;
+            color: white;
+        }
+
+        .source-website {
+            background-color: #6c757d;
+            color: white;
+        }
 
         .review-content {
             color: #444;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            line-height: 1.5;
+            margin-bottom: 15px;
             flex-grow: 1;
+            font-size: 0.85rem;
+            overflow: hidden;
         }
 
-        .review-content.truncated { max-height: 120px; overflow: hidden; }
+        .review-content.truncated {
+            max-height: 80px;
+            overflow: hidden;
+            position: relative;
+        }
 
-        .review-images { margin-top: 15px; }
+        .review-content.truncated::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(to bottom, transparent, white);
+        }
+
+        .review-images {
+            margin-top: 10px;
+            flex-shrink: 0;
+        }
 
         .review-image-container {
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
-            height: 80px;
-            width: 80px;
+            height: 60px;
+            width: 60px;
             display: inline-block;
-            margin-right: 8px;
-            margin-bottom: 8px;
+            margin-right: 5px;
+            margin-bottom: 5px;
             position: relative;
             cursor: pointer;
         }
@@ -157,7 +226,9 @@
             transition: transform 0.3s ease;
         }
 
-        .review-image-container:hover img { transform: scale(1.1); }
+        .review-image-container:hover img {
+            transform: scale(1.1);
+        }
 
         .image-counter {
             position: absolute;
@@ -165,38 +236,10 @@
             right: 0;
             background: rgba(0, 0, 0, 0.7);
             color: white;
-            font-size: 0.7rem;
-            padding: 2px 6px;
+            font-size: 0.6rem;
+            padding: 1px 4px;
             border-radius: 0 0 0 5px;
         }
-
-        .carousel-control-prev, .carousel-control-next {
-            width: 50px;
-            height: 50px;
-            background-color: white;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
-            opacity: 1;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-control-prev { left: -25px; }
-        .carousel-control-next { right: -25px; }
-
-        .carousel-control-prev-icon, .carousel-control-next-icon {
-            filter: invert(0.5);
-            transition: filter 0.3s ease;
-        }
-
-        .carousel-control-prev:hover, .carousel-control-next:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .carousel-control-prev:hover .carousel-control-prev-icon,
-        .carousel-control-next:hover .carousel-control-next-icon { filter: invert(1); }
 
         .read-more-btn {
             color: var(--primary-color);
@@ -204,11 +247,14 @@
             font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 3px;
             cursor: pointer;
             border: none;
             background: none;
             padding: 0;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 5px;
         }
 
         .read-more-btn:hover {
@@ -216,6 +262,48 @@
             color: #0a58ca;
         }
 
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-control-prev {
+            left: 0;
+        }
+
+        .carousel-control-next {
+            right: 0;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            filter: invert(0.5);
+            transition: filter 0.3s ease;
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .carousel-control-prev:hover,
+        .carousel-control-next:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-control-prev:hover .carousel-control-prev-icon,
+        .carousel-control-next:hover .carousel-control-next-icon {
+            filter: invert(1);
+        }
+
+        /* Modales */
         .modal-content {
             border-radius: 15px;
             border: none;
@@ -250,12 +338,38 @@
             object-fit: cover;
         }
 
-        .modal-body { padding: 25px; }
+        .modal-reviewer-info {
+            flex-grow: 1;
+        }
+
+        .modal-reviewer-info .modal-title {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .modal-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .modal-rating-source {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 5px;
+        }
 
         .modal-rating {
             color: var(--accent-color);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .modal-body {
+            padding: 25px;
         }
 
         .modal-images-grid {
@@ -285,7 +399,9 @@
             transition: transform 0.3s ease;
         }
 
-        .modal-image:hover img { transform: scale(1.05); }
+        .modal-image:hover img {
+            transform: scale(1.05);
+        }
 
         .image-preview-modal {
             backdrop-filter: blur(10px);
@@ -334,8 +450,15 @@
         }
 
         @keyframes imageFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .close-photo-btn {
@@ -406,8 +529,13 @@
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .image-nav-btn.prev { left: 20px; }
-        .image-nav-btn.next { right: 20px; }
+        .image-nav-btn.prev {
+            left: 20px;
+        }
+
+        .image-nav-btn.next {
+            right: 20px;
+        }
 
         .image-nav-btn:disabled {
             opacity: 0.3;
@@ -447,9 +575,13 @@
             transform: scale(1.3);
         }
 
-        .image-indicator-dot:hover { background: rgba(255, 255, 255, 0.6); }
+        .image-indicator-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
 
-        .carousel-indicators { bottom: -40px; }
+        .carousel-indicators {
+            bottom: -40px;
+        }
 
         .carousel-indicators button {
             width: 10px;
@@ -460,16 +592,57 @@
             margin: 0 5px;
         }
 
-        .carousel-indicators button.active { background-color: var(--primary-color); }
+        .carousel-indicators button.active {
+            background-color: var(--primary-color);
+        }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1400px) {
+            .review-card {
+                padding: 15px;
+            }
+
+            .reviewer-avatar {
+                width: 45px;
+                height: 45px;
+            }
+
+            .review-content {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .review-card {
+                padding: 12px;
+            }
+
+            .review-content {
+                font-size: 0.78rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+
+            .carousel-control-prev,
+            .carousel-control-next {
+                width: 35px;
+                height: 35px;
+            }
+
             .image-nav-btn {
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
             }
-            .image-nav-btn.prev { left: 10px; }
-            .image-nav-btn.next { right: 10px; }
+
+            .image-nav-btn.prev {
+                left: 10px;
+            }
+
+            .image-nav-btn.next {
+                right: 10px;
+            }
+
             .close-photo-btn {
                 top: 0px;
                 right: 0px;
@@ -479,21 +652,40 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .image-preview-modal img { border-radius: 8px; }
+        @media (max-width: 768px) {
+            .image-preview-modal img {
+                border-radius: 8px;
+            }
+
             .image-nav-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
             }
+
             .close-photo-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 1.3rem;
             }
         }
+
+        @media (max-width: 576px) {
+            .carousel-container {
+                padding: 0 10px;
+            }
+
+            .review-card {
+                margin: 0 2px;
+            }
+
+            .reviewer-info h5 {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="reviews-header">
@@ -501,19 +693,22 @@
             <div class="rating-summary">
                 <div class="stars-container" id="averageStars"></div>
                 <div class="text-muted">
-                    <span class="fw-bold text-primary" id="averageRating"></span> basé sur <span id="reviewCount"></span> avis
+                    <span class="fw-bold text-primary" id="averageRating"></span> basé sur <span
+                        id="reviewCount"></span> avis
                 </div>
             </div>
         </div>
 
         <div class="carousel-container">
-            <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
                 <div class="carousel-inner" id="carouselInner"></div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Précédent</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Suivant</span>
                 </button>
@@ -530,11 +725,13 @@
                         <div class="modal-avatar">
                             <img id="modalProfilePic" src="" alt="">
                         </div>
-                        <div>
-                            <h5 class="modal-title mb-1" id="modalReviewerName"></h5>
-                            <div class="modal-rating" id="modalRating"></div>
-                            <div class="text-muted small" id="modalDate"></div>
-                            <span id="modalSource" class="review-source"></span>
+                        <div class="modal-reviewer-info">
+                            <h5 class="modal-title" id="modalReviewerName"></h5>
+                            <span class="modal-date" id="modalDate"></span>
+                            <div class="modal-rating-source">
+                                <div class="modal-rating" id="modalRating"></div>
+                                <span id="modalSource" class="review-source"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -549,7 +746,8 @@
         </div>
     </div>
 
-    <div class="modal fade image-preview-modal" id="imagePreviewModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal fade image-preview-modal" id="imagePreviewModal" tabindex="-1" aria-hidden="true"
+        data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -557,8 +755,10 @@
                     <div class="image-container" id="imageContainer">
                         <img id="previewImage" src="" alt="Aperçu de l'image">
                     </div>
-                    <button class="image-nav-btn prev" id="prevImageBtn" style="display: none;"><i class="fas fa-chevron-left"></i></button>
-                    <button class="image-nav-btn next" id="nextImageBtn" style="display: none;"><i class="fas fa-chevron-right"></i></button>
+                    <button class="image-nav-btn prev" id="prevImageBtn" style="display: none;"><i
+                            class="fas fa-chevron-left"></i></button>
+                    <button class="image-nav-btn next" id="nextImageBtn" style="display: none;"><i
+                            class="fas fa-chevron-right"></i></button>
                     <div class="image-indicator" id="imageIndicator" style="display: none;"></div>
                 </div>
             </div>
@@ -568,27 +768,39 @@
     <div class="modal-backdrop-overlay" id="modalOverlay" style="display: none;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         let currentImages = [], currentImageIndex = 0, imagePreviewModal = null, modalOverlay = null;
+        let currentSlideIndex = 0;
+
+        function abbreviateName(fullName) {
+            const parts = fullName.split(' ');
+            if (parts.length <= 1) return fullName;
+
+            const firstName = parts[0];
+            const lastNameInitial = parts[parts.length - 1].charAt(0) + '.';
+
+            return `${firstName} ${lastNameInitial}`;
+        }
 
         function calculateAverageRating() {
             const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
             const average = totalRating / reviews.length;
             const roundedAverage = Math.round(average * 10) / 10;
-            
+
             document.getElementById('reviewCount').textContent = reviews.length;
             document.getElementById('averageRating').textContent = `${roundedAverage}/5`;
-            
+
             let starsHtml = '';
             const fullStars = Math.floor(roundedAverage);
             const hasHalfStar = roundedAverage % 1 >= 0.5;
-            
+
             for (let i = 1; i <= 5; i++) {
                 if (i <= fullStars) starsHtml += '<i class="fas fa-star"></i>';
                 else if (i === fullStars + 1 && hasHalfStar) starsHtml += '<i class="fas fa-star-half-alt"></i>';
                 else starsHtml += '<i class="far fa-star"></i>';
             }
-            
+
             document.getElementById('averageStars').innerHTML = starsHtml;
         }
 
@@ -597,7 +809,7 @@
             const now = new Date();
             const diffTime = Math.abs(now - date);
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            
+
             if (diffDays === 0) return "Aujourd'hui";
             if (diffDays === 1) return "Hier";
             if (diffDays < 7) return `Il y a ${diffDays} jours`;
@@ -617,7 +829,7 @@
         }
 
         function getSourceClass(source) {
-            switch(source) {
+            switch (source) {
                 case 'google': return 'source-google';
                 case 'facebook': return 'source-facebook';
                 case 'trustpilot': return 'source-trustpilot';
@@ -627,7 +839,7 @@
         }
 
         function getSourceIcon(source) {
-            switch(source) {
+            switch (source) {
                 case 'google': return '<i class="fab fa-google me-1"></i>';
                 case 'facebook': return '<i class="fab fa-facebook-f me-1"></i>';
                 case 'trustpilot': return '<i class="fas fa-star me-1"></i>';
@@ -638,112 +850,143 @@
         function generateCarousel() {
             const carouselInner = document.getElementById('carouselInner');
             const indicatorsContainer = document.getElementById('carouselIndicators');
-            
+
             carouselInner.innerHTML = '';
             indicatorsContainer.innerHTML = '';
-            
-            let itemsPerSlide = 3;
-            if (window.innerWidth < 992) itemsPerSlide = 2;
-            if (window.innerWidth < 768) itemsPerSlide = 1;
-            
-            const totalSlides = Math.ceil(reviews.length / itemsPerSlide);
-            
+
+            const visibleItems = 5;
+            const totalSlides = reviews.length;
+
             for (let slideIndex = 0; slideIndex < totalSlides; slideIndex++) {
                 const slide = document.createElement('div');
                 slide.className = `carousel-item ${slideIndex === 0 ? 'active' : ''}`;
                 const row = document.createElement('div');
-                row.className = 'row g-4';
-                
-                const startIndex = slideIndex * itemsPerSlide;
-                const endIndex = Math.min(startIndex + itemsPerSlide, reviews.length);
-                
-                for (let i = startIndex; i < endIndex; i++) {
-                    const review = reviews[i];
+                row.className = 'row g-3 justify-content-center';
+
+                for (let i = -2; i <= 2; i++) {
+                    const reviewIndex = (slideIndex + i + totalSlides) % totalSlides;
+                    const review = reviews[reviewIndex];
+
                     const col = document.createElement('div');
-                    col.className = `col-md-${12 / itemsPerSlide}`;
-                    
-                    const showReadMore = review.content.length > 150;
+                    col.className = 'col';
+                    col.style.flex = '0 0 20%';
+                    col.style.maxWidth = '20%';
+
+                    const showReadMore = review.content.length > 100;
                     const displayContent = showReadMore ? review.shortContent : review.content;
                     const relativeDate = getRelativeDate(review.date);
                     const sourceClass = getSourceClass(review.source);
-                    
+
+                    const displayName = abbreviateName(review.name);
+
                     let imagesHTML = '';
                     if (review.images && review.images.length > 0) {
                         const imageCount = review.images.length;
-                        const displayImages = review.images.slice(0, 3);
-                        
+                        const displayImages = review.images.slice(0, 2);
+
                         imagesHTML = `<div class="review-images">`;
                         displayImages.forEach((img, imgIndex) => {
                             imagesHTML += `
                                 <div class="review-image-container" onclick="openImagePreview(${review.id}, ${imgIndex})">
                                     <img src="${img}" alt="Photo de l'avis">
-                                    ${imgIndex === 2 && imageCount > 3 ? `<div class="image-counter">+${imageCount - 3}</div>` : ''}
+                                    ${imgIndex === 1 && imageCount > 2 ? `<div class="image-counter">+${imageCount - 2}</div>` : ''}
                                 </div>
                             `;
                         });
                         imagesHTML += `</div>`;
                     }
-                    
+
+                    const isCenter = i === 0;
+
                     col.innerHTML = `
-                        <div class="review-card">
+                        <div class="review-card ${isCenter ? 'border-primary border-2' : ''}" style="${!isCenter ? 'opacity: 0.85; transform: scale(0.95);' : ''}">
                             <div class="review-header">
                                 <div class="reviewer-avatar">
                                     <img src="${review.profilePic}" alt="${review.name}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=0d6efd&color=fff&size=150'">
                                 </div>
                                 <div class="reviewer-info">
-                                    <h5>${review.name}</h5>
+                                    <h5>${displayName}</h5>
                                     <div class="review-date">${relativeDate}</div>
-                                    <div class="review-rating">${generateStars(review.rating)}</div>
-                                    <span class="review-source ${sourceClass}">${getSourceIcon(review.source)}${review.sourceName}</span>
                                 </div>
+                            </div>
+                            <div class="review-rating-source">
+                                <div class="review-rating">${generateStars(review.rating)}</div>
+                                <span class="review-source ${sourceClass}">${getSourceIcon(review.source)}${review.sourceName}</span>
                             </div>
                             <div class="review-content ${showReadMore ? 'truncated' : ''}">${displayContent}</div>
                             ${imagesHTML}
                             ${showReadMore ? `<button class="read-more-btn" onclick="openReviewModal(${review.id})"><i class="fas fa-external-link-alt me-1"></i>Lire la suite</button>` : ''}
                         </div>
                     `;
-                    
+
                     row.appendChild(col);
                 }
-                
+
                 slide.appendChild(row);
                 carouselInner.appendChild(slide);
-                
+
                 const indicator = document.createElement('button');
                 indicator.type = 'button';
                 indicator.dataset.bsTarget = '#reviewsCarousel';
                 indicator.dataset.bsSlideTo = slideIndex.toString();
                 indicator.className = slideIndex === 0 ? 'active' : '';
                 indicator.ariaLabel = `Slide ${slideIndex + 1}`;
-                indicator.addEventListener('click', () => {
-                    document.querySelectorAll('#carouselIndicators button').forEach((btn, idx) => {
-                        btn.classList.toggle('active', idx === slideIndex);
-                    });
-                });
                 indicatorsContainer.appendChild(indicator);
             }
+
+            currentSlideIndex = 0;
+        }
+
+        function setupCarouselEvents() {
+            const carouselElement = document.getElementById('reviewsCarousel');
+
+            carouselElement.addEventListener('slide.bs.carousel', function (event) {
+                currentSlideIndex = event.to;
+
+                setTimeout(() => {
+                    const activeSlide = document.querySelector('.carousel-item.active');
+                    if (activeSlide) {
+                        const cards = activeSlide.querySelectorAll('.review-card');
+                        cards.forEach((card, index) => {
+                            if (index === 2) {
+                                card.classList.add('border-primary', 'border-2');
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            } else {
+                                card.classList.remove('border-primary', 'border-2');
+                                card.style.opacity = '0.85';
+                                card.style.transform = 'scale(0.95)';
+                            }
+                        });
+                    }
+                }, 50);
+            });
         }
 
         function openReviewModal(reviewId) {
             const review = reviews.find(r => r.id === reviewId);
             if (!review) return;
-            
+
             const modal = new bootstrap.Modal(document.getElementById('reviewModal'));
-            
+
             document.getElementById('modalReviewerName').textContent = review.name;
             document.getElementById('modalProfilePic').src = review.profilePic;
-            document.getElementById('modalRating').innerHTML = generateStars(review.rating);
             document.getElementById('modalDate').textContent = getRelativeDate(review.date);
-            document.getElementById('modalReviewContent').textContent = review.content;
-            
+
+            const ratingElement = document.getElementById('modalRating');
             const sourceElement = document.getElementById('modalSource');
+
+            ratingElement.innerHTML = generateStars(review.rating);
+
             sourceElement.className = `review-source ${getSourceClass(review.source)}`;
             sourceElement.innerHTML = `${getSourceIcon(review.source)}${review.sourceName}`;
-            
+
+            document.getElementById('modalReviewContent').textContent = review.content;
+
             const imagesContainer = document.getElementById('modalImagesContainer');
             const imagesGrid = document.getElementById('modalImages');
             imagesGrid.innerHTML = '';
-            
+
             if (review.images && review.images.length > 0) {
                 review.images.forEach((image, index) => {
                     const imgContainer = document.createElement('div');
@@ -755,23 +998,23 @@
             } else {
                 imagesContainer.style.display = 'none';
             }
-            
+
             modal.show();
         }
 
         function openImagePreview(reviewId, imageIndex) {
             const review = reviews.find(r => r.id === reviewId);
             if (!review || !review.images || review.images.length === 0) return;
-            
+
             currentImages = review.images;
             currentImageIndex = imageIndex;
-            
+
             if (!imagePreviewModal) {
                 imagePreviewModal = new bootstrap.Modal(document.getElementById('imagePreviewModal'));
                 modalOverlay = document.getElementById('modalOverlay');
                 setupImageModalEvents();
             }
-            
+
             updateImagePreview();
             imagePreviewModal.show();
             modalOverlay.style.display = 'block';
@@ -783,10 +1026,10 @@
             const prevBtn = document.getElementById('prevImageBtn');
             const nextBtn = document.getElementById('nextImageBtn');
             const imageIndicator = document.getElementById('imageIndicator');
-            
+
             if (currentImages.length > 0 && currentImageIndex < currentImages.length) {
                 previewImage.src = currentImages[currentImageIndex];
-                
+
                 if (currentImages.length > 1) {
                     prevBtn.style.display = 'flex';
                     nextBtn.style.display = 'flex';
@@ -805,7 +1048,7 @@
         function updateImageIndicator() {
             const imageIndicator = document.getElementById('imageIndicator');
             imageIndicator.innerHTML = '';
-            
+
             for (let i = 0; i < currentImages.length; i++) {
                 const dot = document.createElement('div');
                 dot.className = `image-indicator-dot ${i === currentImageIndex ? 'active' : ''}`;
@@ -823,9 +1066,9 @@
             const nextBtn = document.getElementById('nextImageBtn');
             const modalOverlay = document.getElementById('modalOverlay');
             const modalElement = document.getElementById('imagePreviewModal');
-            
+
             closeBtn.addEventListener('click', closeImagePreview);
-            
+
             prevBtn.addEventListener('click', () => {
                 if (currentImageIndex > 0) {
                     const imageContainer = document.getElementById('imageContainer');
@@ -839,7 +1082,7 @@
                     }, 150);
                 }
             });
-            
+
             nextBtn.addEventListener('click', () => {
                 if (currentImageIndex < currentImages.length - 1) {
                     const imageContainer = document.getElementById('imageContainer');
@@ -853,12 +1096,12 @@
                     }, 150);
                 }
             });
-            
+
             modalOverlay.addEventListener('click', closeImagePreview);
-            
+
             document.addEventListener('keydown', (e) => {
                 if (modalElement.classList.contains('show') && e.key === 'Escape') closeImagePreview();
-                
+
                 if (modalElement.classList.contains('show')) {
                     if (e.key === 'ArrowLeft' && currentImageIndex > 0) {
                         const imageContainer = document.getElementById('imageContainer');
@@ -883,7 +1126,7 @@
                     }
                 }
             });
-            
+
             document.getElementById('previewImage').addEventListener('click', (e) => e.stopPropagation());
         }
 
@@ -895,17 +1138,32 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % reviews.length;
+            const carousel = bootstrap.Carousel.getInstance(document.getElementById('reviewsCarousel'));
+            carousel.to(currentSlideIndex);
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + reviews.length) % reviews.length;
+            const carousel = bootstrap.Carousel.getInstance(document.getElementById('reviewsCarousel'));
+            carousel.to(currentSlideIndex);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
             calculateAverageRating();
             generateCarousel();
-            
-            window.addEventListener('resize', generateCarousel);
-            
+            setupCarouselEvents();
+
             const carousel = new bootstrap.Carousel(document.getElementById('reviewsCarousel'), {
                 interval: 5000,
-                ride: 'carousel'
+                ride: 'carousel',
+                wrap: true
             });
+
+            window.addEventListener('resize', generateCarousel);
         });
     </script>
 </body>
+
 </html>
