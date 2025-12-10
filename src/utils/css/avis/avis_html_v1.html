@@ -1,190 +1,98 @@
+<!--
+    <!DOCTYPE html>
+ -->
 
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avis clients</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --accent-color: #ffc107;
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         body {
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .reviews-container {
-            max-width: 1200px;
-            width: 100%;
-            position: relative;
+            background-color: var(--light-bg);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            padding: 20px 0;
         }
 
         .reviews-header {
             text-align: center;
-            margin-bottom: 25px;
-            position: relative;
+            margin-bottom: 40px;
         }
 
         .reviews-header h1 {
-            color: #333;
-            font-size: 3rem;
-            margin-bottom: 5px;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-color);
             font-weight: 700;
-            animation: titleFadeIn 1s ease;
+            margin-bottom: 10px;
         }
 
-        @keyframes titleFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .reviews-header .lead {
+            color: var(--secondary-color);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .subtitle {
-            color: #666;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            position: relative;
+        .rating-summary {
             display: inline-block;
-            padding: 0 20px;
-        }
-
-        .subtitle:before,
-        .subtitle:after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #6a11cb);
-        }
-
-        .subtitle:before {
-            left: -50px;
-        }
-
-        .subtitle:after {
-            right: -50px;
-            background: linear-gradient(90deg, #2575fc, transparent);
-        }
-
-        .animated-rating {
-            margin-top: 30px;
-            animation: pulse 2s infinite;
+            background: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: var(--card-shadow);
+            margin-top: 20px;
         }
 
         .stars-container {
-            font-size: 2.5rem;
-            color: #FFD700;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .rating-text {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .highlight {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-            padding: 0 5px;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
         }
 
         .carousel-container {
             position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            background: white;
-            padding: 40px 0;
+            padding: 0 50px;
         }
 
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            padding: 0 60px;
+        @media (max-width: 768px) {
+            .carousel-container { padding: 0 20px; }
         }
 
         .review-card {
-            flex: 0 0 calc(100% / 3 - 30px);
             background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            margin: 0 15px;
-            border: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
-            height: auto;
-            min-height: 450px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
+            border-radius: 15px;
+            border: none;
+            box-shadow: var(--card-shadow);
+            height: 100%;
+            transition: transform 0.3s ease;
+            padding: 25px;
+            margin: 10px;
         }
 
-        .review-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
+        .review-card:hover { transform: translateY(-5px); }
 
         .review-header {
             display: flex;
-            justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 20px;
         }
 
-        .reviewer-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
         .reviewer-avatar {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            position: relative;
+            border: 3px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin-right: 15px;
+            flex-shrink: 0;
         }
 
         .reviewer-avatar img {
@@ -193,297 +101,151 @@
             object-fit: cover;
         }
 
-        .reviewer-badge {
-            position: absolute;
-            bottom: 0px;
-            right: 0px;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: white;
-            border: 2px solid white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
+        .reviewer-info { flex-grow: 1; }
 
-        .badge-google {
-            background: #4285F4;
-        }
-
-        .badge-facebook {
-            background: #1877F2;
-        }
-
-        .badge-trustpilot {
-            background: #00B67A;
-        }
-
-        .badge-website {
-            background: #FF6B6B;
-        }
-
-        .reviewer-details h3 {
+        .reviewer-info h5 {
+            margin: 0 0 5px 0;
             color: #333;
-            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .review-date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
             margin-bottom: 5px;
         }
 
-        .reviewer-details .review-date {
-            color: #888;
-            font-size: 0.9rem;
+        .review-rating { color: var(--accent-color); font-size: 0.9rem; }
+
+        .review-source {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 5px;
         }
 
-        .review-rating {
-            color: #FFD700;
-            font-size: 1.2rem;
-        }
+        .source-google { background-color: #4285f4; color: white; }
+        .source-facebook { background-color: #1877f2; color: white; }
+        .source-trustpilot { background-color: #00b67a; color: white; }
+        .source-website { background-color: #6c757d; color: white; }
 
         .review-content {
             color: #444;
-            line-height: 1.7;
-            margin: 20px 0;
+            line-height: 1.6;
+            margin-bottom: 20px;
             flex-grow: 1;
-            position: relative;
-            overflow: hidden;
         }
 
-        .review-content.truncated {
-            max-height: 120px;
-        }
+        .review-content.truncated { max-height: 120px; overflow: hidden; }
 
-        .review-images {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 20px 0;
-            border-radius: 12px;
-            overflow: hidden;
-        }
+        .review-images { margin-top: 15px; }
 
         .review-image-container {
-            position: relative;
             border-radius: 10px;
             overflow: hidden;
+            height: 80px;
+            width: 80px;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            position: relative;
             cursor: pointer;
-            transition: all 0.3s ease;
-            aspect-ratio: 1;
         }
 
-        .review-image-container:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 117, 252, 0.25);
-        }
-
-        .review-image {
+        .review-image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .review-image-container:hover .review-image {
-            transform: scale(1.1);
-        }
-
-        .image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7) 100%);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            padding: 10px;
-        }
-
-        .review-image-container:hover .image-overlay {
-            opacity: 1;
-        }
-
-        .image-overlay-text {
-            color: white;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-align: center;
-            transform: translateY(10px);
             transition: transform 0.3s ease;
         }
 
-        .review-image-container:hover .image-overlay-text {
-            transform: translateY(0);
-        }
+        .review-image-container:hover img { transform: scale(1.1); }
 
         .image-counter {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(37, 117, 252, 0.9);
+            top: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 2;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 0 0 0 5px;
         }
 
-        .read-more-btn {
-            background: none;
-            border: none;
-            color: #666;
-            padding: 8px 0;
-            cursor: pointer;
-            font-weight: 500;
-            margin-top: 15px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-            align-self: flex-start;
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-
-        .read-more-btn:hover {
-            color: #2575fc;
-            text-decoration: underline;
-        }
-
-        .read-more-btn i {
-            font-size: 0.9rem;
-            color: #666;
-            transition: color 0.3s;
-        }
-
-        .read-more-btn:hover i {
-            color: #2575fc;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+        .carousel-control-prev, .carousel-control-next {
             width: 50px;
             height: 50px;
-            background: white;
-            border: none;
+            background-color: white;
             border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #333;
-            z-index: 10;
-            transition: all 0.3s;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+            transition: all 0.3s ease;
         }
 
-        .carousel-nav:hover {
-            background: #2575fc;
-            color: white;
+        .carousel-control-prev { left: -25px; }
+        .carousel-control-next { right: -25px; }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            filter: invert(0.5);
+            transition: filter 0.3s ease;
+        }
+
+        .carousel-control-prev:hover, .carousel-control-next:hover {
+            background-color: var(--primary-color);
             transform: translateY(-50%) scale(1.1);
         }
 
-        .carousel-nav.prev {
-            left: 10px;
-        }
+        .carousel-control-prev:hover .carousel-control-prev-icon,
+        .carousel-control-next:hover .carousel-control-next-icon { filter: invert(1); }
 
-        .carousel-nav.next {
-            right: 10px;
-        }
-
-        .carousel-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 30px;
-        }
-
-        .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .indicator.active {
-            background: #2575fc;
-            transform: scale(1.2);
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            justify-content: center;
+        .read-more-btn {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
             align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            backdrop-filter: blur(10px);
+            gap: 5px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+        }
+
+        .read-more-btn:hover {
+            text-decoration: underline;
+            color: #0a58ca;
         }
 
         .modal-content {
-            background: white;
-            border-radius: 20px;
-            width: 95%;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: modalFadeIn 0.4s ease;
-        }
-
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px) scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            border-radius: 15px;
+            border: none;
+            overflow: hidden;
         }
 
         .modal-header {
-            padding: 25px 30px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            border-radius: 20px 20px 0 0;
-            color: white;
+            border-bottom: 1px solid #dee2e6;
+            padding: 20px 25px;
+            background: white;
         }
 
-        .modal-header-info {
-            flex-grow: 1;
+        .modal-reviewer {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
         .modal-avatar {
-            width: 90px;
-            height: 90px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid white;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
+            border: 3px solid #f8f9fa;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .modal-avatar img {
@@ -492,461 +254,449 @@
             object-fit: cover;
         }
 
-        .modal-badge {
-            position: absolute;
-            bottom: 0px;
-            right: 0px;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            color: white;
-            border: 3px solid white;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-header-text h2 {
-            font-size: 1.6rem;
-            margin-bottom: 8px;
-        }
-
-        .modal-rating-date {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 1rem;
-            opacity: 0.9;
-        }
+        .modal-body { padding: 25px; }
 
         .modal-rating {
-            color: #FFD700;
-            font-size: 1.3rem;
-        }
-
-        .close-modal {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
-        }
-
-        .close-modal:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 30px;
-        }
-
-        .modal-review-content {
-            color: #444;
-            line-height: 1.8;
-            font-size: 1.15rem;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .modal-images-container {
-            margin-top: 20px;
-        }
-
-        .modal-images-title {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-images-title i {
-            color: #2575fc;
+            color: var(--accent-color);
             font-size: 1.2rem;
+            margin-bottom: 10px;
         }
 
         .modal-images-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 15px;
-        }
-
-        .modal-image-container {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            aspect-ratio: 1;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-image-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(37, 117, 252, 0.25);
+            margin-top: 20px;
         }
 
         .modal-image {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 150px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.3s ease;
         }
 
-        .modal-image-container:hover .modal-image {
-            transform: scale(1.1);
+        .modal-image:hover img { transform: scale(1.05); }
+
+        .image-preview-modal {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.9) !important;
         }
 
-        .modal-image-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
+        .image-preview-modal .modal-dialog {
+            max-width: 95vw;
+            margin: auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            min-height: 100vh;
         }
 
-        .modal-image-container:hover .modal-image-overlay {
-            opacity: 1;
+        .image-preview-modal .modal-content {
+            background: transparent;
+            border: none;
+            box-shadow: none;
         }
 
-        .modal-image-overlay i {
-            color: white;
-            font-size: 2rem;
-            background: rgba(37, 117, 252, 0.8);
+        .image-preview-modal .modal-body {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .image-preview-modal .image-container {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-preview-modal img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: imageFadeIn 0.5s ease-out;
+        }
+
+        @keyframes imageFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .close-photo-btn {
+            position: absolute;
+            top: 0px;
+            right: 0px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .image-modal {
+        .close-photo-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-backdrop-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1001;
-        }
-
-        .image-modal img {
-            max-width: 95%;
-            max-height: 95%;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
-            animation: imageFadeIn 0.4s ease;
-        }
-
-        @keyframes imageFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .close-image-modal {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            color: white;
-            font-size: 2.5rem;
+            background: transparent;
+            z-index: 999;
             cursor: pointer;
-            width: 55px;
-            height: 55px;
+        }
+
+        .image-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
+            background-color: white;
+            border: none;
+            color: #333;
+            font-size: 1.5rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0.9;
         }
 
-        .close-image-modal:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: rotate(90deg);
+        .image-nav-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            opacity: 1;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
-        @media (max-width: 1024px) {
-            .review-card {
-                flex: 0 0 calc(100% / 2 - 30px);
-            }
+        .image-nav-btn.prev { left: 20px; }
+        .image-nav-btn.next { right: 20px; }
 
-            .review-images {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .modal-images-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            }
+        .image-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: translateY(-50%) scale(1);
         }
+
+        .image-nav-btn:disabled:hover {
+            background-color: white;
+            color: #333;
+            transform: translateY(-50%) scale(1);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .image-indicator {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .image-indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-indicator-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .image-indicator-dot:hover { background: rgba(255, 255, 255, 0.6); }
+
+        .carousel-indicators { bottom: -40px; }
+
+        .carousel-indicators button {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            border: none;
+            margin: 0 5px;
+        }
+
+        .carousel-indicators button.active { background-color: var(--primary-color); }
 
         @media (max-width: 768px) {
-            .review-card {
-                flex: 0 0 calc(100% - 30px);
-                min-height: 420px;
+            .image-nav-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
-
-            .carousel-track {
-                padding: 0 40px;
-            }
-
-            .carousel-nav {
-                width: 40px;
-                height: 40px;
-            }
-
-            .reviews-header h1 {
-                font-size: 2.2rem;
-            }
-
-            .modal-content {
-                width: 98%;
-                max-height: 85vh;
-            }
-
-            .modal-header,
-            .modal-body {
-                padding: 20px;
-            }
-
-            .modal-header-info {
-                gap: 15px;
-            }
-
-            .modal-avatar {
-                width: 70px;
-                height: 70px;
-            }
-
-            .modal-badge {
-                width: 30px;
-                height: 30px;
-                font-size: 0.9rem;
-            }
-
-            .modal-images-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 12px;
-            }
-
-            .review-images {
-                grid-template-columns: repeat(3, 1fr);
+            .image-nav-btn.prev { left: 10px; }
+            .image-nav-btn.next { right: 10px; }
+            .close-photo-btn {
+                top: 0px;
+                right: 0px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
             }
         }
 
         @media (max-width: 480px) {
-            .carousel-track {
-                padding: 0 20px;
+            .image-preview-modal img { border-radius: 8px; }
+            .image-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
-
-            .review-card {
-                padding: 20px;
-                margin: 0 10px;
-                min-height: 400px;
-            }
-
-            .reviewer-avatar {
-                width: 60px;
-                height: 60px;
-            }
-
-            .reviewer-badge {
-                width: 24px;
-                height: 24px;
-                font-size: 0.7rem;
-            }
-
-            .modal-header-info {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .modal-avatar {
-                width: 60px;
-                height: 60px;
-            }
-
-            .modal-badge {
-                width: 25px;
-                height: 25px;
-                font-size: 0.8rem;
-            }
-
-            .modal-images-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-
-            .review-images {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .reviews-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .subtitle:before,
-            .subtitle:after {
-                width: 30px;
-            }
-
-            .subtitle:before {
-                left: -30px;
-            }
-
-            .subtitle:after {
-                right: -30px;
+            .close-photo-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="reviews-container">
+    <div class="container">
         <div class="reviews-header">
-            <div class="animated-rating">
-                <div class="stars-container">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <div class="rating-text">
-                    <span class="highlight">Excellent</span> sur 3 plateformes
+            <p class="lead">Découvrez ce que nos clients disent de nos services</p>
+            <div class="rating-summary">
+                <div class="stars-container" id="averageStars"></div>
+                <div class="text-muted">
+                    <span class="fw-bold text-primary" id="averageRating"></span> basé sur <span id="reviewCount"></span> avis
                 </div>
             </div>
         </div>
 
         <div class="carousel-container">
-            <button class="carousel-nav prev" id="prevBtn">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-
-            <div class="carousel-track" id="carouselTrack"></div>
-
-            <button class="carousel-nav next" id="nextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-
-            <div class="carousel-indicators" id="carouselIndicators"></div>
+            <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" id="carouselInner"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Précédent</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Suivant</span>
+                </button>
+                <div class="carousel-indicators" id="carouselIndicators"></div>
+            </div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="reviewModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-header-info">
-                    <div class="modal-avatar">
-                        <img id="modalProfilePic" src="" alt="">
-                        <div id="modalBadge" class="modal-badge"></div>
-                    </div>
-                    <div class="modal-header-text">
-                        <h2 id="modalReviewerName"></h2>
-                        <div class="modal-rating-date">
-                            <span class="modal-rating" id="modalRating"></span>
-                            <span id="modalDate"></span>
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-reviewer">
+                        <div class="modal-avatar">
+                            <img id="modalProfilePic" src="" alt="">
+                        </div>
+                        <div>
+                            <h5 class="modal-title mb-1" id="modalReviewerName"></h5>
+                            <div class="modal-rating" id="modalRating"></div>
+                            <div class="text-muted small" id="modalDate"></div>
+                            <span id="modalSource" class="review-source"></span>
                         </div>
                     </div>
                 </div>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <div class="modal-review-content" id="modalReviewContent"></div>
-
-                <div class="modal-images-container" id="modalImagesContainer">
-                    <div class="modal-images-title">
-                        <i class="fas fa-images"></i>
-                        Galerie Photos
+                <div class="modal-body">
+                    <p id="modalReviewContent" class="mb-4"></p>
+                    <div id="modalImagesContainer" style="display: none;">
+                        <h6 class="mb-3"><i class="fas fa-images me-2 text-primary"></i>Photos associées</h6>
+                        <div class="modal-images-grid" id="modalImages"></div>
                     </div>
-                    <div class="modal-images-grid" id="modalImages"></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="image-modal" id="imageModal">
-        <button class="close-image-modal" id="closeImageModal">&times;</button>
-        <img id="fullSizeImage" src="" alt="Image de l'avis">
+    <div class="modal fade image-preview-modal" id="imagePreviewModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button class="close-photo-btn" id="closePhotoBtn"><i class="fas fa-times"></i></button>
+                    <div class="image-container" id="imageContainer">
+                        <img id="previewImage" src="" alt="Aperçu de l'image">
+                    </div>
+                    <button class="image-nav-btn prev" id="prevImageBtn" style="display: none;"><i class="fas fa-chevron-left"></i></button>
+                    <button class="image-nav-btn next" id="nextImageBtn" style="display: none;"><i class="fas fa-chevron-right"></i></button>
+                    <div class="image-indicator" id="imageIndicator" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="modal-backdrop-overlay" id="modalOverlay" style="display: none;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- script
     <script src="data_avis.js"></script>
  -->
     <script>
+        /*
+        const reviews = [
+            {
+                id: 1,
+                name: "Marie Dubois",
+                profilePic: "https://randomuser.me/api/portraits/women/32.jpg",
+                rating: 5,
+                date: "2024-01-15",
+                source: "google",
+                sourceName: "Google",
+                content: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement cette entreprise pour la qualité de son travail et son sérieux. Le résultat final a dépassé mes attentes.",
+                shortContent: "Service exceptionnel ! L'équipe a été très réactive et professionnelle...",
+                images: [
+                    "https://picsum.photos/800/600?random=1",
+                    "https://picsum.photos/800/600?random=2",
+                    "https://picsum.photos/800/600?random=3"
+                ]
+            },
+            {
+                id: 2,
+                name: "Thomas Martin",
+                profilePic: "https://randomuser.me/api/portraits/men/54.jpg",
+                rating: 4.5,
+                date: "2024-01-10",
+                source: "facebook",
+                sourceName: "Facebook",
+                content: "Très satisfait du service. Prix compétitifs et délais respectés. Petit bémol sur la communication qui pourrait être améliorée, mais dans l'ensemble une très bonne expérience.",
+                shortContent: "Très satisfait du service. Prix compétitifs et délais respectés...",
+                images: ["https://picsum.photos/800/600?random=4"]
+            },
+            {
+                id: 3,
+                name: "Sophie Laurent",
+                profilePic: "https://randomuser.me/api/portraits/women/65.jpg",
+                rating: 5,
+                date: "2024-01-05",
+                source: "trustpilot",
+                sourceName: "Trustpilot",
+                content: "Excellente prestation ! Du premier contact à la livraison, tout s'est parfaitement déroulé. Le professionnalisme de l'équipe est remarquable. Je reviendrai certainement.",
+                shortContent: "Excellente prestation ! Du premier contact à la livraison, tout s'est parfaitement déroulé...",
+                images: [
+                    "https://picsum.photos/800/600?random=5",
+                    "https://picsum.photos/800/600?random=6",
+                    "https://picsum.photos/800/600?random=7",
+                    "https://picsum.photos/800/600?random=8"
+                ]
+            },
+            {
+                id: 4,
+                name: "Jean Petit",
+                profilePic: "https://randomuser.me/api/portraits/men/22.jpg",
+                rating: 4,
+                date: "2023-12-20",
+                source: "website",
+                sourceName: "Notre site",
+                content: "Bon rapport qualité-prix. Le travail a été bien fait dans l'ensemble avec quelques détails à perfectionner. Service client très aimable et à l'écoute.",
+                shortContent: "Bon rapport qualité-prix. Le travail a été bien fait dans l'ensemble...",
+                images: []
+            },
+            {
+                id: 5,
+                name: "Emma Richard",
+                profilePic: "https://randomuser.me/api/portraits/women/44.jpg",
+                rating: 5,
+                date: "2023-12-15",
+                source: "google",
+                sourceName: "Google",
+                content: "Je suis plus que satisfaite ! L'équipe a su comprendre exactement mes besoins et les a parfaitement réalisés. Un grand merci pour ce travail de qualité.",
+                shortContent: "Je suis plus que satisfaite ! L'équipe a su comprendre exactement mes besoins...",
+                images: ["https://picsum.photos/800/600?random=9"]
+            },
+            {
+                id: 6,
+                name: "Lucas Bernard",
+                profilePic: "https://randomuser.me/api/portraits/men/33.jpg",
+                rating: 4,
+                date: "2023-12-10",
+                source: "facebook",
+                sourceName: "Facebook",
+                content: "Service correct avec de bons résultats. Quelques retards mineurs mais expliqués par l'équipe. Dans l'ensemble, je recommande.",
+                shortContent: "Service correct avec de bons résultats. Quelques retards mineurs mais expliqués...",
+                images: []
+            }
+        ];
+*/
+        let currentImages = [], currentImageIndex = 0, imagePreviewModal = null, modalOverlay = null;
+
+        function calculateAverageRating() {
+            const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+            const average = totalRating / reviews.length;
+            const roundedAverage = Math.round(average * 10) / 10;
+            
+            document.getElementById('reviewCount').textContent = reviews.length;
+            document.getElementById('averageRating').textContent = `${roundedAverage}/5`;
+            
+            let starsHtml = '';
+            const fullStars = Math.floor(roundedAverage);
+            const hasHalfStar = roundedAverage % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) starsHtml += '<i class="fas fa-star"></i>';
+                else if (i === fullStars + 1 && hasHalfStar) starsHtml += '<i class="fas fa-star-half-alt"></i>';
+                else starsHtml += '<i class="far fa-star"></i>';
+            }
+            
+            document.getElementById('averageStars').innerHTML = starsHtml;
+        }
+
         function getRelativeDate(dateString) {
             const date = new Date(dateString);
             const now = new Date();
             const diffTime = Math.abs(now - date);
             const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            const diffMonths = Math.floor(diffDays / 30);
-            const diffYears = Math.floor(diffDays / 365);
-
-            if (diffYears > 0) return `il y a ${diffYears} an${diffYears > 1 ? 's' : ''}`;
-            else if (diffMonths > 0) return `il y a ${diffMonths} mois`;
-            else if (diffDays > 0) {
-                if (diffDays === 1) return 'hier';
-                if (diffDays < 7) return `il y a ${diffDays} jours`;
-                if (diffDays < 14) return 'il y a 1 semaine';
-                return `il y a ${Math.floor(diffDays / 7)} semaines`;
-            } else return "aujourd'hui";
+            
+            if (diffDays === 0) return "Aujourd'hui";
+            if (diffDays === 1) return "Hier";
+            if (diffDays < 7) return `Il y a ${diffDays} jours`;
+            if (diffDays < 30) return `Il y a ${Math.floor(diffDays / 7)} semaine${Math.floor(diffDays / 7) > 1 ? 's' : ''}`;
+            if (diffDays < 365) return `Il y a ${Math.floor(diffDays / 30)} mois`;
+            return `Il y a ${Math.floor(diffDays / 365)} an${Math.floor(diffDays / 365) > 1 ? 's' : ''}`;
         }
-
-        function getSourceIcon(source) {
-            switch (source) {
-                case 'google': return '<i class="fab fa-google"></i>';
-                case 'facebook': return '<i class="fab fa-facebook-f"></i>';
-                case 'trustpilot': return '<i class="fas fa-star"></i>';
-                case 'website': return '<i class="fas fa-globe"></i>';
-                default: return '<i class="fas fa-globe"></i>';
-            }
-        }
-
-        function getBadgeClass(source) {
-            switch (source) {
-                case 'google': return 'badge-google';
-                case 'facebook': return 'badge-facebook';
-                case 'trustpilot': return 'badge-trustpilot';
-                case 'website': return 'badge-website';
-                default: return 'badge-website';
-            }
-        }
-
-        let currentIndex = 0;
-        let cardsPerView = 3;
 
         function generateStars(rating) {
             let stars = '';
@@ -958,249 +708,296 @@
             return stars;
         }
 
-        function updateCardsPerView() {
-            if (window.innerWidth < 768) cardsPerView = 1;
-            else if (window.innerWidth < 1024) cardsPerView = 2;
-            else cardsPerView = 3;
+        function getSourceClass(source) {
+            switch(source) {
+                case 'google': return 'source-google';
+                case 'facebook': return 'source-facebook';
+                case 'trustpilot': return 'source-trustpilot';
+                case 'website': return 'source-website';
+                default: return 'source-website';
+            }
+        }
+
+        function getSourceIcon(source) {
+            switch(source) {
+                case 'google': return '<i class="fab fa-google me-1"></i>';
+                case 'facebook': return '<i class="fab fa-facebook-f me-1"></i>';
+                case 'trustpilot': return '<i class="fas fa-star me-1"></i>';
+                default: return '<i class="fas fa-globe me-1"></i>';
+            }
         }
 
         function generateCarousel() {
-            const carouselTrack = document.getElementById('carouselTrack');
+            const carouselInner = document.getElementById('carouselInner');
             const indicatorsContainer = document.getElementById('carouselIndicators');
-
-            carouselTrack.innerHTML = '';
+            
+            carouselInner.innerHTML = '';
             indicatorsContainer.innerHTML = '';
-
-            updateCardsPerView();
-
-            reviews.forEach((review, index) => {
-                const reviewCard = document.createElement('div');
-                reviewCard.className = 'review-card';
-
-                const showReadMore = review.content.length > 150;
-                const displayContent = showReadMore ? review.shortContent : review.content;
-                const relativeDate = getRelativeDate(review.date);
-                const badgeClass = getBadgeClass(review.source);
-                const sourceIcon = getSourceIcon(review.source);
-
-                let imagesHTML = '';
-                if (review.images && review.images.length > 0) {
-                    const imageCount = review.images.length;
-                    const displayImages = review.images.slice(0, 4);
-
-                    imagesHTML = `
-                        <div class="review-images">
-                            ${displayImages.map((img, imgIndex) => `
-                                <div class="review-image-container" data-review-id="${review.id}">
-                                    <img src="${img}" class="review-image" alt="Photo de l'avis">
-                                    <div class="image-overlay">
-                                        <div class="image-overlay-text">Voir l'avis complet</div>
-                                    </div>
-                                    ${imgIndex === 3 && imageCount > 4 ?
-                            `<div class="image-counter">+${imageCount - 4}</div>` : ''}
+            
+            let itemsPerSlide = 3;
+            if (window.innerWidth < 992) itemsPerSlide = 2;
+            if (window.innerWidth < 768) itemsPerSlide = 1;
+            
+            const totalSlides = Math.ceil(reviews.length / itemsPerSlide);
+            
+            for (let slideIndex = 0; slideIndex < totalSlides; slideIndex++) {
+                const slide = document.createElement('div');
+                slide.className = `carousel-item ${slideIndex === 0 ? 'active' : ''}`;
+                const row = document.createElement('div');
+                row.className = 'row g-4';
+                
+                const startIndex = slideIndex * itemsPerSlide;
+                const endIndex = Math.min(startIndex + itemsPerSlide, reviews.length);
+                
+                for (let i = startIndex; i < endIndex; i++) {
+                    const review = reviews[i];
+                    const col = document.createElement('div');
+                    col.className = `col-md-${12 / itemsPerSlide}`;
+                    
+                    const showReadMore = review.content.length > 150;
+                    const displayContent = showReadMore ? review.shortContent : review.content;
+                    const relativeDate = getRelativeDate(review.date);
+                    const sourceClass = getSourceClass(review.source);
+                    
+                    let imagesHTML = '';
+                    if (review.images && review.images.length > 0) {
+                        const imageCount = review.images.length;
+                        const displayImages = review.images.slice(0, 3);
+                        
+                        imagesHTML = `<div class="review-images">`;
+                        displayImages.forEach((img, imgIndex) => {
+                            imagesHTML += `
+                                <div class="review-image-container" onclick="openImagePreview(${review.id}, ${imgIndex})">
+                                    <img src="${img}" alt="Photo de l'avis">
+                                    ${imgIndex === 2 && imageCount > 3 ? `<div class="image-counter">+${imageCount - 3}</div>` : ''}
                                 </div>
-                            `).join('')}
+                            `;
+                        });
+                        imagesHTML += `</div>`;
+                    }
+                    
+                    col.innerHTML = `
+                        <div class="review-card">
+                            <div class="review-header">
+                                <div class="reviewer-avatar">
+                                    <img src="${review.profilePic}" alt="${review.name}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=0d6efd&color=fff&size=150'">
+                                </div>
+                                <div class="reviewer-info">
+                                    <h5>${review.name}</h5>
+                                    <div class="review-date">${relativeDate}</div>
+                                    <div class="review-rating">${generateStars(review.rating)}</div>
+                                    <span class="review-source ${sourceClass}">${getSourceIcon(review.source)}${review.sourceName}</span>
+                                </div>
+                            </div>
+                            <div class="review-content ${showReadMore ? 'truncated' : ''}">${displayContent}</div>
+                            ${imagesHTML}
+                            ${showReadMore ? `<button class="read-more-btn" onclick="openReviewModal(${review.id})"><i class="fas fa-external-link-alt me-1"></i>Lire la suite</button>` : ''}
                         </div>
                     `;
+                    
+                    row.appendChild(col);
                 }
-
-                reviewCard.innerHTML = `
-                    <div class="review-header">
-                        <div class="reviewer-info">
-                            <div class="reviewer-avatar">
-                                <img src="${review.profilePic}" alt="${review.name}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=6a11cb&color=fff&size=150'">
-                                <div class="reviewer-badge ${badgeClass}" title="${review.sourceName}">
-                                    ${sourceIcon}
-                                </div>
-                            </div>
-                            <div class="reviewer-details">
-                                <h3>${review.name}</h3>
-                                <div class="review-date">${relativeDate}</div>
-                            </div>
-                        </div>
-                        <div class="review-rating">
-                            ${generateStars(review.rating)}
-                        </div>
-                    </div>
-                    <div class="review-content ${showReadMore ? 'truncated' : 'full'}">
-                        ${displayContent}
-                    </div>
-                    
-                    ${imagesHTML}
-                    
-                    ${showReadMore ?
-                        `<button class="read-more-btn" data-review-id="${review.id}">
-                            <i class="fas fa-external-link-alt"></i> Lire la suite
-                        </button>`
-                        : ''
-                    }
-                `;
-
-                carouselTrack.appendChild(reviewCard);
-            });
-
-            const totalSlides = Math.ceil(reviews.length / cardsPerView);
-            for (let i = 0; i < totalSlides; i++) {
-                const indicator = document.createElement('div');
-                indicator.className = `indicator ${i === 0 ? 'active' : ''}`;
-                indicator.dataset.slide = i;
+                
+                slide.appendChild(row);
+                carouselInner.appendChild(slide);
+                
+                const indicator = document.createElement('button');
+                indicator.type = 'button';
+                indicator.dataset.bsTarget = '#reviewsCarousel';
+                indicator.dataset.bsSlideTo = slideIndex.toString();
+                indicator.className = slideIndex === 0 ? 'active' : '';
+                indicator.ariaLabel = `Slide ${slideIndex + 1}`;
                 indicator.addEventListener('click', () => {
-                    goToSlide(parseInt(indicator.dataset.slide));
+                    document.querySelectorAll('#carouselIndicators button').forEach((btn, idx) => {
+                        btn.classList.toggle('active', idx === slideIndex);
+                    });
                 });
                 indicatorsContainer.appendChild(indicator);
             }
-
-            updateCarousel();
-            addEventListeners();
-        }
-
-        function updateCarousel() {
-            const carouselTrack = document.getElementById('carouselTrack');
-            const cardWidth = document.querySelector('.review-card')?.offsetWidth || 400;
-            const translateX = -currentIndex * cardWidth * cardsPerView;
-
-            carouselTrack.style.transition = 'transform 0.5s ease-in-out';
-            carouselTrack.style.transform = `translateX(${translateX}px)`;
-
-            document.querySelectorAll('.indicator').forEach((indicator, index) => {
-                indicator.classList.toggle('active', index === currentIndex);
-            });
-        }
-
-        function goToSlide(slideIndex) {
-            currentIndex = slideIndex;
-            updateCarousel();
-        }
-
-        function nextSlide() {
-            const maxIndex = Math.ceil(reviews.length / cardsPerView) - 1;
-            currentIndex = currentIndex < maxIndex ? currentIndex + 1 : 0;
-            updateCarousel();
-        }
-
-        function prevSlide() {
-            const maxIndex = Math.ceil(reviews.length / cardsPerView) - 1;
-            currentIndex = currentIndex > 0 ? currentIndex - 1 : maxIndex;
-            updateCarousel();
-        }
-
-        function addEventListeners() {
-            document.getElementById('nextBtn').addEventListener('click', nextSlide);
-            document.getElementById('prevBtn').addEventListener('click', prevSlide);
-
-            document.querySelectorAll('.read-more-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    const reviewId = parseInt(this.getAttribute('data-review-id'));
-                    openReviewModal(reviewId);
-                });
-            });
-
-            document.querySelectorAll('.review-image-container').forEach(container => {
-                container.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    const reviewId = this.getAttribute('data-review-id');
-                    if (reviewId) openReviewModal(parseInt(reviewId));
-                });
-            });
         }
 
         function openReviewModal(reviewId) {
             const review = reviews.find(r => r.id === reviewId);
             if (!review) return;
-
+            
+            const modal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            
             document.getElementById('modalReviewerName').textContent = review.name;
             document.getElementById('modalProfilePic').src = review.profilePic;
-            document.getElementById('modalProfilePic').alt = review.name;
             document.getElementById('modalRating').innerHTML = generateStars(review.rating);
             document.getElementById('modalDate').textContent = getRelativeDate(review.date);
             document.getElementById('modalReviewContent').textContent = review.content;
-
-            const modalBadge = document.getElementById('modalBadge');
-            modalBadge.className = `modal-badge ${getBadgeClass(review.source)}`;
-            modalBadge.innerHTML = getSourceIcon(review.source);
-            modalBadge.title = review.sourceName;
-
+            
+            const sourceElement = document.getElementById('modalSource');
+            sourceElement.className = `review-source ${getSourceClass(review.source)}`;
+            sourceElement.innerHTML = `${getSourceIcon(review.source)}${review.sourceName}`;
+            
             const imagesContainer = document.getElementById('modalImagesContainer');
             const imagesGrid = document.getElementById('modalImages');
             imagesGrid.innerHTML = '';
-
+            
             if (review.images && review.images.length > 0) {
                 review.images.forEach((image, index) => {
-                    const container = document.createElement('div');
-                    container.className = 'modal-image-container';
-                    container.innerHTML = `
-                        <img src="${image}" class="modal-image" alt="Photo ${index + 1} de ${review.name}">
-                        <div class="modal-image-overlay">
-                            <i class="fas fa-expand"></i>
-                        </div>
-                    `;
-                    container.addEventListener('click', () => openImageModal(image));
-                    imagesGrid.appendChild(container);
+                    const imgContainer = document.createElement('div');
+                    imgContainer.className = 'modal-image';
+                    imgContainer.innerHTML = `<img src="${image}" alt="Photo" onclick="openImagePreview(${review.id}, ${index})">`;
+                    imagesGrid.appendChild(imgContainer);
                 });
                 imagesContainer.style.display = 'block';
-            } else imagesContainer.style.display = 'none';
+            } else {
+                imagesContainer.style.display = 'none';
+            }
+            
+            modal.show();
+        }
 
-            document.getElementById('reviewModal').style.display = 'flex';
+        function openImagePreview(reviewId, imageIndex) {
+            const review = reviews.find(r => r.id === reviewId);
+            if (!review || !review.images || review.images.length === 0) return;
+            
+            currentImages = review.images;
+            currentImageIndex = imageIndex;
+            
+            if (!imagePreviewModal) {
+                imagePreviewModal = new bootstrap.Modal(document.getElementById('imagePreviewModal'));
+                modalOverlay = document.getElementById('modalOverlay');
+                setupImageModalEvents();
+            }
+            
+            updateImagePreview();
+            imagePreviewModal.show();
+            modalOverlay.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
 
-        function openImageModal(imageSrc) {
-            document.getElementById('fullSizeImage').src = imageSrc;
-            document.getElementById('imageModal').style.display = 'flex';
+        function updateImagePreview() {
+            const previewImage = document.getElementById('previewImage');
+            const prevBtn = document.getElementById('prevImageBtn');
+            const nextBtn = document.getElementById('nextImageBtn');
+            const imageIndicator = document.getElementById('imageIndicator');
+            
+            if (currentImages.length > 0 && currentImageIndex < currentImages.length) {
+                previewImage.src = currentImages[currentImageIndex];
+                
+                if (currentImages.length > 1) {
+                    prevBtn.style.display = 'flex';
+                    nextBtn.style.display = 'flex';
+                    imageIndicator.style.display = 'flex';
+                    prevBtn.disabled = currentImageIndex === 0;
+                    nextBtn.disabled = currentImageIndex === currentImages.length - 1;
+                    updateImageIndicator();
+                } else {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    imageIndicator.style.display = 'none';
+                }
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            generateCarousel();
+        function updateImageIndicator() {
+            const imageIndicator = document.getElementById('imageIndicator');
+            imageIndicator.innerHTML = '';
+            
+            for (let i = 0; i < currentImages.length; i++) {
+                const dot = document.createElement('div');
+                dot.className = `image-indicator-dot ${i === currentImageIndex ? 'active' : ''}`;
+                dot.addEventListener('click', () => {
+                    currentImageIndex = i;
+                    updateImagePreview();
+                });
+                imageIndicator.appendChild(dot);
+            }
+        }
 
-            document.getElementById('closeModal').addEventListener('click', function () {
-                document.getElementById('reviewModal').style.display = 'none';
-                document.body.style.overflow = 'auto';
-            });
-
-            document.getElementById('reviewModal').addEventListener('click', function (e) {
-                if (e.target === this) {
-                    this.style.display = 'none';
-                    document.body.style.overflow = 'auto';
+        function setupImageModalEvents() {
+            const closeBtn = document.getElementById('closePhotoBtn');
+            const prevBtn = document.getElementById('prevImageBtn');
+            const nextBtn = document.getElementById('nextImageBtn');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalElement = document.getElementById('imagePreviewModal');
+            
+            closeBtn.addEventListener('click', closeImagePreview);
+            
+            prevBtn.addEventListener('click', () => {
+                if (currentImageIndex > 0) {
+                    const imageContainer = document.getElementById('imageContainer');
+                    imageContainer.style.opacity = '0.7';
+                    imageContainer.style.transform = 'translateX(10px)';
+                    setTimeout(() => {
+                        currentImageIndex--;
+                        updateImagePreview();
+                        imageContainer.style.opacity = '1';
+                        imageContainer.style.transform = 'translateX(0)';
+                    }, 150);
                 }
             });
-
-            document.getElementById('closeImageModal').addEventListener('click', function () {
-                document.getElementById('imageModal').style.display = 'none';
-            });
-
-            document.getElementById('imageModal').addEventListener('click', function (e) {
-                if (e.target === this || e.target.id === 'fullSizeImage') {
-                    this.style.display = 'none';
+            
+            nextBtn.addEventListener('click', () => {
+                if (currentImageIndex < currentImages.length - 1) {
+                    const imageContainer = document.getElementById('imageContainer');
+                    imageContainer.style.opacity = '0.7';
+                    imageContainer.style.transform = 'translateX(-10px)';
+                    setTimeout(() => {
+                        currentImageIndex++;
+                        updateImagePreview();
+                        imageContainer.style.opacity = '1';
+                        imageContainer.style.transform = 'translateX(0)';
+                    }, 150);
                 }
             });
-
-            window.addEventListener('resize', function () {
-                updateCardsPerView();
-                generateCarousel();
-            });
-
-            document.addEventListener('keydown', function (e) {
-                if (document.getElementById('reviewModal').style.display === 'flex') {
-                    if (e.key === 'Escape') {
-                        document.getElementById('reviewModal').style.display = 'none';
-                        document.body.style.overflow = 'auto';
+            
+            modalOverlay.addEventListener('click', closeImagePreview);
+            
+            document.addEventListener('keydown', (e) => {
+                if (modalElement.classList.contains('show') && e.key === 'Escape') closeImagePreview();
+                
+                if (modalElement.classList.contains('show')) {
+                    if (e.key === 'ArrowLeft' && currentImageIndex > 0) {
+                        const imageContainer = document.getElementById('imageContainer');
+                        imageContainer.style.opacity = '0.7';
+                        imageContainer.style.transform = 'translateX(10px)';
+                        setTimeout(() => {
+                            currentImageIndex--;
+                            updateImagePreview();
+                            imageContainer.style.opacity = '1';
+                            imageContainer.style.transform = 'translateX(0)';
+                        }, 150);
+                    } else if (e.key === 'ArrowRight' && currentImageIndex < currentImages.length - 1) {
+                        const imageContainer = document.getElementById('imageContainer');
+                        imageContainer.style.opacity = '0.7';
+                        imageContainer.style.transform = 'translateX(-10px)';
+                        setTimeout(() => {
+                            currentImageIndex++;
+                            updateImagePreview();
+                            imageContainer.style.opacity = '1';
+                            imageContainer.style.transform = 'translateX(0)';
+                        }, 150);
                     }
-                } else if (document.getElementById('imageModal').style.display === 'flex') {
-                    if (e.key === 'Escape') document.getElementById('imageModal').style.display = 'none';
-                } else {
-                    if (e.key === 'ArrowRight') nextSlide();
-                    if (e.key === 'ArrowLeft') prevSlide();
                 }
             });
+            
+            document.getElementById('previewImage').addEventListener('click', (e) => e.stopPropagation());
+        }
 
-            setInterval(() => {
-                if (document.getElementById('reviewModal').style.display !== 'flex' &&
-                    document.getElementById('imageModal').style.display !== 'flex') {
-                    nextSlide();
-                }
-            }, 5000);
+        function closeImagePreview() {
+            if (imagePreviewModal) {
+                imagePreviewModal.hide();
+                modalOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateAverageRating();
+            generateCarousel();
+            
+            window.addEventListener('resize', generateCarousel);
+            
+            const carousel = new bootstrap.Carousel(document.getElementById('reviewsCarousel'), {
+                interval: 5000,
+                ride: 'carousel'
+            });
         });
     </script>
 </body>
-
 </html>
