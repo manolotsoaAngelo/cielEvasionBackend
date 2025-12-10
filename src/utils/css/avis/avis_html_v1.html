@@ -1,7 +1,3 @@
-<!--
-    <!DOCTYPE html>
- -->
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -572,95 +568,7 @@
     <div class="modal-backdrop-overlay" id="modalOverlay" style="display: none;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- script
-    <script src="data_avis.js"></script>
- -->
     <script>
-        /*
-        const reviews = [
-            {
-                id: 1,
-                name: "Marie Dubois",
-                profilePic: "https://randomuser.me/api/portraits/women/32.jpg",
-                rating: 5,
-                date: "2024-01-15",
-                source: "google",
-                sourceName: "Google",
-                content: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement cette entreprise pour la qualité de son travail et son sérieux. Le résultat final a dépassé mes attentes.",
-                shortContent: "Service exceptionnel ! L'équipe a été très réactive et professionnelle...",
-                images: [
-                    "https://picsum.photos/800/600?random=1",
-                    "https://picsum.photos/800/600?random=2",
-                    "https://picsum.photos/800/600?random=3"
-                ]
-            },
-            {
-                id: 2,
-                name: "Thomas Martin",
-                profilePic: "https://randomuser.me/api/portraits/men/54.jpg",
-                rating: 4.5,
-                date: "2024-01-10",
-                source: "facebook",
-                sourceName: "Facebook",
-                content: "Très satisfait du service. Prix compétitifs et délais respectés. Petit bémol sur la communication qui pourrait être améliorée, mais dans l'ensemble une très bonne expérience.",
-                shortContent: "Très satisfait du service. Prix compétitifs et délais respectés...",
-                images: ["https://picsum.photos/800/600?random=4"]
-            },
-            {
-                id: 3,
-                name: "Sophie Laurent",
-                profilePic: "https://randomuser.me/api/portraits/women/65.jpg",
-                rating: 5,
-                date: "2024-01-05",
-                source: "trustpilot",
-                sourceName: "Trustpilot",
-                content: "Excellente prestation ! Du premier contact à la livraison, tout s'est parfaitement déroulé. Le professionnalisme de l'équipe est remarquable. Je reviendrai certainement.",
-                shortContent: "Excellente prestation ! Du premier contact à la livraison, tout s'est parfaitement déroulé...",
-                images: [
-                    "https://picsum.photos/800/600?random=5",
-                    "https://picsum.photos/800/600?random=6",
-                    "https://picsum.photos/800/600?random=7",
-                    "https://picsum.photos/800/600?random=8"
-                ]
-            },
-            {
-                id: 4,
-                name: "Jean Petit",
-                profilePic: "https://randomuser.me/api/portraits/men/22.jpg",
-                rating: 4,
-                date: "2023-12-20",
-                source: "website",
-                sourceName: "Notre site",
-                content: "Bon rapport qualité-prix. Le travail a été bien fait dans l'ensemble avec quelques détails à perfectionner. Service client très aimable et à l'écoute.",
-                shortContent: "Bon rapport qualité-prix. Le travail a été bien fait dans l'ensemble...",
-                images: []
-            },
-            {
-                id: 5,
-                name: "Emma Richard",
-                profilePic: "https://randomuser.me/api/portraits/women/44.jpg",
-                rating: 5,
-                date: "2023-12-15",
-                source: "google",
-                sourceName: "Google",
-                content: "Je suis plus que satisfaite ! L'équipe a su comprendre exactement mes besoins et les a parfaitement réalisés. Un grand merci pour ce travail de qualité.",
-                shortContent: "Je suis plus que satisfaite ! L'équipe a su comprendre exactement mes besoins...",
-                images: ["https://picsum.photos/800/600?random=9"]
-            },
-            {
-                id: 6,
-                name: "Lucas Bernard",
-                profilePic: "https://randomuser.me/api/portraits/men/33.jpg",
-                rating: 4,
-                date: "2023-12-10",
-                source: "facebook",
-                sourceName: "Facebook",
-                content: "Service correct avec de bons résultats. Quelques retards mineurs mais expliqués par l'équipe. Dans l'ensemble, je recommande.",
-                shortContent: "Service correct avec de bons résultats. Quelques retards mineurs mais expliqués...",
-                images: []
-            }
-        ];
-*/
         let currentImages = [], currentImageIndex = 0, imagePreviewModal = null, modalOverlay = null;
 
         function calculateAverageRating() {
