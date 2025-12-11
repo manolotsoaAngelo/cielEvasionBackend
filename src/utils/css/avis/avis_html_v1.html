@@ -148,33 +148,32 @@
             white-space: nowrap;
         }
 
-        .review-source {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            white-space: nowrap;
+        .source-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .source-google {
             background-color: #4285f4;
-            color: white;
         }
 
         .source-facebook {
             background-color: #1877f2;
-            color: white;
         }
 
-        .source-trustpilot {
-            background-color: #00b67a;
-            color: white;
+        .source-instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
         }
 
-        .source-website {
-            background-color: #6c757d;
-            color: white;
+        .source-tripadvisor {
+            background-color: #34e0a1;
         }
 
         .review-content {
@@ -303,7 +302,6 @@
             filter: invert(1);
         }
 
-        /* Modales */
         .modal-content {
             border-radius: 15px;
             border: none;
@@ -366,6 +364,18 @@
         .modal-rating {
             color: var(--accent-color);
             font-size: 1.1rem;
+        }
+
+        .modal-source-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
         }
 
         .modal-body {
@@ -730,7 +740,7 @@
                             <span class="modal-date" id="modalDate"></span>
                             <div class="modal-rating-source">
                                 <div class="modal-rating" id="modalRating"></div>
-                                <span id="modalSource" class="review-source"></span>
+                                <div class="modal-source-logo" id="modalSourceLogo"></div>
                             </div>
                         </div>
                     </div>
@@ -766,7 +776,6 @@
     </div>
 
     <div class="modal-backdrop-overlay" id="modalOverlay" style="display: none;"></div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -832,18 +841,19 @@
             switch (source) {
                 case 'google': return 'source-google';
                 case 'facebook': return 'source-facebook';
-                case 'trustpilot': return 'source-trustpilot';
-                case 'website': return 'source-website';
-                default: return 'source-website';
+                case 'instagram': return 'source-instagram';
+                case 'tripadvisor': return 'source-tripadvisor';
+                default: return 'source-google';
             }
         }
 
         function getSourceIcon(source) {
             switch (source) {
-                case 'google': return '<i class="fab fa-google me-1"></i>';
-                case 'facebook': return '<i class="fab fa-facebook-f me-1"></i>';
-                case 'trustpilot': return '<i class="fas fa-star me-1"></i>';
-                default: return '<i class="fas fa-globe me-1"></i>';
+                case 'google': return '<i class="fab fa-google"></i>';
+                case 'facebook': return '<i class="fab fa-facebook-f"></i>';
+                case 'instagram': return '<i class="fab fa-instagram"></i>';
+                case 'tripadvisor': return '<i class="fab fa-tripadvisor"></i>';
+                default: return '<i class="fab fa-google"></i>';
             }
         }
 
@@ -911,7 +921,9 @@
                             </div>
                             <div class="review-rating-source">
                                 <div class="review-rating">${generateStars(review.rating)}</div>
-                                <span class="review-source ${sourceClass}">${getSourceIcon(review.source)}${review.sourceName}</span>
+                                <div class="source-logo ${sourceClass}">
+                                    ${getSourceIcon(review.source)}
+                                </div>
                             </div>
                             <div class="review-content ${showReadMore ? 'truncated' : ''}">${displayContent}</div>
                             ${imagesHTML}
@@ -974,12 +986,12 @@
             document.getElementById('modalDate').textContent = getRelativeDate(review.date);
 
             const ratingElement = document.getElementById('modalRating');
-            const sourceElement = document.getElementById('modalSource');
+            const sourceLogoElement = document.getElementById('modalSourceLogo');
 
             ratingElement.innerHTML = generateStars(review.rating);
 
-            sourceElement.className = `review-source ${getSourceClass(review.source)}`;
-            sourceElement.innerHTML = `${getSourceIcon(review.source)}${review.sourceName}`;
+            sourceLogoElement.className = `modal-source-logo ${getSourceClass(review.source)}`;
+            sourceLogoElement.innerHTML = getSourceIcon(review.source);
 
             document.getElementById('modalReviewContent').textContent = review.content;
 
