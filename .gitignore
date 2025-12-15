@@ -2,6 +2,7 @@
 node_modules/
 backup_wix/utils
 backup_wix/test
+src/utils/css/partenaire
 .env
 .vscode/
 *.log
