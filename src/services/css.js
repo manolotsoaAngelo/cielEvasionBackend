@@ -220,7 +220,7 @@ const init=setInterval(()=>{
 },200);
 
 window.addEventListener("load",adjust);
-window.addEventListener("resize",adjust);
+//window.addEventListener("resize",adjust);
 
 function runReady(fn){
   let t;
