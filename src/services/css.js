@@ -183,50 +183,51 @@ onNavigated(() => {
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
 
-    let css = `const cssContent=\`
-#comp-mhytj3e7,#comp-mi2u0prw{
-  position:fixed!important;top:0;left:0;width:100%;z-index:10000;background:inherit
+    let css = `const cssContent = \`
+#comp-mhytj3e7,
+#comp-mi2u0prw {
+  position:fixed!important;
+  top:0;left:0;
+  width:100%;
+  z-index:10000;
+  background:inherit;
 }
-#comp-lvw159ib,#comp-lvw159l6{
-  box-sizing:border-box;min-height:100vh!important;height:auto!important;width:100%!important
+#comp-lvw159ib,
+#comp-lvw159l6 {
+  box-sizing:border-box;
+  min-height:100vh!important;
+  height:auto!important;
+  width:100%!important;
 }
-html{scroll-behavior:smooth}body{margin:0}
+html{scroll-behavior:smooth;}
+body{margin:0;}
 \`;
+
 const style=document.createElement("style");
 style.textContent=cssContent;
 document.head.appendChild(style);
 
-const HIDS=["comp-mhytj3e7","comp-mi2u0prw"];
-const CIDS=["comp-lvw159ib","comp-lvw159l6"];
+function adjust(){
+  const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
+  const contents=["comp-lvw159ib","comp-lvw159l6"].map(id=>document.getElementById(id));
+  let h=0;headers.forEach(e=>{if(e)h=Math.max(h,e.offsetHeight)});
+  contents.forEach(c=>{if(c){c.style.paddingTop=h+"px"}});
+}
 
-let raf=0,locked=false;
-const adjust=()=>{
-  if(locked) return;
-  cancelAnimationFrame(raf);
-  raf=requestAnimationFrame(()=>{
-    const hs=HIDS.map(id=>document.getElementById(id)).filter(Boolean);
-    const cs=CIDS.map(id=>document.getElementById(id)).filter(Boolean);
-    if(!hs.length||!cs.length) return;
-    const h=Math.max(...hs.map(e=>e.offsetHeight));
-    cs.forEach(c=>c.style.paddingTop=h+"px");
-  });
-};
+const init=setInterval(()=>{
+  adjust();
+  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(init)
+},200);
 
-const waitStable=async()=>{
-  if(document.fonts&&document.fonts.ready) await document.fonts.ready;
-  await new Promise(r=>window.addEventListener("load",r,{once:true}));
-  locked=false;adjust();
-};
+window.addEventListener("load",adjust);
+window.addEventListener("resize",adjust);
 
-locked=true;
-new ResizeObserver(adjust).observe(document.documentElement);
-window.addEventListener("resize",adjust,{passive:true});
-
-const mo=new MutationObserver(adjust);
-mo.observe(document.body,{childList:true,subtree:true});
-
-waitStable().then(()=>mo.disconnect());
-
+function runReady(fn){
+  let t;
+  const o=new MutationObserver(()=>{clearTimeout(t);t=setTimeout(()=>{o.disconnect();fn()},100)});
+  o.observe(document.body,{childList:true,subtree:true});
+}
+runReady(adjust);
 `
 
     return css.replace(/\s+/g, " ")
