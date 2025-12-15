@@ -183,39 +183,51 @@ onNavigated(() => {
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
 
-    let css = `const css=\`#comp-mhytj3e7,#comp-mi2u0prw{position:fixed!important;top:0;left:0;width:100%;z-index:10000;background:inherit;transition:height .3s ease}#comp-lvw159ib,#comp-lvw159l6{box-sizing:border-box;min-height:100vh!important;height:auto!important;width:100%!important;transition:padding-top .3s ease}html{scroll-behavior:smooth}body{margin:0}\`;
+    let css = `const cssContent = \`
+#comp-mhytj3e7,
+#comp-mi2u0prw {
+  position:fixed!important;
+  top:0;left:0;
+  width:100%;
+  z-index:10000;
+  background:inherit;
+}
+#comp-lvw159ib,
+#comp-lvw159l6 {
+  box-sizing:border-box;
+  min-height:100vh!important;
+  height:auto!important;
+  width:100%!important;
+}
+html{scroll-behavior:smooth;}
+body{margin:0;}
+\`;
 
-const s=document.createElement('style');
-s.textContent=css;
-document.head.appendChild(s);
+const style=document.createElement("style");
+style.textContent=cssContent;
+document.head.appendChild(style);
 
-const a=()=>{
-    const h=['comp-mhytj3e7','comp-mi2u0prw'].map(i=>document.getElementById(i)),
-          c=['comp-lvw159ib','comp-lvw159l6'].map(i=>document.getElementById(i));
-    let m=0;
-    h.forEach(e=>e&&(m=Math.max(m,e.offsetHeight)));
-    c.forEach(e=>e&&(e.style.paddingTop=m+'px'))
-};
+function adjust(){
+  const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
+  const contents=["comp-lvw159ib","comp-lvw159l6"].map(id=>document.getElementById(id));
+  let h=0;headers.forEach(e=>{if(e)h=Math.max(h,e.offsetHeight)});
+  contents.forEach(c=>{if(c){c.style.paddingTop=h+"px"}});
+}
 
-const i=setInterval(()=>{
-    a();
-    document.getElementById('comp-mhytj3e7')&&document.getElementById('comp-lvw159ib')&&clearInterval(i)
+const init=setInterval(()=>{
+  adjust();
+  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(init)
 },200);
 
-window.addEventListener('load',a);
-window.addEventListener('resize',a);
+window.addEventListener("load",adjust);
+window.addEventListener("resize",adjust);
 
-const r=t=>{
-    let e;
-    new MutationObserver(()=>{
-        clearTimeout(e);
-        e=setTimeout(()=>{
-            t();
-            this.disconnect()
-        },100)
-    }).observe(document.body,{childList:!0,subtree:!0})
-};
-r(a);
+function runReady(fn){
+  let t;
+  const o=new MutationObserver(()=>{clearTimeout(t);t=setTimeout(()=>{o.disconnect();fn()},100)});
+  o.observe(document.body,{childList:true,subtree:true});
+}
+//runReady(adjust);
 `
 
     return css.replace(/\s+/g, " ")
