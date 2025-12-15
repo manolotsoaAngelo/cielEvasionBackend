@@ -203,31 +203,34 @@ html{scroll-behavior:smooth;}
 body{margin:0;}
 \`;
 
-const style=document.createElement("style");
-style.textContent=cssContent;
+const style = document.createElement("style");
+style.textContent = cssContent;
 document.head.appendChild(style);
 
-function adjust(){
-  const headers=["comp-mhytj3e7","comp-mi2u0prw"].map(id=>document.getElementById(id));
-  const contents=["comp-lvw159ib","comp-lvw159l6"].map(id=>document.getElementById(id));
-  let h=0;headers.forEach(e=>{if(e)h=Math.max(h,e.offsetHeight)});
-  contents.forEach(c=>{if(c){c.style.paddingTop=h+"px"}});
+function adjust() {
+  const headers = ["comp-mhytj3e7", "comp-mi2u0prw"].map(id => document.getElementById(id));
+  const contents = ["comp-lvw159ib", "comp-lvw159l6"].map(id => document.getElementById(id));
+  let h = 0;
+  headers.forEach(e => { if (e) h = Math.max(h, e.offsetHeight) });
+  contents.forEach(c => { if (c) { c.style.paddingTop = h + "px" } });
 }
 
-const init=setInterval(()=>{
-  adjust();
-  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(init)
-},200);
+let executed = false;
 
-window.addEventListener("load",adjust);
-//window.addEventListener("resize",adjust);
-
-function runReady(fn){
-  let t;
-  const o=new MutationObserver(()=>{clearTimeout(t);t=setTimeout(()=>{o.disconnect();fn()},100)});
-  o.observe(document.body,{childList:true,subtree:true});
+function executeOnce() {
+  if (executed) return;
+  if (document.readyState === "complete") {
+    adjust();
+    executed = true;
+    window.addEventListener("resize", adjust);
+  }
 }
-//runReady(adjust);
+
+if (document.readyState === "loading") {
+  window.addEventListener("load", executeOnce);
+} else {
+  executeOnce();
+}
 `
 
     return css.replace(/\s+/g, " ")
