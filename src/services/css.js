@@ -235,7 +235,7 @@ function adjust(){
 
 const init=setInterval(()=>{
   adjust();
-  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(init)
+  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib")||document.getElementById("comp-mi2u0prw")&&document.getElementById("comp-lvw159l6") )clearInterval(init)
 },200);
 
   const resizeObserver = new ResizeObserver(() => {
