@@ -233,11 +233,24 @@ function adjust(){
   });
 }
 
-
 const init=setInterval(()=>{
   adjust();
   if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib"))clearInterval(init)
 },200);
+
+  const resizeObserver = new ResizeObserver(() => {
+    adjust();
+});
+
+setTimeout(() => {
+    [
+        "comp-mhytj3e7","comp-mi2u0prw",
+        "comp-lvw159ib","comp-lvw159l6"
+    ].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) resizeObserver.observe(el);
+    });
+}, 1500);
 
 window.addEventListener("load",adjust);
 window.addEventListener("resize",adjust);
