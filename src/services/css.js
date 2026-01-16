@@ -242,12 +242,50 @@ const init=setInterval(()=>{
 window.addEventListener("load",adjust);
 window.addEventListener("resize",adjust);
 
-function runReady(fn){
-  let t;
-  const o=new MutationObserver(()=>{clearTimeout(t);t=setTimeout(()=>{o.disconnect();fn()},100)});
-  o.observe(document.body,{childList:true,subtree:true});
+function onNavigated(callback) {
+  let lastUrl = location.href;
+
+  const push = history.pushState;
+  history.pushState = function() {
+    push.apply(history, arguments);
+    callback();
+  };
+
+  const replace = history.replaceState;
+  history.replaceState = function() {
+    replace.apply(history, arguments);
+    callback();
+  };
+
+  window.addEventListener("popstate", callback);
+
+  setInterval(() => {
+    if (location.href !== lastUrl) {
+      lastUrl = location.href;
+      callback();
+    }
+  }, 300);
 }
-runReady(adjust);
+
+function runWhenReady(fn) {
+  let timeout;
+  const observer = new MutationObserver(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      observer.disconnect();
+      fn();
+    }, 100);
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+}
+
+onNavigated(() => {
+  window.addEventListener("load", () => {
+    runWhenReady(adjust);
+  });
+
+  runWhenReady(adjust);
+});
 `
 
     return css.replace(/\s+/g, " ")
