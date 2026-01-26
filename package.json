@@ -2,16 +2,20 @@
   "dependencies": {
     "axios": "^1.12.2",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "lz-string": "^1.5.0",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "resend": "^6.8.0"
   },
   "name": "cielevasionbackend",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "server.js",
-  "cacheDirectories": ["node_modules"],
+  "cacheDirectories": [
+    "node_modules"
+  ],
   "devDependencies": {
     "nodemon": "^3.1.10"
   },

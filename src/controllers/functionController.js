@@ -20,6 +20,7 @@ import OrdersService from "../services/orders.js";
 import PartenairesService from "../services/partenaires.js";
 import UsersService from "../services/users.js";
 import CssService from "../services/css.js";
+import EmailService from "../services/email.js";
 
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
@@ -32,6 +33,11 @@ export async function runFunction(req, res) {
   let value = decompressed_obj(data);
   let result;
   switch (value.typeFunction) {
+
+    case "sendEmailDispo":
+      result = await EmailService.sendEmailDispo(value.valeur);
+      break;
+
     case "init_cachedData":
       switch (value.valeur) {
         case "ebillets":
@@ -68,34 +74,44 @@ export async function runFunction(req, res) {
           break;
       }
       break;
+
     ///Orders
     case "create_order_new":
       result = await OrdersService.create(value.valeur);
       break;
+
     case "tri_reportByASC_ref":
       result = await tri_reportByASC_ref(value.valeur);
       break;
+
     case "chaine_opt":
       result = await chaine_opt(value.valeur);
       break;
+
     case "opt_reportByRef":
       result = await opt_reportByRef(value.valeur);
       break;
+
     case "chaine_opt_partenaire":
       result = await chaine_opt_partenaire(value.valeur);
       break;
+
     case "crypter":
       result = crypter(value.valeur);
       break;
+
     case "decrypter":
       result = decrypter(value.valeur);
       break;
+
     case "compressed_obj":
       result = compressed_obj(value.valeur);
       break;
+
     case "decompressed_obj":
       result = decompressed_obj(value.valeur);
       break;
+      
     default:
       break;
   }
