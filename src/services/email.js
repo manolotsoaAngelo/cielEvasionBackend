@@ -20,13 +20,13 @@ class EmailService {
     }
 
     async ResendDomain() {
-        return 'dev.contact@ciel-evasion.fr <onboarding@resend.dev>'
+        return 'dev.contact@ciel-evasion.fr <manolotsoa.randriambeloniaina@gmail.com>'
     }
 
     async sendEmailDispo(emailData) {
         let path_template = "src/utils/templateEmail/dispoEmail.html"
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
-        let destination = ['manolotsoa.randriambeloniaina@gmail.com']
+        let destination = ['manolotsoa.randriambeloniaina@gmail.com','zelotobey@gmail.com']
 
         return await this.send(emailData, path_template, destination, objet);
     }
@@ -34,8 +34,13 @@ class EmailService {
     async send(emailData, path_template, destination, objet) {
         let htmlTemplate = fs.readFileSync(path_template, "utf8");
         for (const key in emailData) {
-            const regex = new RegExp(`{{${key}}}`, "g");
-            htmlTemplate = htmlTemplate.replace(regex, emailData[key]);
+            if(emailData[key] !== null && emailData[key] !== undefined) {
+                let regex = new RegExp(`{{${key}}}`, "g");
+                htmlTemplate = htmlTemplate.replace(regex, emailData[key]);
+            }else{
+                let regex = new RegExp(`{{${key}}}`, "g");
+                htmlTemplate = htmlTemplate.replace(regex, '...');
+            }
         }
         const resend = new Resend(await this.ResendApiKey());
 

@@ -1,186 +1,220 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demande de disponibilité</title>
-
-<style>
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    color: #1a1a1a;
-    background-color: #f9f9f9;
-    padding: 0;
-}
-
-.email-container {
-    max-width: 600px;
-    margin: 20px auto;
-    background-color: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.email-header {
-    background: linear-gradient(135deg, #4a6fa5 0%, #3a5a8c 100%);
-    color: white;
-    padding: 32px 24px 24px;
-    position: relative;
-}
-
-.header-triangle {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 80px 80px 0;
-    border-color: transparent #2d456b transparent transparent;
-}
-
-.email-title {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.email-subtitle {
-    font-size: 16px;
-    opacity: 0.9;
-}
-
-.email-content {
-    padding: 28px 24px;
-}
-
-.section-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin: 24px 0 12px;
-    color: #2d456b;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 6px;
-}
-
-.info-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.info-item {
-    display: flex;
-    margin-bottom: 14px;
-}
-
-.info-label {
-    min-width: 170px;
-    font-weight: 500;
-    color: #555;
-    font-size: 14.5px;
-}
-
-.info-value {
-    font-size: 14.5px;
-}
-
-.action-button {
-    display: inline-block;
-    margin-top: 28px;
-    padding: 12px 28px;
-    background-color: #2d456b;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: 500;
-}
-
-.action-button:hover {
-    background-color: #3a5a8c;
-}
-
-.wix-section {
-    background-color: #f8f9fa;
-    border-top: 1px solid #eaeaea;
-    padding: 20px 24px;
-    text-align: center;
-}
-
-.wix-text {
-    font-size: 13px;
-    color: #666;
-}
-
-.wix-link {
-    font-size: 13px;
-    color: #4a6fa5;
-    text-decoration: none;
-}
-
-@media (max-width: 480px) {
-    .info-item {
-        flex-direction: column;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demande de disponibilité</title>
+  <style>
+    @media only screen and (max-width: 640px) {
+      .container {
+        width: 100% !important;
+        border-radius: 8px !important;
+      }
+      .content-padding {
+        padding: 24px !important;
+      }
+      .header-padding {
+        padding: 24px !important;
+      }
+      .button {
+        display: block !important;
+        width: 90% !important;
+        margin: 0 auto !important;
+      }
     }
-    .info-label {
-        margin-bottom: 4px;
-    }
-}
-</style>
+  </style>
 </head>
 
-<body>
-<div class="email-container">
+<body style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;color:#1e293b;line-height:1.5;">
 
-    <div class="email-header">
-        <div class="header-triangle"></div>
-        <h1 class="email-title">Bonjour,</h1>
-        <p class="email-subtitle">Vous avez une demande de disponibilité</p>
-    </div>
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:20px;">
+    <tr>
+      <td align="center">
 
-    <div class="email-content">
+        <!-- Container -->
+        <table width="640" cellpadding="0" cellspacing="0" class="container" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.05);">
 
-        <h2 class="section-title">Activité demandée</h2>
-        <ul class="info-list">
-            <li class="info-item">
-                <span class="info-label">Activité :</span>
-                <span id="activity" class="info-value">{{activity}}</span>
-            </li>
-            <li class="info-item">
-                <span class="info-label">Formule :</span>
-                <span id="formula" class="info-value">{{formula}}</span>
-            </li>
-        </ul>
+          <!-- Header -->
+          
+          <tr>
+            <td style="background: linear-gradient(rgba(76, 81, 191, 0.85), rgba(102, 126, 234, 0.85)), url('https://static.wixstatic.com/media/5192e0_45123c3fa8d441e9ac66a2c580b11d9a~mv2.png') no-repeat center center / cover; min-height: 200px; padding: 40px 32px;" class="header-padding" align="center">
+              
+              <!-- Logo et contenu superposé -->
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td align="center" class="header-content" style="padding: 30px 20px;">
+                    
+                    
+                    <!-- Titre principal -->
+                    <div style="margin-top: 30px;">
+                      <h2 style="margin:0;font-size:26px;font-weight:700;color:#ffffff;">
+                        Bonjour {{partenaire}}
+                      </h2>
+                      <p style="margin:12px 0 0;font-size:16px;color:rgba(255,255,255,0.9);max-width:500px;">
+                        Nouvelle demande de disponibilité reçue
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-        <h2 class="section-title">Dates souhaitées</h2>
-        <ul class="info-list">
-            <li class="info-item"><span class="info-label">Date 1 :</span><span id="date1" class="info-value">{{date1}}</span></li>
-            <li class="info-item"><span class="info-label">Date 2 :</span><span id="date2" class="info-value">{{date2}}</span></li>
-            <li class="info-item"><span class="info-label">Date 3 :</span><span id="date3" class="info-value">{{date3}}</span></li>
-        </ul>
+          <!-- Content -->
+          <tr>
+            <td style="padding:32px;" class="content-padding">
 
-        <h2 class="section-title">Informations client</h2>
-        <ul class="info-list">
-            <li class="info-item"><span class="info-label">Bénéficiaire :</span><span id="beneficiary" class="info-value">{{beneficiary}}</span></li>
-            <li class="info-item"><span class="info-label">N° e-Billet :</span><span id="ticket" class="info-value">{{ticket}}</span></li>
-            <li class="info-item"><span class="info-label">Mobile :</span><span id="phone" class="info-value">{{phone}}</span></li>
-            <li class="info-item"><span class="info-label">E-mail :</span><span id="email" class="info-value">{{email}}</span></li>
-            <li class="info-item"><span class="info-label">Montant facturé :</span><span id="amount" class="info-value">{{amount}}</span></li>
-        </ul>
+              <!-- Introduction -->
+              <p style="margin:0 0 24px;font-size:16px;color:#475569;">
+                Notre client souhaite réserver l’activité suivante :
+              </p>
 
-        <a id="calendarLink" href="{{calendarLink}}" class="action-button" target="_blank">
-            Planifier
-        </a>
-    </div>
+              <!-- Section Activité -->
+              <div style="background:#f8fafc;border-radius:12px;padding:20px;margin-bottom:24px;">
+                <h2 style="font-size:15px;color:#4c51bf;text-transform:uppercase;margin:0 0 16px;letter-spacing:0.5px;font-weight:600;">
+                  Détails de l'activité
+                </h2>
+                
+                <table width="100%" cellpadding="8" cellspacing="0">
+                  <tr>
+                    <td width="35%" style="color:#64748b;font-size:14px;padding-bottom:10px;">Activité :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{Articles}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;padding-bottom:10px;">Formule :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{TitreActivite}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;padding-bottom:10px;">Lieu :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{Lieu}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;">Options :</td>
+                    <td style="font-weight:500;">{{Options}}</td>
+                  </tr>
+                </table>
+              </div>
 
-    <div class="wix-section">
-        <p class="wix-text">Cet e-mail a été créé avec Wix.</p>
-        <a class="wix-link" href="https://www.wix.com">En découvrir davantage</a>
-    </div>
+              <!-- Section Dates -->
+              <div style="background:#f8fafc;border-radius:12px;padding:20px;margin-bottom:24px;">
+                <h2 style="font-size:15px;color:#4c51bf;text-transform:uppercase;margin:0 0 16px;letter-spacing:0.5px;font-weight:600;">
+                  Les dates et horaires souhaités sont les suivantes :
+                </h2>
+                
+                <table width="100%" cellpadding="8">
+                  <tr>
+                    <td width="45%" style="color:#475569;font-size:14px;padding-bottom:8px;">{{Date1}} :</td>
+                    <td style="font-weight:500;padding-bottom:8px;">à {{Horaire1}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#475569;font-size:14px;padding-bottom:8px;">{{Date2}} :</td>
+                    <td style="font-weight:500;padding-bottom:8px;">à {{Horaire2}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#475569;font-size:14px;">{{Date3}} :</td>
+                    <td style="font-weight:500;">à {{Horaire3}}</td>
+                  </tr>
+                </table>
+              </div>
 
-</div>
+              <!-- Section Client -->
+              <div style="background:#f8fafc;border-radius:12px;padding:20px;margin-bottom:32px;">
+                <h2 style="font-size:15px;color:#4c51bf;text-transform:uppercase;margin:0 0 16px;letter-spacing:0.5px;font-weight:600;">
+                  Informations client
+                </h2>
+                
+                <table width="100%" cellpadding="8">
+                  <tr>
+                    <td width="40%" style="color:#64748b;font-size:14px;padding-bottom:10px;">Bénéficiaire :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{Prenom}} {{Nom}} – {{Age}} ans</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;padding-bottom:10px;">Taille / Poids :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{Taille}} cm / {{Poids}} kg</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;padding-bottom:10px;">E-billet :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{ebillet}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;padding-bottom:10px;">Téléphone :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{tel}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#64748b;font-size:14px;padding-bottom:10px;">E-mail :</td>
+                    <td style="font-weight:500;padding-bottom:10px;">{{email}}</td>
+                  </tr>
+                  <tr>
+                    <td style="color:#4c51bf;font-size:14px;font-weight:600;padding-top:10px;border-top:1px dashed #e2e8f0;">
+                      Montant facturé :
+                    </td>
+                    <td style="font-size:18px;font-weight:700;color:#059669;padding-top:10px;border-top:1px dashed #e2e8f0;">
+                      {{prix}}€
+                    </td>
+                  </tr>
+                </table>
+              </div>
+
+              <!-- Bouton d'action -->
+              <div style="text-align:center;margin-top:32px;">
+                <a href="https://www.ciel-evasion.fr/partenaire"
+                   target="_blank"
+                   class="button"
+                   style="
+                     display:inline-block;
+                     background:linear-gradient(135deg, #4c51bf 0%, #667eea 100%);
+                     color:#ffffff;
+                     text-decoration:none;
+                     padding:16px 32px;
+                     border-radius:10px;
+                     font-weight:600;
+                     font-size:16px;
+                     box-shadow:0 4px 12px rgba(76, 81, 191, 0.25);
+                     transition:all 0.3s ease;">
+                   Planifier cette réservation
+                </a>
+        
+              </div>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f8fafc;padding:24px;text-align:center;font-size:13px;color:#64748b;border-top:1px solid #e2e8f0;">
+              <table width="100%">
+                <tr>
+                  <td style="padding-bottom:12px;">
+                    <p style="margin:0 0 8px;">
+                      Cet e-mail a été envoyé via Ciel Évasion.
+                    </p>
+                    <p style="margin:0;font-size:12px;">
+                      Si vous avez des questions, contactez notre équipe au <br>
+                      <a href="mailto:support@ciel-evasion.fr" style="color:#4c51bf;text-decoration:none;">support@ciel-evasion.fr</a>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="border-top:1px solid #e2e8f0;padding-top:16px;">
+                    <p style="margin:0 0 8px;font-size:12px;">
+                      © 2026 Ciel Évasion. Tous droits réservés.
+                    </p>
+                    <p style="margin:0;font-size:12px;">
+                      <a href="https://www.ciel-evasion.fr" style="color:#4c51bf;text-decoration:none;">Visiter notre site</a> 
+                      | 
+                      <a href="https://www.ciel-evasion.fr/politique-de-confidentialite" style="color:#4c51bf;text-decoration:none;">Politique de confidentialité</a>
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
 
 </body>
 </html>

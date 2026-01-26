@@ -14,18 +14,28 @@ import EmailService from "../services/email.js";
 //console.log(await EbilletsService.getAllEbilletFacture())
 /*
 const emailData = {
-            activity: "Baptême de l'air en ULM",
-            formula: "Formule Découverte - 30 minutes",
-            date1: "15 février 2026 - 14:30",
-            date2: "16 février 2026 - 10:00",
-            date3: "17 février 2026 - 15:45",
-            beneficiary: "35 ans – 70 kg",
-            ticket: "EB-2026-78945",
-            phone: "06 12 34 56 78",
-            email: "client@example.com",
-            amount: "185 €",
-            calendarLink: "https://www.ciel-evasion.fr/partenaire"
-        };
+    partenaire: "Aventure Sensation",
+    Articles: "Saut en parachute tandem",
+    TitreActivite: "Formule Découverte + Photos HD",
+    variable_lieu: "AltitudeMax",
+    Lieu: "Aérodrome de Chambéry - Savoie",
+    Options: null,
+    Date1: "15 juin 2024",
+    Horaire1: "09h30",
+    Date2: "16 juin 2024",
+    Horaire2: "11h00",
+    Date3: "17 juin 2024",
+    Horaire3: "14h00",
+    Prenom: "Marie",
+    Nom: "Dubois",
+    Age: "32",
+    Poids: "65",
+    Taille: "172",
+    ebillet: "AVS-2024-05678",
+    tel: "+33 6 12 34 56 78",
+    email: "marie.dubois@example.com",
+    prix: "289"
+};
 
 console.log(await EmailService.sendEmailDispo(emailData))
 */

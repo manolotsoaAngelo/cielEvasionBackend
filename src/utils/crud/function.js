@@ -103,7 +103,7 @@ export async function create_order_new(wixData) {
       .join(" ")
       .includes(ciel_evasion_id)
   ) {
-    TVA = 10;
+    TVA = 20;
   } else {
     TVA = Number(
       Math.round((lineItems.tax / (lineItems.price - lineItems.tax)) * 100)
