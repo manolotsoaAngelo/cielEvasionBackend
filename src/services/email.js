@@ -45,27 +45,56 @@ class EmailService {
     }
 
     async send(htmlTemplate, objet, all_destinataire) {
-        const mailOptions = {
-            from: '"dev-contact-Ciel-ÉVASION®" <' + [all_destinataire[0]] + '>',
-            to: all_destinataire,
-            subject: objet,
-            text: "Bonjour !",
-            html: htmlTemplate
-        };
-        try {
-            const transporter = nodemailer.createTransport(await this.brevo());
+    // Validation des paramètres
+    if (!all_destinataire || !Array.isArray(all_destinataire) || all_destinataire.length === 0) {
+        throw new Error('Liste des destinataires invalide');
+    }
+    
+    if (!htmlTemplate || typeof htmlTemplate !== 'string') {
+        throw new Error('Template HTML invalide');
+    }
+    
+    if (!objet || typeof objet !== 'string') {
+        throw new Error('Objet du mail invalide');
+    }
+
+    const mailOptions = {
+        from: '"dev-contact-Ciel-ÉVASION®" <' + all_destinataire[0] + '>',
+        to: all_destinataire.join(', '), // Convertir le tableau en chaîne séparée par des virgules
+        subject: objet,
+        text: "Bonjour !", // Version texte pour les clients mail qui ne supportent pas HTML
+        html: htmlTemplate
+    };
+    
+    try {
+        const transporter = nodemailer.createTransport(await this.brevo());
+        
+        // Utiliser une promesse pour un meilleur contrôle du flux asynchrone
+        const result = await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
-                    console.log(error);
+                    console.error('Erreur d\'envoi d\'email:', error);
+                    reject(error);
                 } else {
-                    console.log('Email envoyé: ' + info.response);
+                    console.log('Email envoyé avec succès. ID:', info.messageId);
+                    console.log('Réponse du serveur:', info.response);
+                    resolve(info);
                 }
-            })
-            return 'Email envoyé avec succès'
-        } catch (error) {
-            return error
-        }
+            });
+        });
+        
+        return {
+            success: true,
+            message: 'Email envoyé avec succès',
+            messageId: result.messageId,
+            response: result.response
+        };
+        
+    } catch (error) {
+        console.error('Erreur dans la fonction send:', error);
+        throw error; // Relancer l'erreur pour que l'appelant puisse la gérer
     }
+}
 
     async email_Tib2QVP(data) {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
