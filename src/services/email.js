@@ -27,7 +27,7 @@ class EmailService {
     }
 
     async emailAdmin() {
-        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com','holiniainaprisca566@gmail.com']
+        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'holiniainaprisca566@gmail.com']
     }
 
     async init_data_html_template(path_template, emailData) {
@@ -45,8 +45,6 @@ class EmailService {
     }
 
     async send(htmlTemplate, objet, all_destinataire) {
-        
-        const transporter = nodemailer.createTransport(await this.brevo());
         const mailOptions = {
             from: '"dev-contact-Ciel-ÉVASION®" <' + [all_destinataire[0]] + '>',
             to: all_destinataire,
@@ -54,27 +52,32 @@ class EmailService {
             text: "Bonjour !",
             html: htmlTemplate
         };
-        transporter.sendMail(mailOptions, (error, info) => {
-           if (error) {
-               console.log(error);
-           } else {
-               console.log('Email envoyé: ' + info.response);
-           }
-       })
-       return mailOptions
+        try {
+            const transporter = nodemailer.createTransport(await this.brevo());
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email envoyé: ' + info.response);
+                }
+            })
+            return 'Email envoyé avec succès'
+        } catch (error) {
+            return error
+        }
     }
 
     async email_Tib2QVP(data) {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
         let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
-        
+
         let path_template = "src/utils/templateEmail/dispoEmail.html"
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
         return await this.send(htmlTemplate, objet, all_destinataire);
     }
 
-    
+
 }
 
 export default new EmailService();
