@@ -18,29 +18,17 @@ class EmailService {
     }
 
     async brevo() {
-        /*
         return {
             host: "smtp-relay.brevo.com",
-            port: 587,
-            auth: {
-                user: "a0e9f1001@smtp-brevo.com",
-                pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
-            }
-        }
-*/
-        return {
-            host: "smtp-relay.brevo.com",
-            port: 2525,
-            secure: false, // IMPORTANT
+            port: 2525, /// 587  # ou 465, 2525, 25
+            secure: false,
             auth: {
                 user: "a0e9f1001@smtp-brevo.com",
                 pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
             },
-            // Options importantes pour Render
-            connectionTimeout: 30000, // Augmentez le timeout
+            connectionTimeout: 30000,
             socketTimeout: 30000,
             greetingTimeout: 30000,
-            // Désactiver la vérification TLS pour certains fournisseurs
             tls: {
                 rejectUnauthorized: false
             }
