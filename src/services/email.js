@@ -44,16 +44,6 @@ class EmailService {
         return htmlTemplate
     }
 
-    async email_Tib2QVP(data) {
-        let objet = "Demande de disponibilité Ciel-ÉVASION®"
-        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
-        
-        let path_template = "src/utils/templateEmail/dispoEmail.html"
-        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
-
-        return await this.send(htmlTemplate, objet, all_destinataire);
-    }
-
     async send(htmlTemplate, objet, all_destinataire) {
         
         const transporter = nodemailer.createTransport(await this.brevo());
@@ -64,15 +54,26 @@ class EmailService {
             text: "Bonjour !",
             html: htmlTemplate
         };
-
-         transporter.sendMail(mailOptions, (error, info) => {
+       return await transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                return error
+                console.log(error);
             } else {
-                return 'Email envoyé: ' + info.response
+                console.log('Email envoyé: ' + info.response)
             }
-        });
+        })
     }
+
+    async email_Tib2QVP(data) {
+        let objet = "Demande de disponibilité Ciel-ÉVASION®"
+        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
+        
+        let path_template = "src/utils/templateEmail/dispoEmail.html"
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
+
+        return await this.send(htmlTemplate, objet, all_destinataire);
+    }
+
+    
 }
 
 export default new EmailService();

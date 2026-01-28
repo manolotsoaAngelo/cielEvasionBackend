@@ -5,6 +5,7 @@ import {
 
 import EmailService from "../services/email.js";
 import UsersService from "../services/users.js";
+
 /*
 let id_destinataire = (await UsersService.getByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id;
 const emailData = {
@@ -34,7 +35,9 @@ const emailData = {
 let data = { data:emailData, destinataire: id_destinataire}
 
 console.log(await EmailService.email_Tib2QVP(data))
+
 */
+
 /*
 export async function get_All_Ebillet_Facture(req, res) {
   let all_ebillet_data = await EbilletsService.getAllEbilletFacture()
