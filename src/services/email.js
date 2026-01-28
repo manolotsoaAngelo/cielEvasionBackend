@@ -46,7 +46,7 @@ class EmailService {
 
     async send(htmlTemplate, objet, all_destinataire) {
         
-        const transporter = await nodemailer.createTransport(await this.brevo());
+        const transporter = nodemailer.createTransport(await this.brevo());
         const mailOptions = {
             from: '"dev-contact-Ciel-ÉVASION®" <' + [all_destinataire[0]] + '>',
             to: all_destinataire,
@@ -54,13 +54,13 @@ class EmailService {
             text: "Bonjour !",
             html: htmlTemplate
         };
-       return await transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email envoyé: ' + info.response)
-            }
-        })
+       return transporter.sendMail(mailOptions, (error, info) => {
+           if (error) {
+               console.log(error);
+           } else {
+               console.log('Email envoyé: ' + info.response);
+           }
+       })
     }
 
     async email_Tib2QVP(data) {
