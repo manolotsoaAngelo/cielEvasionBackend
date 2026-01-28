@@ -35,8 +35,7 @@ export async function runFunction(req, res) {
   switch (value.typeFunction) {
 
     case "email_Tib2QVP":
-      //result = await EmailService.email_Tib2QVP(value.valeur);
-      result = value.valeur
+      result = await EmailService.email_Tib2QVP(value.valeur);
       break;
 
     case "init_cachedData":

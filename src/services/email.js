@@ -65,11 +65,11 @@ class EmailService {
             html: htmlTemplate
         };
 
-        return transporter.sendMail(mailOptions, (error, info) => {
+         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                console.log(error);
+                return error
             } else {
-                console.log('Email envoyé: ' + info.response);
+                return 'Email envoyé: ' + info.response
             }
         });
     }
