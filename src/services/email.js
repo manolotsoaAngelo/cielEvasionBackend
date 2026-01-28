@@ -16,12 +16,26 @@ class EmailService {
     }
 
     async brevo() {
+        /*
         return {
             host: "smtp-relay.brevo.com",
             port: 587,
             auth: {
                 user: "a0e9f1001@smtp-brevo.com",
                 pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
+            }
+        }
+*/
+        return {
+            host: "smtp-relay.brevo.com",
+            port: 587,
+            secure: false, // IMPORTANT
+            auth: {
+                user: "a0e9f1001@smtp-brevo.com",
+                pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         }
     }
@@ -53,7 +67,7 @@ class EmailService {
             text: "Bonjour !",
             html: htmlTemplate
         };
-        
+
         const transporter = nodemailer.createTransport(await this.brevo());
         const result = await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, (error, info) => {
@@ -67,7 +81,7 @@ class EmailService {
                 }
             });
         });
-        
+
         return {
             success: true,
             message: 'Email envoyé avec succès',
@@ -85,8 +99,6 @@ class EmailService {
 
         return await this.send(htmlTemplate, objet, all_destinataire);
     }
-
-
 }
 
 export default new EmailService();
