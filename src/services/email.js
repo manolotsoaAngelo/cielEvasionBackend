@@ -35,6 +35,11 @@ class EmailService {
                 user: "a0e9f1001@smtp-brevo.com",
                 pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
             },
+            // Options importantes pour Render
+            connectionTimeout: 30000, // Augmentez le timeout
+            socketTimeout: 30000,
+            greetingTimeout: 30000,
+            // Désactiver la vérification TLS pour certains fournisseurs
             tls: {
                 rejectUnauthorized: false
             }
@@ -64,20 +69,20 @@ class EmailService {
         let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
 
         let path_template = "src/utils/templateEmail/dispoEmail.html"
-        let htmlTemplate //= await this.init_data_html_template(path_template, data.data);
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
         return await this.send(htmlTemplate, objet, all_destinataire);
     }
 
     async send(htmlTemplate, objet, all_destinataire) {
-        
+
         let expediteur = all_destinataire[0]
         const mailOptions = {
             from: '"dev-contact-Ciel-ÉVASION®" <' + [expediteur] + '>',
             to: all_destinataire,
             subject: objet,
             text: "Bonjour !",
-            html: "htmlTemplate"
+            html: htmlTemplate
         };
 
         const transporter = nodemailer.createTransport(await this.brevo());
