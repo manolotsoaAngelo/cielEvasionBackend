@@ -10,7 +10,8 @@ let wixData_url_get_FullData =
 import fs from "fs";
 import nodemailer from 'nodemailer';
 import UsersService from "../services/users.js";
-
+import Brevo from "@getbrevo/brevo";
+import axios from "axios";
 class EmailService {
     constructor() {
     }
@@ -63,19 +64,20 @@ class EmailService {
         let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
 
         let path_template = "src/utils/templateEmail/dispoEmail.html"
-        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
-        return {objet:objet, all_destinataire:all_destinataire, htmlTemplate:htmlTemplate };
-        //return await this.send(htmlTemplate, objet, all_destinataire);
+        let htmlTemplate //= await this.init_data_html_template(path_template, data.data);
+
+        return await this.send(htmlTemplate, objet, all_destinataire);
     }
 
     async send(htmlTemplate, objet, all_destinataire) {
+        
         let expediteur = all_destinataire[0]
         const mailOptions = {
             from: '"dev-contact-Ciel-ÉVASION®" <' + [expediteur] + '>',
             to: all_destinataire,
             subject: objet,
             text: "Bonjour !",
-            html: htmlTemplate
+            html: "htmlTemplate"
         };
 
         const transporter = nodemailer.createTransport(await this.brevo());
