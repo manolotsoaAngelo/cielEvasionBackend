@@ -68,7 +68,7 @@ class EmailService {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
         let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
 
-        let path_template = "src/utils/templateEmail/dispoEmail.html"
+        let path_template = "../src/utils/templateEmail/dispoEmail.html"
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
         return await this.send(htmlTemplate, objet, all_destinataire);
