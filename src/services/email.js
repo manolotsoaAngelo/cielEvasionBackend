@@ -45,31 +45,16 @@ class EmailService {
     }
 
     async send(htmlTemplate, objet, all_destinataire) {
-    // Validation des paramètres
-    if (!all_destinataire || !Array.isArray(all_destinataire) || all_destinataire.length === 0) {
-        throw new Error('Liste des destinataires invalide');
-    }
-    
-    if (!htmlTemplate || typeof htmlTemplate !== 'string') {
-        throw new Error('Template HTML invalide');
-    }
-    
-    if (!objet || typeof objet !== 'string') {
-        throw new Error('Objet du mail invalide');
-    }
-
-    const mailOptions = {
-        from: '"dev-contact-Ciel-ÉVASION®" <' + all_destinataire[0] + '>',
-        to: all_destinataire.join(', '), // Convertir le tableau en chaîne séparée par des virgules
-        subject: objet,
-        text: "Bonjour !", // Version texte pour les clients mail qui ne supportent pas HTML
-        html: htmlTemplate
-    };
-    
-    try {
-        const transporter = nodemailer.createTransport(await this.brevo());
+        let expediteur = all_destinataire[0]
+        const mailOptions = {
+            from: '"dev-contact-Ciel-ÉVASION®" <' + [expediteur] + '>',
+            to: all_destinataire,
+            subject: objet,
+            text: "Bonjour !",
+            html: htmlTemplate
+        };
         
-        // Utiliser une promesse pour un meilleur contrôle du flux asynchrone
+        const transporter = nodemailer.createTransport(await this.brevo());
         const result = await new Promise((resolve, reject) => {
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
@@ -89,12 +74,7 @@ class EmailService {
             messageId: result.messageId,
             response: result.response
         };
-        
-    } catch (error) {
-        console.error('Erreur dans la fonction send:', error);
-        throw error; // Relancer l'erreur pour que l'appelant puisse la gérer
     }
-}
 
     async email_Tib2QVP(data) {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
