@@ -4,15 +4,9 @@ import {
 } from "../utils/compression/compression.js";
 
 import EmailService from "../services/email.js";
-
-//console.log(await EbilletsService.getByidArticle("27f91f30-a07d-005f-6b44-894cd81c9b2d"))
-//console.log(await EbilletsService.getByRef("E241230-3"))
-//console.log(await EbilletsService.getById('6650005f-61b4-497f-8cca-2e8b08299fe3'))
-//console.log(await EbilletsService.getAll())
-//console.log(await EbilletsService.getAllEbilletByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
-//console.log(await EbilletsService.getAllEbilletFactureByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
-//console.log(await EbilletsService.getAllEbilletFacture())
+import UsersService from "../services/users.js";
 /*
+let id_destinataire = (await UsersService.getByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id;
 const emailData = {
     partenaire: "Aventure Sensation",
     Articles: "Saut en parachute tandem",
@@ -37,7 +31,9 @@ const emailData = {
     prix: "289"
 };
 
-console.log(await EmailService.sendEmailDispo(emailData))
+let data = { data:emailData, destinataire: id_destinataire}
+
+console.log(await EmailService.email_Tib2QVP(data))
 */
 /*
 export async function get_All_Ebillet_Facture(req, res) {

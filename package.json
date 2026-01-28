@@ -6,7 +6,10 @@
     "express": "^5.1.0",
     "lz-string": "^1.5.0",
     "node-fetch": "^3.3.2",
-    "resend": "^6.8.0"
+    "node-mailjet": "^6.0.11",
+    "nodemailer": "^7.0.13",
+    "resend": "^6.8.0",
+    "sib-api-v3-sdk": "^8.5.0"
   },
   "name": "cielevasionbackend",
   "version": "1.0.0",

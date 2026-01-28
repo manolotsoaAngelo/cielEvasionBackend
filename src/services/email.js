@@ -7,67 +7,72 @@ let collection_name = "Membre_everyone";
 let wixData_url_get_FullData =
     "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
-
 import fs from "fs";
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
+import UsersService from "../services/users.js";
 
 class EmailService {
     constructor() {
     }
 
-    async ResendApiKey() {
-        return 're_GVETd2gP_CNJVruMGjsJT3LCi9bNUVaWw'
+    async brevo() {
+        return {
+            host: "smtp-relay.brevo.com",
+            port: 587,
+            auth: {
+                user: "a0e9f1001@smtp-brevo.com",
+                pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
+            }
+        }
     }
 
-    async ResendDomain() {
-        return 'dev.contact@ciel-evasion.fr <manolotsoa.randriambeloniaina@gmail.com>'
+    async emailAdmin() {
+        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com','holiniainaprisca566@gmail.com']
     }
 
-    async sendEmailDispo(emailData) {
-        let path_template = "src/utils/templateEmail/dispoEmail.html"
-        let objet = "Demande de disponibilité Ciel-ÉVASION®"
-        let destination = ['manolotsoa.randriambeloniaina@gmail.com','zelotobey@gmail.com']
-
-        return await this.send(emailData, path_template, destination, objet);
-    }
-
-    async send(emailData, path_template, destination, objet) {
+    async init_data_html_template(path_template, emailData) {
         let htmlTemplate = fs.readFileSync(path_template, "utf8");
         for (const key in emailData) {
-            if(emailData[key] !== null && emailData[key] !== undefined) {
+            if (emailData[key] !== null && emailData[key] !== undefined) {
                 let regex = new RegExp(`{{${key}}}`, "g");
                 htmlTemplate = htmlTemplate.replace(regex, emailData[key]);
-            }else{
+            } else {
                 let regex = new RegExp(`{{${key}}}`, "g");
                 htmlTemplate = htmlTemplate.replace(regex, '...');
             }
         }
-        const resend = new Resend(await this.ResendApiKey());
-
-        return await resend.emails.send({
-            from: await this.ResendDomain(),
-            to: destination,
-            subject: objet,
-            html: htmlTemplate,
-        });
+        return htmlTemplate
     }
 
-    /*
-      async refresh() {
-        return await refreshData(wixData_url);
-      }
-      async getAll() {
-        return await FullData(wixData_url);
-      }
-    
-      async getById(id) {
-        return (await get_wix_services(wixData_url + "_id/" + id)).data;
-      }
-    
-      async getByEmail(email) {
-        return (await this.getAll()).find((item) => item.loginEmail === email);
-      }
-    */
+    async email_Tib2QVP(data) {
+        let objet = "Demande de disponibilité Ciel-ÉVASION®"
+        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
+        
+        let path_template = "src/utils/templateEmail/dispoEmail.html"
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
+
+        return await this.send(htmlTemplate, objet, all_destinataire);
+    }
+
+    async send(htmlTemplate, objet, all_destinataire) {
+        
+        const transporter = nodemailer.createTransport(await this.brevo());
+        const mailOptions = {
+            from: '"dev-contact-Ciel-ÉVASION®" <' + [all_destinataire[0]] + '>',
+            to: all_destinataire,
+            subject: objet,
+            text: "Bonjour !",
+            html: htmlTemplate
+        };
+
+        return transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email envoyé: ' + info.response);
+            }
+        });
+    }
 }
 
 export default new EmailService();
