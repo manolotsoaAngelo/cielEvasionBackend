@@ -46,7 +46,7 @@ class EmailService {
 
     async send(htmlTemplate, objet, all_destinataire) {
         
-        const transporter = nodemailer.createTransport(await this.brevo());
+        const transporter = await nodemailer.createTransport(await this.brevo());
         const mailOptions = {
             from: '"dev-contact-Ciel-ÉVASION®" <' + [all_destinataire[0]] + '>',
             to: all_destinataire,
