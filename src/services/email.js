@@ -29,7 +29,7 @@ class EmailService {
 */
         return {
             host: "smtp-relay.brevo.com",
-            port: 587,
+            port: 465,
             secure: false, // IMPORTANT
             auth: {
                 user: "a0e9f1001@smtp-brevo.com",
