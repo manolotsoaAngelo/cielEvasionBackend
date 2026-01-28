@@ -58,6 +58,16 @@ class EmailService {
         return htmlTemplate
     }
 
+    async email_Tib2QVP(data) {
+        let objet = "Demande de disponibilité Ciel-ÉVASION®"
+        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
+
+        let path_template = "src/utils/templateEmail/dispoEmail.html"
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
+        return {objet:objet, all_destinataire:all_destinataire, htmlTemplate:htmlTemplate };
+        //return await this.send(htmlTemplate, objet, all_destinataire);
+    }
+
     async send(htmlTemplate, objet, all_destinataire) {
         let expediteur = all_destinataire[0]
         const mailOptions = {
@@ -88,16 +98,6 @@ class EmailService {
             messageId: result.messageId,
             response: result.response
         };
-    }
-
-    async email_Tib2QVP(data) {
-        let objet = "Demande de disponibilité Ciel-ÉVASION®"
-        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
-
-        let path_template = "src/utils/templateEmail/dispoEmail.html"
-        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
-
-        return await this.send(htmlTemplate, objet, all_destinataire);
     }
 }
 

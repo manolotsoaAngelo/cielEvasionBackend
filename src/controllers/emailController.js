@@ -33,11 +33,12 @@ const emailData = {
 };
 
 let data = { data:emailData, destinataire: id_destinataire}
-
+const start = Date.now();
 console.log(await EmailService.email_Tib2QVP(data))
+const end = Date.now();
+    console.log(`email_Tib2QVP a pris ${(end - start)/1000} s`);
 
 */
-
 /*
 export async function get_All_Ebillet_Facture(req, res) {
   let all_ebillet_data = await EbilletsService.getAllEbilletFacture()
