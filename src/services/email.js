@@ -8,6 +8,7 @@ let wixData_url_get_FullData =
     "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
 import fs from "fs";
+import path from "path";
 import nodemailer from 'nodemailer';
 import UsersService from "../services/users.js";
 import Brevo from "@getbrevo/brevo";
@@ -29,7 +30,7 @@ class EmailService {
 */
         return {
             host: "smtp-relay.brevo.com",
-            port: 465,
+            port: 2525,
             secure: false, // IMPORTANT
             auth: {
                 user: "a0e9f1001@smtp-brevo.com",
@@ -68,7 +69,13 @@ class EmailService {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
         let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
 
-        let path_template = "../src/utils/templateEmail/dispoEmail.html"
+        let path_template = path.join(
+            process.cwd(),
+            "src",
+            "utils",
+            "templateEmail",
+            "dispoEmail.html"
+        );
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
         return await this.send(htmlTemplate, objet, all_destinataire);
