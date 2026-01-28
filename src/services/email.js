@@ -54,13 +54,14 @@ class EmailService {
             text: "Bonjour !",
             html: htmlTemplate
         };
-       return transporter.sendMail(mailOptions, (error, info) => {
+        transporter.sendMail(mailOptions, (error, info) => {
            if (error) {
                console.log(error);
            } else {
                console.log('Email envoyé: ' + info.response);
            }
        })
+       return mailOptions
     }
 
     async email_Tib2QVP(data) {
