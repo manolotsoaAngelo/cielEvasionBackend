@@ -36,7 +36,8 @@ class EmailService {
     }
 
     async emailAdmin() {
-        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'holiniainaprisca566@gmail.com']
+        //return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'holiniainaprisca566@gmail.com']
+        return ['manolotsoa.randriambeloniaina@gmail.com']
     }
 
     async init_data_html_template(path_template, emailData) {
