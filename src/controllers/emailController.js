@@ -5,7 +5,6 @@ import {
 
 import EmailService from "../services/email.js";
 import UsersService from "../services/users.js";
-
 /*
 let id_destinataire = (await UsersService.getByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id;
 const emailData = {
@@ -34,8 +33,9 @@ const emailData = {
 
 let data = { data:emailData, destinataire: id_destinataire}
 const start = Date.now();
-//console.log(await EmailService.email_Tib2QVP(data))
+console.log(await EmailService.email_Tib2QVP(data))
 console.log(await EmailService.email_Tiam3wq(data))
+console.log(await EmailService.email_Tj8PgM(data))
 const end = Date.now();
     console.log(`email_Tib2QVP a pris ${(end - start)/1000} s`);
 */

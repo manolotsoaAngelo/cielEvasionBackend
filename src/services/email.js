@@ -54,10 +54,22 @@ class EmailService {
         return htmlTemplate
     }
 
+    async email_Tj8PgM(data) {
+        let objet = "Confirmation de rendez vous"
+        let path_template = path.join(
+            process.cwd(),
+            "src",
+            "utils",
+            "templateEmail",
+            "email_Tj8PgM.html"
+        );
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
+
+        return await this.send(htmlTemplate, objet, data.destinataire);
+    }
+
     async email_Tiam3wq(data) {
         let objet = "Demande de rendez vous"
-        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
-
         let path_template = path.join(
             process.cwd(),
             "src",
@@ -67,13 +79,11 @@ class EmailService {
         );
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
-        return await this.send(htmlTemplate, objet, all_destinataire);
+        return await this.send(htmlTemplate, objet, data.destinataire);
     }
 
     async email_Tib2QVP(data) {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
-        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
-
         let path_template = path.join(
             process.cwd(),
             "src",
@@ -83,10 +93,12 @@ class EmailService {
         );
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
-        return await this.send(htmlTemplate, objet, all_destinataire);
+        return await this.send(htmlTemplate, objet, data.destinataire);
     }
 
-    async send(htmlTemplate, objet, all_destinataire) {
+    async send(htmlTemplate, objet, destinataire) {
+
+        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(destinataire)).loginEmail)
 
         let expediteur = all_destinataire[0]
         const mailOptions = {
