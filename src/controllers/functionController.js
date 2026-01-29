@@ -34,6 +34,9 @@ export async function runFunction(req, res) {
   let result;
   switch (value.typeFunction) {
 
+    case "email_Tiam3wq":
+      result = await EmailService.email_Tiam3wq(value.valeur);
+      break;
     case "email_Tib2QVP":
       result = await EmailService.email_Tib2QVP(value.valeur);
       break;

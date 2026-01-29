@@ -53,6 +53,22 @@ class EmailService {
         return htmlTemplate
     }
 
+    async email_Tiam3wq(data) {
+        let objet = "Demande de rendez vous"
+        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
+
+        let path_template = path.join(
+            process.cwd(),
+            "src",
+            "utils",
+            "templateEmail",
+            "email_Tiam3wq.html"
+        );
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
+
+        return await this.send(htmlTemplate, objet, all_destinataire);
+    }
+
     async email_Tib2QVP(data) {
         let objet = "Demande de disponibilité Ciel-ÉVASION®"
         let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(data.destinataire)).loginEmail)
@@ -62,7 +78,7 @@ class EmailService {
             "src",
             "utils",
             "templateEmail",
-            "dispoEmail.html"
+            "email_Tib2QVP.html"
         );
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 

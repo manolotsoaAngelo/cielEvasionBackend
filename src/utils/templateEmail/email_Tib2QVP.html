@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demande de disponibilité</title>
+</head>
+
+<body
+  style="margin:0;padding:0;background-color:#f3f4f6;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#374151;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="padding:40px 12px;">
+    <tr>
+      <td align="center">
+
+        <!-- Container -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0"
+          style="max-width:600px;background-color:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.08);">
+
+          <!-- Header image -->
+          <tr>
+            <td style="padding:32px 20px;text-align:center;">
+              <img src="https://static.wixstatic.com/media/5192e0_c425c9f1e2c24775811e82e4f76e7a75~mv2.jpg"
+                alt="Ciel Évasion" style="max-width:100%;height:auto;border-radius:10px;">
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding:0 40px 40px 40px;">
+
+              <h1 style="margin:0 0 12px 0;font-size:24px;color:#111827;font-weight:700;">
+                Bonjour {{partenaire}}
+              </h1>
+
+              <p style="margin:0 0 24px 0;font-size:16px;line-height:1.65;color:#4b5563;">
+                Vous avez une demande de disponibilité
+              </p>
+
+              <!-- Info box -->
+              <div
+                style="background:#f9fafb;border-radius:10px;padding:18px 20px;margin-bottom:32px;border-left:5px solid #1f4fd8;">
+                <p style="margin:0;font-size:15px;color:#1f2937;line-height:1.6;">
+                  Notre client souhaite réserver l’activité suivante
+                </p>
+              </div>
+
+              <!-- Recap title -->
+              <h2
+                style="margin:0 0 14px 0;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;font-weight:700;">
+                Détails de l'activité
+              </h2>
+
+              <!-- Recap card -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                style="background:#f9fafb;border-radius:10px;padding:18px 20px;margin-bottom:24px;font-size:15px;">
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Activité</td>
+                  <td style="color:#111827;text-align:right;font-weight:600;">{{Articles}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Formule</td>
+                  <td style="color:#111827;text-align:right;">{{TitreActivite}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Lieu</td>
+                  <td style="color:#111827;text-align:right;">{{Lieu}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Options</td>
+                  <td style="color:#111827;text-align:right;">{{Options}}</td>
+                </tr>
+              </table>
+
+              <!-- Recap title -->
+              <h2
+                style="margin:0 0 14px 0;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;font-weight:700;">
+                Dates et horaires souhaitées
+              </h2>
+
+              <!-- date -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                style="background:#f9fafb;border-radius:10px;padding:18px 20px;margin-bottom:24px;font-size:15px;">
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">{{Date1}}</td>
+                  <td style="color:#111827;text-align:right;">{{Horaire1}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">{{Date2}}</td>
+                  <td style="color:#111827;text-align:right;">{{Horaire2}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">{{Date3}}</td>
+                  <td style="color:#111827;text-align:right;">{{Horaire3}}</td>
+                </tr>
+              </table>
+
+              <!-- Recap title -->
+              <h2
+                style="margin:0 0 14px 0;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;font-weight:700;">
+                Informations client
+              </h2>
+
+              <!-- date -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                style="background:#f9fafb;border-radius:10px;padding:18px 20px;margin-bottom:24px;font-size:15px;">
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Bénéficiaire</td>
+                  <td style="color:#111827;text-align:right;">{{Prenom}} {{Nom}} – {{Age}} ans</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">E-billet</td>
+                  <td style="color:#111827;text-align:right;">{{ebillet}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Taille / Poids</td>
+                  <td style="color:#111827;text-align:right;">{{Taille}} cm / {{Poids}} kg</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Mobile</td>
+                  <td style="color:#111827;text-align:right;">{{tel}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">E-mail</td>
+                  <td style="color:#111827;text-align:right;">{{email}}</td>
+                </tr>
+                <tr>
+                  <td style="color:#6b7280;padding:6px 0;">Montant facturé (options incluses)</td>
+                  <td style="color:#111827;text-align:right;">{{prix}}</td>
+                </tr>
+                
+              </table>
+
+              <!-- CTA -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" style="padding:10px 0 20px;">
+                    <a href="https://www.ciel-evasion.fr/partenaire" style="background:#1f4fd8;color:#ffffff;text-decoration:none;
+                            padding:14px 34px;border-radius:8px;
+                            font-size:16px;font-weight:600;display:inline-block;">
+                      Planifier
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f9fafb;padding:26px;text-align:center;border-top:1px solid #e5e7eb;">
+              <p style="margin:0;font-size:12px;color:#9ca3af;line-height:1.6;">
+                Cet email vous a été envoyé par <strong>Ciel Évasion</strong><br>
+                <a href="https://www.ciel-evasion.fr" style="color:#1f4fd8;text-decoration:none;">
+                  www.ciel-evasion.fr
+                </a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+
+</html>
