@@ -5,30 +5,31 @@ import {
 
 import EmailService from "../services/email.js";
 import UsersService from "../services/users.js";
+
 /*
 let id_destinataire = (await UsersService.getByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id;
 const emailData = {
-    partenaire: "Aventure Sensation",
-    Articles: "Saut en parachute tandem",
-    TitreActivite: "Formule Découverte + Photos HD",
-    variable_lieu: "AltitudeMax",
+    partenaire: "test",
+    Articles: "test",
+    TitreActivite: "test",
+    variable_lieu: "test",
     Lieu: "Aérodrome de Chambéry - Savoie",
-    Options: null,
-    Date1: "15 juin 2024",
-    Horaire1: "09h30",
-    Date2: "16 juin 2024",
-    Horaire2: "11h00",
-    Date3: "17 juin 2024",
-    Horaire3: "14h00",
-    Prenom: "Marie",
-    Nom: "Dubois",
-    Age: "32",
-    Poids: "65",
-    Taille: "172",
-    ebillet: "AVS-2024-05678",
-    tel: "+33 6 12 34 56 78",
-    email: "marie.dubois@example.com",
-    prix: "289"
+    Options: "test",
+    Date1: "test",
+    Horaire1: "test",
+    Date2: "test",
+    Horaire2: "test",
+    Date3: "test",
+    Horaire3: "test",
+    Prenom: "test",
+    Nom: "test",
+    Age: "test",
+    Poids: "test",
+    Taille: "test",
+    ebillet: "test",
+    tel: "test",
+    email: "test",
+    prix: "test"
 };
 
 let data = { data:emailData, destinataire: id_destinataire}
@@ -37,9 +38,8 @@ console.log(await EmailService.email_Tib2QVP(data))
 console.log(await EmailService.email_Tiam3wq(data))
 console.log(await EmailService.email_Tj8PgM(data))
 const end = Date.now();
-    console.log(`email_Tib2QVP a pris ${(end - start)/1000} s`);
+console.log(`email_template a pris ${(end - start)/1000} s`);
 */
-
 /*
 export async function get_All_Ebillet_Facture(req, res) {
   let all_ebillet_data = await EbilletsService.getAllEbilletFacture()

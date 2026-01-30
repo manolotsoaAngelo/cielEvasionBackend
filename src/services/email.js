@@ -11,8 +11,6 @@ import fs from "fs";
 import path from "path";
 import nodemailer from 'nodemailer';
 import UsersService from "../services/users.js";
-import Brevo from "@getbrevo/brevo";
-import axios from "axios";
 class EmailService {
     constructor() {
     }
@@ -43,7 +41,7 @@ class EmailService {
     async init_data_html_template(path_template, emailData) {
         let htmlTemplate = fs.readFileSync(path_template, "utf8");
         for (const key in emailData) {
-            if (emailData[key] !== null && emailData[key] !== undefined && emailData[key] !== '') {
+            if (emailData[key] && emailData[key] !== null && emailData[key] !== undefined && emailData[key] !== '') {
                 let regex = new RegExp(`{{${key}}}`, "g");
                 htmlTemplate = htmlTemplate.replace(regex, emailData[key]);
             } else {
