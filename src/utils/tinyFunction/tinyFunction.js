@@ -10,6 +10,10 @@ import { chaine_opt_partenaire,
 //console.log(await chaine_opt_partenaire("E10917-2"))
 //console.log(await chaine_opt("E10917-2"))
 
+//console.log(await chaine_opt_partenaire("G11532-1"))
+//console.log(await chaine_opt_partenaire("E10917-2"))
+//console.log(await chaine_opt("E10917-2"))
+
 export async function chaine_opt_partenaire(ref) {
   let liste_option = await opt_reportByRef(ref);
   if (liste_option) {
@@ -26,6 +30,7 @@ export async function chaine_opt(ref) {
   let liste_option = await opt_reportByRef(ref);
   if (liste_option) {
     return liste_option
+      .filter((a) => !a.option.includes("OFFERT"))
       .map((item) => `${item.option} : ${item.selection}`)
       .join(", ");
   } else {
