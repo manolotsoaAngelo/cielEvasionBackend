@@ -1,28 +1,22 @@
-//import UsersService from '../services/users.js';
-import { get_wix_services } from "../utils/wixData/wixHttp.js";
-import { FullData } from "../utils/fullData/users.js";
-import { init_cachedData_users, refreshData } from "../utils/fullData/users.js";
-let wixData_url = "https://ciel-evasion.fr/_functions/WixData/all_member/";
-let collection_name = "Membre_everyone";
-let wixData_url_get_FullData =
-    "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
-
 import fs from "fs";
 import path from "path";
 import nodemailer from 'nodemailer';
 import UsersService from "../services/users.js";
+import dotenv from 'dotenv';
+dotenv.config();
+
 class EmailService {
     constructor() {
     }
 
     async brevo() {
         return {
-            host: "smtp-relay.brevo.com",
-            port: 2525, /// 587  # ou 465, 2525, 25
+            host: process.env.BREVO_SMTP_HOST,
+            port: process.env.BREVO_SMTP_PORT,
             secure: false,
             auth: {
-                user: "a0e9f1001@smtp-brevo.com",
-                pass: "xsmtpsib-fe2dbc63ea37ccc47537b9481043fc4e3e9e8ec41a1d9587a8f38702fa040d1c-Y6FaYx3kId7r3XKV"
+                user: process.env.BREVO_USER,
+                pass: process.env.BREVO_PASS
             },
             connectionTimeout: 30000,
             socketTimeout: 30000,
