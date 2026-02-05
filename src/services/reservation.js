@@ -42,7 +42,7 @@ class ReservationService {
     return tri_ebilletByDEC_Date_Byrdv(reserver(await this.getAll()));
   }
   async getAllReservationEnattente() {
-    return tri_ebilletByDEC_Date_Byrdv(enattente(await this.getAll()));
+    return tri_ebilletByASC_Date(enattente(await this.getAll()));
   }
   async getAllReservationContreProposition() {
     return tri_ebilletByASC_Date(contreProposition(await this.getAll()));
