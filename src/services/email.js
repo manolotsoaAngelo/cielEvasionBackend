@@ -1,35 +1,15 @@
 import fs from "fs";
 import path from "path";
-import nodemailer from 'nodemailer';
 import UsersService from "../services/users.js";
-import dotenv from 'dotenv';
-dotenv.config();
+import BrevoService from "../services/brevo.js";
 
 class EmailService {
     constructor() {
     }
 
-    async brevo() {
-        return {
-            host: process.env.BREVO_SMTP_HOST,
-            port: process.env.BREVO_SMTP_PORT,
-            secure: false,
-            auth: {
-                user: process.env.BREVO_USER,
-                pass: process.env.BREVO_PASS
-            },
-            connectionTimeout: 30000,
-            socketTimeout: 30000,
-            greetingTimeout: 30000,
-            tls: {
-                rejectUnauthorized: false
-            }
-        }
-    }
-
     async emailAdmin() {
-        //return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'holiniainaprisca566@gmail.com']
-        return ['manolotsoa.randriambeloniaina@gmail.com', 'contact@ciel-evasion.fr']
+        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'holiniainaprisca566@gmail.com']
+        //return ['manolotsoa.randriambeloniaina@gmail.com', 'contact@ciel-evasion.fr']
     }
 
     async init_data_html_template(path_template, emailData) {
@@ -88,40 +68,38 @@ class EmailService {
         return await this.send(htmlTemplate, objet, data.destinataire);
     }
 
-    async send(htmlTemplate, objet, destinataire) {
+    async send(htmlTemplate, objet, userId) {
+    try {
+        const [user, adminEmails] = await Promise.all([
+            UsersService.getById(userId),
+            this.emailAdmin()
+        ]);
+        if (!user?.loginEmail) {
+            throw new Error("Email utilisateur introuvable");
+        }
+        if (!adminEmails?.length) {
+            throw new Error("Aucun email admin configuré");
+        }
+        const expediteur = adminEmails[0];
+        const destinataires = [
+            ...new Set([...adminEmails, user.loginEmail])
+        ].filter(Boolean);
+        const results = await Promise.all(
+            destinataires.map(email =>
+                BrevoService.send(htmlTemplate, objet, expediteur, email)
+            )
+        );
+        return results;
 
-        let all_destinataire = (await this.emailAdmin()).concat((await UsersService.getById(destinataire)).loginEmail)
-
-        let expediteur = all_destinataire[0]
-        const mailOptions = {
-            from: '"dev-contact-Ciel-ÉVASION®" <' + [expediteur] + '>',
-            to: all_destinataire,
-            subject: objet,
-            text: "Bonjour !",
-            html: htmlTemplate
-        };
-
-        const transporter = nodemailer.createTransport(await this.brevo());
-        const result = await new Promise((resolve, reject) => {
-            transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                    console.error('Erreur d\'envoi d\'email:', error);
-                    reject(error);
-                } else {
-                    console.log('Email envoyé avec succès. ID:', info.messageId);
-                    console.log('Réponse du serveur:', info.response);
-                    resolve(info);
-                }
-            });
-        });
-
-        return {
-            success: true,
-            message: 'Email envoyé avec succès',
-            messageId: result.messageId,
-            response: result.response
-        };
+    } catch (error) {
+        console.error("Erreur envoi emails multiples:", error);
+        return [{
+            success: false,
+            error: error.message
+        }];
     }
+}
+
 }
 
 export default new EmailService();
