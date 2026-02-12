@@ -178,14 +178,16 @@ onNavigated(() => {
   async importateur_header_fix() {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
-    ///Head : comp-mhytj3e7,comp-mi2u0prw
-    ///Contenu : comp-lvw159ib,comp-lvw159l6 ,comp-lvw159id, comp-lvw159if
+    ///Head : comp-mhytj3e7,comp-mi2u0prw, comp-mlj2jwic
+    ///Contenu : comp-lvw159ib,comp-lvw159l6 ,comp-lvw159id, comp-lvw159if ,comp-lvw159qs
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
 
     let css = `const cssContent = \`
 #comp-mhytj3e7,
-#comp-mi2u0prw {
+#comp-mi2u0prw,
+#comp-mlj2jwic
+ {
   position:fixed!important;
   top:0;left:0;
   width:100%;
@@ -193,7 +195,9 @@ onNavigated(() => {
   background:inherit;
 }
 #comp-lvw159ib,
-#comp-lvw159l6 {
+#comp-lvw159l6,
+#comp-lvw159qs
+ {
   box-sizing:border-box;
   min-height:100vh!important;
   height:auto!important;
@@ -208,10 +212,10 @@ style.textContent=cssContent;
 document.head.appendChild(style);
 
 function adjust(){
-  const headers = ["comp-mhytj3e7","comp-mi2u0prw"]
+  const headers = ["comp-mhytj3e7","comp-mi2u0prw", "comp-mlj2jwic"]
     .map(id => document.getElementById(id));
 
-  const contents = ["comp-lvw159ib","comp-lvw159l6"]
+  const contents = ["comp-lvw159ib","comp-lvw159l6","comp-lvw159qs"]
     .map(id => document.getElementById(id));
 
   let h = 0;
@@ -235,7 +239,7 @@ function adjust(){
 
 const init=setInterval(()=>{
   adjust();
-  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib")||document.getElementById("comp-mi2u0prw")&&document.getElementById("comp-lvw159l6"))clearInterval(init)
+  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib")||document.getElementById("comp-mi2u0prw")&&document.getElementById("comp-lvw159l6")||document.getElementById("comp-mlj2jwic")&&document.getElementById("comp-lvw159qs"))clearInterval(init)
 },200);
 
   const resizeObserver = new ResizeObserver(() => {
@@ -244,8 +248,8 @@ const init=setInterval(()=>{
 
 setTimeout(() => {
     [
-        "comp-mhytj3e7","comp-mi2u0prw",
-        "comp-lvw159ib","comp-lvw159l6"
+        "comp-mhytj3e7","comp-mi2u0prw", "comp-mlj2jwic",
+        "comp-lvw159ib","comp-lvw159l6","comp-lvw159qs"
     ].forEach(id => {
         const el = document.getElementById(id);
         if (el) resizeObserver.observe(el);
@@ -300,7 +304,6 @@ onNavigated(() => {
   runWhenReady(adjust);
 });
 `
-
     return css.replace(/\s+/g, " ")
   }
 }
