@@ -178,15 +178,15 @@ onNavigated(() => {
   async importateur_header_fix() {
     //"https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix"
     ///<link rel="stylesheet" href="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix">
-    ///Head : comp-mhytj3e7,comp-mi2u0prw, comp-mlj2jwic
-    ///Contenu : comp-lvw159ib,comp-lvw159l6 ,comp-lvw159id, comp-lvw159if ,comp-lvw159qs
+    ///Head : comp-mhytj3e7,comp-mi2u0prw, comp-mlj3ty9h
+    ///Contenu : comp-lvw159ib,comp-lvw159l6,comp-lvw159qs   ///,comp-lvw159id, comp-lvw159if 
 
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_css_importateur_header_fix" defer></script>
 
     let css = `const cssContent = \`
 #comp-mhytj3e7,
 #comp-mi2u0prw,
-#comp-mlj2jwic
+#comp-mlj3ty9h
  {
   position:fixed!important;
   top:0;left:0;
@@ -212,7 +212,7 @@ style.textContent=cssContent;
 document.head.appendChild(style);
 
 function adjust(){
-  const headers = ["comp-mhytj3e7","comp-mi2u0prw", "comp-mlj2jwic"]
+  const headers = ["comp-mhytj3e7","comp-mi2u0prw", "comp-mlj3ty9h"]
     .map(id => document.getElementById(id));
 
   const contents = ["comp-lvw159ib","comp-lvw159l6","comp-lvw159qs"]
@@ -239,7 +239,7 @@ function adjust(){
 
 const init=setInterval(()=>{
   adjust();
-  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib")||document.getElementById("comp-mi2u0prw")&&document.getElementById("comp-lvw159l6")||document.getElementById("comp-mlj2jwic")&&document.getElementById("comp-lvw159qs"))clearInterval(init)
+  if(document.getElementById("comp-mhytj3e7")&&document.getElementById("comp-lvw159ib")||document.getElementById("comp-mi2u0prw")&&document.getElementById("comp-lvw159l6")||document.getElementById("comp-mlj3ty9h")&&document.getElementById("comp-lvw159qs"))clearInterval(init)
 },200);
 
   const resizeObserver = new ResizeObserver(() => {
@@ -248,7 +248,7 @@ const init=setInterval(()=>{
 
 setTimeout(() => {
     [
-        "comp-mhytj3e7","comp-mi2u0prw", "comp-mlj2jwic",
+        "comp-mhytj3e7","comp-mi2u0prw", "comp-mlj3ty9h",
         "comp-lvw159ib","comp-lvw159l6","comp-lvw159qs"
     ].forEach(id => {
         const el = document.getElementById(id);
