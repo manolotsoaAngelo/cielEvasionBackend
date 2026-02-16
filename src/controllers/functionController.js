@@ -70,7 +70,7 @@ export async function runFunction(req, res) {
           };
           UsersService.refresh();
           break;
-          case "avis":
+        case "avis":
           result = {
             init_cachedData_avis: init_cachedData_avis(),
           };
@@ -117,7 +117,7 @@ export async function runFunction(req, res) {
     case "decompressed_obj":
       result = decompressed_obj(value.valeur);
       break;
-      
+
     default:
       break;
   }

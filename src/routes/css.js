@@ -1,7 +1,8 @@
 import express from "express";
-import { get_css_partenaires_header_footer_body_fix
-    ,get_css_importateur_header_fix
-, get_avis_Client_full_body
+import {
+    get_css_partenaires_header_footer_body_fix
+    , get_css_importateur_header_fix
+    , get_avis_Client_full_body
 } from "../controllers/cssController.js";
 
 const router = express.Router();

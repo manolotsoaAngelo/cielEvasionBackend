@@ -69,36 +69,36 @@ class EmailService {
     }
 
     async send(htmlTemplate, objet, userId) {
-    try {
-        const [user, adminEmails] = await Promise.all([
-            UsersService.getById(userId),
-            this.emailAdmin()
-        ]);
-        if (!user?.loginEmail) {
-            throw new Error("Email utilisateur introuvable");
-        }
-        if (!adminEmails?.length) {
-            throw new Error("Aucun email admin configuré");
-        }
-        const expediteur = adminEmails[0];
-        const destinataires = [
-            ...new Set([...adminEmails, user.loginEmail])
-        ].filter(Boolean);
-        const results = await Promise.all(
-            destinataires.map(email =>
-                BrevoService.send(htmlTemplate, objet, expediteur, email)
-            )
-        );
-        return results;
+        try {
+            const [user, adminEmails] = await Promise.all([
+                UsersService.getById(userId),
+                this.emailAdmin()
+            ]);
+            if (!user?.loginEmail) {
+                throw new Error("Email utilisateur introuvable");
+            }
+            if (!adminEmails?.length) {
+                throw new Error("Aucun email admin configuré");
+            }
+            const expediteur = adminEmails[0];
+            const destinataires = [
+                ...new Set([...adminEmails, user.loginEmail])
+            ].filter(Boolean);
+            const results = await Promise.all(
+                destinataires.map(email =>
+                    BrevoService.send(htmlTemplate, objet, expediteur, email)
+                )
+            );
+            return results;
 
-    } catch (error) {
-        console.error("Erreur envoi emails multiples:", error);
-        return [{
-            success: false,
-            error: error.message
-        }];
+        } catch (error) {
+            console.error("Erreur envoi emails multiples:", error);
+            return [{
+                success: false,
+                error: error.message
+            }];
+        }
     }
-}
 
 }
 
