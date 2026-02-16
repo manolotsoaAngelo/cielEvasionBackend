@@ -41,7 +41,7 @@ export async function chaine_opt(ref) {
 export async function opt_reportByRef(ref) {
   let opt = [];
   let report = await EbilletsService.getByRef(ref);
-  if (report.commande) {
+  if (report && report.commande) {
     let commande = await OrdersService.getById(report.commande);
     let i = 0;
     for (let lineItems of commande.lineItems) {
