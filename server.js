@@ -63,11 +63,11 @@ app.use("/api/orders", ordersController);
 app.use("/api/partenaires", partenairesController);
 app.use("/api/users", usersController);
 app.use("/api/css", cssController);
-
+/*
 app.use((req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
 });
-
+*/
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
 });
