@@ -26,11 +26,11 @@ process.nextTick(async () => {
     UsersService.refresh(),
   ]);
 });
-
+/*
 app.get("/", (req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
 });
-
+*/
 app.get("/ping", (req, res) => {
   function formatDuration(seconds) {
     const h = Math.floor(seconds / 3600);
@@ -64,11 +64,10 @@ app.use("/api/partenaires", partenairesController);
 app.use("/api/users", usersController);
 app.use("/api/css", cssController);
 
-/*
 app.use((req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
 });
-*/
+
 app.listen(PORT, () => {
   console.log(`✅ Serveur démarré sur http://localhost:${PORT}`);
 });
