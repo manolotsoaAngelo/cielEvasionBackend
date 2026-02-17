@@ -26,8 +26,17 @@ console.log(crypt)
 /// https://real-time-data-application.vercel.app/ : aHR0cHM6Ly9yZWFsLXRpbWUtZGF0YS1hcHBsaWNhdGlvbi52ZXJjZWwuYXBwLw==
 
 
+////
+ORDERS
+
+GET
+/api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
+
+POST
+/api/orders/postNomPrenomByOrder : L2FwaS9vcmRlcnMvcG9zdE5vbVByZW5vbVByb3Bvc2l0aW9uQnlPcmRlcgo=
+
 /*
-    /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
+
     /api/users/getAllUsers : L2FwaS91c2Vycy9nZXRBbGxVc2Vycw==
     /api/users/getUserByEmail : L2FwaS91c2Vycy9nZXRVc2VyQnlFbWFpbA==
     /api/users/getUserById : L2FwaS91c2Vycy9nZXRVc2VyQnlJZA==

@@ -23,11 +23,26 @@ let collection_name = "Orders_everyone";
 let wixData_url_get_FullData =
   "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
+import AiService from "../services/ai.js";
+
 class OrdersService {
   constructor() {
   }
   async refresh() {
     return await refreshData(wixData_url);
+  }
+  async get_nom_prenom_byOrder(num) {
+
+    let order = await this.getByNumber(num);
+    let all_inputs = ""
+    for (let item of (order).lineItems) {
+      for (let input of item.customTextFields) {
+        if (input.value) {
+          all_inputs += " [ " + input.value + " ] "
+        }
+      }
+    }
+    return await AiService.clean_input_client_by_Ai(all_inputs)
   }
   async getAll() {
     return await FullData(wixData_url);
