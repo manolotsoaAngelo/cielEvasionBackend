@@ -10,7 +10,7 @@ class AiService {
     async clean_input_client_by_Ai(input) {
         return (JSON.parse((await this.AiGemini(await this.Ai_text_to_text(input))).replace(/```json/g, "")
             .replace(/```/g, "")
-            .trim()))[0]
+            .trim()))
     }
 
     async Ai_text_to_text(value) {
