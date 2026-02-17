@@ -42,7 +42,14 @@ class OrdersService {
         }
       }
     }
-    return await AiService.clean_input_client_by_Ai(all_inputs)
+
+    try {
+      let result = await AiService.clean_input_client_by_Ai(all_inputs);
+      return result
+    } catch (error) {     
+      console.error("Erreur lors du traitement de l'input client par l'IA :", error);
+      return null;
+    }
   }
   async getAll() {
     return await FullData(wixData_url);
