@@ -55,8 +55,8 @@ class OrdersService {
     return await FullData(wixData_url);
   }
   async getById(id) {
-    return (await get_wix_services(wixData_url + "_id/" + id)).data;
-    //return (await this.getAll()).find((item) => item._id === id);
+    //return (await get_wix_services(wixData_url + "_id/" + id)).data;
+    return (await this.getAll()).find((item) => item._id === id);
   }
   async insert(order) {
     return (await post_wix_services(wixData_url_post + "insert/", order)).data;
