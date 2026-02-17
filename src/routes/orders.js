@@ -1,5 +1,5 @@
 import express from "express";
-import { get_all_order } from "../controllers/ordersController.js";
+import { get_all_order, post_nom_prenom_byOrder } from "../controllers/ordersController.js";
 
 const router = express.Router();
 
