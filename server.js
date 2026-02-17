@@ -13,6 +13,9 @@ import OrdersService from "./src/services/orders.js";
 import PartenairesService from "./src/services/partenaires.js";
 import UsersService from "./src/services/users.js";
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
