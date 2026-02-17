@@ -43,51 +43,52 @@ export async function opt_reportByRef(ref) {
   let report = await EbilletsService.getByRef(ref);
   if (report && report.commande) {
     let commande = await OrdersService.getById(report.commande);
-    let i = 0;
-    for (let lineItems of commande.lineItems) {
-      if (lineItems.productId === report.article) {
-        let allItems = commande.lineItems[i].options;
-        allItems = allItems.map((a, index) => ({
-          option: a.option,
-          selection: a.selection,
-          _id: `id-${Date.now()}-${index}`,
-        }));
+    if (commande && commande.lineItems) {
+      let i = 0;
+      for (let lineItems of commande.lineItems) {
+        if (lineItems.productId === report.article) {
+          let allItems = commande.lineItems[i].options;
+          allItems = allItems.map((a, index) => ({
+            option: a.option,
+            selection: a.selection,
+            _id: `id-${Date.now()}-${index}`,
+          }));
 
-        let opt_array = [
-          "Tarif",
-          "adulte",
-          "enfant",
-          "Avion",
-          "Pilote",
-          "Report",
-          "100%",
-          "Garanties",
-          "Échanges",
-          "E-Billet",
-          "Validité",
-          "Billet",
-        ];
-        for (const it of allItems) {
-          let opt_test = false;
-          for (const option_arr of opt_array) {
-            if (
-              JSON.stringify(it)
-                .toLowerCase()
-                .includes(option_arr.toLowerCase())
-            ) {
-              opt_test = true;
+          let opt_array = [
+            "Tarif",
+            "adulte",
+            "enfant",
+            "Avion",
+            "Pilote",
+            "Report",
+            "100%",
+            "Garanties",
+            "Échanges",
+            "E-Billet",
+            "Validité",
+            "Billet",
+          ];
+          for (const it of allItems) {
+            let opt_test = false;
+            for (const option_arr of opt_array) {
+              if (
+                JSON.stringify(it)
+                  .toLowerCase()
+                  .includes(option_arr.toLowerCase())
+              ) {
+                opt_test = true;
+              }
+            }
+            if (!opt_test) {
+              it.selection = it.selection.replace(/\s*\(.*\)/, "");
+              await opt.push(it);
             }
           }
-          if (!opt_test) {
-            it.selection = it.selection.replace(/\s*\(.*\)/, "");
-            await opt.push(it);
-          }
+          return await Promise.all(opt);
         }
-        return await Promise.all(opt);
+        i++;
       }
-      i++;
     }
-  } else {
-    return null;
   }
+  return null;
 }
