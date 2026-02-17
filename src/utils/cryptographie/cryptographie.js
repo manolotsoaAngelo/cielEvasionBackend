@@ -12,7 +12,7 @@ export function decrypter(message) {
   }
 }
 /*
-let crypt = crypter('/api/css/get_avis_Client_full_body')
+let crypt = crypter('/api/orders/postNomPrenomByOrder')
 console.log(crypt)
 */
 //console.log(decrypter("aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t"))
@@ -33,7 +33,7 @@ GET
 /api/orders/getAllOrders : L2FwaS9vcmRlcnMvZ2V0QWxsT3JkZXJz
 
 POST
-/api/orders/postNomPrenomByOrder : L2FwaS9vcmRlcnMvcG9zdE5vbVByZW5vbVByb3Bvc2l0aW9uQnlPcmRlcgo=
+/api/orders/postNomPrenomByOrder : L2FwaS9vcmRlcnMvcG9zdE5vbVByZW5vbUJ5T3JkZXI=
 
 /*
 

@@ -42,8 +42,7 @@ class OrdersService {
         }
       }
     }
-    return all_inputs
-    //return await AiService.clean_input_client_by_Ai(all_inputs)
+    return await AiService.clean_input_client_by_Ai(all_inputs)
   }
   async getAll() {
     return await FullData(wixData_url);
