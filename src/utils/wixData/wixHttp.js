@@ -5,18 +5,6 @@ import {
 //import { get_wix_services,post_wix_services } from '../utils/wixData/wixHttp.js'
 
 export async function get_wix_services(wixUrl) {
-
-  const response = await fetch(wixUrl);
-
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
-  }
-
-  return decompressed_obj(await response.json());
-}
-
-/*
-export async function get_wix_services(wixUrl) {
   const response = await fetch(wixUrl, {
     method: "GET",
     headers: {
@@ -25,7 +13,7 @@ export async function get_wix_services(wixUrl) {
   });
   return decompressed_obj(await response.json());
 }
-*/
+
 export async function post_wix_services(wixUrl, data) {
   const response = await fetch(wixUrl, {
     method: "POST",
