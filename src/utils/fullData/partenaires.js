@@ -26,15 +26,6 @@ export function init_cachedData_partenaire() {
 export async function refresh_partenaire() {
   await refreshData();
 }
-export async function FullData() {
-  if (cachedData) {
-    return cachedData;
-  }
-  if (!refreshPromise) {
-    refreshPromise = await refreshData();
-  }
-  return refreshPromise;
-}
 
 export async function refreshData() {
   try {
@@ -49,6 +40,18 @@ export async function refreshData() {
   }
   return cachedData || [];
 }
+
+export async function FullData() {
+  if (cachedData) {
+    return cachedData;
+  }
+  if (!refreshPromise) {
+    refreshPromise = await refreshData();
+  }
+  return refreshPromise;
+}
+
+
 
 /*
 export async function FullData(wixData_url_get_FullData) {

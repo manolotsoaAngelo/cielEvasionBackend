@@ -24,16 +24,6 @@ export function init_cachedData_ebillet() {
   };
 }
 
-export async function FullData() {
-  if (cachedData) {
-    return cachedData;
-  }
-  if (!refreshPromise) {
-    refreshPromise = await refreshData();
-  }
-  return refreshPromise;
-}
-
 export async function refreshData() {
   try {
     const response = await get_wix_services(wixData_url_get_FullData);
@@ -46,6 +36,16 @@ export async function refreshData() {
     refreshPromise = null;
   }
   return cachedData || [];
+}
+
+export async function FullData() {
+  if (cachedData) {
+    return cachedData;
+  }
+  if (!refreshPromise) {
+    refreshPromise = await refreshData();
+  }
+  return refreshPromise;
 }
 
 /*

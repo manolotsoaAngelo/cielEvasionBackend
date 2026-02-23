@@ -1,5 +1,8 @@
 import express from "express";
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 import ebilletsRoutes from "./src/routes/ebillets.js";
 import reservationController from "./src/routes/reservation.js";
 import functionController from "./src/routes/function.js";
@@ -13,8 +16,6 @@ import OrdersService from "./src/services/orders.js";
 import PartenairesService from "./src/services/partenaires.js";
 import UsersService from "./src/services/users.js";
 
-import dotenv from 'dotenv';
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
