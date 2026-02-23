@@ -37,7 +37,7 @@ export async function refreshData(wixData_url_get_FullData) {
       cachedData = response.data;
     }
   } catch (error) {
-    console.error("Erreur lors du refresh :", error);
+    console.error("Erreur lors du init_cachedData_orders :", error);
   } finally {
     refreshPromise = null;
   }

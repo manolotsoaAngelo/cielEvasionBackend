@@ -43,7 +43,7 @@ export async function refreshData() {
       cachedData = response.data;
     }
   } catch (error) {
-    console.error("Erreur lors du refresh :", error);
+    console.error("Erreur lors du init_cachedData_partenaire :", error);
   } finally {
     refreshPromise = null;
   }
