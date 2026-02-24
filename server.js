@@ -21,7 +21,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
-/*
+
 process.nextTick(async () => {
   await Promise.all([
     EbilletsService.refresh(),
@@ -30,7 +30,7 @@ process.nextTick(async () => {
     UsersService.refresh(),
   ]);
 });
-*/
+
 app.get("/", (req, res) => {
   res.redirect(301, "https://ciel-evasion.fr/");
 });

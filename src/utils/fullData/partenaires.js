@@ -4,22 +4,19 @@ import { init_cachedData_partenaire,
   refresh_partenaire
  } from "../utils/fullData/partenaires.js";
 */
-let cachedData = null;
-let lastFetchTime = 0;
-let refreshPromise = null;
-const CACHE_DURATION = 5 * 60 * 1000;
 
 let collection_name = "Partenaire_test";
 let wixData_url_get_FullData =
   "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
+let cachedData = null;
+let refreshPromise = null;
+
 export function init_cachedData_partenaire() {
   cachedData = null;
-  lastFetchTime = 0;
   refreshPromise = null;
   return {
     cachedData: cachedData,
-    lastFetchTime: lastFetchTime,
     refreshPromise: refreshPromise,
   };
 }
@@ -27,6 +24,40 @@ export async function refresh_partenaire() {
   await refreshData();
 }
 
+export async function refreshData() {
+  try {
+    console.log("🔄 Refresh des données Partenaires depuis Wix...");
+    const response = await get_wix_services(wixData_url_get_FullData);
+    if (response?.data) {
+      cachedData = response.data;
+      console.log("✅ Cache Partenaires mis à jour");
+    } else {
+      console.log("⚠️ Aucune donnée Partenaires reçue lors du refresh");
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors du refresh Partenaires :", error);
+  } finally {
+    refreshPromise = null;
+  }
+  return cachedData || [];
+}
+
+export async function FullData() {
+  if (cachedData) {
+    console.log("⚡ Données Partenaires servies depuis le CACHE");
+    return cachedData;
+  }
+  if (!refreshPromise) {
+    console.log("🚀 Aucun cache Partenaires → lancement du refresh");
+    refreshPromise = refreshData();
+  } else {
+    console.log("⏳ Refresh Partenaires déjà en cours → attente de la même promesse");
+  }
+  return refreshPromise;
+}
+
+
+/*
 export async function refreshData() {
   try {
     const response = await get_wix_services(wixData_url_get_FullData);
@@ -50,7 +81,7 @@ export async function FullData() {
   }
   return refreshPromise;
 }
-
+*/
 
 
 /*

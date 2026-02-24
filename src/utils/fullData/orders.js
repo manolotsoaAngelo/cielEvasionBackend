@@ -5,6 +5,9 @@ import { init_cachedData_orders,
  } from "../utils/fullData/orders.js";
 */
 
+let cachedData = null;
+let refreshPromise = null;
+
 export function init_cachedData_orders() {
   cachedData = null;
   refreshPromise = null;
@@ -13,9 +16,6 @@ export function init_cachedData_orders() {
     refreshPromise: refreshPromise,
   };
 }
-
-let cachedData = null;
-let refreshPromise = null;
 
 export async function refreshData(wixData_url_get_FullData) {
   try {

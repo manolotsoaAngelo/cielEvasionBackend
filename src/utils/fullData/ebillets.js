@@ -4,10 +4,9 @@ import { init_cachedData_ebillet,
   refresh_ebillet
  } from "../utils/fullData/ebillets.js";
 */
+
 let cachedData = null;
-let lastFetchTime = 0;
 let refreshPromise = null;
-const CACHE_DURATION = 5 * 60 * 1000;
 
 let collection_name = "Reports";
 let wixData_url_get_FullData =
@@ -15,15 +14,46 @@ let wixData_url_get_FullData =
 
 export function init_cachedData_ebillet() {
   cachedData = null;
-  lastFetchTime = 0;
   refreshPromise = null;
   return {
     cachedData: cachedData,
-    lastFetchTime: lastFetchTime,
     refreshPromise: refreshPromise,
   };
 }
 
+export async function refreshData() {
+  try {
+    console.log("🔄 Refresh des données E-billet depuis Wix...");
+    const response = await get_wix_services(wixData_url_get_FullData);
+    if (response?.data) {
+      cachedData = response.data;
+      console.log("✅ Cache E-billet mis à jour");
+    } else {
+      console.log("⚠️ Aucune donnée E-billet reçue lors du refresh");
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors du refresh E-billet :", error);
+  } finally {
+    refreshPromise = null;
+  }
+  return cachedData || [];
+}
+
+export async function FullData() {
+  if (cachedData) {
+    console.log("⚡ Données E-billet servies depuis le CACHE");
+    return cachedData;
+  }
+  if (!refreshPromise) {
+    console.log("🚀 Aucun cache E-billet → lancement du refresh");
+    refreshPromise = refreshData();
+  } else {
+    console.log("⏳ Refresh E-billet déjà en cours → attente de la même promesse");
+  }
+  return refreshPromise;
+}
+
+/*
 export async function refreshData() {
   try {
     const response = await get_wix_services(wixData_url_get_FullData);
@@ -47,7 +77,7 @@ export async function FullData() {
   }
   return refreshPromise;
 }
-
+*/
 /*
 export async function FullData(wixData_url_get_FullData) {
   const now = Date.now();
