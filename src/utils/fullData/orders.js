@@ -4,9 +4,7 @@ import { init_cachedData_orders,
   refresh_orders
  } from "../utils/fullData/orders.js";
 */
-let cachedData = null;
 let lastFetchTime = 0;
-let refreshPromise = null;
 const CACHE_DURATION = 5 * 60 * 1000;
 
 export function init_cachedData_orders() {
@@ -20,6 +18,51 @@ export function init_cachedData_orders() {
   };
 }
 
+let cachedData = null;
+let refreshPromise = null;
+
+export async function refreshData(wixData_url_get_FullData) {
+  try {
+    console.log("🔄 Refresh des données depuis Wix...");
+    
+    const response = await get_wix_services(wixData_url_get_FullData);
+
+    if (response?.data) {
+      cachedData = response.data;
+      console.log("✅ Cache mis à jour");
+    } else {
+      console.log("⚠️ Aucune donnée reçue lors du refresh");
+    }
+
+  } catch (error) {
+    console.error("❌ Erreur lors du refresh :", error);
+  } finally {
+    refreshPromise = null;
+  }
+
+  return cachedData || [];
+}
+
+export async function FullData(wixData_url_get_FullData) {
+
+  // 🔹 Si cache déjà disponible
+  if (cachedData) {
+    console.log("⚡ Données servies depuis le CACHE");
+    return cachedData;
+  }
+
+  // 🔹 Si aucun refresh en cours → on en lance un
+  if (!refreshPromise) {
+    console.log("🚀 Aucun cache → lancement du refresh");
+    refreshPromise = refreshData(wixData_url_get_FullData);
+  } else {
+    console.log("⏳ Refresh déjà en cours → attente de la même promesse");
+  }
+
+  return refreshPromise;
+}
+
+/*
 export async function refreshData(wixData_url_get_FullData) {
   try {
     const response = await get_wix_services(wixData_url_get_FullData);
@@ -43,7 +86,7 @@ export async function FullData(wixData_url_get_FullData) {
   }
   return refreshPromise;
 }
-
+/*
 /*
 export async function FullData(wixData_url_get_FullData) {
   const now = Date.now();
