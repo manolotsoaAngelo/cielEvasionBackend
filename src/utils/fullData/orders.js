@@ -43,8 +43,6 @@ export async function FullData(wixData_url_get_FullData) {
   if (!refreshPromise) {
     console.log("🚀 Aucun cache Orders → lancement du refresh");
     refreshPromise = refreshData(wixData_url_get_FullData);
-  } else {
-    console.log("⏳ Refresh Orders déjà en cours → attente de la même promesse");
   }
   return refreshPromise;
 }

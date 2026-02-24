@@ -42,8 +42,6 @@ export async function FullData() {
   if (!refreshPromise) {
     console.log("🚀 Aucun cache Avis → lancement du refresh");
     refreshPromise = refreshData();
-  } else {
-    console.log("⏳ Refresh Avis déjà en cours → attente de la même promesse");
   }
   return refreshPromise;
 }

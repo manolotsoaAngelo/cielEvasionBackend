@@ -50,8 +50,6 @@ export async function FullData() {
   if (!refreshPromise) {
     console.log("🚀 Aucun cache Partenaires → lancement du refresh");
     refreshPromise = refreshData();
-  } else {
-    console.log("⏳ Refresh Partenaires déjà en cours → attente de la même promesse");
   }
   return refreshPromise;
 }
