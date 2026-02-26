@@ -21,7 +21,12 @@ class CssService {
   async codejs_load_page() {
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_codejs_load_page" defer></script>
 
-    let jsCode = `(function () {
+    let jsCode = `
+    (function () {
+  const MIN_DISPLAY_TIME = 800;
+  const FADE_DURATION = 500;
+  const startTime = Date.now();
+
   const css = \`
     #page-loader{
       position:fixed;
@@ -31,46 +36,40 @@ class CssService {
       align-items:center;
       background:linear-gradient(180deg,#87ceeb 0%,#e0f7ff 100%);
       z-index:999999;
-      transition:opacity .5s ease, visibility .5s ease;
+      transition:opacity \${FADE_DURATION}ms ease, visibility \${FADE_DURATION}ms ease;
     }
     #page-loader.hide{
       opacity:0;
       visibility:hidden;
     }
     .loader-box{
+      position:relative;
+      width:120px;
+      height:80px;
       display:flex;
-      flex-direction:column;
+      justify-content:center;
       align-items:center;
-      gap:22px;
     }
     .spinner{
+      position:absolute;
       width:70px;
       height:70px;
       border-radius:50%;
-      border:6px solid rgba(255,255,255,.6);
+      border:6px solid rgba(255,255,255,.5);
       border-top:6px solid #ffffff;
-      box-shadow:0 0 25px rgba(0,0,0,.08);
       animation:spin 1s linear infinite;
+      box-shadow:0 0 25px rgba(0,0,0,.08);
     }
     .cloud{
-      font-size:42px;
+      font-size:48px;
       animation:float 2.5s ease-in-out infinite;
-    }
-    .text{
-      font-family:'Segoe UI',sans-serif;
-      font-size:14px;
-      letter-spacing:.18em;
-      color:#ffffff;
-      text-transform:uppercase;
-      font-weight:600;
-      text-shadow:0 2px 8px rgba(0,0,0,.15);
     }
     @keyframes spin{
       to{transform:rotate(360deg)}
     }
     @keyframes float{
       0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-8px)}
+      50%{transform:translateY(-10px)}
     }
   \`;
 
@@ -88,8 +87,13 @@ class CssService {
   document.body.appendChild(loader);
 
   const hideLoader = () => {
-    loader.classList.add("hide");
-    setTimeout(() => loader.remove(), 2000);
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(MIN_DISPLAY_TIME - elapsed, 0);
+
+    setTimeout(() => {
+      loader.classList.add("hide");
+      setTimeout(() => loader.remove(), FADE_DURATION);
+    }, remaining);
   };
 
   if (document.readyState === "complete") {
