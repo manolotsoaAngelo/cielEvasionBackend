@@ -21,6 +21,46 @@ export function init_cachedData_ebillet() {
   };
 }
 
+const WIX_DATA_URL = wixData_url_get_FullData
+
+export async function refreshData() {
+  try {
+    console.log("🔄 Rafraîchissement des données E-billet depuis Wix...");
+    const response = await get_wix_services(WIX_DATA_URL);
+    
+    if (response?.data) {
+      cachedData = response.data;
+      console.log("✅ Cache E-billet mis à jour avec succès");
+      return cachedData;
+    } else {
+      console.log("⚠️ Aucune donnée E-billet reçue lors du rafraîchissement");
+      return cachedData || [];
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors du rafraîchissement E-billet :", error);
+    return cachedData || [];
+  } finally {
+    refreshPromise = null;
+  }
+}
+
+export async function FullData() {
+  if (cachedData) {
+    console.log("⚡ Données E-billet servies depuis le cache");
+    return cachedData;
+  }
+  
+  if (refreshPromise) {
+    console.log("⏳ Rafraîchissement en cours, attente des données...");
+    return refreshPromise;
+  }
+  
+  console.log("🚀 Aucun cache E-billet → lancement du rafraîchissement");
+  refreshPromise = refreshData();
+  return refreshPromise;
+}
+
+/*
 export async function refreshData() {
   try {
     console.log("🔄 Refresh des données E-billet depuis Wix...");
@@ -50,6 +90,8 @@ export async function FullData() {
   }
   return refreshPromise;
 }
+
+*/
 
 /*
 export async function refreshData() {

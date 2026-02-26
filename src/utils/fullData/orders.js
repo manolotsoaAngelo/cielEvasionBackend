@@ -17,6 +17,44 @@ export function init_cachedData_orders() {
   };
 }
 
+const WIX_DATA_URL = wixData_url_get_FullData
+
+export async function refreshData(WIX_DATA_URL) {
+  try {
+    console.log("🔄 Rafraîchissement des données Orders depuis Wix...");
+    const response = await get_wix_services(WIX_DATA_URL);
+    
+    if (response?.data) {
+      cachedData = response.data;
+      console.log("✅ Cache Orders mis à jour avec succès");
+      return cachedData;
+    } else {
+      console.log("⚠️ Aucune donnée Orders reçue lors du rafraîchissement");
+      return cachedData || [];
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors du rafraîchissement Orders :", error);
+    return cachedData || [];
+  } finally {
+    refreshPromise = null;
+  }
+}
+
+export async function FullData(WIX_DATA_URL) {
+  if (cachedData) {
+    console.log("⚡ Données Orders servies depuis le cache");
+    return cachedData;
+  }
+  if (refreshPromise) {
+    console.log("⏳ Rafraîchissement en cours, attente des données...");
+    return refreshPromise;
+  }
+  console.log("🚀 Aucun cache Orders → lancement du rafraîchissement");
+  refreshPromise = refreshData(WIX_DATA_URL);
+  return refreshPromise;
+}
+
+/*
 export async function refreshData(wixData_url_get_FullData) {
   try {
     console.log("🔄 Refresh des données Orders depuis Wix...");
@@ -46,7 +84,7 @@ export async function FullData(wixData_url_get_FullData) {
   }
   return refreshPromise;
 }
-
+*/
 /*
 export async function refreshData(wixData_url_get_FullData) {
   try {

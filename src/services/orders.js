@@ -31,6 +31,22 @@ class OrdersService {
   async refresh() {
     return await refreshData(wixData_url);
   }
+  async getAll() {
+    return await FullData(wixData_url);
+  }
+  async getById(id) {
+    //return (await get_wix_services(wixData_url + "_id/" + id)).data;
+    return (await this.getAll()).find((item) => item._id === id);
+  }
+  async insert(order) {
+    return (await post_wix_services(wixData_url_post + "insert/", order)).data;
+  }
+  async create(wixData) {
+    return await create_order_new(wixData);
+  }
+  async getByNumber(Number) {
+    return (await get_wix_services(wixData_url + "number/" + Number)).data;
+  }
   async get_nom_prenom_byOrder(num) {
 
     let order = await this.getByNumber(num);
@@ -50,22 +66,6 @@ class OrdersService {
       console.error("Erreur lors du traitement de l'input client par l'IA :", error);
       return null;
     }
-  }
-  async getAll() {
-    return await FullData(wixData_url);
-  }
-  async getById(id) {
-    //return (await get_wix_services(wixData_url + "_id/" + id)).data;
-    return (await this.getAll()).find((item) => item._id === id);
-  }
-  async insert(order) {
-    return (await post_wix_services(wixData_url_post + "insert/", order)).data;
-  }
-  async create(wixData) {
-    return await create_order_new(wixData);
-  }
-  async getByNumber(Number) {
-    return (await get_wix_services(wixData_url + "number/" + Number)).data;
   }
 }
 

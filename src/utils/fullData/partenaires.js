@@ -24,6 +24,44 @@ export async function refresh_partenaire() {
   await refreshData();
 }
 
+const WIX_DATA_URL = wixData_url_get_FullData
+
+export async function refreshData() {
+  try {
+    console.log("🔄 Rafraîchissement des données Avis depuis Wix...");
+    const response = await get_wix_services(WIX_DATA_URL);
+    
+    if (response?.data) {
+      cachedData = response.data;
+      console.log("✅ Cache Avis mis à jour avec succès");
+      return cachedData;
+    } else {
+      console.log("⚠️ Aucune donnée Avis reçue lors du rafraîchissement");
+      return cachedData || [];
+    }
+  } catch (error) {
+    console.error("❌ Erreur lors du rafraîchissement Avis :", error);
+    return cachedData || [];
+  } finally {
+    refreshPromise = null;
+  }
+}
+
+export async function FullData() {
+  if (cachedData) {
+    console.log("⚡ Données Avis servies depuis le cache");
+    return cachedData;
+  }
+  if (refreshPromise) {
+    console.log("⏳ Rafraîchissement en cours, attente des données...");
+    return refreshPromise;
+  }
+  console.log("🚀 Aucun cache Avis → lancement du rafraîchissement");
+  refreshPromise = refreshData();
+  return refreshPromise;
+}
+
+/*
 export async function refreshData() {
   try {
     console.log("🔄 Refresh des données Partenaires depuis Wix...");
@@ -53,7 +91,7 @@ export async function FullData() {
   }
   return refreshPromise;
 }
-
+*/
 
 /*
 export async function refreshData() {
