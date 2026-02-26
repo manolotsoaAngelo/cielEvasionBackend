@@ -23,7 +23,7 @@ class CssService {
 
     let jsCode = `
     
-(function () {
+    (function () {
   const css = \`
     #page-loader{
       position:fixed;
@@ -83,32 +83,37 @@ class CssService {
   \`;
   document.body.appendChild(loader);
 
-  const startTime = performance.now();
-  
+  let startTime = Date.now();
+  const MIN_DISPLAY_TIME = 800; // Affiche le loader au moins 800ms
+
   const hideLoader = () => {
-    const elapsedTime = performance.now() - startTime;
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = Math.max(0, MIN_DISPLAY_TIME - elapsedTime);
     
-    const minDisplayTime = 1000;
-    
-    if (elapsedTime < minDisplayTime) {
-      const remainingTime = minDisplayTime - elapsedTime;
-      setTimeout(() => {
-        loader.classList.add("hide");
-        setTimeout(() => loader.remove(), 500);
-      }, remainingTime);
-    } else {
+    setTimeout(() => {
       loader.classList.add("hide");
       setTimeout(() => loader.remove(), 500);
-    }
+    }, remainingTime);
   };
 
   if (document.readyState === "complete") {
     hideLoader();
   } else {
     window.addEventListener("load", hideLoader);
+    
+    requestAnimationFrame(() => {
+      if (document.readyState === "interactive") {
+        hideLoader();
+      }
+    });
   }
-})();
 
+  setTimeout(() => {
+    if (!loader.classList.contains("hide")) {
+      hideLoader();
+    }
+  }, 5000);
+})();
 
     `
     return jsCode.replace(/\s+/g, " ")
