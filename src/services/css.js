@@ -89,7 +89,7 @@ class CssService {
 
   const hideLoader = () => {
     loader.classList.add("hide");
-    setTimeout(() => loader.remove(), 500);
+    setTimeout(() => loader.remove(), 2000);
   };
 
   if (document.readyState === "complete") {
