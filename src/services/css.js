@@ -22,11 +22,8 @@ class CssService {
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_codejs_load_page" defer></script>
 
     let jsCode = `
-    (function () {
-  const MIN_DISPLAY_TIME = 800;
-  const FADE_DURATION = 500;
-  const startTime = Date.now();
-
+    
+(function () {
   const css = \`
     #page-loader{
       position:fixed;
@@ -36,7 +33,7 @@ class CssService {
       align-items:center;
       background:linear-gradient(180deg,#87ceeb 0%,#e0f7ff 100%);
       z-index:999999;
-      transition:opacity \${FADE_DURATION}ms ease, visibility \${FADE_DURATION}ms ease;
+      transition:opacity .5s ease, visibility .5s ease;
     }
     #page-loader.hide{
       opacity:0;
@@ -86,14 +83,23 @@ class CssService {
   \`;
   document.body.appendChild(loader);
 
+  const startTime = performance.now();
+  
   const hideLoader = () => {
-    const elapsed = Date.now() - startTime;
-    const remaining = Math.max(MIN_DISPLAY_TIME - elapsed, 0);
-
-    setTimeout(() => {
+    const elapsedTime = performance.now() - startTime;
+    
+    const minDisplayTime = 1000;
+    
+    if (elapsedTime < minDisplayTime) {
+      const remainingTime = minDisplayTime - elapsedTime;
+      setTimeout(() => {
+        loader.classList.add("hide");
+        setTimeout(() => loader.remove(), 500);
+      }, remainingTime);
+    } else {
       loader.classList.add("hide");
-      setTimeout(() => loader.remove(), FADE_DURATION);
-    }, remaining);
+      setTimeout(() => loader.remove(), 500);
+    }
   };
 
   if (document.readyState === "complete") {
@@ -102,6 +108,8 @@ class CssService {
     window.addEventListener("load", hideLoader);
   }
 })();
+
+
     `
     return jsCode.replace(/\s+/g, " ")
   }
