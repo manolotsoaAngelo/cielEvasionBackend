@@ -17,12 +17,10 @@ export function init_cachedData_orders() {
   };
 }
 
-const WIX_DATA_URL = wixData_url_get_FullData
-
-export async function refreshData(WIX_DATA_URL) {
+export async function refreshData(wixData_url_get_FullData) {
   try {
     console.log("🔄 Rafraîchissement des données Orders depuis Wix...");
-    const response = await get_wix_services(WIX_DATA_URL);
+    const response = await get_wix_services(wixData_url_get_FullData);
     
     if (response?.data) {
       cachedData = response.data;
@@ -40,7 +38,7 @@ export async function refreshData(WIX_DATA_URL) {
   }
 }
 
-export async function FullData(WIX_DATA_URL) {
+export async function FullData(wixData_url_get_FullData) {
   if (cachedData) {
     console.log("⚡ Données Orders servies depuis le cache");
     return cachedData;
@@ -50,7 +48,7 @@ export async function FullData(WIX_DATA_URL) {
     return refreshPromise;
   }
   console.log("🚀 Aucun cache Orders → lancement du rafraîchissement");
-  refreshPromise = refreshData(WIX_DATA_URL);
+  refreshPromise = refreshData(wixData_url_get_FullData);
   return refreshPromise;
 }
 
