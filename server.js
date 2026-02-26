@@ -24,12 +24,10 @@ app.use(express.json());
 app.use(express.json({ limit: "10mb" }));
 
 process.nextTick(async () => {
-  await Promise.all([
-    EbilletsService.refresh(),
-    OrdersService.refresh(),
-    PartenairesService.refresh(),
-    UsersService.refresh(),
-  ]);
+  await EbilletsService.refresh()
+  await OrdersService.refresh()
+  await PartenairesService.refresh()
+  await UsersService.refresh()
 });
 
 app.get("/", (req, res) => {
