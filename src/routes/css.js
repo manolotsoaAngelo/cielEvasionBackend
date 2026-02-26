@@ -1,5 +1,6 @@
 import express from "express";
 import {
+    get_codejs_load_page,
     get_css_partenaires_header_footer_body_fix
     , get_css_importateur_header_fix
     , get_avis_Client_full_body
@@ -12,5 +13,6 @@ const router = express.Router();
 router.get("/get_css_partenaires_header_footer_body_fix", get_css_partenaires_header_footer_body_fix);
 router.get("/get_css_importateur_header_fix", get_css_importateur_header_fix);
 router.get("/get_avis_Client_full_body", get_avis_Client_full_body);
+router.get("/get_codejs_load_page", get_codejs_load_page);
 
 export default router;

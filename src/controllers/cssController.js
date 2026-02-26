@@ -12,6 +12,11 @@ import CssService from "../services/css.js";
 //console.log((await CssService.getAll_avis())[0].images)
 //console.log(await CssService.avis_Client_full_body())
 
+export async function get_codejs_load_page(req, res) {
+  let codejs_load_page = await CssService.codejs_load_page()
+  res.json(compressed_obj(codejs_load_page));
+}
+
 export async function get_avis_Client_full_body(req, res) {
   let avis_Client_full_body = await CssService.avis_Client_full_body()
   res.json(compressed_obj(avis_Client_full_body));

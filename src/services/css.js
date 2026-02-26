@@ -18,6 +18,67 @@ class CssService {
     return await FullData();
   }
 
+  async codejs_load_page() {
+    ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_codejs_load_page" defer></script>
+
+    let jsCode = `
+    (function () {
+  const style = document.createElement("style");
+  style.innerHTML = \`
+    #page-loader {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      font-family: Arial, sans-serif;
+    }
+    #page-loader .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #e0e0e0;
+      border-top: 5px solid #000000;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    #page-loader .text {
+      font-size: 18px;
+      color: #333;
+      letter-spacing: 1px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .fade-out {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+  \`;
+  document.head.appendChild(style);
+
+  const loader = document.createElement("div");
+  loader.id = "page-loader";
+  loader.innerHTML = \`
+    <div class="spinner"></div>
+    <div class="text">En cours de chargement...</div>
+  \`;
+  document.body.appendChild(loader);
+
+  window.addEventListener("load", function () {
+    loader.classList.add("fade-out");
+    setTimeout(() => {
+      loader.remove();
+    }, 500);
+  });
+})();
+    `
+    return jsCode.replace(/\s+/g, " ")
+  }
+
   async avis_Client_full_body() {
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_avis_Client_full_body_Byserver" defer></script>
 
