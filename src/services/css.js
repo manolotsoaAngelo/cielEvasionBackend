@@ -21,59 +21,82 @@ class CssService {
   async codejs_load_page() {
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_codejs_load_page" defer></script>
 
-    let jsCode = `
-    (function () {
-  const style = document.createElement("style");
-  style.innerHTML = \`
-    #page-loader {
-      position: fixed;
-      inset: 0;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 999999;
-      font-family: Arial, sans-serif;
+    let jsCode = `(function () {
+  const css = \`
+    #page-loader{
+      position:fixed;
+      inset:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(180deg,#87ceeb 0%,#e0f7ff 100%);
+      z-index:999999;
+      transition:opacity .5s ease, visibility .5s ease;
     }
-    #page-loader .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid #e0e0e0;
-      border-top: 5px solid #000000;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 20px;
+    #page-loader.hide{
+      opacity:0;
+      visibility:hidden;
     }
-    #page-loader .text {
-      font-size: 18px;
-      color: #333;
-      letter-spacing: 1px;
+    .loader-box{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:22px;
     }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    .spinner{
+      width:70px;
+      height:70px;
+      border-radius:50%;
+      border:6px solid rgba(255,255,255,.6);
+      border-top:6px solid #ffffff;
+      box-shadow:0 0 25px rgba(0,0,0,.08);
+      animation:spin 1s linear infinite;
     }
-    .fade-out {
-      opacity: 0;
-      transition: opacity 0.5s ease;
+    .cloud{
+      font-size:42px;
+      animation:float 2.5s ease-in-out infinite;
+    }
+    .text{
+      font-family:'Segoe UI',sans-serif;
+      font-size:14px;
+      letter-spacing:.18em;
+      color:#ffffff;
+      text-transform:uppercase;
+      font-weight:600;
+      text-shadow:0 2px 8px rgba(0,0,0,.15);
+    }
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-8px)}
     }
   \`;
+
+  const style = document.createElement("style");
+  style.textContent = css;
   document.head.appendChild(style);
 
   const loader = document.createElement("div");
   loader.id = "page-loader";
   loader.innerHTML = \`
-    <div class="spinner"></div>
-    <div class="text">En cours de chargement...</div>
+    <div class="loader-box">
+      <div class="spinner"></div>
+    </div>
   \`;
   document.body.appendChild(loader);
 
-  window.addEventListener("load", function () {
-    loader.classList.add("fade-out");
-    setTimeout(() => {
-      loader.remove();
-    }, 500);
-  });
+  const hideLoader = () => {
+    loader.classList.add("hide");
+    setTimeout(() => loader.remove(), 500);
+  };
+
+  if (document.readyState === "complete") {
+    hideLoader();
+  } else {
+    window.addEventListener("load", hideLoader);
+  }
 })();
     `
     return jsCode.replace(/\s+/g, " ")
