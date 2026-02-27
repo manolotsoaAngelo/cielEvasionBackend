@@ -69,7 +69,7 @@ class CssService {
     @keyframes spin {
         to { transform: rotate(360deg); }
     }
-    `;
+    \`;
 
     const style = document.createElement("style");
     style.textContent = css;
@@ -77,11 +77,11 @@ class CssService {
 
     const loader = document.createElement("div");
     loader.id = "page-loader";
-    loader.innerHTML = `
+    loader.innerHTML = \`
         <div class="loader-box">
             <div class="spinner"></div>
         </div>
-    `;
+    \`;
 
     document.body.appendChild(loader);
 
