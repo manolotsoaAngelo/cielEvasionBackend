@@ -24,95 +24,90 @@ class CssService {
     let jsCode = `
     
     (function () {
-  const css = \`
-    #page-loader{
-      position:fixed;
-      inset:0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:linear-gradient(180deg,#87ceeb 0%,#e0f7ff 100%);
-      z-index:999999;
-      transition:opacity .5s ease, visibility .5s ease;
-    }
-    #page-loader.hide{
-      opacity:0;
-      visibility:hidden;
-    }
-    .loader-box{
-      position:relative;
-      width:120px;
-      height:80px;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-    .spinner{
-      position:absolute;
-      width:70px;
-      height:70px;
-      border-radius:50%;
-      border:6px solid rgba(255,255,255,.5);
-      border-top:6px solid #ffffff;
-      animation:spin 1s linear infinite;
-      box-shadow:0 0 25px rgba(0,0,0,.08);
-    }
-    .cloud{
-      font-size:48px;
-      animation:float 2.5s ease-in-out infinite;
-    }
-    @keyframes spin{
-      to{transform:rotate(360deg)}
-    }
-    @keyframes float{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-10px)}
-    }
-  \`;
+    const MIN_DISPLAY_TIME = 5000;
+    const FADE_DURATION = 500;
+    const startTime = Date.now();
 
-  const style = document.createElement("style");
-  style.textContent = css;
-  document.head.appendChild(style);
+    const css = \`
+    #page-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(4px);
+        z-index: 999999;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity \${FADE_DURATION}ms ease, visibility \${FADE_DURATION}ms ease;
+    }
 
-  const loader = document.createElement("div");
-  loader.id = "page-loader";
-  loader.innerHTML = \`
-    <div class="loader-box">
-      <div class="spinner"></div>
-    </div>
-  \`;
-  document.body.appendChild(loader);
+    #page-loader.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
 
-  let startTime = Date.now();
-  const MIN_DISPLAY_TIME = 800;
+    .loader-box {
+        position: relative;
+        width: 120px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-  const hideLoader = () => {
-    const elapsedTime = Date.now() - startTime;
-    const remainingTime = Math.max(0, MIN_DISPLAY_TIME - elapsedTime);
-    
-    setTimeout(() => {
-      loader.classList.add("hide");
-      setTimeout(() => loader.remove(), 500);
-    }, remainingTime);
-  };
+    .spinner {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 6px solid rgba(255,255,255,.5);
+        border-top: 6px solid #fff;
+        animation: spin 1s linear infinite;
+    }
 
-  if (document.readyState === "complete") {
-    hideLoader();
-  } else {
-    window.addEventListener("load", hideLoader);
-    
-    requestAnimationFrame(() => {
-      if (document.readyState === "interactive") {
-        hideLoader();
-      }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    `;
+
+    const style = document.createElement("style");
+    style.textContent = css;
+    document.head.appendChild(style);
+
+    const loader = document.createElement("div");
+    loader.id = "page-loader";
+    loader.innerHTML = `
+        <div class="loader-box">
+            <div class="spinner"></div>
+        </div>
+    `;
+
+    document.body.appendChild(loader);
+
+    const showLoader = () => {
+        loader.classList.remove("hide");
+    };
+
+    const hideLoader = () => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(MIN_DISPLAY_TIME - elapsed, 0);
+
+        setTimeout(() => {
+            loader.classList.add("hide");
+        }, remaining);
+    };
+
+    showLoader();
+
+    window.addEventListener("message", function (event) {
+        if (event.data === "showLoader") {
+            showLoader();
+        } else if (event.data === "hideLoader") {
+            hideLoader();
+        }
     });
-  }
 
-  setTimeout(() => {
-    if (!loader.classList.contains("hide")) {
-      hideLoader();
-    }
-  }, 5000);
 })();
 
     `
