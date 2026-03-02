@@ -98,8 +98,6 @@ class CssService {
         }, remaining);
     };
 
-    showLoader();
-
     window.addEventListener("message", function (event) {
         if (event.data === "showLoader") {
             showLoader();
