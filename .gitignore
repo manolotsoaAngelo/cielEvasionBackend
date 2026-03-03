@@ -1,7 +1,6 @@
 # .gitignore
 node_modules/
-backup_wix/utils
-backup_wix/test
+backup_wix/
 src/utils/css/partenaire
 .env
 .vscode/

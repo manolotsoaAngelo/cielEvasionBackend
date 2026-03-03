@@ -50,31 +50,31 @@ export async function runFunction(req, res) {
           result = {
             init_cachedData_ebillet: init_cachedData_ebillet(),
           };
-          EbilletsService.refresh();
+          await EbilletsService.refresh();
           break;
         case "orders":
           result = {
             init_cachedData_orders: init_cachedData_orders(),
           };
-          OrdersService.refresh();
+          await OrdersService.refresh();
           break;
         case "partenaires":
           result = {
             init_cachedData_partenaire: init_cachedData_partenaire(),
           };
-          PartenairesService.refresh();
+          await PartenairesService.refresh();
           break;
         case "users":
           result = {
             init_cachedData_users: init_cachedData_users(),
           };
-          UsersService.refresh();
+          await UsersService.refresh();
           break;
         case "avis":
           result = {
             init_cachedData_avis: init_cachedData_avis(),
           };
-          CssService.refresh_avis();
+          await CssService.refresh_avis();
           break;
         default:
           break;
