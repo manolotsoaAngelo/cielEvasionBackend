@@ -32,7 +32,7 @@ export async function refreshData(wixData_url_get_FullData) {
     }
   } catch (error) {
     console.error("❌ Erreur lors du rafraîchissement Orders :", error);
-    return cachedData || [];
+    return cachedData = (await get_wix_services(wixData_url_get_FullData)).data
   } finally {
     refreshPromise = null;
   }

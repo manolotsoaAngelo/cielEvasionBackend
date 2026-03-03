@@ -22,7 +22,7 @@ export async function refreshData() {
   try {
     console.log("🔄 Rafraîchissement des données Avis depuis Wix...");
     const response = await get_wix_services(WIX_DATA_URL);
-    
+
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache Avis mis à jour avec succès");
@@ -33,7 +33,7 @@ export async function refreshData() {
     }
   } catch (error) {
     console.error("❌ Erreur lors du rafraîchissement Avis :", error);
-    return cachedData || [];
+    return cachedData = (await get_wix_services(WIX_DATA_URL)).data
   } finally {
     refreshPromise = null;
   }

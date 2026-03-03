@@ -32,7 +32,7 @@ export async function refreshData(WIX_DATA_URL) {
     }
   } catch (error) {
     console.error("❌ Erreur lors du rafraîchissement Users :", error);
-    return cachedData || [];
+    return cachedData = (await get_wix_services(WIX_DATA_URL)).data
   } finally {
     refreshPromise = null;
   }

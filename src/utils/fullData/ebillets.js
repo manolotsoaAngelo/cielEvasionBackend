@@ -38,7 +38,7 @@ export async function refreshData() {
     }
   } catch (error) {
     console.error("❌ Erreur lors du rafraîchissement E-billet :", error);
-    return cachedData || [];
+    return cachedData = (await get_wix_services(WIX_DATA_URL)).data
   } finally {
     refreshPromise = null;
   }
