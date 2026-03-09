@@ -8,9 +8,11 @@ class AiService {
     }
 
     async clean_input_client_by_Ai(input) {
-        return (JSON.parse((await this.AiGemini(await this.Ai_text_to_text(input))).replace(/```json/g, "")
+        let result = (JSON.parse((await this.AiGemini(await this.Ai_text_to_text(input))).replace(/```json/g, "")
             .replace(/```/g, "")
             .trim()))
+            console.log("Result AI prediction Nom Prenom: ", result)
+        return result;
     }
 
     async Ai_text_to_text(value) {
