@@ -2,10 +2,13 @@ import {
   compressed_obj,
   decompressed_obj,
 } from "../utils/compression/compression.js";
-
-
+/*
+import BrevoService from "../services/brevo.js";
 import EmailService from "../services/email.js";
 import UsersService from "../services/users.js";
+*/
+//console.log(await BrevoService.Usage_limit())
+
 /*
 let id_destinataire = (await UsersService.getByEmail("manolotsoa.randriambeloniaina@gmail.com"))._id;
 const emailData = {

@@ -6,6 +6,20 @@ class BrevoService {
     constructor() {
         this.transporter = nodemailer.createTransport(this.config());
     }
+    async Usage_limit() {
+        return ((await this.BrevoAccount()).plan[0]).credits
+    }
+    async BrevoAccount() {
+        const res = await fetch("https://api.brevo.com/v3/account", {
+            method: "GET",
+            headers: {
+                "api-key": process.env.BREVO_API_KEY,
+                "Content-Type": "application/json"
+            }
+        });
+
+        return await res.json();
+    }
 
     config() {
         return {

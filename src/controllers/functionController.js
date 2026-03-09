@@ -21,7 +21,7 @@ import PartenairesService from "../services/partenaires.js";
 import UsersService from "../services/users.js";
 import CssService from "../services/css.js";
 import EmailService from "../services/email.js";
-
+import BrevoService from "../services/brevo.js";
 ///https://ciel-evasion-backend.vercel.app/api/function/runFunction
 
 ///import { services_post, services_get } from 'backend/modules/server/server'
@@ -33,7 +33,9 @@ export async function runFunction(req, res) {
   let value = decompressed_obj(data);
   let result;
   switch (value.typeFunction) {
-
+    case "Usage_limit":
+      result = await BrevoService.Usage_limit();
+      break;
     case "email_Tj8PgM":
       result = await EmailService.email_Tj8PgM(value.valeur);
       break;

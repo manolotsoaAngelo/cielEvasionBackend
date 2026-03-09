@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@getbrevo/brevo": "^3.0.1",
+    "@getbrevo/brevo": "^3.0.4",
     "@google/genai": "^1.41.0",
     "axios": "^1.12.2",
     "cors": "^2.8.5",
