@@ -11,7 +11,7 @@ class AiService {
         let result = (JSON.parse((await this.AiGemini(await this.Ai_text_to_text(input))).replace(/```json/g, "")
             .replace(/```/g, "")
             .trim()))
-            console.log("Result AI prediction Nom Prenom: ", result)
+        console.log("Result AI prediction Nom Prenom: ", result)
         return result;
     }
 
