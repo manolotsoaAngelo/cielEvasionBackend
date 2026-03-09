@@ -7,7 +7,8 @@ class BrevoService {
         this.transporter = nodemailer.createTransport(this.config());
     }
     async Usage_limit() {
-        return ((await this.BrevoAccount()).plan[0]).credits
+        return await this.BrevoAccount()
+        //return ((await this.BrevoAccount()).plan[0]).credits
     }
     async BrevoAccount() {
         const res = await fetch("https://api.brevo.com/v3/account", {
