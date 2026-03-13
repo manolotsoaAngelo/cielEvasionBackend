@@ -12,6 +12,11 @@ import CssService from "../services/css.js";
 //console.log((await CssService.getAll_avis())[0].images)
 //console.log(await CssService.avis_Client_full_body())
 
+export async function get_section_admin_hauteux_max(req, res) {
+  let section_admin_hauteux_max = await CssService.section_admin_hauteux_max()
+  res.json(compressed_obj(section_admin_hauteux_max));
+}
+
 export async function get_avis_Client_full_body(req, res) {
   let avis_Client_full_body = await CssService.avis_Client_full_body()
   res.json(compressed_obj(avis_Client_full_body));

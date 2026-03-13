@@ -18,6 +18,32 @@ class CssService {
     return await FullData();
   }
 
+  // section : comp-m56sapad // contenu du section : comp-mmk94ljq
+
+  ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_section_admin_hauteux_max" defer></script>
+
+  async section_admin_hauteux_max() {
+
+    let css = `(function () {
+    const css = \`
+        @media screen and (min-width: 1000px) {
+            section#comp-m56sapad {
+                height: 200px !important;
+                min-height: 200px !important;
+            }
+        }
+    \`;
+
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.appendChild(document.createTextNode(css));
+
+    document.head.appendChild(style);
+})();`;
+
+    return css.replace(/\s+/g, " ")
+  }
+
   async avis_Client_full_body() {
     ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_avis_Client_full_body_Byserver" defer></script>
 

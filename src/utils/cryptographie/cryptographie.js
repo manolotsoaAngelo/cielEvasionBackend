@@ -12,7 +12,7 @@ export function decrypter(message) {
   }
 }
 /*
-let crypt = crypter('/api/css/get_codejs_load_page')
+let crypt = crypter('/api/css/get_section_admin_hauteux_max')
 console.log(crypt)
 */
 //console.log(decrypter("aHR0cHM6Ly9jaWVsZXZhc2lvbmJhY2tlbmQub25yZW5kZXIuY29t"))
@@ -45,6 +45,7 @@ POST
     /api/partenaires/getAllpartenaires : L2FwaS9wYXJ0ZW5haXJlcy9nZXRBbGxwYXJ0ZW5haXJlcw==
 
     CSS
+    /api/css/get_section_admin_hauteux_max : L2FwaS9jc3MvZ2V0X3NlY3Rpb25fYWRtaW5faGF1dGV1eF9tYXg=
     /api/css/get_codejs_load_page : L2FwaS9jc3MvZ2V0X2NvZGVqc19sb2FkX3BhZ2U=
     /api/css/get_css_partenaires_header_footer_body_fix : L2FwaS9jc3MvZ2V0X2Nzc19wYXJ0ZW5haXJlc19oZWFkZXJfZm9vdGVyX2JvZHlfZml4
     /api/css/get_css_importateur_header_fix : L2FwaS9jc3MvZ2V0X2Nzc19pbXBvcnRhdGV1cl9oZWFkZXJfZml4
