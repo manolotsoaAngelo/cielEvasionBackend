@@ -19,9 +19,10 @@ export function init_cachedData_users() {
 
 export async function refreshData(WIX_DATA_URL) {
   try {
+    refreshPromise = true
     console.log("🔄 Rafraîchissement des données Users depuis Wix...");
     const response = await get_wix_services(WIX_DATA_URL);
-    
+    refreshPromise = null
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache Users mis à jour avec succès");
