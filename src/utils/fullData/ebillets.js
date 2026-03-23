@@ -28,7 +28,7 @@ export async function refreshData() {
     refreshPromise = true
     console.log("🔄 Rafraîchissement des données E-billet depuis Wix...");
     const response = await get_wix_services(WIX_DATA_URL);
-    
+    refreshPromise = null;
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache E-billet mis à jour avec succès");

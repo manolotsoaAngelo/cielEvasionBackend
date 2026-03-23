@@ -22,7 +22,7 @@ export async function refreshData(wixData_url_get_FullData) {
     refreshPromise = true
     console.log("🔄 Rafraîchissement des données Orders depuis Wix...");
     const response = await get_wix_services(wixData_url_get_FullData);
-    
+    refreshPromise = null;
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache Orders mis à jour avec succès");
