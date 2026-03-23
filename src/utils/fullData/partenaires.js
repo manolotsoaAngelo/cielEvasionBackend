@@ -57,7 +57,7 @@ export async function FullData() {
     return refreshPromise;
   }
   console.log("🚀 Aucun cache Avis → lancement du rafraîchissement");
-  refreshPromise = await refreshData();
+  refreshPromise = refreshData();
   return refreshPromise;
 }
 
