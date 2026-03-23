@@ -7,7 +7,7 @@ import { init_cachedData_ebillet,
 
 let cachedData = null;
 let refreshPromise = null;
-let refreshing = false;
+
 let collection_name = "Reports";
 let wixData_url_get_FullData =
   "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
@@ -15,7 +15,6 @@ let wixData_url_get_FullData =
 export function init_cachedData_ebillet() {
   cachedData = null;
   refreshPromise = null;
-  console.log("🔄 Initialisation du cache E-billet : cache vidé et promesse de rafraîchissement réinitialisée");
   return {
     cachedData: cachedData,
     refreshPromise: refreshPromise,
@@ -26,23 +25,19 @@ const WIX_DATA_URL = wixData_url_get_FullData
 
 export async function refreshData() {
   try {
-    refreshing = true;
     console.log("🔄 Rafraîchissement des données E-billet depuis Wix...");
     const response = await get_wix_services(WIX_DATA_URL);
     
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache E-billet mis à jour avec succès");
-      refreshing = false;
       return cachedData;
     } else {
-      refreshing = false;
       console.log("⚠️ Aucune donnée E-billet reçue lors du rafraîchissement");
       return cachedData || [];
     }
   } catch (error) {
     console.error("❌ Erreur lors du rafraîchissement E-billet :", error);
-    refreshing = false;
     return cachedData = (await get_wix_services(WIX_DATA_URL)).data
   } finally {
     refreshPromise = null;
