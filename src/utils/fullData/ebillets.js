@@ -57,8 +57,7 @@ export async function FullData() {
   }
   
   console.log("🚀 Aucun cache E-billet → lancement du rafraîchissement");
-  refreshPromise = refreshData();
-  return refreshPromise;
+  return refreshData();
 }
 
 /*

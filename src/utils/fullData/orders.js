@@ -49,8 +49,7 @@ export async function FullData(wixData_url_get_FullData) {
     return refreshPromise;
   }
   console.log("🚀 Aucun cache Orders → lancement du rafraîchissement");
-  refreshPromise = refreshData(wixData_url_get_FullData);
-  return refreshPromise;
+  return refreshData(wixData_url_get_FullData);;
 }
 
 /*
