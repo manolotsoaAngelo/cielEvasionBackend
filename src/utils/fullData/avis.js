@@ -20,10 +20,9 @@ const WIX_DATA_URL = wixData_url_get_FullData
 
 export async function refreshData() {
   try {
-    refreshPromise = true
     console.log("🔄 Rafraîchissement des données Avis depuis Wix...");
     const response = await get_wix_services(WIX_DATA_URL);
-refreshPromise = null;
+
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache Avis mis à jour avec succès");
@@ -50,7 +49,8 @@ export async function FullData() {
     return refreshPromise;
   }
   console.log("🚀 Aucun cache Avis → lancement du rafraîchissement");
-  return refreshData();
+  refreshPromise = refreshData();
+  return refreshPromise;
 }
 
 /*
