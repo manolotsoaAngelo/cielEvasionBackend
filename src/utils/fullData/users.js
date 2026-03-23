@@ -48,7 +48,7 @@ export async function FullData(WIX_DATA_URL) {
     return refreshPromise;
   }
   console.log("🚀 Aucun cache Users → lancement du rafraîchissement");
-  refreshPromise = refreshData(WIX_DATA_URL);
+  refreshPromise = await refreshData(WIX_DATA_URL);
   return refreshPromise;
 }
 
