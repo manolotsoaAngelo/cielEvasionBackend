@@ -81,7 +81,8 @@ class EmailService {
             if (!adminEmails?.length) {
                 throw new Error("Aucun email admin configuré");
             }
-            const expediteur = adminEmails[0];
+            //const expediteur = adminEmails[0];
+            const expediteur = process.env.BREVO_SENDER_EMAIL;
             const destinataires = [
                 ...new Set([...adminEmails, user.loginEmail])
             ].filter(Boolean);
