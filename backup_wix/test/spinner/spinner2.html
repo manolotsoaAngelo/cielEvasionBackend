@@ -1,0 +1,88 @@
+<script>
+(function () {
+    const MIN_DISPLAY_TIME = 5000;
+    const FADE_DURATION = 500;
+    const startTime = Date.now();
+
+    const css = `
+    #page-loader {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(4px);
+        z-index: 999999;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity ${FADE_DURATION}ms ease, visibility ${FADE_DURATION}ms ease;
+    }
+
+    #page-loader.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .loader-box {
+        position: relative;
+        width: 120px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .spinner {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 6px solid rgba(255,255,255,.5);
+        border-top: 6px solid #fff;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    `;
+
+    const style = document.createElement("style");
+    style.textContent = css;
+    document.head.appendChild(style);
+
+    const loader = document.createElement("div");
+    loader.id = "page-loader";
+    loader.innerHTML = `
+        <div class="loader-box">
+            <div class="spinner"></div>
+        </div>
+    `;
+
+    document.body.appendChild(loader);
+
+    const showLoader = () => {
+        loader.classList.remove("hide");
+    };
+
+    const hideLoader = () => {
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(MIN_DISPLAY_TIME - elapsed, 0);
+
+        setTimeout(() => {
+            loader.classList.add("hide");
+        }, remaining);
+    };
+
+    showLoader();
+
+    window.addEventListener("message", function (event) {
+        if (event.data === "showLoader") {
+            showLoader();
+        } else if (event.data === "hideLoader") {
+            hideLoader();
+        }
+    });
+
+})();
+</script>

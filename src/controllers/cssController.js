@@ -19,6 +19,7 @@ export async function get_section_admin_hauteux_max(req, res) {
 
 export async function get_avis_Client_full_body(req, res) {
   let avis_Client_full_body = await CssService.avis_Client_full_body()
+  //res.send(avis_Client_full_body)
   res.json(compressed_obj(avis_Client_full_body));
 }
 

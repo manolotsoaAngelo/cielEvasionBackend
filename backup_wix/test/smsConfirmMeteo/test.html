@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SMS automatique</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f9fafb, #e9ecef);
+            color: #222;
+            text-align: center;
+        }
+
+        #status {
+            font-size: 17px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            padding: 0 20px;
+            max-width: 420px;
+        }
+
+        #manualBtn {
+            display: none;
+            background-color: #d62828;
+            color: #fff;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        #manualBtn:hover {
+            background-color: #b51f1f;
+            transform: scale(1.04);
+        }
+
+        a#hiddenSms {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="status">📱 Ouverture de l’application Messages...</div>
+    <button id="manualBtn">Ouvrir Messages</button>
+    <a id="hiddenSms" href="#">sms</a>
+
+    <script>
+        (function () {
+            let numero;
+            let nom;
+            let ref;
+            let activite;
+            let partenaire;
+            let launched = false;
+            let autoCloseEnabled = false;
+
+            const status = document.getElementById("status");
+            const hiddenSms = document.getElementById("hiddenSms");
+            const manualBtn = document.getElementById("manualBtn");
+            const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const isWindows = /Win/i.test(navigator.platform);
+
+            function getGreetingParts() {
+                const heureParis = new Date().toLocaleString("fr-FR", {
+                    timeZone: "Europe/Paris",
+                    hour: "2-digit",
+                    hour12: false
+                });
+                const h = parseInt(heureParis, 10);
+                return h < 18
+                    ? { greet: "Bonjour", timeWord: "journée" }
+                    : { greet: "Bonsoir", timeWord: "soirée" };
+            }
+
+            const messageTemplate = () => {
+                const { greet, timeWord } = getGreetingParts();
+                const messageIntro = `
+Bonne nouvelle ! La météo est favorable et nous avons le plaisir de vous confirmer votre rendez-vous pour votre aventure en ${activite.title}.`;
+                const nb = `Pour que votre expérience se déroule dans les meilleures conditions, merci de suivre ces quelques étapes :`
+                const contenu = `Connectez-vous dès maintenant pour récupérer vos documents de vol
+👉 Votre espace personnel : https://www.ciel-evasion.fr/mes-billets
+
+📄 À préparer pour le jour J :
+* Imprimez votre Bon d’Échange (il vous sera demandé sur place).
+* Lisez attentivement les consignes de l'activité détaillées sur votre billet.
+* Localisation : Le lieu de rendez-vous est cliquable directement sur votre Bon d’Échange (format PDF) ; il vous renverra vers un point GPS précis.
+Nous avons hâte de vous accueillir pour partager ce moment magique avec vous.`
+
+                const messageSignature = `Je vous souhaite une magnifique expérience et vous dis à très bientôt dans les airs !`;
+                const pilote = `Bien cordialement, ${partenaire.prenomPartenaire} – Pilote chez Ciel-ÉVASION®`;
+
+                const lines = [
+                    `${greet} ${nom},`,
+                    messageIntro,
+                    "",
+                    nb,
+                    "",
+                    contenu,
+                    "",
+                    messageSignature,
+                    "",
+                    pilote
+                ]
+                return lines.join("\n");
+            };
+
+            function encodeBodyLight(s) {
+                return encodeURIComponent(s)
+                    .replace(/%20/g, ' ')
+                    .replace(/%0A/g, '%0A');
+            }
+
+            function closeLightbox(delay = 3500) {
+                if (!autoCloseEnabled && isIOS) return;
+                setTimeout(() => window.parent.postMessage({ type: "close" }, "*"), delay);
+            }
+
+            function openSms() {
+                const body = encodeBodyLight(messageTemplate());
+                const smsLink = `sms:${numero}?body=${body}`;
+                try {
+                    hiddenSms.href = smsLink;
+                    hiddenSms.target = "_top";
+                    hiddenSms.click();
+                    return;
+                } catch { }
+                try { window.top.location.href = smsLink; return; } catch { }
+                try { window.location.href = smsLink; } catch { }
+            }
+
+            function launch() {
+                if (launched) return;
+                launched = true;
+
+                if (isWindows) {
+                    status.textContent = "⚠️ Cette fonction doit être ouverte depuis un téléphone ou un Mac avec Messages.";
+                    return;
+                }
+
+                try {
+                    if (isIOS) {
+                        status.innerHTML = "📱 Appuyez sur le bouton ci-dessous pour ouvrir Messages :<br><small>(puis validez l’envoi dans l’application)</small>";
+                        manualBtn.style.display = "inline-block";
+                        manualBtn.addEventListener("click", () => {
+                            openSms();
+                            autoCloseEnabled = true;
+                            closeLightbox(3500);
+                        }, { once: true });
+                    } else {
+                        openSms();
+                        closeLightbox(3500);
+                    }
+                } catch {
+                    status.textContent = "❌ Impossible d’ouvrir Messages sur cet appareil.";
+                    closeLightbox(3500);
+                }
+            }
+
+            window.addEventListener("message", (event) => {
+                const data = event.data || {};
+                if (data.numero) numero = data.numero;
+                if (data.nom) nom = data.nom;
+                if (data.ref) ref = data.ref;
+                if (data.activite) activite = data.activite;
+                if (data.partenaire) partenaire = data.partenaire;
+                setTimeout(launch, 400);
+            });
+
+            setTimeout(launch, 1200);
+        })();
+    </script>
+</body>
+
+</html>

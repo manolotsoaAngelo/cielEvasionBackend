@@ -1,13 +1,18 @@
 import { get_wix_services } from "../wixData/wixHttp.js";
-
-let collection_name = "Import1"; //all_avis //Import1
-let wixData_url_get_FullData =
-  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+/*
+import { init_cachedData_ebillet,
+  refresh_ebillet
+ } from "../utils/fullData/ebillets.js";
+*/
 
 let cachedData = null;
 let refreshPromise = null;
 
-export function init_cachedData_avis() {
+let collection_name = "Reports";
+let wixData_url_get_FullData =
+  "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+
+export function init_cachedData_ebillet() {
   cachedData = null;
   refreshPromise = null;
   return {
@@ -20,19 +25,19 @@ const WIX_DATA_URL = wixData_url_get_FullData
 
 export async function refreshData() {
   try {
-    console.log("🔄 Rafraîchissement des données Avis depuis Wix...");
+    console.log("🔄 Rafraîchissement des données E-billet depuis Wix...");
     const response = await get_wix_services(WIX_DATA_URL);
-
+    
     if (response?.data) {
       cachedData = response.data;
-      console.log("✅ Cache Avis mis à jour avec succès");
+      console.log("✅ Cache E-billet mis à jour avec succès");
       return cachedData;
     } else {
-      console.log("⚠️ Aucune donnée Avis reçue lors du rafraîchissement");
+      console.log("⚠️ Aucune donnée E-billet reçue lors du rafraîchissement");
       return cachedData || [];
     }
   } catch (error) {
-    console.error("❌ Erreur lors du rafraîchissement Avis :", error);
+    console.error("❌ Erreur lors du rafraîchissement E-billet :", error);
     return cachedData = (await get_wix_services(WIX_DATA_URL)).data
   } finally {
     refreshPromise = null;
@@ -41,14 +46,16 @@ export async function refreshData() {
 
 export async function FullData() {
   if (cachedData) {
-    console.log("⚡ Données Avis servies depuis le cache");
+    console.log("⚡ Données E-billet servies depuis le cache");
     return cachedData;
   }
+  
   if (refreshPromise) {
     console.log("⏳ Rafraîchissement en cours, attente des données...");
     return refreshPromise;
   }
-  console.log("🚀 Aucun cache Avis → lancement du rafraîchissement");
+  
+  console.log("🚀 Aucun cache E-billet → lancement du rafraîchissement");
   refreshPromise = refreshData();
   return refreshPromise;
 }
@@ -56,16 +63,16 @@ export async function FullData() {
 /*
 export async function refreshData() {
   try {
-    console.log("🔄 Refresh des données Avis depuis Wix...");
+    console.log("🔄 Refresh des données E-billet depuis Wix...");
     const response = await get_wix_services(wixData_url_get_FullData);
     if (response?.data) {
       cachedData = response.data;
-      console.log("✅ Cache Avis mis à jour");
+      console.log("✅ Cache E-billet mis à jour");
     } else {
-      console.log("⚠️ Aucune donnée Avis reçue lors du refresh");
+      console.log("⚠️ Aucune donnée E-billet reçue lors du refresh");
     }
   } catch (error) {
-    console.error("❌ Erreur lors du refresh Avis :", error);
+    console.error("❌ Erreur lors du refresh E-billet :", error);
   } finally {
     refreshPromise = null;
   }
@@ -74,16 +81,18 @@ export async function refreshData() {
 
 export async function FullData() {
   if (cachedData) {
-    console.log("⚡ Données Avis servies depuis le CACHE");
+    console.log("⚡ Données E-billet servies depuis le CACHE");
     return cachedData;
   }
   if (!refreshPromise) {
-    console.log("🚀 Aucun cache Avis → lancement du refresh");
+    console.log("🚀 Aucun cache E-billet → lancement du refresh");
     refreshPromise = refreshData();
   }
   return refreshPromise;
 }
+
 */
+
 /*
 export async function refreshData() {
   try {
@@ -92,7 +101,7 @@ export async function refreshData() {
       cachedData = response.data;
     }
   } catch (error) {
-    console.error("Erreur lors du init_cachedData_avis :", error);
+    console.error("Erreur lors du init_cachedData_ebillet :", error);
   } finally {
     refreshPromise = null;
   }
@@ -109,7 +118,6 @@ export async function FullData() {
   return refreshPromise;
 }
 */
-
 /*
 export async function FullData(wixData_url_get_FullData) {
   const now = Date.now();

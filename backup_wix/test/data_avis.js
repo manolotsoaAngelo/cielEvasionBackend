@@ -4,7 +4,7 @@
                 id: 1,
                 name: "Marie Dupont",
                 profilePic: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face",
-                rating: 5,
+                rating: 1.5,
                 date: "2024-02-15",
                 content: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement. Le produit est arrivé bien emballé et en parfait état. La qualité est au rendez-vous et correspond parfaitement à la description. Je suis vraiment satisfaite de mon achat et n'hésiterai pas à recommander cette boutique à mes proches. L'expérience client était fluide du début à la fin.",
                 shortContent: "Service exceptionnel ! L'équipe a été très réactive et professionnelle. Je recommande vivement. Le produit est arrivé bien emballé et en parfait état...",
@@ -88,9 +88,7 @@
                 date: "2024-03-01",
                 content: "Produit de qualité, service client réactif. J'ai eu une question sur l'utilisation et l'équipe m'a répondu en moins d'une heure. Le produit correspond parfaitement à mes attentes et je le recommande sans hésitation.",
                 shortContent: "Produit de qualité, service client réactif. J'ai eu une question sur l'utilisation et l'équipe m'a répondu en moins d'une heure...",
-                images: [
-                    "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&h=600&fit=crop"
-                ],
+                
                 source: "facebook",
                 sourceName: "Facebook"
             }

@@ -7,6 +7,16 @@ import {
   FullData, init_cachedData_avis,
   refreshData,
 } from "../utils/fullData/avis.js";
+
+function capitalize(word) {
+  return word ? word.charAt(0).toUpperCase() + word.slice(1) : null;
+}
+function generateShortContent(content, maxLength = 60) {
+  if (content.length <= maxLength) return content;
+
+  return content.substring(0, maxLength).trim() + "...";
+}
+
 class CssService {
   constructor() {
   }
@@ -15,9 +25,30 @@ class CssService {
     return await refreshData();
   }
   async getAll_avis() {
-    return await FullData();
-  }
 
+    let result = []
+    let all_avis_csv = (await FullData())
+
+    all_avis_csv.forEach((avis, index) => {
+      if(avis.contenuDeLAvis1){
+        result.push({
+        id: index,
+        name: avis.nomDeLAuteur1,
+        profilePic: avis.photoDeProfil1,
+        images: avis.photos1 ? avis.photos1 : [],
+        rating: avis.noteSur51,
+        date: avis.dateDeLAvis1,
+        source: (avis.source).replace(" ","_"),
+        sourceName: capitalize(avis.source),
+        content: avis.contenuDeLAvis1 ? avis.contenuDeLAvis1 : "",
+        shortContent: avis.contenuDeLAvis1 ? generateShortContent(avis.contenuDeLAvis1, 60) : ""
+      })
+      }
+    })
+
+    return result
+  }
+  
   // section : comp-m56sapad // contenu du section : comp-mmk94ljq
 
   ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_section_admin_hauteux_max" defer></script>
