@@ -1,8 +1,10 @@
 # .gitignore
-node_modules/
+
+node_modules
+dist
 src/utils/css/partenaire
 .env
-.vscode/
+.vscode
 *.log
 .DS_Store
 .vercel
