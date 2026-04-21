@@ -4,8 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="x-apple-disable-message-reformatting">
     <title>Contre-proposition de rendez-vous - CIEL ÉVASION</title>
     <style>
+        table,
+        td {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            border: 0;
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -88,11 +104,8 @@
             background: #f0f7ff;
             border: 1px solid #dbeafe;
             border-radius: 12px;
-            padding: 15px 20px;
+            padding: 0;
             margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
         .date-info {
@@ -108,6 +121,7 @@
             padding: 4px 10px;
             border-radius: 20px;
             text-transform: uppercase;
+            display: inline-block;
         }
 
         .info-card {
@@ -165,6 +179,7 @@
             font-size: 16px;
             font-weight: 600;
             display: inline-block;
+            mso-padding-alt: 0;
         }
 
         .closing-box {
@@ -208,24 +223,35 @@
                 width: 45%;
             }
 
-            .date-option {
-                flex-direction: column;
-                text-align: center;
-                gap: 10px;
+            .mobile-stack {
+                display: block !important;
+                width: 100% !important;
+                text-align: center !important;
+                padding-top: 6px !important;
             }
         }
     </style>
 </head>
 
-<body>
-    <div class="wrapper">
-        <div class="container">
-            <div class="header-cell">
-                <img src="https://static.wixstatic.com/media/5192e0_c425c9f1e2c24775811e82e4f76e7a75~mv2.jpg"
-                    alt="CIEL ÉVASION" class="logo">
-            </div>
+<body style="margin:0; padding:0; background-color:#f3f4f6;">
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent; mso-hide:all; font-size:1px; line-height:1px;">
+        📍 Nouvelles dates disponibles : choisissez vite votre créneau.
+    </div>
 
-            <div class="content">
+    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" class="wrapper"
+        style="width:100%; background-color:#f3f4f6; padding:40px 12px;">
+        <tr>
+            <td align="center">
+                <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" class="container"
+                    style="max-width:700px; width:100%; margin:0 auto; background:#ffffff; border-radius:14px; overflow:hidden;">
+                    <tr>
+                        <td class="header-cell" style="padding:32px 20px; text-align:center;">
+                <img src="https://static.wixstatic.com/media/5192e0_c425c9f1e2c24775811e82e4f76e7a75~mv2.jpg"
+                    alt="CIEL ÉVASION" class="logo" style="max-width:520px; width:100%; height:auto; border-radius:10px; display:block; margin:0 auto;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="content" style="padding:0 40px 40px 40px;">
                 <h1>📍 Nouvelle proposition</h1>
 
                 <p class="text-block" style="text-align: center;">
@@ -244,18 +270,36 @@
                 <span class="section-label">Dates disponibles à choisir :</span>
 
                 <div class="date-option">
-                    <span class="date-info">📅 {{Date1}} </span>
-                    <span class="date-tag">Option A</span>
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <tr>
+                            <td style="padding:15px 20px;" class="date-info">📅 {{Date1}}</td>
+                            <td style="padding:15px 20px; text-align:right;" class="mobile-stack">
+                                <span class="date-tag">Option A</span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="date-option">
-                    <span class="date-info">📅 {{Date2}} </span>
-                    <span class="date-tag">Option B</span>
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <tr>
+                            <td style="padding:15px 20px;" class="date-info">📅 {{Date2}}</td>
+                            <td style="padding:15px 20px; text-align:right;" class="mobile-stack">
+                                <span class="date-tag">Option B</span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="date-option">
-                    <span class="date-info">📅 {{Date3}} </span>
-                    <span class="date-tag">Option C</span>
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <tr>
+                            <td style="padding:15px 20px;" class="date-info">📅 {{Date3}}</td>
+                            <td style="padding:15px 20px; text-align:right;" class="mobile-stack">
+                                <span class="date-tag">Option C</span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
                 <span class="section-label">Détails de votre dossier</span>
@@ -283,23 +327,36 @@
                 </div>
 
                 <div class="btn-container">
-                    <a href="https://www.ciel-evasion.fr/mes-billets" class="btn">Choisir mon créneau maintenant</a>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+                        <tr>
+                            <td align="center" bgcolor="#1f4fd8" style="border-radius:10px;">
+                                <a href="https://www.ciel-evasion.fr/mes-billets" class="btn"
+                                    style="background:#1f4fd8; color:#ffffff !important; text-decoration:none; padding:16px 36px; border-radius:10px; font-size:16px; font-weight:600; display:inline-block;">
+                                    Choisir mon créneau maintenant
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
                 <div class="closing-box">
                     <p style="margin:0; font-size: 15px;">À très vite dans les airs !</p>
                     <div class="signature">L’équipe CIEL ÉVASION ☁️</div>
                 </div>
-            </div>
-
-            <div class="footer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="footer" style="padding:26px; text-align:center; background:#f9fafb; border-top:1px solid #e5e7eb;">
                 <p>
                     Cet email vous a été envoyé par <strong>CIEL ÉVASION®</strong><br>
                     <a href="https://www.ciel-evasion.fr">www.ciel-evasion.fr</a>
                 </p>
-            </div>
-        </div>
-    </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 
 </html>
