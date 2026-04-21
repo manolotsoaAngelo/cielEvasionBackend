@@ -37,7 +37,7 @@ export async function runFunction(req, res) {
       result = await BrevoService.Usage_limit();
       break;
       case "email_contrepropositions":
-      result = await EmailService.email_Tj8PgM(value.valeur);
+      result = await EmailService.email_contrepropositions(value.valeur);
       break;
     case "email_Tj8PgM":
       result = await EmailService.email_Tj8PgM(value.valeur);
