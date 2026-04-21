@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contre-proposition de rendez-vous - CIEL ÉVASION</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #374151;
+        }
+
+        .wrapper {
+            width: 100%;
+            background-color: #f3f4f6;
+            padding: 40px 12px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-cell {
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 520px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 0 40px 40px 40px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Alert Box pour l'urgence */
+        .urgent-box {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-left: 4px solid #f97316;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .urgent-text {
+            font-size: 15px;
+            color: #9a3412;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* Style des options de dates */
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 25px 0 10px 0;
+            display: block;
+        }
+
+        .date-option {
+            background: #f0f7ff;
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .date-info {
+            font-size: 16px;
+            color: #1e40af;
+            font-weight: 700;
+        }
+
+        .date-tag {
+            background: #1f4fd8;
+            color: #ffffff;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .info-card {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table td {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 15px;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #6b7280;
+            width: 40%;
+        }
+
+        .value {
+            color: #111827;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .text-block {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 20px;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 35px 0;
+        }
+
+        .btn {
+            background: #1f4fd8;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 16px 36px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .closing-box {
+            padding: 25px 0;
+            text-align: right;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .signature {
+            font-size: 18px;
+            font-weight: 700;
+            color: #111827;
+            margin-top: 10px;
+        }
+
+        .footer {
+            padding: 26px;
+            text-align: center;
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: #1f4fd8;
+            text-decoration: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .content {
+                padding: 0 20px 30px 20px;
+            }
+
+            .label {
+                width: 45%;
+            }
+
+            .date-option {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="header-cell">
+                <img src="https://static.wixstatic.com/media/5192e0_c425c9f1e2c24775811e82e4f76e7a75~mv2.jpg"
+                    alt="CIEL ÉVASION" class="logo">
+            </div>
+
+            <div class="content">
+                <h1>📍 Nouvelle proposition</h1>
+
+                <p class="text-block" style="text-align: center;">
+                    Nous ne pouvons malheureusement pas confirmer votre demande initiale, mais nous avons trouvé des
+                    alternatives pour votre aventure !
+                </p>
+
+                <div class="urgent-box">
+                    <p class="urgent-text">
+                        ⚡ <strong>Vite, ne tardez pas !</strong> Les disponibilités s'envolent rapidement. Ces
+                        contre-propositions peuvent être réservées par d'autres clients entre-temps. Premier arrivé,
+                        premier servi !
+                    </p>
+                </div>
+
+                <span class="section-label">Dates disponibles à choisir :</span>
+
+                <div class="date-option">
+                    <span class="date-info">📅 {{Date1}}</span>
+                    <span class="date-tag">Option A</span>
+                </div>
+
+                <div class="date-option">
+                    <span class="date-info">📅 {{Date2}}</span>
+                    <span class="date-tag">Option B</span>
+                </div>
+
+                <div class="date-option">
+                    <span class="date-info">📅 {{Date3}}</span>
+                    <span class="date-tag">Option C</span>
+                </div>
+
+                <span class="section-label">Détails de votre dossier</span>
+                <div class="info-card">
+                    <table class="data-table">
+                        <tr>
+                            <td class="label">Activité</td>
+                            <td class="value">{{TitreActivite}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Bénéficiaire</td>
+                            <td class="value">{{Nom}}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Référence</td>
+                            <td class="value">{{eBillet}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="text-block">
+                    <strong>Comment valider ?</strong><br>
+                    Rendez-vous immédiatement sur votre compte pour sélectionner le créneau qui vous convient le mieux.
+                    Une fois votre choix validé, votre Bon d'Échange définitif sera généré automatiquement.
+                </div>
+
+                <div class="btn-container">
+                    <a href="https://www.ciel-evasion.fr/mes-billets" class="btn">Choisir mon créneau maintenant</a>
+                </div>
+
+                <div class="closing-box">
+                    <p style="margin:0; font-size: 15px;">À très vite dans les airs !</p>
+                    <div class="signature">L’équipe CIEL ÉVASION ☁️</div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>
+                    Cet email vous a été envoyé par <strong>CIEL ÉVASION®</strong><br>
+                    <a href="https://www.ciel-evasion.fr">www.ciel-evasion.fr</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -27,6 +27,20 @@ class EmailService {
         return htmlTemplate
     }
 
+    async email_contrepropositions(data) {
+        let objet = "Contre-proposition de rendez-vous - CIEL ÉVASION"
+        let path_template = path.join(
+            process.cwd(),
+            "src",
+            "utils",
+            "templateEmail",
+            "email_contrepropositions.html"
+        );
+        let htmlTemplate = await this.init_data_html_template(path_template, data.data);
+
+        return await this.send(htmlTemplate, objet, data.destinataire);
+    }
+
     async email_Tj8PgM(data) {
         let objet = "Confirmation de rendez vous"
         let path_template = path.join(
