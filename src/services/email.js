@@ -36,6 +36,25 @@ class EmailService {
             "templateEmail",
             "email_contrepropositions.html"
         );
+
+        let All_date = (data.data).All_date
+        let date_option = ""
+        let option = ["A", "B", "C"]
+        for (let [index, date] of All_date.entries()) {
+            date_option += `<div class="date-option">
+                    <table role="presentation" width="100%" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <tr>
+                            <td style="padding:15px 20px;" class="date-info">📅 ${date}</td>
+                            <td style="padding:15px 20px; text-align:right;" class="mobile-stack">
+                                <span class="date-tag">Option ${option[index]}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>`
+        }
+
+        (data.data).options = date_option
+
         let htmlTemplate = await this.init_data_html_template(path_template, data.data);
 
         return await this.send(htmlTemplate, objet, data.destinataire);
