@@ -1,0 +1,10 @@
+# .gitignore
+
+node_modules
+dist
+src/utils/css/partenaire
+.env
+.vscode
+*.log
+.DS_Store
+.vercel
