@@ -39,7 +39,7 @@ class BrevoService {
     async send(htmlTemplate, objet, expediteur, destinataire) {
         try {
             const mailOptions = {
-                from: `"dev-contact-Ciel-ÉVASION®" <${expediteur}>`,
+                from: `"Contact-Ciel-ÉVASION®" <${expediteur}>`,
                 to: destinataire,
                 subject: objet,
                 html: htmlTemplate
@@ -48,7 +48,7 @@ class BrevoService {
             const info = await this.transporter.sendMail(mailOptions);
 
             let msg = 'Envoi email à : ' + destinataire + ' avec messageId : ' + info.messageId
-            console.error(msg);
+            console.log(msg);
             return {
                 success: true,
                 messageId: msg,

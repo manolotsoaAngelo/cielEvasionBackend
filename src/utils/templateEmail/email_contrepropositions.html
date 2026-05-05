@@ -234,7 +234,8 @@
 </head>
 
 <body style="margin:0; padding:0; background-color:#f3f4f6;">
-    <div style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent; mso-hide:all; font-size:1px; line-height:1px;">
+    <div
+        style="display:none; max-height:0; overflow:hidden; opacity:0; color:transparent; mso-hide:all; font-size:1px; line-height:1px;">
         📍 Nouvelles dates disponibles : choisissez vite votre créneau.
     </div>
 
@@ -246,80 +247,84 @@
                     style="max-width:700px; width:100%; margin:0 auto; background:#ffffff; border-radius:14px; overflow:hidden;">
                     <tr>
                         <td class="header-cell" style="padding:32px 20px; text-align:center;">
-                <img src="https://static.wixstatic.com/media/5192e0_c425c9f1e2c24775811e82e4f76e7a75~mv2.jpg"
-                    alt="CIEL ÉVASION" class="logo" style="max-width:520px; width:100%; height:auto; border-radius:10px; display:block; margin:0 auto;">
+                            <img src="https://static.wixstatic.com/media/5192e0_c425c9f1e2c24775811e82e4f76e7a75~mv2.jpg"
+                                alt="CIEL ÉVASION" class="logo"
+                                style="max-width:520px; width:100%; height:auto; border-radius:10px; display:block; margin:0 auto;">
                         </td>
                     </tr>
                     <tr>
                         <td class="content" style="padding:0 40px 40px 40px;">
-                <h1>📍 Nouvelle proposition</h1>
+                            <h1>📍 Nouvelle proposition</h1>
 
-                <p class="text-block" style="text-align: center;">
-                    Nous ne pouvons malheureusement pas confirmer votre demande initiale, mais nous avons trouvé des
-                    alternatives pour votre aventure !
-                </p>
+                            <p class="text-block" style="text-align: center;">
+                                Nous ne pouvons malheureusement pas confirmer votre demande initiale, mais nous avons
+                                trouvé des
+                                alternatives pour votre aventure !
+                            </p>
 
-                <div class="urgent-box">
-                    <p class="urgent-text">
-                        ⚡ <strong>Vite, ne tardez pas !</strong> Les disponibilités s'envolent rapidement. Ces
-                        contre-propositions peuvent être réservées par d'autres clients entre-temps. Premier arrivé,
-                        premier servi !
-                    </p>
-                </div>
+                            <div class="urgent-box">
+                                <p class="urgent-text">
+                                    ⚡ <strong>Vite, ne tardez pas !</strong> Les disponibilités s'envolent rapidement.
+                                    Ces
+                                    contre-propositions peuvent être réservées par d'autres clients entre-temps. Premier
+                                    arrivé,
+                                    premier servi !
+                                </p>
+                            </div>
 
-                <span class="section-label">Dates disponibles à choisir :</span>
+                            <span class="section-label">Dates disponibles à choisir :</span>
+                            {{options}}
+                            <span class="section-label">Détails de votre dossier</span>
+                            <div class="info-card">
+                                <table class="data-table">
+                                    <tr>
+                                        <td class="label">Activité</td>
+                                        <td class="value">{{TitreActivite}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Bénéficiaire</td>
+                                        <td class="value">{{Nom}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label">Référence</td>
+                                        <td class="value">{{eBillet}}</td>
+                                    </tr>
+                                </table>
+                            </div>
 
-                {{options}}
+                            <div class="text-block">
+                                <strong>Comment valider ?</strong><br>
+                                Rendez-vous immédiatement sur votre compte pour sélectionner le créneau qui vous
+                                convient le mieux.
+                                Une fois votre choix validé, votre Bon d'Échange définitif sera généré automatiquement.
+                            </div>
 
-                <span class="section-label">Détails de votre dossier</span>
-                <div class="info-card">
-                    <table class="data-table">
-                        <tr>
-                            <td class="label">Activité</td>
-                            <td class="value">{{TitreActivite}}</td>
-                        </tr>
-                        <tr>
-                            <td class="label">Bénéficiaire</td>
-                            <td class="value">{{Nom}}</td>
-                        </tr>
-                        <tr>
-                            <td class="label">Référence</td>
-                            <td class="value">{{eBillet}}</td>
-                        </tr>
-                    </table>
-                </div>
+                            <div class="btn-container">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
+                                    <tr>
+                                        <td align="center" bgcolor="#1f4fd8" style="border-radius:10px;">
+                                            <a href="https://www.ciel-evasion.fr/mes-billets" class="btn"
+                                                style="background:#1f4fd8; color:#ffffff !important; text-decoration:none; padding:16px 36px; border-radius:10px; font-size:16px; font-weight:600; display:inline-block;">
+                                                Choisir mon créneau maintenant
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
 
-                <div class="text-block">
-                    <strong>Comment valider ?</strong><br>
-                    Rendez-vous immédiatement sur votre compte pour sélectionner le créneau qui vous convient le mieux.
-                    Une fois votre choix validé, votre Bon d'Échange définitif sera généré automatiquement.
-                </div>
-
-                <div class="btn-container">
-                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center">
-                        <tr>
-                            <td align="center" bgcolor="#1f4fd8" style="border-radius:10px;">
-                                <a href="https://www.ciel-evasion.fr/mes-billets" class="btn"
-                                    style="background:#1f4fd8; color:#ffffff !important; text-decoration:none; padding:16px 36px; border-radius:10px; font-size:16px; font-weight:600; display:inline-block;">
-                                    Choisir mon créneau maintenant
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="closing-box">
-                    <p style="margin:0; font-size: 15px;">À très vite dans les airs !</p>
-                    <div class="signature">L’équipe CIEL ÉVASION ☁️</div>
-                </div>
+                            <div class="closing-box">
+                                <p style="margin:0; font-size: 15px;">À très vite dans les airs !</p>
+                                <div class="signature">L’équipe CIEL ÉVASION ☁️</div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
-                        <td class="footer" style="padding:26px; text-align:center; background:#f9fafb; border-top:1px solid #e5e7eb;">
-                <p>
-                    Cet email vous a été envoyé par <strong>CIEL ÉVASION®</strong><br>
-                    <a href="https://www.ciel-evasion.fr">www.ciel-evasion.fr</a>
-                </p>
+                        <td class="footer"
+                            style="padding:26px; text-align:center; background:#f9fafb; border-top:1px solid #e5e7eb;">
+                            <p>
+                                Cet email vous a été envoyé par <strong>CIEL ÉVASION®</strong><br>
+                                <a href="https://www.ciel-evasion.fr">www.ciel-evasion.fr</a>
+                            </p>
                         </td>
                     </tr>
                 </table>

@@ -8,3 +8,17 @@ src/utils/css/partenaire
 *.log
 .DS_Store
 .vercel
+
+# À AJOUTER À LA FIN DE VOTRE .gitignore EXISTANT
+
+# === DOCKER (AJOUT ESSENTIEL) ===
+data/
+volumes/
+docker-data/
+Dockerfile
+.env.docker
+docker.env
+docker-compose.yml
+*.key
+*.pem
+.docker-cache/
