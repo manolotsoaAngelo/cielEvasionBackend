@@ -9,7 +9,7 @@ class EmailService {
 
     async emailAdmin() {
         ///return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'holiniainaprisca566@gmail.com', 'contact@ciel-evasion.fr']
-        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com', 'contact@ciel-evasion.fr']
+        return ['manolotsoa.randriambeloniaina@gmail.com', 'zelotobey@gmail.com']
         //return ['manolotsoa.randriambeloniaina@gmail.com', 'contact@ciel-evasion.fr']
     }
 
