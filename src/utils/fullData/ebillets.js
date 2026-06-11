@@ -21,7 +21,7 @@ export function init_cachedData_ebillet() {
   };
 }
 
-const WIX_DATA_URL = wixData_url_get_FullData
+const WIX_DATA_URL = "https://ciel-evasion.fr/_functions/WixData/all_ebillet/"
 
 export async function refreshData() {
   try {

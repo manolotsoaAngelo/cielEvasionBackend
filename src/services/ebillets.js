@@ -20,8 +20,7 @@ class EbilletsService {
     return await refreshData();
   }
   async getAll() {
-    return (await get_wix_services(wixData_url_get)).data;
-    //return await FullData();
+    return await FullData();
   }
 
   async getById(id) {
