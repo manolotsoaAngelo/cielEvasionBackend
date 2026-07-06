@@ -38,11 +38,31 @@ class AiService {
     }
 
     async AiGemini(content) {
-        const response = await (await this.ai).models.generateContent({
-            model: "gemini-3-flash-preview",
-            contents: content,
-        });
-        return response.text;
+        const models = [
+            "gemini-3.5-flash",
+            "gemini-2.5-flash",
+            "gemini-3-flash-preview",
+            "gemini-2.0-flash",
+            "gemini-2.0-flash-lite",
+            "gemini-flash-latest"
+        ];
+
+        let lastError = null;
+
+        for (const model of models) {
+            try {
+                const response = await (await this.ai).models.generateContent({
+                    model: model,
+                    contents: content,
+                });
+                return response.text;
+            } catch (error) {
+                console.warn(`[AI Service] Échec avec le modèle ${model}, tentative avec le modèle suivant... Erreur:`, error.message || error);
+                lastError = error;
+            }
+        }
+
+        throw new Error(`Tous les modèles Gemini ont échoué. Dernière erreur: ${lastError?.message || lastError}`);
     }
 }
 
