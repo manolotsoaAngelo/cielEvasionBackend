@@ -39,12 +39,12 @@ class AiService {
 
     async AiGemini(content) {
         const models = [
-            "gemini-3.5-flash",
             "gemini-2.5-flash",
             "gemini-3-flash-preview",
             "gemini-2.0-flash",
             "gemini-2.0-flash-lite",
-            "gemini-flash-latest"
+            "gemini-flash-latest",
+            "gemini-3.5-flash"
         ];
 
         let lastError = null;
