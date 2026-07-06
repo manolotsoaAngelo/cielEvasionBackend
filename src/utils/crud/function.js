@@ -105,9 +105,12 @@ export async function create_order_new(wixData) {
   ) {
     TVA = 10;
   } else {
+    TVA = 20;
+    /*
     TVA = Number(
       Math.round((lineItems.tax / (lineItems.price - lineItems.tax)) * 100)
     );
+    */
   }
   let tax = prix - prix / (1 + TVA / 100);
   delete command.paymentStatus;
