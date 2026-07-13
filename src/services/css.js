@@ -30,25 +30,25 @@ class CssService {
     let all_avis_csv = (await FullData())
 
     all_avis_csv.forEach((avis, index) => {
-      if(avis.contenuDeLAvis1){
+      if (avis.contenuDeLAvis1) {
         result.push({
-        id: index,
-        name: avis.nomDeLAuteur1,
-        profilePic: avis.photoDeProfil1,
-        images: avis.photos1 ? avis.photos1 : [],
-        rating: avis.noteSur51,
-        date: avis.dateDeLAvis1,
-        source: (avis.source).replace(" ","_"),
-        sourceName: capitalize(avis.source),
-        content: avis.contenuDeLAvis1 ? avis.contenuDeLAvis1 : "",
-        shortContent: avis.contenuDeLAvis1 ? generateShortContent(avis.contenuDeLAvis1, 60) : ""
-      })
+          id: index,
+          name: avis.nomDeLAuteur1,
+          profilePic: avis.photoDeProfil1,
+          images: avis.photos1 ? avis.photos1 : [],
+          rating: avis.noteSur51,
+          date: avis.dateDeLAvis1,
+          source: (avis.source).replace(" ", "_"),
+          sourceName: capitalize(avis.source),
+          content: avis.contenuDeLAvis1 ? avis.contenuDeLAvis1 : "",
+          shortContent: avis.contenuDeLAvis1 ? generateShortContent(avis.contenuDeLAvis1, 60) : ""
+        })
       }
     })
 
     return result
   }
-  
+
   // section : comp-m56sapad // contenu du section : comp-mmk94ljq
 
   ///<script src="https://ciel-evasion.fr/_functions/WixCss/get_section_admin_hauteux_max" defer></script>
@@ -103,17 +103,6 @@ class CssService {
   z-index: 10000;
   background: inherit;
 }
-#comp-mdiw7w5g2,
-#comp-m59ieqh9,
-#comp-m59ob8a72,
-#comp-mdznowf0 {
-  position: fixed !important;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10000;
-  background: inherit;
-}
 #comp-mceqgvd0,
 #comp-m59icq1u,
 #comp-m56rqvpq,
@@ -136,23 +125,17 @@ function adjustContentPadding() {
     const headers = [
         "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o"
     ].map(id => document.getElementById(id));
-    const footers = [
-        "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0"
-    ].map(id => document.getElementById(id));
     const contents = [
         "comp-mceqgvd0","comp-m59icq1u","comp-m56rqvpq","comp-mdznalu2"
     ].map(id => document.getElementById(id));
 
     let maxHeaderHeight = 0;
-    let maxFooterHeight = 0;
 
     headers.forEach(h => { if(h) maxHeaderHeight = Math.max(maxHeaderHeight, h.offsetHeight); });
-    footers.forEach(f => { if(f) maxFooterHeight = Math.max(maxFooterHeight, f.offsetHeight); });
 
     contents.forEach(c => {
         if(c) {
             c.style.paddingTop = maxHeaderHeight + "px";
-            c.style.paddingBottom = maxFooterHeight + "px";
         }
     });
 }
@@ -161,7 +144,6 @@ const retryInterval = setInterval(() => {
     adjustContentPadding();
     const allLoaded =
         document.getElementById("comp-mdiw6s9o") &&
-        document.getElementById("comp-mdiw7w5g2") &&
         document.getElementById("comp-mceqgvd0");
     if (allLoaded) clearInterval(retryInterval);
 }, 200);
@@ -172,8 +154,7 @@ const resizeObserver = new ResizeObserver(() => {
 
 setTimeout(() => {
     [
-        "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o",
-        "comp-mdiw7w5g2","comp-m59ieqh9","comp-m59ob8a72","comp-mdznowf0"
+        "comp-mdiw6s9o","comp-m59ic5d3","comp-m56uvovw","comp-mdzn7y3o"
     ].forEach(id => {
         const el = document.getElementById(id);
         if (el) resizeObserver.observe(el);
