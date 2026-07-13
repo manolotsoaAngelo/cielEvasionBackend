@@ -443,8 +443,12 @@ export async function facture_comptabilite_css(id_partenaire) {
           alt="Ciel-ÉVASION®" class="logo">
       </div>
       <div class="meta-container">
-        <h1 class="invoice-title">Facture n° <span class="invoice-number">00001493</span> ${partenaire.prenomPartenaire} ${partenaire.nom} </h1>
-        <p class="invoice-date">Date d'émission : ${new Date().toISOString().split('T')[0]}</p>
+        <h1 class="invoice-title">Facture de ${partenaire.title} </h1>
+        <p class="invoice-date">Date d'émission : ${new Intl.DateTimeFormat('fr-FR', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        }).format(new Date())}</p>
       </div>
     </header>
 
@@ -517,7 +521,11 @@ export async function facture_comptabilite_css(id_partenaire) {
     <section class="payment-section">
       <h2 class="section-title">Détail du paiement</h2>
       <div class="payment-details-box">
-        <div class="payment-col col-date">${new Date().toISOString().split('T')[0]}</div>
+        <div class="payment-col col-date">${new Intl.DateTimeFormat('fr-FR', {
+            day: 'numeric',
+            month: '2-digit',
+            year: 'numeric'
+        }).format(new Date())}</div>
         <div class="payment-col col-method">Réversion par virement</div>
         <div class="payment-col col-amount">${reversion_par_virement.toFixed(2).replace('.', ',')} €</div>
       </div>
