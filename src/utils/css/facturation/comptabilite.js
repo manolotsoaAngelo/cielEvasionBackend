@@ -435,8 +435,7 @@ export async function facture_comptabilite_css(id_partenaire) {
     window.onload = function () {
         window.onmessage = function (event) {
             if (event.data) {
-                window.print()
-                //window.parent.postMessage("print", "https://www.ciel-evasion.fr/");
+                window.print();
             }
         };
     };
