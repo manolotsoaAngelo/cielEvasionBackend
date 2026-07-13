@@ -5,12 +5,13 @@ import EbilletsService from "../../../services/ebillets.js";
 //console.log(await PartenairesService.getAll())
 //console.log(await PartenairesService.getByIdEbillet("6650005f-61b4-497f-8cca-2e8b08299fe3"))
 
+//facture_comptabilite_css("2369c7db-11f5-44b0-a030-9b71a4bb3637")
+
 export async function facture_comptabilite_css(id_partenaire) {
 
     //let id_partenaire = "2369c7db-11f5-44b0-a030-9b71a4bb3637"
 
-    let partenaire = await PartenairesService.getByIdEbillet(id_partenaire)
-
+    let partenaire = await PartenairesService.getById(id_partenaire)
     let all_facture_ebillet = await EbilletsService.getAllEbilletFactureByPartenaire(id_partenaire)
 
     let sous_total = 0, taxe_total = 0, prix_total = 0
