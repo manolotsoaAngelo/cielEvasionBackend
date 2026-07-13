@@ -431,7 +431,6 @@ export async function facture_comptabilite_css(id_partenaire) {
       }
     }
   </style>
-</head>
 <script>
     window.onload = function () {
         window.onmessage = function (event) {
@@ -441,6 +440,7 @@ export async function facture_comptabilite_css(id_partenaire) {
         };
     };
 </script>
+</head>
 
 <body>
   <div class="invoice-container">
@@ -548,6 +548,6 @@ export async function facture_comptabilite_css(id_partenaire) {
     </footer>
   </div>
 </body>
-</html>`
+</html>`.replace(/\s+/g, " ")
     }
 }
