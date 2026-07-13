@@ -10,7 +10,7 @@ import EbilletsService from "../services/ebillets.js";
 //console.log(await EbilletsService.getById('6650005f-61b4-497f-8cca-2e8b08299fe3'))
 //console.log(await EbilletsService.getAll())
 //console.log(await EbilletsService.getAllEbilletByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
-//console.log(await EbilletsService.getAllEbilletFactureByPartenaire("15d9204a-b1d1-4288-8e5e-24e0fde1b8d3"))
+//console.log(await EbilletsService.getAllEbilletFactureByPartenaire("2369c7db-11f5-44b0-a030-9b71a4bb3637"))
 //console.log(await EbilletsService.getAllEbilletFacture())
 
 export async function get_All_Ebillet_Facture(req, res) {
