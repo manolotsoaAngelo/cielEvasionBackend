@@ -40,24 +40,8 @@ function getNextInvoiceNumber() {
     return `Facture n° ${String(counter).padStart(8, '0')}`;
 }
 
-function getDatePrevisionFacturation_lundi(dateSaisie) {
-    let moisSuivant = dateSaisie.getMonth() + 1;
-    let annee = dateSaisie.getFullYear();
-    if (moisSuivant > 11) {
-        moisSuivant = 0;
-        annee++;
-    }
-    const premierJour = new Date(annee, moisSuivant, 1);
-    const jourSemaine = premierJour.getDay();
-    const joursAAjouter = (1 - jourSemaine + 7) % 7;
-    const premierLundi = new Date(premierJour);
-    premierLundi.setDate(premierJour.getDate() + joursAAjouter);
-    return premierLundi;
-}
-
 export async function facture_comptabilite_css(id_partenaire) {
 
-    let date_prevu = await getDatePrevisionFacturation_lundi(new Date())
     let counter = readCounter();
     counter++;
     saveCounter(counter);
@@ -511,7 +495,7 @@ export async function facture_comptabilite_css(id_partenaire) {
             day: 'numeric',
             month: 'short',
             year: 'numeric'
-        }).format(new Date(date_prevu))}</p>
+        }).format(new Date())}</p>
       </div>
     </header>
 
@@ -588,7 +572,7 @@ export async function facture_comptabilite_css(id_partenaire) {
             day: 'numeric',
             month: '2-digit',
             year: 'numeric'
-        }).format(new Date(date_prevu))}</div>
+        }).format(new Date())}</div>
         <div class="payment-col col-method">Réversion par virement</div>
         <div class="payment-col col-amount">${reversion_par_virement.toFixed(2).replace('.', ',')} €</div>
       </div>
