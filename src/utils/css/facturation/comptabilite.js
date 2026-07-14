@@ -44,7 +44,7 @@ export async function facture_comptabilite_css(id_partenaire) {
 
     let counter = readCounter();
     counter++;
-
+    saveCounter(counter);
 
     //let id_partenaire = "2369c7db-11f5-44b0-a030-9b71a4bb3637"
 
