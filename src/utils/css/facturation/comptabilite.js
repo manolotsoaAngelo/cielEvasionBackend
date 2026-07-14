@@ -1,4 +1,6 @@
 
+import fs from "fs";
+import path from "path";
 import PartenairesService from "../../../services/partenaires.js";
 import EbilletsService from "../../../services/ebillets.js";
 
@@ -7,7 +9,42 @@ import EbilletsService from "../../../services/ebillets.js";
 
 //facture_comptabilite_css("2369c7db-11f5-44b0-a030-9b71a4bb3637")
 
+const counterFile = path.join(process.cwd(), 'src', 'utils', 'css', 'facturation', 'counter.json');
+function readCounter() {
+    try {
+        if (!fs.existsSync(counterFile)) {
+            fs.writeFileSync(counterFile, JSON.stringify({ lastNumber: 0 }));
+            return 0;
+        }
+        const data = fs.readFileSync(counterFile, 'utf8');
+        const json = JSON.parse(data);
+        return json.lastNumber || 0;
+    } catch (error) {
+        console.error('Erreur lecture:', error);
+        return 0;
+    }
+}
+
+function saveCounter(number) {
+    try {
+        fs.writeFileSync(counterFile, JSON.stringify({ lastNumber: number }));
+    } catch (error) {
+        console.error('Erreur sauvegarde:', error);
+    }
+}
+
+function getNextInvoiceNumber() {
+    let counter = readCounter();
+    counter++;
+    saveCounter(counter);
+    return `Facture n° ${String(counter).padStart(8, '0')}`;
+}
+
 export async function facture_comptabilite_css(id_partenaire) {
+
+    let counter = readCounter();
+    counter++;
+
 
     //let id_partenaire = "2369c7db-11f5-44b0-a030-9b71a4bb3637"
 
@@ -40,6 +77,7 @@ export async function facture_comptabilite_css(id_partenaire) {
     let reversion_par_virement = prix_total - total
 
     return {
+        counter: String(counter).padStart(8, '0'),
         html: `
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,7 +85,7 @@ export async function facture_comptabilite_css(id_partenaire) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Facture ${partenaire.title}</title>
+  <title>${`Facture n° ${String(counter).padStart(8, '0')}`}</title>
   <style>
     /* ==========================================================================
        RESET & SYSTEM DEFAULTS
@@ -452,7 +490,7 @@ export async function facture_comptabilite_css(id_partenaire) {
           alt="Ciel-ÉVASION®" class="logo">
       </div>
       <div class="meta-container">
-        <h1 class="invoice-title">Facture de ${partenaire.title} </h1>
+        <h1 class="invoice-title">Facture n° <span class="invoice-number">${String(counter).padStart(8, '0')}</span></h1>
         <p class="invoice-date">Date d'émission : ${new Intl.DateTimeFormat('fr-FR', {
             day: 'numeric',
             month: 'short',
