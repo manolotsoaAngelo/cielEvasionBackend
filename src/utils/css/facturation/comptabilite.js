@@ -1,6 +1,10 @@
 
 import fs from "fs";
 import path from "path";
+import {
+    get_wix_services,
+    post_wix_services,
+} from "../../../utils/wixData/wixHttp.js";
 import PartenairesService from "../../../services/partenaires.js";
 import EbilletsService from "../../../services/ebillets.js";
 
@@ -40,11 +44,19 @@ function getNextInvoiceNumber() {
     return `Facture n° ${String(counter).padStart(8, '0')}`;
 }
 
+async function getNextInvoiceNumber_byWix() {
+    let collection_name = "Tableaudebord"
+    let wixData_url_get_FullData =
+        "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+
+    let result = (await get_wix_services(wixData_url_get_FullData)).data
+    return (result[0]).counterImpFact;
+}
+
 export async function facture_comptabilite_css(id_partenaire) {
 
-    let counter = readCounter();
+    let counter = await getNextInvoiceNumber_byWix();
     counter++;
-    saveCounter(counter);
 
     //let id_partenaire = "2369c7db-11f5-44b0-a030-9b71a4bb3637"
 
