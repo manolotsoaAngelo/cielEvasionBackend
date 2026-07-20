@@ -68,7 +68,7 @@ export async function facture_comptabilite_css(id_partenaire) {
   let Tbody = `<tbody>
     
     ${all_facture_ebillet.map((facture) => {
-    let commission = ((facture.prix * partenaire.taux_commission) + ((facture.prix * partenaire.taux_commission) * (20 / 100)))
+    let commission = facture.prix * partenaire.taux_commission
     sous_total += commission
     prix_total += facture.prix
     return `
