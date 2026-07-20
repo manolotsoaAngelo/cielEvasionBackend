@@ -2,8 +2,8 @@
 import fs from "fs";
 import path from "path";
 import {
-    get_wix_services,
-    post_wix_services,
+  get_wix_services,
+  post_wix_services,
 } from "../../../utils/wixData/wixHttp.js";
 import PartenairesService from "../../../services/partenaires.js";
 import EbilletsService from "../../../services/ebillets.js";
@@ -15,63 +15,63 @@ import EbilletsService from "../../../services/ebillets.js";
 
 const counterFile = path.join(process.cwd(), 'src', 'utils', 'css', 'facturation', 'counter.json');
 function readCounter() {
-    try {
-        if (!fs.existsSync(counterFile)) {
-            fs.writeFileSync(counterFile, JSON.stringify({ lastNumber: 0 }));
-            return 0;
-        }
-        const data = fs.readFileSync(counterFile, 'utf8');
-        const json = JSON.parse(data);
-        return json.lastNumber || 0;
-    } catch (error) {
-        console.error('Erreur lecture:', error);
-        return 0;
+  try {
+    if (!fs.existsSync(counterFile)) {
+      fs.writeFileSync(counterFile, JSON.stringify({ lastNumber: 0 }));
+      return 0;
     }
+    const data = fs.readFileSync(counterFile, 'utf8');
+    const json = JSON.parse(data);
+    return json.lastNumber || 0;
+  } catch (error) {
+    console.error('Erreur lecture:', error);
+    return 0;
+  }
 }
 
 function saveCounter(number) {
-    try {
-        fs.writeFileSync(counterFile, JSON.stringify({ lastNumber: number }));
-    } catch (error) {
-        console.error('Erreur sauvegarde:', error);
-    }
+  try {
+    fs.writeFileSync(counterFile, JSON.stringify({ lastNumber: number }));
+  } catch (error) {
+    console.error('Erreur sauvegarde:', error);
+  }
 }
 
 function getNextInvoiceNumber() {
-    let counter = readCounter();
-    counter++;
-    saveCounter(counter);
-    return `Facture n° ${String(counter).padStart(8, '0')}`;
+  let counter = readCounter();
+  counter++;
+  saveCounter(counter);
+  return `Facture n° ${String(counter).padStart(8, '0')}`;
 }
 
 async function getNextInvoiceNumber_byWix() {
-    let collection_name = "Tableaudebord"
-    let wixData_url_get_FullData =
-        "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
+  let collection_name = "Tableaudebord"
+  let wixData_url_get_FullData =
+    "https://ciel-evasion.fr/_functions/WixData/" + collection_name + "/";
 
-    let result = (await get_wix_services(wixData_url_get_FullData)).data
-    return (result[0]).counterImpFact;
+  let result = (await get_wix_services(wixData_url_get_FullData)).data
+  return (result[0]).counterImpFact;
 }
 
 export async function facture_comptabilite_css(id_partenaire) {
 
-    let counter = await getNextInvoiceNumber_byWix();
-    counter++;
+  let counter = await getNextInvoiceNumber_byWix();
+  counter++;
 
-    //let id_partenaire = "2369c7db-11f5-44b0-a030-9b71a4bb3637"
+  //let id_partenaire = "2369c7db-11f5-44b0-a030-9b71a4bb3637"
 
-    let partenaire = await PartenairesService.getById(id_partenaire)
-    let all_facture_ebillet = await EbilletsService.getAllEbilletFactureByPartenaire(id_partenaire)
+  let partenaire = await PartenairesService.getById(id_partenaire)
+  let all_facture_ebillet = await EbilletsService.getAllEbilletFactureByPartenaire(id_partenaire)
 
-    let sous_total = 0, taxe_total = 0, prix_total = 0
+  let sous_total = 0, taxe_total = 0, prix_total = 0
 
-    let Tbody = `<tbody>
+  let Tbody = `<tbody>
     
     ${all_facture_ebillet.map((facture) => {
-        let commission = (facture.prix * partenaire.taux_commission) + ((facture.prix * partenaire.taux_commission) * (20 / 100))
-        sous_total += commission
-        prix_total += facture.prix
-        return `
+    let commission = ((facture.prix * partenaire.taux_commission) + ((facture.prix * partenaire.taux_commission) * (20 / 100))).toFixed(2)
+    sous_total += commission
+    prix_total += facture.prix
+    return `
             <tr>
               <td class="cell-elements">${facture.ref} : ${facture.prenom} ${facture.nom}</td>
               <td class="cell-quantity">1</td>
@@ -80,17 +80,17 @@ export async function facture_comptabilite_css(id_partenaire) {
               <td class="cell-commission">${commission}</td>
             </tr>
           `
-    }).join('')}
+  }).join('')}
     </tbody>`
 
-    taxe_total = sous_total * (20 / 100)
-    let total = sous_total + taxe_total
+  taxe_total = sous_total * (20 / 100)
+  let total = sous_total + taxe_total
 
-    let reversion_par_virement = prix_total - total
+  let reversion_par_virement = prix_total - total
 
-    return {
-        counter: String(counter).padStart(8, '0'),
-        html: `
+  return {
+    counter: String(counter).padStart(8, '0'),
+    html: `
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -504,10 +504,10 @@ export async function facture_comptabilite_css(id_partenaire) {
       <div class="meta-container">
         <h1 class="invoice-title">Facture n° <span class="invoice-number">${String(counter).padStart(8, '0')}</span></h1>
         <p class="invoice-date">Date d'émission : ${new Intl.DateTimeFormat('fr-FR', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric'
-        }).format(new Date())}</p>
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric'
+    }).format(new Date())}</p>
       </div>
     </header>
 
@@ -581,10 +581,10 @@ export async function facture_comptabilite_css(id_partenaire) {
       <h2 class="section-title">Détail du paiement</h2>
       <div class="payment-details-box">
         <div class="payment-col col-date">${new Intl.DateTimeFormat('fr-FR', {
-            day: 'numeric',
-            month: '2-digit',
-            year: 'numeric'
-        }).format(new Date())}</div>
+      day: 'numeric',
+      month: '2-digit',
+      year: 'numeric'
+    }).format(new Date())}</div>
         <div class="payment-col col-method">Réversion par virement</div>
         <div class="payment-col col-amount">${reversion_par_virement.toFixed(2).replace('.', ',')} €</div>
       </div>
@@ -599,5 +599,5 @@ export async function facture_comptabilite_css(id_partenaire) {
   </div>
 </body>
 </html>`.replace(/\s+/g, " ")
-    }
+  }
 }
