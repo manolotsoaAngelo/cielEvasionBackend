@@ -68,7 +68,7 @@ export async function facture_comptabilite_css(id_partenaire) {
   let Tbody = `<tbody>
     
     ${all_facture_ebillet.map((facture) => {
-    let commission = ((facture.prix * partenaire.taux_commission) + ((facture.prix * partenaire.taux_commission) * (20 / 100))).toFixed(2)
+    let commission = ((facture.prix * partenaire.taux_commission) + ((facture.prix * partenaire.taux_commission) * (20 / 100)))
     sous_total += commission
     prix_total += facture.prix
     return `
@@ -77,7 +77,7 @@ export async function facture_comptabilite_css(id_partenaire) {
               <td class="cell-quantity">1</td>
               <td class="cell-price">${facture.prix}</td>
               <td class="cell-taxes">20%</td>
-              <td class="cell-commission">${commission}</td>
+              <td class="cell-commission">${commission.toFixed(2).replace('.', ',')}</td>
             </tr>
           `
   }).join('')}
