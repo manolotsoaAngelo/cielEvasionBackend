@@ -1277,8 +1277,7 @@ export async function pop_rdv_css() {
   </script>
 </body>
 
-</html>
-        `
-    }
+</html>`.replace(/\s+/g, " ")
 
+    }
 }
