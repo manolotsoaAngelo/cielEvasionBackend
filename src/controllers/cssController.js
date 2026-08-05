@@ -9,7 +9,7 @@ import {
 } from "../utils/css/facturation/comptabilite.js";
 import {
   pop_rdv_css
-} from "../utils/css/pop_rdv_css/rdv.js";
+} from "../utils/css/pop_rdv/rdv.js";
 
 //console.log(await CssService.partenaires_header_footer_body_fix())
 //console.log(await CssService.importateur_header_fix())
