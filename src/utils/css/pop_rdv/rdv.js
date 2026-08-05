@@ -1067,6 +1067,9 @@ export async function pop_rdv_css() {
 
         souscriptionTimer = setTimeout(() => {
           isSouscriptionLoading = false;
+          if (cardNo) {
+            cardNo.style.display = 'none';
+          }
           if (btnNext) {
             btnNext.disabled = false;
             btnNext.style.opacity = '1';
@@ -1192,7 +1195,10 @@ export async function pop_rdv_css() {
       const cardYes = document.getElementById('card-garantie-yes');
       const cardNo = document.getElementById('card-garantie-no');
       if (cardYes) cardYes.classList.remove('selected');
-      if (cardNo) cardNo.classList.remove('selected');
+      if (cardNo) {
+        cardNo.classList.remove('selected');
+        cardNo.style.display = 'flex';
+      }
 
       currentStep = 1;
       updateAgeLabel();
