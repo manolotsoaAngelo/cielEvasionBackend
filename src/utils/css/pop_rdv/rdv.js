@@ -906,7 +906,6 @@ export async function pop_rdv_css() {
     let currentStep = 1;
     const totalSteps = 5;
     function updateStepUI() {
-      // Hide or show tab 4 depending on ebillet.souscription
       const tab4 = document.getElementById('tab-4');
       if (tab4) {
         if (ebillet && ebillet.souscription === true) {
@@ -915,7 +914,6 @@ export async function pop_rdv_css() {
           tab4.style.display = 'block';
         }
       }
-      // Hide all steps
       for (let i = 1; i <= totalSteps; i++) {
         document.getElementById(\`step-\${i}\`).classList.remove('active');
         const tab = document.getElementById(\`tab-\${i}\`);
@@ -929,7 +927,6 @@ export async function pop_rdv_css() {
         }
       }
       document.getElementById(\`step-\${currentStep}\`).classList.add('active');
-      // Update Buttons Text and behavior
       const btnBack = document.getElementById('btn-back');
       const btnNext = document.getElementById('btn-next');
       if (currentStep === 1) {
@@ -978,7 +975,6 @@ export async function pop_rdv_css() {
           showPopup(errorMsg, "Erreur de validation");
           return false;
         }
-        // Auto-fill Step 5 fields with ebillet data if currently empty
         const telEl = document.getElementById('telephone');
         const prenomEl = document.getElementById('prenom');
         const nomEl = document.getElementById('nom');
@@ -1029,7 +1025,6 @@ export async function pop_rdv_css() {
         }
         updateStepUI();
       } else {
-        // Submit final form
         submitForm();
       }
     }
@@ -1046,13 +1041,12 @@ export async function pop_rdv_css() {
     }
     function goToStep(step) {
       if (step === 4 && ebillet && ebillet.souscription === true) {
-        return; // Skip step 4 if souscription is true
+        return;
       }
       if (step < currentStep) {
         currentStep = step;
         updateStepUI();
       } else if (step > currentStep) {
-        // Validate intermediate steps before jumping forward
         if (validateCurrentStep()) {
           currentStep = step;
           updateStepUI();
@@ -1098,14 +1092,11 @@ export async function pop_rdv_css() {
       const ageDisplay = calculatedAge !== null ? \`\${calculatedAge} ans\` : dateNaissanceVal;
       const poids = document.getElementById('poids').value;
       const taille = document.getElementById('taille').value;
-      // Hide footer & tabs
       document.querySelector('.stepper-nav').style.display = 'none';
       document.getElementById('modal-footer').style.display = 'none';
-      // Hide form steps
       for (let i = 1; i <= totalSteps; i++) {
         document.getElementById(\`step-\${i}\`).classList.remove('active');
       }
-      // Build Summary
       const recapHTML = \`
         <div class="recap-item">
           <span class="recap-label">Réf. E-billet :</span>
@@ -1255,7 +1246,6 @@ export async function pop_rdv_css() {
     window.addEventListener('DOMContentLoaded', () => {
       const today = new Date();
       const todayStr = today.toISOString().split('T')[0];
-      // Lock past dates & enforce unique selections for availability dates
       ['date-1', 'date-2', 'date-3'].forEach(id => {
         const dateEl = document.getElementById(id);
         if (dateEl) {
@@ -1264,7 +1254,6 @@ export async function pop_rdv_css() {
           dateEl.addEventListener('input', validateUniqueAvailabilityDates);
         }
       });
-      // Lock future dates and require at least 6 years old for Date de Naissance
       const maxDate = new Date(today.getFullYear() - 6, today.getMonth(), today.getDate()).toISOString().split('T')[0];
       const dateInput = document.getElementById('date_de_naissance');
       if (dateInput) {
