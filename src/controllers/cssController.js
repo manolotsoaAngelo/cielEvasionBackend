@@ -18,8 +18,8 @@ import {
 //console.log(await CssService.avis_Client_full_body())
 
 export async function get_pop_rdv_css(req, res) {
-  let pop_rdv_css = await pop_rdv_css()
-  res.json(compressed_obj(pop_rdv_css));
+  let pop = await pop_rdv_css()
+  res.json(compressed_obj(pop));
 }
 
 export async function post_facture_comptabilite_css(req, res) {
