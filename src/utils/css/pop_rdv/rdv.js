@@ -1,4 +1,4 @@
-import { EbilletsService } from "../../../services/ebillets.js";
+import EbilletsService from "../../../services/ebillets.js";
 
 export async function pop_rdv_css() {
 
