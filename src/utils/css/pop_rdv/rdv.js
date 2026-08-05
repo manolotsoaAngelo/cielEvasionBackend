@@ -1144,25 +1144,25 @@ export async function pop_rdv_css() {
       document.getElementById('recap-content').innerHTML = recapHTML;
       document.getElementById('step-success').classList.add('active');
 
-      let resultat = ebillet
+      let resultat = ebillet;
 
-      resultat._id = ebillet._id
-      resultat.ref = refEbillet
-      resultat.rdvDemand1 = d1
-      resultat.choixHoraireDate1 = h1
-      resultat.rdvDemand11 = d2
-      resultat.choixHoraireDate2 = h2
-      resultat.rdvDemand111 = d3
-      resultat.choixHoraireDate3 = h3
-      resultat.lieu = lieuSelected
-      resultat.souscription = garantieOui
-      resultat.lieu111 = tel
-      resultat.date_de_naissance = dateNaissanceVal
-      resultat.poids = Number(poids)
-      resultat.taille = Number(taille)
-      resultat.nb_rdv = Number(1)
+      resultat._id = ebillet._id;
+      resultat.ref = refEbillet;
+      resultat.rdvDemand1 = d1;
+      resultat.choixHoraireDate1 = h1;
+      resultat.rdvDemand11 = d2;
+      resultat.choixHoraireDate2 = h2;
+      resultat.rdvDemand111 = d3;
+      resultat.choixHoraireDate3 = h3;
+      resultat.lieu = lieuSelected;
+      resultat.souscription = garantieOui;
+      resultat.lieu111 = tel;
+      resultat.date_de_naissance = dateNaissanceVal;
+      resultat.poids = Number(poids);
+      resultat.taille = Number(taille);
+      resultat.nb_rdv = Number(1);
 
-      console.log(resultat)
+      console.log(resultat);
       sendReturnMessage({ type_msg: "save_rdv", data: resultat });
     }
 
