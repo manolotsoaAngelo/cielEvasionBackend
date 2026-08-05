@@ -900,7 +900,7 @@ export async function pop_rdv_css() {
     </div>
   </div>
   <script>
-    let all_ebillet = ${all_ebillet};
+    let all_ebillet = ${JSON.stringify(all_ebillet)};
     let ebillet;
 
     let currentStep = 1;
