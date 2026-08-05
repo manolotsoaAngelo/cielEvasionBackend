@@ -2,10 +2,10 @@ import EbilletsService from "../../../services/ebillets.js";
 
 export async function pop_rdv_css() {
 
-    let all_ebillet = await EbilletsService.getAll()
+  let all_ebillet = await EbilletsService.getAll()
 
-    return {
-        html: `
+  return {
+    html: `
         <!DOCTYPE html>
 <html lang="fr">
 
@@ -1265,7 +1265,7 @@ export async function pop_rdv_css() {
 
     function closePopup() {
       const overlay = document.getElementById('custom-popup');
-      if (overlay) overlay.style.display = 'none';
+      if (overlay) overlay.style.display = 'none'; sendReturnMessage({ type_msg: "annulation" });
     }
 
     function closePopupOnBackdrop(e) {
@@ -1299,5 +1299,5 @@ export async function pop_rdv_css() {
 
 </html>`.replace(/\s+/g, " ")
 
-    }
+  }
 }
