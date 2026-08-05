@@ -1014,7 +1014,7 @@ export async function pop_rdv_css() {
         }
         updateStepUI();
       } else {
-        showPopup("Action d'annulation déclenchée.", "Annulation");
+        sendReturnMessage({ type_msg: "annulation" })
       }
     }
     function goToStep(step) {
@@ -1265,7 +1265,7 @@ export async function pop_rdv_css() {
 
     function closePopup() {
       const overlay = document.getElementById('custom-popup');
-      if (overlay) overlay.style.display = 'none'; sendReturnMessage({ type_msg: "annulation" });
+      if (overlay) overlay.style.display = 'none';
     }
 
     function closePopupOnBackdrop(e) {
