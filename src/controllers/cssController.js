@@ -7,12 +7,20 @@ import CssService from "../services/css.js";
 import {
   facture_comptabilite_css
 } from "../utils/css/facturation/comptabilite.js";
+import {
+  pop_rdv_css
+} from "../utils/css/pop_rdv_css/rdv.js";
 
 //console.log(await CssService.partenaires_header_footer_body_fix())
 //console.log(await CssService.importateur_header_fix())
 //console.log((await CssService.getAll_avis()))
 //console.log((await CssService.getAll_avis())[0].images)
 //console.log(await CssService.avis_Client_full_body())
+
+export async function get_pop_rdv_css(req, res) {
+  let pop_rdv_css = await pop_rdv_css()
+  res.json(compressed_obj(pop_rdv_css));
+}
 
 export async function post_facture_comptabilite_css(req, res) {
   let value = post(req, res);

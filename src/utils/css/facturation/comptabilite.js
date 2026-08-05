@@ -8,6 +8,12 @@ import {
 import PartenairesService from "../../../services/partenaires.js";
 import EbilletsService from "../../../services/ebillets.js";
 
+/*
+import {
+  facture_comptabilite_css
+} from "../utils/css/facturation/comptabilite.js";
+*/
+
 //console.log(await PartenairesService.getAll())
 //console.log(await PartenairesService.getByIdEbillet("6650005f-61b4-497f-8cca-2e8b08299fe3"))
 
