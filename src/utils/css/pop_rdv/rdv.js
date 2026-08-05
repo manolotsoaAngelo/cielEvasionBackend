@@ -790,7 +790,7 @@ export async function pop_rdv_css() {
         <div class="radio-card-group">
           <!-- Option 1: Souscrire -->
           <label class="radio-card selected" id="card-garantie-yes" onclick="selectGarantie(true)">
-            <input type="radio" name="garantie" id="garantie-oui" value="oui" checked>
+            <input type="radio" name="garantie" id="garantie-oui" value="oui">
             <div class="radio-content">
               <div class="radio-title">
                 <span>
@@ -1012,12 +1012,6 @@ export async function pop_rdv_css() {
     }
     function nextStep() {
       if (!validateCurrentStep()) return;
-      if (currentStep === 4) {
-        const radioYes = document.getElementById('garantie-oui');
-        if (radioYes && radioYes.checked) {
-          sendReturnMessage({ type_msg: "souscription", data: ebillet });
-        }
-      }
       if (currentStep < totalSteps) {
         currentStep++;
         if (currentStep === 4 && ebillet && ebillet.souscription === true) {
@@ -1155,7 +1149,6 @@ export async function pop_rdv_css() {
       resultat.rdvDemand111 = d3;
       resultat.choixHoraireDate3 = h3;
       resultat.lieu = lieuSelected;
-      resultat.souscription = garantieOui;
       resultat.lieu111 = tel;
       resultat.date_de_naissance = dateNaissanceVal;
       resultat.poids = Number(poids);
