@@ -1178,7 +1178,7 @@ export async function pop_rdv_css() {
       resultat.taille = Number(taille);
       resultat.nb_rdv = Number(1);
 
-      console.log(resultat)
+      console.log(resultat);
       sendReturnMessage({ type_msg: "save_rdv", data: resultat });
     }
     function resetForm() {
