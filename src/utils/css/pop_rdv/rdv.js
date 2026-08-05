@@ -13,7 +13,6 @@ export async function pop_rdv_css() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Réservation & Disponibilités</title>
-  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -42,7 +41,7 @@ export async function pop_rdv_css() {
     }
 
     body {
-      background: var(--bg-page);
+      background: transparent !important;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -52,20 +51,6 @@ export async function pop_rdv_css() {
       overflow-x: hidden;
     }
 
-    /* Background styling */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: transparent;
-      z-index: -2;
-      opacity: 0.85;
-    }
-
-    /* Main Modal Card */
     .modal-card {
       background: var(--card-bg);
       width: 100%;
@@ -89,7 +74,6 @@ export async function pop_rdv_css() {
       }
     }
 
-    /* Brand Header */
     .brand-header {
       display: flex;
       align-items: center;
@@ -125,7 +109,6 @@ export async function pop_rdv_css() {
       letter-spacing: -0.4px;
     }
 
-    /* Title Block */
     .step-header {
       margin-bottom: 28px;
     }
@@ -144,7 +127,6 @@ export async function pop_rdv_css() {
       font-weight: 400;
     }
 
-    /* Stepper Tabs Bar */
     .stepper-nav {
       display: flex;
       gap: 8px;
@@ -178,7 +160,6 @@ export async function pop_rdv_css() {
       border-bottom-color: #34c759;
     }
 
-    /* Form Body */
     .step-content {
       display: none;
       animation: fadeIn 0.3s ease;
@@ -200,7 +181,6 @@ export async function pop_rdv_css() {
       }
     }
 
-    /* Outlined Form Field Group */
     .field-group {
       margin-bottom: 20px;
       position: relative;
@@ -214,7 +194,6 @@ export async function pop_rdv_css() {
       display: block;
     }
 
-    /* Field container with clean outline style */
     .input-outline-wrapper {
       position: relative;
     }
@@ -247,7 +226,6 @@ export async function pop_rdv_css() {
       padding-right: 40px;
     }
 
-    /* Field grid for step 2 (Date + Time slot) */
     .dispo-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -269,7 +247,6 @@ export async function pop_rdv_css() {
       gap: 6px;
     }
 
-    /* Location Choice Box for Step 3 */
     .location-box {
       background: #f4f5f7;
       border-radius: 8px;
@@ -309,7 +286,6 @@ export async function pop_rdv_css() {
       cursor: pointer;
     }
 
-    /* Step 5 - Infos Section Box (Matching photo) */
     .infos-phone-box {
       background: #f4f5f7;
       padding: 20px 24px;
@@ -349,7 +325,6 @@ export async function pop_rdv_css() {
       border-radius: 8px;
     }
 
-    /* Radio Cards for Step 4 */
     .radio-card-group {
       display: flex;
       flex-direction: column;
@@ -428,7 +403,6 @@ export async function pop_rdv_css() {
       margin-left: 8px;
     }
 
-    /* Actions Footer */
     .modal-footer {
       display: flex;
       justify-content: flex-end;
@@ -474,7 +448,6 @@ export async function pop_rdv_css() {
       box-shadow: 0 6px 16px rgba(24, 144, 255, 0.4);
     }
 
-    /* Success View */
     .success-box {
       text-align: center;
       padding: 30px 10px;
@@ -530,7 +503,6 @@ export async function pop_rdv_css() {
       max-width: 60%;
     }
 
-    /* Mobile Responsive */
     @media (max-width: 600px) {
       .modal-card {
         padding: 28px 20px;
@@ -572,7 +544,6 @@ export async function pop_rdv_css() {
       }
     }
 
-    /* Custom Popup Modal Overlay */
     .popup-overlay {
       position: fixed;
       top: 0;
@@ -656,7 +627,6 @@ export async function pop_rdv_css() {
 
 <body>
   <div class="modal-card">
-    <!-- Brand Header -->
     <div class="brand-header">
       <div class="brand-left">
         <img src="https://static.wixstatic.com/media/5192e0_e7e2430dd874429d93e0527b58faa1c8~mv2.png" alt="Ciel Évasion"
@@ -665,7 +635,6 @@ export async function pop_rdv_css() {
         <h1 class="brand-name">Prendre rendez-vous</h1>
       </div>
     </div>
-    <!-- Stepper Navigation Bar -->
     <div class="stepper-nav">
       <div class="step-tab active" id="tab-1" onclick="goToStep(1)">1. Réservation</div>
       <div class="step-tab" id="tab-2" onclick="goToStep(2)">2. Disponibilités</div>
@@ -673,9 +642,7 @@ export async function pop_rdv_css() {
       <div class="step-tab" id="tab-4" onclick="goToStep(4)">4. Souscription</div>
       <div class="step-tab" id="tab-5" onclick="goToStep(5)">5. Mes infos</div>
     </div>
-    <!-- Main Form Form -->
     <form id="multi-step-form" onsubmit="handleFormSubmit(event)">
-      <!-- ================= ÉTAPE 1 ================= -->
       <div class="step-content active" id="step-1">
         <div class="step-header">
           <h2 class="step-title">Vérifier et compléter votre réservation</h2>
@@ -694,13 +661,11 @@ export async function pop_rdv_css() {
           </div>
         </div>
       </div>
-      <!-- ================= ÉTAPE 2 ================= -->
       <div class="step-content" id="step-2">
         <div class="step-header">
           <h2 class="step-title">Choisissez vos disponibilités</h2>
           <p class="step-subtitle">Sélectionnez 3 choix de dates avec leur créneau horaire préféré</p>
         </div>
-        <!-- Choice 1 -->
         <div class="dispo-row">
           <div class="dispo-row-title">Option 1</div>
           <div>
@@ -718,7 +683,6 @@ export async function pop_rdv_css() {
             </select>
           </div>
         </div>
-        <!-- Choice 2 -->
         <div class="dispo-row">
           <div class="dispo-row-title">Option 2</div>
           <div>
@@ -736,7 +700,6 @@ export async function pop_rdv_css() {
             </select>
           </div>
         </div>
-        <!-- Choice 3 -->
         <div class="dispo-row">
           <div class="dispo-row-title">Option 3</div>
           <div>
@@ -755,7 +718,6 @@ export async function pop_rdv_css() {
           </div>
         </div>
       </div>
-      <!-- ================= ÉTAPE 3 ================= -->
       <div class="step-content" id="step-3">
         <div class="location-box">
           <h3 class="location-title">Lieu de préférence pour mon activité *</h3>
@@ -781,15 +743,13 @@ export async function pop_rdv_css() {
           </div>
         </div>
       </div>
-      <!-- ================= ÉTAPE 4 ================= -->
       <div class="step-content" id="step-4">
         <div class="step-header">
           <h2 class="step-title">Protégez-vous contre les imprévus</h2>
           <p class="step-subtitle">Assurez votre réservation en cas de retard, maladie ou annulation</p>
         </div>
         <div class="radio-card-group">
-          <!-- Option 1: Souscrire -->
-          <label class="radio-card selected" id="card-garantie-yes" onclick="selectGarantie(true)">
+          <label class="radio-card" id="card-garantie-yes" onclick="selectGarantie(true)">
             <input type="radio" name="garantie" id="garantie-oui" value="oui">
             <div class="radio-content">
               <div class="radio-title">
@@ -803,7 +763,6 @@ export async function pop_rdv_css() {
               </div>
             </div>
           </label>
-          <!-- Option 2: Refuser -->
           <label class="radio-card" id="card-garantie-no" onclick="selectGarantie(false)">
             <input type="radio" name="garantie" id="garantie-non" value="non">
             <div class="radio-content">
@@ -817,9 +776,7 @@ export async function pop_rdv_css() {
           </label>
         </div>
       </div>
-      <!-- ================= ÉTAPE 5 (Matching Photo) ================= -->
       <div class="step-content" id="step-5">
-        <!-- Grey Container Form Fields -->
         <div class="mes-infos-box">
           <div class="field-group">
             <label class="field-label" for="telephone">N° de téléphone (pour le point météo) *</label>
@@ -859,7 +816,6 @@ export async function pop_rdv_css() {
           </div>
         </div>
       </div>
-      <!-- ================= SUCCESS CONFIRMATION ================= -->
       <div class="step-content" id="step-success">
         <div class="success-box">
           <div class="success-icon">
@@ -870,13 +826,11 @@ export async function pop_rdv_css() {
           <h2 class="step-title">Réservation confirmée !</h2>
           <p class="step-subtitle">Votre demande a été traitée avec succès.</p>
           <div class="recap-list" id="recap-content">
-            <!-- Dynamic Javascript Fill -->
           </div>
           <button type="button" class="btn btn-primary" style="width: 100%;" onclick="resetForm()">Effectuer une autre
             démarche</button>
         </div>
       </div>
-      <!-- Modal Action Buttons Footer -->
       <div class="modal-footer" id="modal-footer">
         <button type="button" class="btn btn-secondary" id="btn-back" onclick="prevStep()">Annuler</button>
         <button type="button" class="btn btn-primary" id="btn-next" onclick="nextStep()">Suivant</button>
@@ -884,7 +838,6 @@ export async function pop_rdv_css() {
     </form>
   </div>
 
-  <!-- Custom Popup Overlay -->
   <div id="custom-popup" class="popup-overlay" style="display: none;" onclick="closePopupOnBackdrop(event)">
     <div class="popup-box">
       <div class="popup-icon-wrapper">
@@ -900,8 +853,8 @@ export async function pop_rdv_css() {
     </div>
   </div>
   <script>
-    let all_ebillet = ${JSON.stringify(all_ebillet)};
-    let ebillet;
+    let all_ebillet = ${JSON.stringify(all_ebillet)} ;
+    let ebillet
 
     let currentStep = 1;
     const totalSteps = 5;
@@ -929,15 +882,25 @@ export async function pop_rdv_css() {
       document.getElementById(\`step-\${currentStep}\`).classList.add('active');
       const btnBack = document.getElementById('btn-back');
       const btnNext = document.getElementById('btn-next');
+
       if (currentStep === 1) {
         btnBack.innerText = "Annuler";
       } else {
         btnBack.innerText = "Précédent";
       }
+
       if (currentStep === totalSteps) {
         btnNext.innerText = "Continuer";
+      } else if (currentStep === 4 && isSouscriptionLoading) {
+        btnNext.innerText = "Patientez...";
+        btnNext.disabled = true;
+        btnNext.style.opacity = '0.6';
+        btnNext.style.cursor = 'not-allowed';
       } else {
         btnNext.innerText = "Suivant";
+        btnNext.disabled = false;
+        btnNext.style.opacity = '1';
+        btnNext.style.cursor = 'pointer';
       }
     }
     function validateCurrentStep() {
@@ -1008,6 +971,21 @@ export async function pop_rdv_css() {
           return false;
         }
       }
+
+      if (currentStep === 4) {
+        const radioYes = document.getElementById('garantie-oui');
+        const radioNo = document.getElementById('garantie-non');
+
+        if (!radioYes.checked && !radioNo.checked) {
+          showPopup("Veuillez choisir une option (souscrire à la garantie ou ne pas souscrire) avant de continuer.", "Sélection requise");
+          return false;
+        }
+
+        if (isSouscriptionLoading) {
+          return false;
+        }
+      }
+
       return true;
     }
     function nextStep() {
@@ -1023,6 +1001,12 @@ export async function pop_rdv_css() {
       }
     }
     function prevStep() {
+      if (souscriptionTimer) {
+        clearTimeout(souscriptionTimer);
+        souscriptionTimer = null;
+      }
+      isSouscriptionLoading = false;
+
       if (currentStep > 1) {
         currentStep--;
         if (currentStep === 4 && ebillet && ebillet.souscription === true) {
@@ -1051,20 +1035,58 @@ export async function pop_rdv_css() {
       window.parent.postMessage(msg, "https://www.ciel-evasion.fr/");
     }
 
+    let souscriptionTimer = null;
+    let isSouscriptionLoading = false;
+
     function selectGarantie(isYes) {
       const cardYes = document.getElementById('card-garantie-yes');
       const cardNo = document.getElementById('card-garantie-no');
       const radioYes = document.getElementById('garantie-oui');
       const radioNo = document.getElementById('garantie-non');
+      const btnNext = document.getElementById('btn-next');
+
+      if (souscriptionTimer) {
+        clearTimeout(souscriptionTimer);
+        souscriptionTimer = null;
+      }
+
       if (isYes) {
         cardYes.classList.add('selected');
         cardNo.classList.remove('selected');
         radioYes.checked = true;
+
         sendReturnMessage({ type_msg: "souscription", data: ebillet });
+
+        isSouscriptionLoading = true;
+        if (btnNext) {
+          btnNext.disabled = true;
+          btnNext.style.opacity = '0.6';
+          btnNext.style.cursor = 'not-allowed';
+          btnNext.innerText = 'Patientez...';
+        }
+
+        souscriptionTimer = setTimeout(() => {
+          isSouscriptionLoading = false;
+          if (btnNext) {
+            btnNext.disabled = false;
+            btnNext.style.opacity = '1';
+            btnNext.style.cursor = 'pointer';
+            btnNext.innerText = 'Suivant';
+          }
+        }, 3000);
+
       } else {
         cardNo.classList.add('selected');
         cardYes.classList.remove('selected');
         radioNo.checked = true;
+
+        isSouscriptionLoading = false;
+        if (btnNext) {
+          btnNext.disabled = false;
+          btnNext.style.opacity = '1';
+          btnNext.style.cursor = 'pointer';
+          btnNext.innerText = 'Suivant';
+        }
       }
     }
     function submitForm() {
@@ -1149,20 +1171,30 @@ export async function pop_rdv_css() {
       resultat.rdvDemand111 = d3;
       resultat.choixHoraireDate3 = h3;
       resultat.lieu = lieuSelected;
+      resultat.souscription = garantieOui;
       resultat.lieu111 = tel;
       resultat.date_de_naissance = dateNaissanceVal;
       resultat.poids = Number(poids);
       resultat.taille = Number(taille);
       resultat.nb_rdv = Number(1);
 
-      console.log(resultat);
+      console.log(resultat)
       sendReturnMessage({ type_msg: "save_rdv", data: resultat });
     }
-
     function resetForm() {
       document.getElementById('multi-step-form').reset();
+      if (souscriptionTimer) {
+        clearTimeout(souscriptionTimer);
+        souscriptionTimer = null;
+      }
+      isSouscriptionLoading = false;
+
+      const cardYes = document.getElementById('card-garantie-yes');
+      const cardNo = document.getElementById('card-garantie-no');
+      if (cardYes) cardYes.classList.remove('selected');
+      if (cardNo) cardNo.classList.remove('selected');
+
       currentStep = 1;
-      selectGarantie(true);
       updateAgeLabel();
       document.querySelector('.stepper-nav').style.display = 'flex';
       document.getElementById('modal-footer').style.display = 'flex';
