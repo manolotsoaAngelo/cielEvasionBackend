@@ -1075,6 +1075,7 @@ export async function pop_rdv_css() {
             btnNext.style.cursor = 'pointer';
             btnNext.innerText = 'Suivant';
           }
+          goToStep(5);
         }, 3000);
 
       } else {
