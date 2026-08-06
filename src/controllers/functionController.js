@@ -122,7 +122,8 @@ export async function runFunction(req, res) {
       break;
   }
 
-  console.log(value.typeFunction, result)
+  //console.log(value.typeFunction, result)
+  console.log('\x1b[46m\x1b[30m %s \x1b[0m', ' DEBUG ', value.typeFunction, result);
 
   res.status(201).json(compressed_obj(result));
 }
