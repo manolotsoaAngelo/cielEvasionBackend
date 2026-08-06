@@ -937,6 +937,39 @@ export async function pop_rdv_css() {
           showPopup(errorMsg, "Erreur de validation");
           return false;
         }
+
+        const isPerime = Boolean(ebillet.perime);
+        const isPrimDefinitif = Boolean(ebillet.primDfinitif || ebillet['primDfinitif'] || ebillet.perimeDefinitif);
+        const isEffectu = Boolean(ebillet.effectu || ebillet.effectue);
+        const isRdv = Boolean(ebillet.rdv);
+        const isCrdit = Boolean(ebillet.crdit || ebillet.credit);
+        const isBonDchange = Boolean(ebillet.bonDchange || ebillet['bonDchange']);
+        const isRdvDemand = Boolean(ebillet.rdvDemand);
+
+        if (isRdvDemand) {
+          sendReturnMessage({ type_msg: "rdv_en_attente", data: ebillet });
+          return false;
+        }
+        if (isPerime && !isEffectu && !isRdv) {
+          showPopup("Périmé !", "Billet périmé");
+          return false;
+        }
+        if (isPrimDefinitif && !isEffectu && !isRdv) {
+          showPopup("Définitivement périmé !", "Billet périmé");
+          return false;
+        }
+        if (isEffectu || (isEffectu && isRdv)) {
+          showPopup("Date de prestation passée.", "Prestation effectuée");
+          return false;
+        }
+        if (isCrdit) {
+          showPopup("Billet remboursé !", "Billet remboursé");
+          return false;
+        }
+        if (isBonDchange && isRdv) {
+          showPopup("Veuillez consulter 👉 votre espace personnel en cliquant ici.", "Information", () => sendReturnMessage({ type_msg: "ok" }));
+          return false;
+        }
         const telEl = document.getElementById('telephone');
         const prenomEl = document.getElementById('prenom');
         const nomEl = document.getElementById('nom');
@@ -1252,10 +1285,13 @@ export async function pop_rdv_css() {
         }
       }
     }
-    function showPopup(message, title = "Information") {
+    let popupConfirmCallback = null;
+
+    function showPopup(message, title = "Information", onConfirm = null) {
       const overlay = document.getElementById('custom-popup');
       const msgEl = document.getElementById('popup-message');
       const titleEl = document.getElementById('popup-title');
+      popupConfirmCallback = onConfirm;
       if (msgEl && titleEl && overlay) {
         titleEl.innerText = title;
         msgEl.innerText = message;
@@ -1266,6 +1302,11 @@ export async function pop_rdv_css() {
     function closePopup() {
       const overlay = document.getElementById('custom-popup');
       if (overlay) overlay.style.display = 'none';
+      if (typeof popupConfirmCallback === 'function') {
+        const cb = popupConfirmCallback;
+        popupConfirmCallback = null;
+        cb();
+      }
     }
 
     function closePopupOnBackdrop(e) {
