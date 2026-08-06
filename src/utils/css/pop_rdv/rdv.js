@@ -827,8 +827,7 @@ export async function pop_rdv_css() {
           <p class="step-subtitle">Votre demande a été traitée avec succès.</p>
           <div class="recap-list" id="recap-content">
           </div>
-          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="resetForm()">Effectuer une autre
-            démarche</button>
+          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="sendReturnMessage({ type_msg: 'ok' })">OK</button>
         </div>
       </div>
       <div class="modal-footer" id="modal-footer">
@@ -1273,6 +1272,44 @@ export async function pop_rdv_css() {
         closePopup();
       }
     }
+
+    function handleAutoEbillet(ebilletData) {
+      if (!ebilletData) return;
+      const targetRef = typeof ebilletData === 'string' ? ebilletData : (ebilletData.ref || '');
+      let found = (all_ebillet || []).find(item => item.ref && targetRef && item.ref.toLowerCase() === targetRef.toLowerCase());
+      if (found) {
+        ebillet = found;
+      } else if (typeof ebilletData === 'object') {
+        ebillet = ebilletData;
+      }
+
+      if (ebillet) {
+        const refInput = document.getElementById('ref-ebillet');
+        const nameInput = document.getElementById('nom-prenom');
+        if (refInput && ebillet.ref) {
+          refInput.value = ebillet.ref;
+        }
+        if (nameInput) {
+          const fullName = [ebillet.prenom, ebillet.nom].filter(Boolean).join(' ');
+          nameInput.value = fullName || ebillet.nom || ebillet.prenom || '';
+        }
+        goToStep(2);
+      }
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.data) {
+        const data = event.data;
+        const ebilletVal = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'ebillet' ? data : null);
+        if (ebilletVal !== null && ebilletVal !== undefined) {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => handleAutoEbillet(ebilletVal));
+          } else {
+            handleAutoEbillet(ebilletVal);
+          }
+        }
+      }
+    });
 
     window.addEventListener('DOMContentLoaded', () => {
       const today = new Date();

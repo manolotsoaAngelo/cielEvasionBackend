@@ -36,7 +36,7 @@ export async function runFunction(req, res) {
     case "Usage_limit":
       result = await BrevoService.Usage_limit();
       break;
-      case "email_contrepropositions":
+    case "email_contrepropositions":
       result = await EmailService.email_contrepropositions(value.valeur);
       break;
     case "email_Tj8PgM":
@@ -121,5 +121,8 @@ export async function runFunction(req, res) {
     default:
       break;
   }
+
+  console.log(value.typeFunction, result)
+
   res.status(201).json(compressed_obj(result));
 }
