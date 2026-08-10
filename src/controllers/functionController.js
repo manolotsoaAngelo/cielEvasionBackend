@@ -28,6 +28,7 @@ import BrevoService from "../services/brevo.js";
 ///return await services_post("L2FwaS9mdW5jdGlvbi9ydW5GdW5jdGlvbg==", { typeFunction: 'opt_reportByRef', valeur: ref })
 
 export async function runFunction(req, res) {
+  let show_log = false
   const { data } = req.body;
   if (!data) return res.status(400).json({ error: "données requis" });
   let value = decompressed_obj(data);
@@ -50,6 +51,7 @@ export async function runFunction(req, res) {
       break;
 
     case "init_cachedData":
+      show_log = true
       switch (value.valeur) {
         case "ebillets":
           result = {
@@ -83,6 +85,7 @@ export async function runFunction(req, res) {
 
     ///Orders
     case "create_order_new":
+      show_log = true
       result = await OrdersService.create(value.valeur);
       break;
 
@@ -123,7 +126,9 @@ export async function runFunction(req, res) {
   }
 
   //console.log(value.typeFunction, result)
-  console.log('\x1b[46m\x1b[30m %s \x1b[0m', ' DEBUG ', value.typeFunction, result);
+  if (show_log) {
+    console.log('\x1b[46m\x1b[30m %s \x1b[0m', ' DEBUG ', value.typeFunction, result);
+  }
 
   res.status(201).json(compressed_obj(result));
 }
