@@ -1109,7 +1109,7 @@ export async function pop_rdv_css() {
             btnNext.innerText = 'Suivant';
           }
           goToStep(5);
-        }, 3000);
+        }, 5000);
 
       } else {
         cardNo.classList.add('selected');
