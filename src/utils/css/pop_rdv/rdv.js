@@ -3,10 +3,11 @@ import EbilletsService from "../../../services/ebillets.js";
 export async function pop_rdv_css() {
 
   let all_ebillet = await EbilletsService.getAll();
-
+  ///${JSON.stringify(all_ebillet)}
   return {
     html: `
-        <!DOCTYPE html>
+    
+    <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -768,6 +769,7 @@ export async function pop_rdv_css() {
     }
 
     @media (max-width: 520px) {
+
       .beneficiaire-grid,
       .beneficiaire-grid-3 {
         grid-template-columns: 1fr;
@@ -1045,7 +1047,8 @@ export async function pop_rdv_css() {
           <p class="step-subtitle">Votre demande a été traitée avec succès.</p>
           <div class="recap-list" id="recap-content">
           </div>
-          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="sendReturnMessage({ type_msg: 'ok' })">OK</button>
+          <button type="button" class="btn btn-primary" style="width: 100%;"
+            onclick="sendReturnMessage({ type_msg: 'ok' })">OK</button>
         </div>
       </div>
       <div class="modal-footer" id="modal-footer">
@@ -1070,30 +1073,35 @@ export async function pop_rdv_css() {
     </div>
   </div>
 
-  <div id="beneficiaire-popup" class="popup-overlay" style="display: none;" onclick="closeBeneficiairePopupOnBackdrop(event)">
+  <div id="beneficiaire-popup" class="popup-overlay" style="display: none;"
+    onclick="closeBeneficiairePopupOnBackdrop(event)">
     <div class="beneficiaire-popup-box">
       <div class="beneficiaire-popup-header">
         <div class="beneficiaire-header-left">
           <div class="beneficiaire-header-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
               <circle cx="9" cy="7" r="4"></circle>
               <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
               <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
             </svg>
           </div>
-          <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à la garantie Échanges et Report</span>
+          <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à la garantie
+            Échanges et Report</span>
         </div>
         <button type="button" class="beneficiaire-popup-close" onclick="closeBeneficiairePopup()" aria-label="Fermer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
       </div>
       <div class="beneficiaire-popup-body">
-        <p class="beneficiaire-popup-question" id="beneficiaire-popup-question">Vous souhaitez modifier les Informations du bénéficiaire ?</p>
-        
+        <p class="beneficiaire-popup-question" id="beneficiaire-popup-question">Vous souhaitez modifier les Informations
+          du bénéficiaire ?</p>
+
         <div id="beneficiaire-popup-fields" class="beneficiaire-fields-wrap" style="display: none;">
           <div class="beneficiaire-grid">
             <div class="field-group">
@@ -1117,7 +1125,8 @@ export async function pop_rdv_css() {
           </div>
           <div class="beneficiaire-grid-3">
             <div class="field-group">
-              <label class="field-label" id="popup-label-date-naissance" for="popup-date-naissance">Date de naissance *</label>
+              <label class="field-label" id="popup-label-date-naissance" for="popup-date-naissance">Date de naissance
+                *</label>
               <div class="input-outline-wrapper">
                 <input type="date" id="popup-date-naissance" class="input-control" required>
               </div>
@@ -1138,14 +1147,17 @@ export async function pop_rdv_css() {
         </div>
 
         <div class="beneficiaire-popup-btn-wrap">
-          <button type="button" id="beneficiaire-popup-btn" class="beneficiaire-popup-btn" onclick="handleBeneficiaireAction()">Souscrire et Modifier</button>
+          <button type="button" id="beneficiaire-popup-btn" class="beneficiaire-popup-btn"
+            onclick="handleBeneficiaireAction()">Souscrire et Modifier</button>
         </div>
         <div class="beneficiaire-popup-footer">
           <p class="beneficiaire-footer-note">
             <span>ℹ️</span>
-            <span>La garantie Échanges et Report sera utilisée dès confirmation de la modification du bénéficiaire.</span>
+            <span>La garantie Échanges et Report sera utilisée dès confirmation de la modification du
+              bénéficiaire.</span>
           </p>
-          <p class="beneficiaire-footer-warning">⚠️ <u>Attention : cette garantie ne prolonge en aucun cas la validité du e-Billet.</u></p>
+          <p class="beneficiaire-footer-warning">⚠️ <u>Attention : cette garantie ne prolonge en aucun cas la validité
+              du e-Billet.</u></p>
         </div>
       </div>
     </div>
@@ -1154,7 +1166,7 @@ export async function pop_rdv_css() {
     let all_ebillet = ${JSON.stringify(all_ebillet)};
     let ebillet;
     let souscriptionUtilisee = false;
-      const today = new Date();
+    const today = new Date();
 
     let currentStep = 1;
     const totalSteps = 5;
@@ -1277,6 +1289,7 @@ export async function pop_rdv_css() {
         const dobEl = document.getElementById('date_de_naissance');
         const poidsEl = document.getElementById('poids');
         const tailleEl = document.getElementById('taille');
+
         let isReadOnly = true;
         if (Number(ebillet.nb_rdv) < 2) {
           isReadOnly = false;
@@ -1436,6 +1449,10 @@ export async function pop_rdv_css() {
         cardNo.classList.remove('selected');
         radioYes.checked = true;
 
+        if (ebillet) {
+          ebillet.souscription = true;
+        }
+
         sendReturnMessage({ type_msg: "souscription", data: ebillet });
 
         isSouscriptionLoading = true;
@@ -1568,7 +1585,6 @@ export async function pop_rdv_css() {
       resultat.rdvDemand111 = d3;
       resultat.choixHoraireDate3 = h3;
       resultat.lieu = lieuSelected;
-      resultat.souscription = (ebillet && ebillet.souscription === true);
       resultat.lieu111 = tel;
       resultat.date_de_naissance = dateNaissanceVal;
       resultat.poids = Number(poids);
@@ -1659,8 +1675,8 @@ export async function pop_rdv_css() {
             for (let other of choices) {
               if (other !== currentChoice && other.date && other.horaire) {
                 if (other.date.value && other.horaire.value &&
-                    other.date.value === currentDate &&
-                    other.horaire.value === currentHoraire) {
+                  other.date.value === currentDate &&
+                  other.horaire.value === currentHoraire) {
                   target.value = '';
                   target.setCustomValidity('Cette date a déjà été choisie dans un autre de vos choix.');
                   target.reportValidity();
@@ -1758,7 +1774,7 @@ export async function pop_rdv_css() {
       if (age !== null && age >= 6) {
         label.innerText = \`Âge (\${age}ans) *\`;
       } else {
-        label.innerText = \`Date de naissance *\`;
+        label.innerText =   \`Date de naissance *\`;
       }
     }
 
@@ -1936,6 +1952,22 @@ export async function pop_rdv_css() {
       if (event.data) {
         const data = event.data;
 
+        if (data.type_msg === 'maj_ebillet') {
+          const newEbillet = data.data !== undefined ? data.data : data.ebillet;
+          if (newEbillet) {
+            if (typeof newEbillet === 'object') {
+              ebillet = { ...(ebillet || {}), ...newEbillet };
+            } else {
+              ebillet = newEbillet;
+            }
+            if (ebillet && ebillet.ref && Array.isArray(all_ebillet)) {
+              const idx = all_ebillet.findIndex(item => item.ref && item.ref.toLowerCase() === ebillet.ref.toLowerCase());
+              if (idx !== -1) {
+                all_ebillet[idx] = { ...all_ebillet[idx], ...ebillet };
+              }
+            }
+          }
+        }
 
         const ebilletVal = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'ebillet' ? data : null);
         if (ebilletVal !== null && ebilletVal !== undefined) {
@@ -1968,6 +2000,7 @@ export async function pop_rdv_css() {
           horaireEl.addEventListener('input', validateUniqueAvailabilityDates);
         }
       });
+
       const maxDate = new Date(today.getFullYear() - 6, today.getMonth(), today.getDate()).toISOString().split('T')[0];
       const dateInput = document.getElementById('date_de_naissance');
       if (dateInput) {
@@ -1987,7 +2020,9 @@ export async function pop_rdv_css() {
   </script>
 </body>
 
-</html>`.replace(/\s+/g, " ")
+</html>
+    
+    `.replace(/\s+/g, " ")
 
   }
 }
