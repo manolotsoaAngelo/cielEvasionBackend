@@ -975,6 +975,7 @@ export async function pop_rdv_css() {
   <script>
     let all_ebillet = ${JSON.stringify(all_ebillet)};
     let ebillet;
+      const today = new Date();
 
     let currentStep = 1;
     const totalSteps = 5;
@@ -1429,7 +1430,6 @@ export async function pop_rdv_css() {
       if (!birthDateString) return null;
       const birthDate = new Date(birthDateString);
       if (isNaN(birthDate.getTime())) return null;
-      const today = new Date();
       let age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
       if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
