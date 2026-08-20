@@ -2,7 +2,7 @@ import EbilletsService from "../../../services/ebillets.js";
 
 export async function pop_rdv_css() {
 
-  let all_ebillet = await EbilletsService.getAll()
+  let all_ebillet = await EbilletsService.getAll();
 
   return {
     html: `
@@ -1215,7 +1215,7 @@ export async function pop_rdv_css() {
         }
         updateStepUI();
       } else {
-        sendReturnMessage({ type_msg: "annulation" })
+        sendReturnMessage({ type_msg: "annulation" });
       }
     }
     function goToStep(step) {
@@ -1637,8 +1637,8 @@ export async function pop_rdv_css() {
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      let minDate = new Date()
-      minDate.setDate(minDate.getDate() + 3)
+      let minDate = new Date();
+      minDate.setDate(minDate.getDate() + 3);
 
       const todayStr = minDate.toISOString().split('T')[0];
       ['date-1', 'date-2', 'date-3'].forEach(id => {
