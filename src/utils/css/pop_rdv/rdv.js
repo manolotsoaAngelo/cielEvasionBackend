@@ -1457,10 +1457,6 @@ export async function pop_rdv_css() {
             btnNext.style.cursor = 'pointer';
             btnNext.innerText = 'Suivant';
           }
-          ['telephone', 'prenom', 'nom', 'date_de_naissance', 'poids', 'taille'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.readOnly = false;
-          });
           goToStep(5);
         }, 3000);
 
