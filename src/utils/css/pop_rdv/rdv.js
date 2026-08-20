@@ -1448,7 +1448,7 @@ export async function pop_rdv_css() {
         cardYes.classList.add('selected');
         cardNo.classList.remove('selected');
         radioYes.checked = true;
-        
+
         sendReturnMessage({ type_msg: "souscription", data: ebillet });
 
         isSouscriptionLoading = true;
@@ -1471,7 +1471,7 @@ export async function pop_rdv_css() {
             btnNext.innerText = 'Suivant';
           }
           goToStep(5);
-        }, 3000);
+        }, 5000);
 
       } else {
         cardNo.classList.add('selected');
@@ -1949,7 +1949,7 @@ export async function pop_rdv_css() {
         const data = event.data;
 
         if (data.type_msg === 'maj_ebillet') {
-          const newEbillet = data.data !== undefined ? data.data : data.ebillet;
+          const newEbillet = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'maj_ebillet' ? data : null);
           if (newEbillet) {
             if (typeof newEbillet === 'object') {
               ebillet = { ...(ebillet || {}), ...newEbillet };
