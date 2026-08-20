@@ -633,14 +633,14 @@ export async function pop_rdv_css() {
     }
 
     .beneficiaire-popup-box {
-      background: #ededed;
-      border: 1.5px solid #4a4a4a;
-      border-radius: 6px;
-      padding: 16px 20px 18px 20px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      padding: 26px 28px 22px 28px;
       width: 100%;
-      max-width: 580px;
+      max-width: 560px;
       position: relative;
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.22), 0 0 1px 1px rgba(0, 0, 0, 0.04);
       animation: popUpScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -648,81 +648,197 @@ export async function pop_rdv_css() {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #f0f0f2;
+      gap: 12px;
+    }
+
+    .beneficiaire-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .beneficiaire-header-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #e6f7ff;
+      color: #1890ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .beneficiaire-header-icon svg {
+      width: 20px;
+      height: 20px;
     }
 
     .beneficiaire-popup-title {
-      font-size: 16px;
-      font-weight: 600;
-      color: #222222;
-      letter-spacing: -0.2px;
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #1d1d1f;
+      letter-spacing: -0.3px;
+      line-height: 1.35;
     }
 
     .beneficiaire-popup-close {
-      background: transparent;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #f5f5f7;
       border: none;
-      font-size: 26px;
-      line-height: 1;
-      color: #333333;
+      color: #6e6e73;
       cursor: pointer;
-      padding: 0 4px;
-      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
     }
 
     .beneficiaire-popup-close:hover {
-      opacity: 0.7;
+      background: #e5e5ea;
+      color: #1d1d1f;
+      transform: scale(1.05);
     }
 
     .beneficiaire-popup-body {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      text-align: center;
     }
 
     .beneficiaire-popup-question {
-      font-size: 17px;
-      font-weight: 500;
-      color: #222222;
-      margin-bottom: 22px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 16px;
+      text-align: center;
+      line-height: 1.45;
+    }
+
+    .beneficiaire-fields-wrap {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px 16px 4px 16px;
+    }
+
+    .beneficiaire-fields-wrap .field-group {
+      margin-bottom: 12px;
+    }
+
+    .beneficiaire-fields-wrap .field-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 5px;
+    }
+
+    .beneficiaire-fields-wrap .input-control {
+      height: 42px;
+      font-size: 14px;
+      background: #ffffff;
+      border-radius: 8px;
+      border-color: #cbd5e1;
+    }
+
+    .beneficiaire-fields-wrap .input-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.15);
+    }
+
+    .beneficiaire-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .beneficiaire-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 520px) {
+      .beneficiaire-grid,
+      .beneficiaire-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
     }
 
     .beneficiaire-popup-btn-wrap {
-      margin-bottom: 26px;
+      margin-bottom: 16px;
       width: 100%;
       display: flex;
       justify-content: center;
     }
 
     .beneficiaire-popup-btn {
-      background: #2e2e2e;
+      background: linear-gradient(135deg, #1890ff, #096dd9);
       color: #ffffff;
       font-size: 15px;
-      font-weight: 500;
-      padding: 10px 32px;
-      border-radius: 3px;
+      font-weight: 600;
+      padding: 0 32px;
+      height: 46px;
+      border-radius: 12px;
       border: none;
       cursor: pointer;
-      transition: background 0.2s;
+      box-shadow: 0 4px 14px rgba(24, 144, 255, 0.35);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      max-width: 320px;
     }
 
-    .beneficiaire-popup-btn:hover {
-      background: #141414;
+    .beneficiaire-popup-btn:hover:not(:disabled) {
+      background: linear-gradient(135deg, #40a9ff, #1890ff);
+      box-shadow: 0 6px 20px rgba(24, 144, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    .beneficiaire-popup-btn:disabled {
+      background: #e2e8f0 !important;
+      color: #94a3b8 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+      transform: none !important;
     }
 
     .beneficiaire-popup-footer {
-      font-size: 12px;
-      color: #333333;
-      line-height: 1.5;
+      background: #fffbe6;
+      border: 1px solid #ffe58f;
+      border-radius: 12px;
+      padding: 12px 14px;
+      text-align: left;
     }
 
     .beneficiaire-footer-note {
+      font-size: 12px;
+      color: #78350f;
       margin-bottom: 4px;
+      line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
     }
 
     .beneficiaire-footer-warning {
-      font-weight: 500;
-      color: #111111;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #b45309;
+      line-height: 1.45;
     }
   </style>
 </head>
@@ -957,16 +1073,78 @@ export async function pop_rdv_css() {
   <div id="beneficiaire-popup" class="popup-overlay" style="display: none;" onclick="closeBeneficiairePopupOnBackdrop(event)">
     <div class="beneficiaire-popup-box">
       <div class="beneficiaire-popup-header">
-        <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à la garantie Échanges et Report</span>
-        <button type="button" class="beneficiaire-popup-close" onclick="closeBeneficiairePopup()" aria-label="Fermer">&times;</button>
+        <div class="beneficiaire-header-left">
+          <div class="beneficiaire-header-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à la garantie Échanges et Report</span>
+        </div>
+        <button type="button" class="beneficiaire-popup-close" onclick="closeBeneficiairePopup()" aria-label="Fermer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
       <div class="beneficiaire-popup-body">
-        <p class="beneficiaire-popup-question">Vous souhaitez modifier le Nom du bénéficiaire ?</p>
+        <p class="beneficiaire-popup-question" id="beneficiaire-popup-question">Vous souhaitez modifier les Informations du bénéficiaire ?</p>
+        
+        <div id="beneficiaire-popup-fields" class="beneficiaire-fields-wrap" style="display: none;">
+          <div class="beneficiaire-grid">
+            <div class="field-group">
+              <label class="field-label" for="popup-prenom">Prénom *</label>
+              <div class="input-outline-wrapper">
+                <input type="text" id="popup-prenom" class="input-control" placeholder="Prénom" required>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="popup-nom">Nom *</label>
+              <div class="input-outline-wrapper">
+                <input type="text" id="popup-nom" class="input-control" placeholder="Nom" required>
+              </div>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="popup-telephone">N° de téléphone (pour le point météo) *</label>
+            <div class="input-outline-wrapper">
+              <input type="tel" id="popup-telephone" class="input-control" placeholder="ex: 06 12 34 56 78" required>
+            </div>
+          </div>
+          <div class="beneficiaire-grid-3">
+            <div class="field-group">
+              <label class="field-label" id="popup-label-date-naissance" for="popup-date-naissance">Date de naissance *</label>
+              <div class="input-outline-wrapper">
+                <input type="date" id="popup-date-naissance" class="input-control" required>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="popup-poids">Poids ( kg ) *</label>
+              <div class="input-outline-wrapper">
+                <input type="number" id="popup-poids" class="input-control" placeholder="kg" required>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="popup-taille">Taille ( cm ) *</label>
+              <div class="input-outline-wrapper">
+                <input type="number" id="popup-taille" class="input-control" placeholder="cm" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="beneficiaire-popup-btn-wrap">
           <button type="button" id="beneficiaire-popup-btn" class="beneficiaire-popup-btn" onclick="handleBeneficiaireAction()">Souscrire et Modifier</button>
         </div>
         <div class="beneficiaire-popup-footer">
-          <p class="beneficiaire-footer-note">La garantie Échanges et Report sera utilisé dès que vous aurez modifié le bénéficiaire</p>
+          <p class="beneficiaire-footer-note">
+            <span>ℹ️</span>
+            <span>La garantie Échanges et Report sera utilisée dès confirmation de la modification du bénéficiaire.</span>
+          </p>
           <p class="beneficiaire-footer-warning">⚠️ <u>Attention : cette garantie ne prolonge en aucun cas la validité du e-Billet.</u></p>
         </div>
       </div>
@@ -975,6 +1153,7 @@ export async function pop_rdv_css() {
   <script>
     let all_ebillet = ${JSON.stringify(all_ebillet)};
     let ebillet;
+    let souscriptionUtilisee = false;
       const today = new Date();
 
     let currentStep = 1;
@@ -1312,8 +1491,19 @@ export async function pop_rdv_css() {
       const h2 = document.getElementById('horaire-2').value;
       const d3 = document.getElementById('date-3').value;
       const h3 = document.getElementById('horaire-3').value;
-      const lieuSelected = document.querySelector('input[name="lieu_preference"]:checked')?.value || "Non spécifié";
       const garantieOui = (ebillet && ebillet.souscription === true) ? true : document.getElementById('garantie-oui').checked;
+
+      let garantieText = 'Non souscrite';
+      let garantieColor = '#ff4d4f';
+
+      if (souscriptionUtilisee) {
+        garantieText = 'Souscrite mais utilisé';
+        garantieColor = '#fa8c16';
+      } else if (garantieOui) {
+        garantieText = 'Souscrite';
+        garantieColor = '#52c41a';
+      }
+
       const tel = document.getElementById('telephone').value;
       const prenom = document.getElementById('prenom').value;
       const nom = document.getElementById('nom').value;
@@ -1354,8 +1544,8 @@ export async function pop_rdv_css() {
         </div>
         <div class="recap-item">
           <span class="recap-label">Garantie Imprévus :</span>
-          <span class="recap-val" style="color: \${garantieOui ? '#52c41a' : '#ff4d4f'};">
-            \${garantieOui ? 'Souscrite ' : 'Non souscrite'}
+          <span class="recap-val" style="color: \${garantieColor};">
+            \${garantieText}
           </span>
         </div>
         <div class="recap-item">
@@ -1385,18 +1575,23 @@ export async function pop_rdv_css() {
       resultat.rdvDemand111 = d3;
       resultat.choixHoraireDate3 = h3;
       resultat.lieu = lieuSelected;
-      resultat.souscription = garantieOui;
+      resultat.souscription = (ebillet && ebillet.souscription === true);
       resultat.lieu111 = tel;
       resultat.date_de_naissance = dateNaissanceVal;
       resultat.poids = Number(poids);
       resultat.taille = Number(taille);
-      resultat.nb_rdv = Number(1);
+      if (ebillet.nb_rdv) {
+        resultat.nb_rdv = Number(ebillet.nb_rdv) + 1;
+      } else {
+        resultat.nb_rdv = Number(1);
+      }
 
       console.log(resultat);
       sendReturnMessage({ type_msg: "save_rdv", data: resultat });
     }
     function resetForm() {
       document.getElementById('multi-step-form').reset();
+      souscriptionUtilisee = false;
       if (souscriptionTimer) {
         clearTimeout(souscriptionTimer);
         souscriptionTimer = null;
@@ -1515,11 +1710,71 @@ export async function pop_rdv_css() {
     }
 
     let lastClickedBeneficiaireInput = null;
+    let beneficiaireInitialData = null;
+
+    function checkBeneficiairePopupChanges() {
+      const btnEl = document.getElementById('beneficiaire-popup-btn');
+      const hasSouscription = !!(ebillet && ebillet.souscription === true);
+
+      if (!hasSouscription) {
+        if (btnEl) {
+          btnEl.disabled = false;
+          btnEl.style.opacity = '1';
+          btnEl.style.cursor = 'pointer';
+        }
+        return true;
+      }
+
+      if (!beneficiaireInitialData) return false;
+
+      const prenom = document.getElementById('popup-prenom')?.value.trim() || '';
+      const nom = document.getElementById('popup-nom')?.value.trim() || '';
+      const tel = document.getElementById('popup-telephone')?.value.trim() || '';
+      const dob = document.getElementById('popup-date-naissance')?.value || '';
+      const poids = document.getElementById('popup-poids')?.value || '';
+      const taille = document.getElementById('popup-taille')?.value || '';
+
+      const isChanged = (
+        prenom !== beneficiaireInitialData.prenom ||
+        nom !== beneficiaireInitialData.nom ||
+        tel !== beneficiaireInitialData.tel ||
+        dob !== beneficiaireInitialData.dob ||
+        String(poids) !== String(beneficiaireInitialData.poids) ||
+        String(taille) !== String(beneficiaireInitialData.taille)
+      );
+
+      if (btnEl) {
+        if (isChanged) {
+          btnEl.disabled = false;
+          btnEl.style.opacity = '1';
+          btnEl.style.cursor = 'pointer';
+        } else {
+          btnEl.disabled = true;
+          btnEl.style.opacity = '0.5';
+          btnEl.style.cursor = 'not-allowed';
+        }
+      }
+      return isChanged;
+    }
+
+    function updatePopupAgeLabel() {
+      const input = document.getElementById('popup-date-naissance');
+      const label = document.getElementById('popup-label-date-naissance');
+      if (!input || !label) return;
+      const age = calculateAge(input.value);
+      if (age !== null && age >= 6) {
+        label.innerText = \`Âge (\${age}ans) *\`;
+      } else {
+        label.innerText = \`Date de naissance *\`;
+      }
+    }
 
     function showBeneficiairePopup(targetInput) {
       lastClickedBeneficiaireInput = targetInput;
       const overlay = document.getElementById('beneficiaire-popup');
       const titleEl = document.getElementById('beneficiaire-popup-title');
+      const questionEl = document.getElementById('beneficiaire-popup-question');
+      const fieldsWrap = document.getElementById('beneficiaire-popup-fields');
       const btnEl = document.getElementById('beneficiaire-popup-btn');
 
       const hasSouscription = !!(ebillet && ebillet.souscription === true);
@@ -1527,9 +1782,60 @@ export async function pop_rdv_css() {
       if (titleEl && btnEl && overlay) {
         if (!hasSouscription) {
           titleEl.innerText = "Vous n'avez pas souscris à la garantie Échanges et Report";
+          if (questionEl) questionEl.innerText = "Vous souhaitez modifier les Informations du bénéficiaire ?";
+          if (fieldsWrap) fieldsWrap.style.display = 'none';
           btnEl.innerText = "Souscrire et Modifier";
+          btnEl.disabled = false;
+          btnEl.style.opacity = '1';
+          btnEl.style.cursor = 'pointer';
         } else {
           titleEl.innerText = "Garantie Échanges et Report";
+          if (questionEl) questionEl.innerText = "Saisissez les nouvelles informations du bénéficiaire :";
+          if (fieldsWrap) {
+            fieldsWrap.style.display = 'block';
+            const popupPrenom = document.getElementById('popup-prenom');
+            const popupNom = document.getElementById('popup-nom');
+            const popupTel = document.getElementById('popup-telephone');
+            const popupDob = document.getElementById('popup-date-naissance');
+            const popupPoids = document.getElementById('popup-poids');
+            const popupTaille = document.getElementById('popup-taille');
+
+            if (popupPrenom) popupPrenom.value = document.getElementById('prenom')?.value || (ebillet && ebillet.prenom) || '';
+            if (popupNom) popupNom.value = document.getElementById('nom')?.value || (ebillet && ebillet.nom) || '';
+            if (popupTel) popupTel.value = document.getElementById('telephone')?.value || (ebillet && ebillet.lieu111) || '';
+            if (popupDob) popupDob.value = document.getElementById('date_de_naissance')?.value || (ebillet && ebillet.date_de_naissance) || '';
+            if (popupPoids) popupPoids.value = document.getElementById('poids')?.value || (ebillet && ebillet.poids) || '';
+            if (popupTaille) popupTaille.value = document.getElementById('taille')?.value || (ebillet && ebillet.taille) || '';
+
+            beneficiaireInitialData = {
+              prenom: popupPrenom?.value.trim() || '',
+              nom: popupNom?.value.trim() || '',
+              tel: popupTel?.value.trim() || '',
+              dob: popupDob?.value || '',
+              poids: popupPoids?.value || '',
+              taille: popupTaille?.value || ''
+            };
+
+            ['popup-prenom', 'popup-nom', 'popup-telephone', 'popup-date-naissance', 'popup-poids', 'popup-taille'].forEach(id => {
+              const el = document.getElementById(id);
+              if (el) {
+                el.removeEventListener('input', checkBeneficiairePopupChanges);
+                el.removeEventListener('change', checkBeneficiairePopupChanges);
+                el.addEventListener('input', checkBeneficiairePopupChanges);
+                el.addEventListener('change', checkBeneficiairePopupChanges);
+              }
+            });
+
+            const maxDate = new Date(today.getFullYear() - 6, today.getMonth(), today.getDate()).toISOString().split('T')[0];
+            if (popupDob) {
+              popupDob.setAttribute('max', maxDate);
+              popupDob.addEventListener('input', updatePopupAgeLabel);
+              popupDob.addEventListener('change', updatePopupAgeLabel);
+              updatePopupAgeLabel();
+            }
+
+            checkBeneficiairePopupChanges();
+          }
           btnEl.innerText = "Confirmer et Modifier";
         }
         overlay.style.display = 'flex';
@@ -1549,27 +1855,55 @@ export async function pop_rdv_css() {
 
     function handleBeneficiaireAction() {
       const hasSouscription = !!(ebillet && ebillet.souscription === true);
-      closeBeneficiairePopup();
 
       if (!hasSouscription) {
+        closeBeneficiairePopup();
         goToStep(4);
       } else {
-        const prenomEl = document.getElementById('prenom');
-        const nomEl = document.getElementById('nom');
-        const dobEl = document.getElementById('date_de_naissance');
-        const poidsEl = document.getElementById('poids');
-        const tailleEl = document.getElementById('taille');
-        const telEl = document.getElementById('telephone');
-
-        [prenomEl, nomEl, dobEl, poidsEl, tailleEl, telEl].forEach(el => {
-          if (el) el.readOnly = false;
-        });
-
-        if (lastClickedBeneficiaireInput) {
-          lastClickedBeneficiaireInput.focus();
-        } else if (prenomEl) {
-          prenomEl.focus();
+        if (!checkBeneficiairePopupChanges()) {
+          return;
         }
+
+        const fieldsWrap = document.getElementById('beneficiaire-popup-fields');
+        if (fieldsWrap) {
+          const popupInputs = fieldsWrap.querySelectorAll('input[required]');
+          for (let input of popupInputs) {
+            if (!input.checkValidity()) {
+              input.reportValidity();
+              return;
+            }
+          }
+
+          const prenomEl = document.getElementById('prenom');
+          const nomEl = document.getElementById('nom');
+          const telEl = document.getElementById('telephone');
+          const dobEl = document.getElementById('date_de_naissance');
+          const poidsEl = document.getElementById('poids');
+          const tailleEl = document.getElementById('taille');
+
+          const popupPrenom = document.getElementById('popup-prenom');
+          const popupNom = document.getElementById('popup-nom');
+          const popupTel = document.getElementById('popup-telephone');
+          const popupDob = document.getElementById('popup-date-naissance');
+          const popupPoids = document.getElementById('popup-poids');
+          const popupTaille = document.getElementById('popup-taille');
+
+          if (prenomEl && popupPrenom) prenomEl.value = popupPrenom.value;
+          if (nomEl && popupNom) nomEl.value = popupNom.value;
+          if (telEl && popupTel) telEl.value = popupTel.value;
+          if (dobEl && popupDob) dobEl.value = popupDob.value;
+          if (poidsEl && popupPoids) poidsEl.value = popupPoids.value;
+          if (tailleEl && popupTaille) tailleEl.value = popupTaille.value;
+
+          if (typeof updateAgeLabel === 'function') updateAgeLabel();
+
+          if (ebillet) {
+            ebillet.souscription = false;
+            souscriptionUtilisee = true;
+            submitForm();
+          }
+        }
+        closeBeneficiairePopup();
       }
     }
 
@@ -1582,6 +1916,7 @@ export async function pop_rdv_css() {
 
     function handleAutoEbillet(ebilletData) {
       if (!ebilletData) return;
+      souscriptionUtilisee = false;
       const targetRef = typeof ebilletData === 'string' ? ebilletData : (ebilletData.ref || '');
       let found = (all_ebillet || []).find(item => item.ref && targetRef && item.ref.toLowerCase() === targetRef.toLowerCase());
       if (found) {
