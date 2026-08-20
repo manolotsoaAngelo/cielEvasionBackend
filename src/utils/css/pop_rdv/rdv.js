@@ -1965,12 +1965,14 @@ export async function pop_rdv_css() {
           }
         }
 
-        const ebilletVal = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'ebillet' ? data : null);
-        if (ebilletVal !== null && ebilletVal !== undefined) {
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => handleAutoEbillet(ebilletVal));
-          } else {
-            handleAutoEbillet(ebilletVal);
+        if (data.type_msg === 'ebillet') {
+          const ebilletVal = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'ebillet' ? data : null);
+          if (ebilletVal !== null && ebilletVal !== undefined) {
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', () => handleAutoEbillet(ebilletVal));
+            } else {
+              handleAutoEbillet(ebilletVal);
+            }
           }
         }
       }
