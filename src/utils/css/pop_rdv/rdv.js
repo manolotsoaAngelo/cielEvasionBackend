@@ -1487,6 +1487,7 @@ export async function pop_rdv_css() {
       const h2 = document.getElementById('horaire-2').value;
       const d3 = document.getElementById('date-3').value;
       const h3 = document.getElementById('horaire-3').value;
+      const lieuSelected = document.querySelector('input[name="lieu_preference"]:checked')?.value || "Non spécifié";
       const garantieOui = (ebillet && ebillet.souscription === true) ? true : document.getElementById('garantie-oui').checked;
 
       let garantieText = 'Non souscrite';
