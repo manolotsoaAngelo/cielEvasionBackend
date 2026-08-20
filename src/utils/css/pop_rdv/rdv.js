@@ -1436,10 +1436,6 @@ export async function pop_rdv_css() {
         cardNo.classList.remove('selected');
         radioYes.checked = true;
 
-        if (ebillet) {
-          ebillet.souscription = true;
-        }
-
         sendReturnMessage({ type_msg: "souscription", data: ebillet });
 
         isSouscriptionLoading = true;
