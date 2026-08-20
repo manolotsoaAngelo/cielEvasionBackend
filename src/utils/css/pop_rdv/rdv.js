@@ -216,10 +216,19 @@ export async function pop_rdv_css() {
       box-shadow: 0 0 0 4px rgba(24, 144, 255, 0.12);
     }
 
+    input.input-control:read-only,
+    input.input-control[readonly] {
+      background-color: #f5f5f7;
+      color: #6e6e73;
+      cursor: not-allowed;
+      border-color: #e5e5ea;
+    }
+
     select.input-control {
       appearance: none;
       -webkit-appearance: none;
       cursor: pointer;
+      background-color: #fff;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%3C86868b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 16px center;
@@ -622,6 +631,99 @@ export async function pop_rdv_css() {
       border-radius: 10px;
       font-size: 14.5px;
     }
+
+    .beneficiaire-popup-box {
+      background: #ededed;
+      border: 1.5px solid #4a4a4a;
+      border-radius: 6px;
+      padding: 16px 20px 18px 20px;
+      width: 100%;
+      max-width: 580px;
+      position: relative;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+      animation: popUpScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .beneficiaire-popup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .beneficiaire-popup-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #222222;
+      letter-spacing: -0.2px;
+    }
+
+    .beneficiaire-popup-close {
+      background: transparent;
+      border: none;
+      font-size: 26px;
+      line-height: 1;
+      color: #333333;
+      cursor: pointer;
+      padding: 0 4px;
+      transition: opacity 0.2s;
+    }
+
+    .beneficiaire-popup-close:hover {
+      opacity: 0.7;
+    }
+
+    .beneficiaire-popup-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .beneficiaire-popup-question {
+      font-size: 17px;
+      font-weight: 500;
+      color: #222222;
+      margin-bottom: 22px;
+    }
+
+    .beneficiaire-popup-btn-wrap {
+      margin-bottom: 26px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .beneficiaire-popup-btn {
+      background: #2e2e2e;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 10px 32px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .beneficiaire-popup-btn:hover {
+      background: #141414;
+    }
+
+    .beneficiaire-popup-footer {
+      font-size: 12px;
+      color: #333333;
+      line-height: 1.5;
+    }
+
+    .beneficiaire-footer-note {
+      margin-bottom: 4px;
+    }
+
+    .beneficiaire-footer-warning {
+      font-weight: 500;
+      color: #111111;
+    }
   </style>
 </head>
 
@@ -851,6 +953,25 @@ export async function pop_rdv_css() {
       <button type="button" class="btn btn-primary popup-btn" onclick="closePopup()">D'accord</button>
     </div>
   </div>
+
+  <div id="beneficiaire-popup" class="popup-overlay" style="display: none;" onclick="closeBeneficiairePopupOnBackdrop(event)">
+    <div class="beneficiaire-popup-box">
+      <div class="beneficiaire-popup-header">
+        <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à la garantie Échanges et Report</span>
+        <button type="button" class="beneficiaire-popup-close" onclick="closeBeneficiairePopup()" aria-label="Fermer">&times;</button>
+      </div>
+      <div class="beneficiaire-popup-body">
+        <p class="beneficiaire-popup-question">Vous souhaitez modifier le Nom du bénéficiaire ?</p>
+        <div class="beneficiaire-popup-btn-wrap">
+          <button type="button" id="beneficiaire-popup-btn" class="beneficiaire-popup-btn" onclick="handleBeneficiaireAction()">Souscrire et Modifier</button>
+        </div>
+        <div class="beneficiaire-popup-footer">
+          <p class="beneficiaire-footer-note">La garantie Échanges et Report sera utilisé dès que vous aurez modifié le bénéficiaire</p>
+          <p class="beneficiaire-footer-warning">⚠️ <u>Attention : cette garantie ne prolonge en aucun cas la validité du e-Billet.</u></p>
+        </div>
+      </div>
+    </div>
+  </div>
   <script>
     let all_ebillet = ${JSON.stringify(all_ebillet)};
     let ebillet;
@@ -976,30 +1097,78 @@ export async function pop_rdv_css() {
         const dobEl = document.getElementById('date_de_naissance');
         const poidsEl = document.getElementById('poids');
         const tailleEl = document.getElementById('taille');
-        if (telEl && !telEl.value) telEl.value = ebillet.lieu111 || '';
-        if (prenomEl && !prenomEl.value) prenomEl.value = ebillet.prenom || '';
-        if (nomEl && !nomEl.value) nomEl.value = ebillet.nom || '';
-        if (dobEl && !dobEl.value) {
-          dobEl.value = ebillet.date_de_naissance || '';
-          if (typeof updateAgeLabel === 'function') updateAgeLabel();
+        let isReadOnly = true;
+        if (Number(ebillet.nb_rdv) < 2) {
+          isReadOnly = false;
         }
-        if (poidsEl && !poidsEl.value) poidsEl.value = ebillet.poids || '';
-        if (tailleEl && !tailleEl.value) tailleEl.value = ebillet.taille || '';
+
+        if (telEl) {
+          if (ebillet.lieu111) {
+            telEl.value = ebillet.lieu111;
+            telEl.readOnly = isReadOnly;
+          } else {
+            telEl.readOnly = false;
+          }
+        }
+        if (prenomEl) {
+          if (ebillet.prenom) {
+            prenomEl.value = ebillet.prenom;
+            prenomEl.readOnly = isReadOnly;
+          } else {
+            prenomEl.readOnly = false;
+          }
+        }
+        if (nomEl) {
+          if (ebillet.nom) {
+            nomEl.value = ebillet.nom;
+            nomEl.readOnly = isReadOnly;
+          } else {
+            nomEl.readOnly = false;
+          }
+        }
+        if (dobEl) {
+          if (ebillet.date_de_naissance) {
+            dobEl.value = ebillet.date_de_naissance;
+            dobEl.readOnly = isReadOnly;
+            if (typeof updateAgeLabel === 'function') updateAgeLabel();
+          } else {
+            dobEl.readOnly = false;
+          }
+        }
+        if (poidsEl) {
+          if (ebillet.poids) {
+            poidsEl.value = ebillet.poids;
+            poidsEl.readOnly = isReadOnly;
+          } else {
+            poidsEl.readOnly = false;
+          }
+        }
+        if (tailleEl) {
+          if (ebillet.taille) {
+            tailleEl.value = ebillet.taille;
+            tailleEl.readOnly = isReadOnly;
+          } else {
+            tailleEl.readOnly = false;
+          }
+        }
       }
       if (currentStep === 2) {
         const d1 = document.getElementById('date-1').value;
+        const h1 = document.getElementById('horaire-1').value;
         const d2 = document.getElementById('date-2').value;
+        const h2 = document.getElementById('horaire-2').value;
         const d3 = document.getElementById('date-3').value;
-        if (d1 && d2 && d1 === d2) {
-          showPopup("Les dates des options de disponibilité doivent toutes être différentes.", "Date en doublon");
+        const h3 = document.getElementById('horaire-3').value;
+        if (d1 && h1 && d2 && h2 && d1 === d2 && h1 === h2) {
+          showPopup("Cette date a déjà été choisie dans un autre de vos choix.", "Date en doublon");
           return false;
         }
-        if (d1 && d3 && d1 === d3) {
-          showPopup("Les dates des options de disponibilité doivent toutes être différentes.", "Date en doublon");
+        if (d1 && h1 && d3 && h3 && d1 === d3 && h1 === h3) {
+          showPopup("Cette date a déjà été choisie dans un autre de vos choix.", "Date en doublon");
           return false;
         }
-        if (d2 && d3 && d2 === d3) {
-          showPopup("Les dates des options de disponibilité doivent toutes être différentes.", "Date en doublon");
+        if (d2 && h2 && d3 && h3 && d2 === d3 && h2 === h3) {
+          showPopup("Cette date a déjà été choisie dans un autre de vos choix.", "Date en doublon");
           return false;
         }
       }
@@ -1087,6 +1256,10 @@ export async function pop_rdv_css() {
         cardNo.classList.remove('selected');
         radioYes.checked = true;
 
+        if (ebillet) {
+          ebillet.souscription = true;
+        }
+
         sendReturnMessage({ type_msg: "souscription", data: ebillet });
 
         isSouscriptionLoading = true;
@@ -1108,8 +1281,12 @@ export async function pop_rdv_css() {
             btnNext.style.cursor = 'pointer';
             btnNext.innerText = 'Suivant';
           }
+          ['telephone', 'prenom', 'nom', 'date_de_naissance', 'poids', 'taille'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.readOnly = false;
+          });
           goToStep(5);
-        }, 5000);
+        }, 3000);
 
       } else {
         cardNo.classList.add('selected');
@@ -1233,6 +1410,11 @@ export async function pop_rdv_css() {
         cardNo.style.display = 'flex';
       }
 
+      ['telephone', 'prenom', 'nom', 'date_de_naissance', 'poids', 'taille'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.readOnly = false;
+      });
+
       currentStep = 1;
       updateAgeLabel();
       document.querySelector('.stepper-nav').style.display = 'flex';
@@ -1268,19 +1450,36 @@ export async function pop_rdv_css() {
     }
     function validateUniqueAvailabilityDates(e) {
       const target = e ? e.target : null;
-      const inputs = [
-        document.getElementById('date-1'),
-        document.getElementById('date-2'),
-        document.getElementById('date-3')
-      ].filter(Boolean);
-      inputs.forEach(input => input.setCustomValidity(''));
+      const choices = [
+        { date: document.getElementById('date-1'), horaire: document.getElementById('horaire-1') },
+        { date: document.getElementById('date-2'), horaire: document.getElementById('horaire-2') },
+        { date: document.getElementById('date-3'), horaire: document.getElementById('horaire-3') }
+      ];
+
+      choices.forEach(c => {
+        if (c.date) c.date.setCustomValidity('');
+        if (c.horaire) c.horaire.setCustomValidity('');
+      });
+
       if (target && target.value) {
-        for (let other of inputs) {
-          if (other !== target && other.value && other.value === target.value) {
-            target.value = '';
-            target.setCustomValidity('Cette date a déjà été choisie dans un autre de vos choix.');
-            target.reportValidity();
-            return;
+        const currentChoice = choices.find(c => c.date === target || c.horaire === target);
+        if (currentChoice && currentChoice.date && currentChoice.horaire) {
+          const currentDate = currentChoice.date.value;
+          const currentHoraire = currentChoice.horaire.value;
+
+          if (currentDate && currentHoraire) {
+            for (let other of choices) {
+              if (other !== currentChoice && other.date && other.horaire) {
+                if (other.date.value && other.horaire.value &&
+                    other.date.value === currentDate &&
+                    other.horaire.value === currentHoraire) {
+                  target.value = '';
+                  target.setCustomValidity('Cette date a déjà été choisie dans un autre de vos choix.');
+                  target.reportValidity();
+                  return;
+                }
+              }
+            }
           }
         }
       }
@@ -1315,6 +1514,72 @@ export async function pop_rdv_css() {
       }
     }
 
+    let lastClickedBeneficiaireInput = null;
+
+    function showBeneficiairePopup(targetInput) {
+      lastClickedBeneficiaireInput = targetInput;
+      const overlay = document.getElementById('beneficiaire-popup');
+      const titleEl = document.getElementById('beneficiaire-popup-title');
+      const btnEl = document.getElementById('beneficiaire-popup-btn');
+
+      const hasSouscription = !!(ebillet && ebillet.souscription === true);
+
+      if (titleEl && btnEl && overlay) {
+        if (!hasSouscription) {
+          titleEl.innerText = "Vous n'avez pas souscris à la garantie Échanges et Report";
+          btnEl.innerText = "Souscrire et Modifier";
+        } else {
+          titleEl.innerText = "Garantie Échanges et Report";
+          btnEl.innerText = "Confirmer et Modifier";
+        }
+        overlay.style.display = 'flex';
+      }
+    }
+
+    function closeBeneficiairePopup() {
+      const overlay = document.getElementById('beneficiaire-popup');
+      if (overlay) overlay.style.display = 'none';
+    }
+
+    function closeBeneficiairePopupOnBackdrop(e) {
+      if (e.target && e.target.id === 'beneficiaire-popup') {
+        closeBeneficiairePopup();
+      }
+    }
+
+    function handleBeneficiaireAction() {
+      const hasSouscription = !!(ebillet && ebillet.souscription === true);
+      closeBeneficiairePopup();
+
+      if (!hasSouscription) {
+        goToStep(4);
+      } else {
+        const prenomEl = document.getElementById('prenom');
+        const nomEl = document.getElementById('nom');
+        const dobEl = document.getElementById('date_de_naissance');
+        const poidsEl = document.getElementById('poids');
+        const tailleEl = document.getElementById('taille');
+        const telEl = document.getElementById('telephone');
+
+        [prenomEl, nomEl, dobEl, poidsEl, tailleEl, telEl].forEach(el => {
+          if (el) el.readOnly = false;
+        });
+
+        if (lastClickedBeneficiaireInput) {
+          lastClickedBeneficiaireInput.focus();
+        } else if (prenomEl) {
+          prenomEl.focus();
+        }
+      }
+    }
+
+    function handleBeneficiaireFieldClick(e) {
+      const target = e.target;
+      if (target && target.readOnly) {
+        showBeneficiairePopup(target);
+      }
+    }
+
     function handleAutoEbillet(ebilletData) {
       if (!ebilletData) return;
       const targetRef = typeof ebilletData === 'string' ? ebilletData : (ebilletData.ref || '');
@@ -1342,6 +1607,24 @@ export async function pop_rdv_css() {
     window.addEventListener('message', (event) => {
       if (event.data) {
         const data = event.data;
+
+        if (data.type_msg === 'maj_ebillet') {
+          const newEbillet = data.data !== undefined ? data.data : data.ebillet;
+          if (newEbillet) {
+            if (typeof newEbillet === 'object') {
+              ebillet = { ...(ebillet || {}), ...newEbillet };
+            } else {
+              ebillet = newEbillet;
+            }
+            if (ebillet && ebillet.ref && Array.isArray(all_ebillet)) {
+              const idx = all_ebillet.findIndex(item => item.ref && item.ref.toLowerCase() === ebillet.ref.toLowerCase());
+              if (idx !== -1) {
+                all_ebillet[idx] = { ...all_ebillet[idx], ...ebillet };
+              }
+            }
+          }
+        }
+
         const ebilletVal = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'ebillet' ? data : null);
         if (ebilletVal !== null && ebilletVal !== undefined) {
           if (document.readyState === 'loading') {
@@ -1354,14 +1637,23 @@ export async function pop_rdv_css() {
     });
 
     window.addEventListener('DOMContentLoaded', () => {
-      const today = new Date();
-      const todayStr = today.toISOString().split('T')[0];
+      let minDate = new Date()
+      minDate.setDate(minDate.getDate() + 3)
+
+      const todayStr = minDate.toISOString().split('T')[0];
       ['date-1', 'date-2', 'date-3'].forEach(id => {
         const dateEl = document.getElementById(id);
         if (dateEl) {
           dateEl.setAttribute('min', todayStr);
           dateEl.addEventListener('change', validateUniqueAvailabilityDates);
           dateEl.addEventListener('input', validateUniqueAvailabilityDates);
+        }
+      });
+      ['horaire-1', 'horaire-2', 'horaire-3'].forEach(id => {
+        const horaireEl = document.getElementById(id);
+        if (horaireEl) {
+          horaireEl.addEventListener('change', validateUniqueAvailabilityDates);
+          horaireEl.addEventListener('input', validateUniqueAvailabilityDates);
         }
       });
       const maxDate = new Date(today.getFullYear() - 6, today.getMonth(), today.getDate()).toISOString().split('T')[0];
@@ -1372,6 +1664,13 @@ export async function pop_rdv_css() {
         dateInput.addEventListener('change', updateAgeLabel);
         updateAgeLabel();
       }
+
+      ['nom', 'prenom'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('click', handleBeneficiaireFieldClick);
+        }
+      });
     });
   </script>
 </body>
