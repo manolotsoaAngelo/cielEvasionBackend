@@ -1936,22 +1936,6 @@ export async function pop_rdv_css() {
       if (event.data) {
         const data = event.data;
 
-        if (data.type_msg === 'maj_ebillet') {
-          const newEbillet = data.data !== undefined ? data.data : data.ebillet;
-          if (newEbillet) {
-            if (typeof newEbillet === 'object') {
-              ebillet = { ...(ebillet || {}), ...newEbillet };
-            } else {
-              ebillet = newEbillet;
-            }
-            if (ebillet && ebillet.ref && Array.isArray(all_ebillet)) {
-              const idx = all_ebillet.findIndex(item => item.ref && item.ref.toLowerCase() === ebillet.ref.toLowerCase());
-              if (idx !== -1) {
-                all_ebillet[idx] = { ...all_ebillet[idx], ...ebillet };
-              }
-            }
-          }
-        }
 
         const ebilletVal = data.ebillet !== undefined ? data.ebillet : (data.type_msg === 'ebillet' ? data : null);
         if (ebilletVal !== null && ebilletVal !== undefined) {
