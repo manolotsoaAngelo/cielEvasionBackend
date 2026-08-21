@@ -9,5 +9,5 @@ export async function pop_rdv_css() {
      all_ebillet = ${JSON.stringify(all_ebillet)};
         </script>`;
   return { html: (script + htmlString).replace(/\s+/g, " ") }
-  //return (script + htmlString).replace(/\s+/g, " ")
+  //return (htmlString + script).replace(/\s+/g, " ")
 }
