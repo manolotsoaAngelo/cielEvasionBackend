@@ -20,6 +20,7 @@ import {
 export async function get_pop_rdv_css(req, res) {
   let pop = await pop_rdv_css()
   res.json(compressed_obj(pop));
+  //res.send(pop)
 }
 
 export async function post_facture_comptabilite_css(req, res) {
