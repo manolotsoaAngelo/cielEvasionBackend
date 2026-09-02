@@ -887,7 +887,8 @@
 
 <body>
     <div class="modal-card">
-        <button type="button" id="btn-close-modal" class="popup-close-btn" onclick="closeModal()" aria-label="Fermer la popup" title="Fermer la popup">
+        <button type="button" id="btn-close-modal" class="popup-close-btn" onclick="closeModal()"
+            aria-label="Fermer la popup" title="Fermer la popup">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
                 stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -1582,11 +1583,10 @@
             }
 
             if (isYes) {
+                sendReturnMessage({ type_msg: "souscription", data: ebillet });
                 cardYes.classList.add('selected');
                 cardNo.classList.remove('selected');
                 radioYes.checked = true;
-
-                sendReturnMessage({ type_msg: "souscription", data: ebillet });
 
                 isSouscriptionLoading = true;
                 updateStepUI();
@@ -1595,7 +1595,7 @@
                     isSouscriptionLoading = false;
                     updateStepUI();
                     goToStep(5);
-                }, 3000);
+                }, 5000);
 
             } else {
                 cardNo.classList.add('selected');
