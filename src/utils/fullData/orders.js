@@ -1,55 +1,77 @@
 import { get_wix_services } from "../wixData/wixHttp.js";
-/*
-import { init_cachedData_orders,
-  refresh_orders
- } from "../utils/fullData/orders.js";
-*/
 
 let cachedData = null;
 let refreshPromise = null;
 
-export function init_cachedData_orders() {
-  cachedData = null;
-  refreshPromise = null;
-  return {
-    cachedData: cachedData,
-    refreshPromise: refreshPromise,
-  };
-}
+const WIX_DATA_URL = "https://ciel-evasion.fr/_functions/WixData/all_order/";
 
-export async function refreshData(wixData_url_get_FullData) {
+// 1. Fonction unique pour récupérer les données (sécurisée)
+async function fetchFromWix() {
   try {
-    console.log("🔄 Rafraîchissement des données Orders depuis Wix...");
-    const response = await get_wix_services(wixData_url_get_FullData);
-    
+    console.log("🔄 Récupération des données Orders depuis Wix...");
+    const response = await get_wix_services(WIX_DATA_URL);
+
     if (response?.data) {
       cachedData = response.data;
       console.log("✅ Cache Orders mis à jour avec succès");
-      return cachedData;
     } else {
-      console.log("⚠️ Aucune donnée Orders reçue lors du rafraîchissement");
-      return cachedData || [];
+      console.log("⚠️ Aucune donnée Orders reçue, conservation de l'ancien cache si existant");
+      // On garde l'ancien cache s'il existe, sinon on met un tableau vide
+      cachedData = cachedData || [];
     }
+    return cachedData;
   } catch (error) {
     console.error("❌ Erreur lors du rafraîchissement Orders :", error);
-    return cachedData = (await get_wix_services(wixData_url_get_FullData)).data
+    // En cas d'erreur, on retourne le cache existant ou un tableau vide pour éviter de tout bloquer
+    return cachedData || [];
   } finally {
+    // Crucial : on libère la promesse seulement quand l'appel est 100% terminé
     refreshPromise = null;
   }
 }
 
-export async function FullData(wixData_url_get_FullData) {
-  if (cachedData) {
+// 2. Fonction principale avec option de forçage du cache
+export async function FullData(forceRefresh = false) {
+  // Si on force le rafraîchissement, on vide le cache local
+  if (forceRefresh) {
+    console.log("🧹 Vidage du cache demandé.");
+    cachedData = null;
+  }
+
+  // S'il y a déjà des données et qu'on ne force pas, on les renvoie
+  if (cachedData && !forceRefresh) {
     console.log("⚡ Données Orders servies depuis le cache");
     return cachedData;
   }
+
+  // Si une requête est DÉJÀ en cours vers Wix, on s'abonne à cette même requête
+  // Cela empêche d'envoyer 5 requêtes Wix si 5 utilisateurs se connectent en même temps
   if (refreshPromise) {
-    console.log("⏳ Rafraîchissement en cours, attente des données...");
+    console.log("⏳ Requête déjà en cours, attente de la résolution...");
     return refreshPromise;
   }
-  console.log("🚀 Aucun cache Orders → lancement du rafraîchissement");
-  refreshPromise = refreshData(wixData_url_get_FullData);
+
+  // S'il n'y a ni cache ni requête en cours, on lance la récupération
+  console.log("🚀 Lancement d'un nouveau rafraîchissement Orders");
+  refreshPromise = fetchFromWix();
+
   return refreshPromise;
+}
+
+// 3. Rétrocompatibilité et exposition du rafraîchissement
+export async function refreshData() {
+  // Appelle simplement FullData en forçant le rafraîchissement
+  return FullData(true);
+}
+
+export function init_cachedData_orders() {
+  // Pour éviter de casser les imports de vos autres fichiers
+  cachedData = null;
+  // Ne mettez PAS refreshPromise à null ici, sinon vous cassez les requêtes en vol !
+  return {
+    cachedData: cachedData,
+    refreshPromise: refreshPromise,
+  };
 }
 
 /*

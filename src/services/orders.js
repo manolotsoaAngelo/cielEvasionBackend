@@ -29,10 +29,10 @@ class OrdersService {
   constructor() {
   }
   async refresh() {
-    return await refreshData(wixData_url);
+    return await refreshData();
   }
   async getAll() {
-    return await FullData(wixData_url);
+    return await FullData();
   }
   async getById(id) {
     //return (await get_wix_services(wixData_url + "_id/" + id)).data;
@@ -62,7 +62,7 @@ class OrdersService {
     try {
       let result = await AiService.clean_input_client_by_Ai(all_inputs);
       return result
-    } catch (error) {     
+    } catch (error) {
       console.error("Erreur lors du traitement de l'input client par l'IA :", error);
       return null;
     }
