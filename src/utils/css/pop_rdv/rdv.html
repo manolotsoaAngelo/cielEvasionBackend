@@ -1280,7 +1280,8 @@
                         <div class="validite-info-text">
                             <span class="validite-info-title">Validité du e-billet</span>
                             <span class="validite-info-desc">Votre e-billet est valide jusqu'au <span
-                                    id="step2-validite-date" class="validite-date-highlight">Vendredi 26 Mai 2028</span>. Vos choix de dates doivent être programmés avant cette
+                                    id="step2-validite-date" class="validite-date-highlight">Vendredi 26 Mai
+                                    2028</span>. Vos choix de dates doivent être programmés avant cette
                                 échéance.</span>
                         </div>
                     </div>
@@ -2261,7 +2262,7 @@
         function handleProlongerValidite() {
             const ticket = ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet);
             showPopup(
-                "Veuillez consulter 👉 votre espace personnel en cliquant ici pour prolonger la validité de votre e-billet de 1 an.",
+                "Souhaitez-vous prolonger la validité de votre e-billet d'un an ?",
                 "Prolongation de validité",
                 () => sendReturnMessage({ type_msg: "prolonger_validite", data: ticket })
             );
