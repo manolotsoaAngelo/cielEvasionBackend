@@ -36,7 +36,6 @@
             width: 100%;
             min-height: 100%;
             -webkit-text-size-adjust: 100%;
-            overflow-x: hidden;
         }
 
         body {
@@ -46,10 +45,11 @@
             justify-content: center;
             align-items: flex-start;
             padding: 24px 16px;
-            margin: 0;
+            position: relative;
             overflow-x: hidden;
+            overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            background-color: var(--bg-page);
+            background-color: transparent;
         }
 
         .modal-card {
@@ -60,6 +60,7 @@
             box-shadow: var(--shadow);
             padding: 36px 40px;
             position: relative;
+            overflow: hidden;
             margin: 0 auto;
             animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -735,7 +736,8 @@
             }
 
             .input-control {
-                font-size: 16px; /* Empêche le zoom auto iOS Safari dans l'iframe */
+                font-size: 16px;
+                /* Empêche le zoom auto iOS Safari dans l'iframe */
                 height: 44px;
                 padding: 0 12px;
             }
@@ -885,43 +887,26 @@
         }
 
         .popup-overlay {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            height: 100dvh !important;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
-            z-index: 99999 !important;
+            z-index: 9999;
             display: flex;
-            align-items: center !important;
-            justify-content: center !important;
+            align-items: center;
+            justify-content: center;
             padding: 16px;
+            border-radius: inherit;
             animation: fadeIn 0.2s ease;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             box-sizing: border-box;
-        }
-
-        #custom-popup {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            height: 100dvh !important;
-            display: none;
-            align-items: center !important;
-            justify-content: center !important;
-            z-index: 99999 !important;
-            padding: 16px !important;
-            box-sizing: border-box !important;
         }
 
         .popup-box {
@@ -931,9 +916,8 @@
             width: 100%;
             max-width: 420px;
             max-height: calc(100vh - 32px);
-            max-height: calc(100dvh - 32px);
             overflow-y: auto;
-            margin: auto !important;
+            margin: auto;
             position: relative;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -1269,7 +1253,8 @@
                 <div class="validite-info-card">
                     <div class="validite-info-content">
                         <div class="validite-info-icon">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                 <line x1="16" y1="2" x2="16" y2="6"></line>
                                 <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -1278,12 +1263,16 @@
                         </div>
                         <div class="validite-info-text">
                             <span class="validite-info-title">Validité du e-billet</span>
-                            <span class="validite-info-desc">Votre e-billet est valide jusqu'au <span id="step2-validite-date" class="validite-date-highlight">26 mai 2028 (26/05/2028)</span>. Vos choix de dates doivent être programmés avant cette échéance.</span>
+                            <span class="validite-info-desc">Votre e-billet est valide jusqu'au <span
+                                    id="step2-validite-date" class="validite-date-highlight">26 mai 2028
+                                    (26/05/2028)</span>. Vos choix de dates doivent être programmés avant cette
+                                échéance.</span>
                         </div>
                     </div>
                     <div class="validite-action-wrap">
                         <button type="button" class="btn-prolongation" onclick="handleProlongerValidite()">
-                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 <polyline points="12 6 12 12 16 14"></polyline>
                             </svg>
@@ -1465,123 +1454,129 @@
                 <button type="button" class="btn btn-primary" id="btn-next" onclick="nextStep()">Suivant</button>
             </div>
         </form>
-    </div>
 
-    <div id="custom-popup" class="popup-overlay" style="display: none;" onclick="closePopupOnBackdrop(event)">
-        <div class="popup-box">
-            <button type="button" id="btn-close-custom-popup" class="popup-close-btn" onclick="closePopup(false)"
-                aria-label="Fermer la popup" title="Fermer la popup">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="popup-icon-wrapper">
-                <svg class="popup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <line x1="12" y1="8" x2="12" y2="12"></line>
-                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                </svg>
-            </div>
-            <h3 id="popup-title" class="popup-title">Information</h3>
-            <div id="popup-message" class="popup-message"></div>
-            <button type="button" class="btn btn-primary popup-btn" onclick="closePopup()">D'accord</button>
-        </div>
-    </div>
-
-    <div id="beneficiaire-popup" class="popup-overlay" style="display: none;"
-        onclick="closeBeneficiairePopupOnBackdrop(event)">
-        <div class="beneficiaire-popup-box">
-            <div class="beneficiaire-popup-header">
-                <div class="beneficiaire-header-left">
-                    <div class="beneficiaire-header-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
-                    <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à la
-                        garantie
-                        Échanges et Report</span>
-                </div>
-                <button type="button" class="beneficiaire-popup-close" onclick="closeBeneficiairePopup()"
-                    aria-label="Fermer">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        <div id="custom-popup" class="popup-overlay" style="display: none;" onclick="closePopupOnBackdrop(event)">
+            <div class="popup-box">
+                <button type="button" id="btn-close-custom-popup" class="popup-close-btn" onclick="closePopup(false)"
+                    aria-label="Fermer la popup" title="Fermer la popup">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
                         stroke-linecap="round" stroke-linejoin="round">
                         <line x1="18" y1="6" x2="6" y2="18"></line>
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
+                <div class="popup-icon-wrapper">
+                    <svg class="popup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <h3 id="popup-title" class="popup-title">Information</h3>
+                <div id="popup-message" class="popup-message"></div>
+                <button type="button" class="btn btn-primary popup-btn" onclick="closePopup()">D'accord</button>
             </div>
-            <div class="beneficiaire-popup-body">
-                <p class="beneficiaire-popup-question" id="beneficiaire-popup-question">Vous souhaitez modifier les
-                    Informations
-                    du bénéficiaire ?</p>
+        </div>
 
-                <div id="beneficiaire-popup-fields" class="beneficiaire-fields-wrap" style="display: none;">
-                    <div class="beneficiaire-grid">
-                        <div class="field-group">
-                            <label class="field-label" for="popup-prenom">Prénom *</label>
-                            <div class="input-outline-wrapper">
-                                <input type="text" id="popup-prenom" class="input-control" placeholder="Prénom"
-                                    required>
+        <div id="beneficiaire-popup" class="popup-overlay" style="display: none;"
+            onclick="closeBeneficiairePopupOnBackdrop(event)">
+            <div class="beneficiaire-popup-box">
+                <div class="beneficiaire-popup-header">
+                    <div class="beneficiaire-header-left">
+                        <div class="beneficiaire-header-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <span id="beneficiaire-popup-title" class="beneficiaire-popup-title">Vous n'avez pas souscris à
+                            la
+                            garantie
+                            Échanges et Report</span>
+                    </div>
+                    <button type="button" class="beneficiaire-popup-close" onclick="closeBeneficiairePopup()"
+                        aria-label="Fermer">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="beneficiaire-popup-body">
+                    <p class="beneficiaire-popup-question" id="beneficiaire-popup-question">Vous souhaitez modifier les
+                        Informations
+                        du bénéficiaire ?</p>
+
+                    <div id="beneficiaire-popup-fields" class="beneficiaire-fields-wrap" style="display: none;">
+                        <div class="beneficiaire-grid">
+                            <div class="field-group">
+                                <label class="field-label" for="popup-prenom">Prénom *</label>
+                                <div class="input-outline-wrapper">
+                                    <input type="text" id="popup-prenom" class="input-control" placeholder="Prénom"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label" for="popup-nom">Nom *</label>
+                                <div class="input-outline-wrapper">
+                                    <input type="text" id="popup-nom" class="input-control" placeholder="Nom" required>
+                                </div>
                             </div>
                         </div>
                         <div class="field-group">
-                            <label class="field-label" for="popup-nom">Nom *</label>
-                            <div class="input-outline-wrapper">
-                                <input type="text" id="popup-nom" class="input-control" placeholder="Nom" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field-group">
-                        <label class="field-label" for="popup-telephone">N° de téléphone (pour le point météo) *</label>
-                        <div class="input-outline-wrapper">
-                            <input type="tel" id="popup-telephone" class="input-control"
-                                placeholder="ex: 06 12 34 56 78" required>
-                        </div>
-                    </div>
-                    <div class="beneficiaire-grid-3">
-                        <div class="field-group">
-                            <label class="field-label" id="popup-label-date-naissance" for="popup-date-naissance">Date
-                                de naissance
+                            <label class="field-label" for="popup-telephone">N° de téléphone (pour le point météo)
                                 *</label>
                             <div class="input-outline-wrapper">
-                                <input type="date" id="popup-date-naissance" class="input-control" required>
+                                <input type="tel" id="popup-telephone" class="input-control"
+                                    placeholder="ex: 06 12 34 56 78" required>
                             </div>
                         </div>
-                        <div class="field-group">
-                            <label class="field-label" for="popup-poids">Poids ( kg ) *</label>
-                            <div class="input-outline-wrapper">
-                                <input type="number" id="popup-poids" class="input-control" placeholder="kg" required>
+                        <div class="beneficiaire-grid-3">
+                            <div class="field-group">
+                                <label class="field-label" id="popup-label-date-naissance"
+                                    for="popup-date-naissance">Date
+                                    de naissance
+                                    *</label>
+                                <div class="input-outline-wrapper">
+                                    <input type="date" id="popup-date-naissance" class="input-control" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label" for="popup-taille">Taille ( cm ) *</label>
-                            <div class="input-outline-wrapper">
-                                <input type="number" id="popup-taille" class="input-control" placeholder="cm" required>
+                            <div class="field-group">
+                                <label class="field-label" for="popup-poids">Poids ( kg ) *</label>
+                                <div class="input-outline-wrapper">
+                                    <input type="number" id="popup-poids" class="input-control" placeholder="kg"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label" for="popup-taille">Taille ( cm ) *</label>
+                                <div class="input-outline-wrapper">
+                                    <input type="number" id="popup-taille" class="input-control" placeholder="cm"
+                                        required>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="beneficiaire-popup-btn-wrap">
-                    <button type="button" id="beneficiaire-popup-btn" class="beneficiaire-popup-btn"
-                        onclick="handleBeneficiaireAction()">Souscrire et Modifier</button>
-                </div>
-                <div class="beneficiaire-popup-footer">
-                    <p class="beneficiaire-footer-note">
-                        <span>ℹ️</span>
-                        <span>La garantie Échanges et Report sera utilisée dès confirmation de la modification du
-                            bénéficiaire.</span>
-                    </p>
-                    <p class="beneficiaire-footer-warning">⚠️ <u>Attention : cette garantie ne prolonge en aucun cas la
-                            validité
-                            du e-Billet.</u></p>
+                    <div class="beneficiaire-popup-btn-wrap">
+                        <button type="button" id="beneficiaire-popup-btn" class="beneficiaire-popup-btn"
+                            onclick="handleBeneficiaireAction()">Souscrire et Modifier</button>
+                    </div>
+                    <div class="beneficiaire-popup-footer">
+                        <p class="beneficiaire-footer-note">
+                            <span>ℹ️</span>
+                            <span>La garantie Échanges et Report sera utilisée dès confirmation de la modification du
+                                bénéficiaire.</span>
+                        </p>
+                        <p class="beneficiaire-footer-warning">⚠️ <u>Attention : cette garantie ne prolonge en aucun cas
+                                la
+                                validité
+                                du e-Billet.</u></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1670,7 +1665,7 @@
                         tab.classList.add('active');
                         try {
                             tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                        } catch (e) {}
+                        } catch (e) { }
                     }
                 }
             }
@@ -2286,7 +2281,12 @@
                 titleEl.innerText = title;
                 msgEl.innerText = message;
                 overlay.style.display = 'flex';
-                overlay.scrollTop = 0;
+                try {
+                    const popupBox = overlay.querySelector('.popup-box');
+                    if (popupBox) {
+                        popupBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } catch (e) { }
             }
         }
 
