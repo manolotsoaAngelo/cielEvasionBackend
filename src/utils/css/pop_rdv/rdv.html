@@ -32,13 +32,24 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
+        html {
+            width: 100%;
+            min-height: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
+            width: 100%;
+            min-height: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
+            padding: 24px 16px;
             position: relative;
             overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            background-color: var(--bg-page);
         }
 
         .modal-card {
@@ -47,9 +58,10 @@
             max-width: 650px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
-            padding: 40px 44px;
+            padding: 36px 40px;
             position: relative;
-            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin: 0 auto;
+            animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes slideUp {
@@ -68,9 +80,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             padding-bottom: 16px;
+            padding-right: 48px;
             border-bottom: 1px solid #eaeaea;
+            position: relative;
         }
 
         .brand-left {
@@ -80,20 +94,20 @@
         }
 
         .brand-logo-img {
-            height: 95px;
+            height: 75px;
             width: auto;
-            max-width: 280px;
+            max-width: 240px;
             object-fit: contain;
         }
 
         .brand-divider {
             width: 1.5px;
-            height: 54px;
+            height: 48px;
             background: #e0e0e5;
         }
 
         .brand-name {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 700;
             color: var(--text-dark);
             letter-spacing: -0.4px;
@@ -164,12 +178,20 @@
         .stepper-nav {
             display: flex;
             gap: 8px;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             position: relative;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .stepper-nav::-webkit-scrollbar {
+            display: none;
         }
 
         .step-tab {
-            flex: 1;
+            flex: 1 1 0;
+            min-width: 0;
             text-align: left;
             padding-bottom: 10px;
             font-size: 12.5px;
@@ -267,6 +289,105 @@
             background-repeat: no-repeat;
             background-position: right 16px center;
             padding-right: 40px;
+        }
+
+        .validite-info-card {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f4ff 100%);
+            border: 1.5px solid #bae0ff;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(24, 144, 255, 0.06);
+        }
+
+        .validite-info-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .validite-info-icon {
+            color: var(--primary);
+            background: #ffffff;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(24, 144, 255, 0.15);
+        }
+
+        .validite-info-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 13.5px;
+            line-height: 1.45;
+            color: #2c3e50;
+        }
+
+        .validite-info-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #003a8c;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .validite-info-desc {
+            font-size: 13.5px;
+            color: #4a5568;
+        }
+
+        .validite-date-highlight {
+            color: #096dd9;
+            font-weight: 700;
+            background: #ffffff;
+            padding: 2px 8px;
+            border-radius: 6px;
+            border: 1px solid #91caff;
+            display: inline-block;
+        }
+
+        .validite-action-wrap {
+            display: flex;
+            align-items: center;
+            padding-left: 46px;
+        }
+
+        .btn-prolongation {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            color: #096dd9;
+            border: 1.5px solid #91caff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(24, 144, 255, 0.08);
+            outline: none;
+        }
+
+        .btn-prolongation:hover {
+            background: #1890ff;
+            color: #ffffff;
+            border-color: #1890ff;
+            box-shadow: 0 4px 12px rgba(24, 144, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-prolongation:active {
+            transform: translateY(0);
         }
 
         .dispo-row {
@@ -547,13 +668,20 @@
         }
 
         @media (max-width: 600px) {
+            body {
+                padding: 12px 8px;
+            }
+
             .modal-card {
-                padding: 28px 20px;
+                padding: 24px 16px;
+                border-radius: 18px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
             }
 
             .brand-header {
-                margin-bottom: 20px;
+                margin-bottom: 16px;
                 padding-bottom: 12px;
+                padding-right: 42px;
             }
 
             .brand-left {
@@ -561,36 +689,198 @@
             }
 
             .brand-logo-img {
-                height: 65px;
-                max-width: 200px;
+                height: 52px;
+                max-width: 160px;
             }
 
             .brand-divider {
-                height: 40px;
+                height: 34px;
             }
 
             .brand-name {
-                font-size: 18px;
+                font-size: 16.5px;
+                line-height: 1.25;
             }
 
             .popup-close-btn {
-                top: 14px;
-                right: 14px;
-                width: 34px;
-                height: 34px;
+                top: 12px;
+                right: 12px;
+                width: 32px;
+                height: 32px;
+            }
+
+            .stepper-nav {
+                gap: 6px;
+                margin-bottom: 20px;
+                padding-bottom: 2px;
+            }
+
+            .step-tab {
+                font-size: 11.5px;
+                padding-bottom: 6px;
+                flex: 0 0 auto;
+                min-width: max-content;
+            }
+
+            .step-header {
+                margin-bottom: 20px;
+            }
+
+            .step-title {
+                font-size: 20px;
+            }
+
+            .step-subtitle {
+                font-size: 13.5px;
+            }
+
+            .input-control {
+                font-size: 16px; /* Empêche le zoom auto iOS Safari dans l'iframe */
+                height: 44px;
+                padding: 0 12px;
             }
 
             .dispo-row {
                 grid-template-columns: 1fr;
+                gap: 10px;
+                padding: 12px;
+                margin-bottom: 14px;
             }
 
-            .stepper-nav {
+            .validite-info-card {
+                padding: 14px 12px;
+                gap: 10px;
+                margin-bottom: 18px;
+            }
+
+            .validite-info-title {
+                font-size: 13px;
+            }
+
+            .validite-info-desc {
+                font-size: 12.5px;
+            }
+
+            .validite-action-wrap {
+                padding-left: 0;
+            }
+
+            .btn-prolongation {
+                width: 100%;
+                justify-content: center;
+                font-size: 12.5px;
+                padding: 8px 10px;
+            }
+
+            .radio-card {
+                padding: 14px 12px;
+                gap: 10px;
+            }
+
+            .radio-title {
+                font-size: 14px;
+                flex-wrap: wrap;
                 gap: 4px;
             }
 
-            .step-tab {
-                font-size: 11px;
-                padding-bottom: 6px;
+            .radio-desc {
+                font-size: 12.5px;
+            }
+
+            .mes-infos-box,
+            .location-box {
+                padding: 16px 12px;
+            }
+
+            .modal-footer {
+                display: flex;
+                gap: 10px;
+                margin-top: 24px;
+            }
+
+            .modal-footer .btn {
+                flex: 1;
+                height: 44px;
+                padding: 0 12px;
+                font-size: 14px;
+            }
+
+            .recap-list {
+                padding: 14px;
+                margin: 18px 0;
+                font-size: 13px;
+            }
+
+            .recap-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+                padding: 6px 0;
+            }
+
+            .recap-val {
+                max-width: 100%;
+                text-align: left;
+            }
+
+            .popup-box {
+                padding: 24px 18px;
+                border-radius: 16px;
+            }
+
+            .popup-box .popup-close-btn {
+                top: 12px;
+                right: 12px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .beneficiaire-popup-box {
+                padding: 20px 16px 16px 16px;
+                border-radius: 16px;
+            }
+
+            .beneficiaire-popup-title {
+                font-size: 14.5px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 6px 4px;
+            }
+
+            .modal-card {
+                padding: 18px 10px;
+                border-radius: 14px;
+            }
+
+            .brand-logo-img {
+                height: 44px;
+                max-width: 120px;
+            }
+
+            .brand-name {
+                font-size: 14.5px;
+            }
+
+            .brand-divider {
+                height: 28px;
+            }
+
+            .brand-left {
+                gap: 6px;
+            }
+
+            .brand-header {
+                padding-right: 36px;
+            }
+
+            .popup-close-btn {
+                top: 8px;
+                right: 8px;
+                width: 28px;
+                height: 28px;
             }
         }
 
@@ -598,27 +888,45 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.45);
             backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
             animation: fadeIn 0.2s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
         }
 
         .popup-box {
             background: #ffffff;
             border-radius: 20px;
-            padding: 30px 26px;
+            padding: 30px 24px;
             width: 100%;
             max-width: 420px;
+            max-height: calc(100vh - 32px);
+            overflow-y: auto;
+            margin: auto;
+            position: relative;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             animation: popUpScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-sizing: border-box;
+        }
+
+        .popup-box .popup-close-btn {
+            top: 16px;
+            right: 16px;
+            width: 32px;
+            height: 32px;
         }
 
         @keyframes popUpScale {
@@ -680,9 +988,13 @@
             padding: 26px 28px 22px 28px;
             width: 100%;
             max-width: 560px;
+            max-height: calc(100vh - 32px);
+            overflow-y: auto;
+            margin: auto;
             position: relative;
             box-shadow: 0 24px 48px -12px rgba(16, 24, 40, 0.22), 0 0 1px 1px rgba(0, 0, 0, 0.04);
             animation: popUpScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-sizing: border-box;
         }
 
         .beneficiaire-popup-header {
@@ -935,6 +1247,31 @@
                     <h2 class="step-title">Choisissez vos disponibilités</h2>
                     <p class="step-subtitle">Sélectionnez 3 choix de dates avec leur créneau horaire préféré</p>
                 </div>
+                <div class="validite-info-card">
+                    <div class="validite-info-content">
+                        <div class="validite-info-icon">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                        </div>
+                        <div class="validite-info-text">
+                            <span class="validite-info-title">Validité du e-billet</span>
+                            <span class="validite-info-desc">Votre e-billet est valide jusqu'au <span id="step2-validite-date" class="validite-date-highlight">26 mai 2028 (26/05/2028)</span>. Vos choix de dates doivent être programmés avant cette échéance.</span>
+                        </div>
+                    </div>
+                    <div class="validite-action-wrap">
+                        <button type="button" class="btn-prolongation" onclick="handleProlongerValidite()">
+                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Prolonger la validité de 1 an (+12 mois)</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="dispo-row">
                     <div class="dispo-row-title">Option 1</div>
                     <div>
@@ -1113,6 +1450,14 @@
 
     <div id="custom-popup" class="popup-overlay" style="display: none;" onclick="closePopupOnBackdrop(event)">
         <div class="popup-box">
+            <button type="button" id="btn-close-custom-popup" class="popup-close-btn" onclick="closePopup(false)"
+                aria-label="Fermer la popup" title="Fermer la popup">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
             <div class="popup-icon-wrapper">
                 <svg class="popup-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle>
@@ -1304,6 +1649,9 @@
                         tab.classList.add('completed');
                     } else if (i === currentStep) {
                         tab.classList.add('active');
+                        try {
+                            tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                        } catch (e) {}
                     }
                 }
             }
@@ -1372,6 +1720,7 @@
                     showPopup("Aucun e-billet trouvé avec la référence saisie.", "e-Billet introuvable");
                     return false;
                 }
+                updateAvailabilityDatesMax(ebillet);
                 const isRefValid = refValue.toLowerCase() === ebillet.ref.toLowerCase();
                 const nomLower = ebillet.nom.toLowerCase();
                 const prenomLower = ebillet.prenom.toLowerCase();
@@ -1396,6 +1745,19 @@
                 const isCrdit = Boolean(ebillet.crdit || ebillet.credit);
                 const isBonDchange = Boolean(ebillet.bonDchange || ebillet['bonDchange']);
                 const isRdvDemand = Boolean(ebillet.rdvDemand);
+                const isContreProposition = Boolean(!(ebillet.rdv) &&
+                    (ebillet.contrepropositionDate1 || ebillet.contrepropositionDate2 || ebillet.contrepropositionDate3) &&
+                    ebillet.statut_reservation === "contreproposition" &&
+                    !(ebillet.rdvDemand) && !(ebillet.perime && !ebillet.effectu && !ebillet.rdv) &&
+                    !(ebillet.primDfinitif && !ebillet.effectu && !ebillet.rdv) &&
+                    !(ebillet.effectu || (ebillet.effectu && ebillet.rdv)) &&
+                    !(ebillet.crdit) &&
+                    !(ebillet.bonDchange && ebillet.rdv));
+
+                if (isContreProposition) {
+                    showPopup("Contre-proposition(s)", "Contre-proposition(s) en attente de confirmation.");
+                    return false;
+                }
 
                 if (isRdvDemand) {
                     sendReturnMessage({ type_msg: "rdv_en_attente", data: ebillet });
@@ -1490,6 +1852,21 @@
                 const h2 = document.getElementById('horaire-2').value;
                 const d3 = document.getElementById('date-3').value;
                 const h3 = document.getElementById('horaire-3').value;
+                const maxDateStr = getValiditeDateStr(ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet));
+                if (maxDateStr) {
+                    if (d1 && d1 > maxDateStr) {
+                        showPopup(`La date de l'Option 1 (${d1}) dépasse la date de validité de votre billet (${maxDateStr}).`, "Date non valide");
+                        return false;
+                    }
+                    if (d2 && d2 > maxDateStr) {
+                        showPopup(`La date de l'Option 2 (${d2}) dépasse la date de validité de votre billet (${maxDateStr}).`, "Date non valide");
+                        return false;
+                    }
+                    if (d3 && d3 > maxDateStr) {
+                        showPopup(`La date de l'Option 3 (${d3}) dépasse la date de validité de votre billet (${maxDateStr}).`, "Date non valide");
+                        return false;
+                    }
+                }
                 if (d1 && h1 && d2 && h2 && d1 === d2 && h1 === h2) {
                     showPopup("Cette date a déjà été choisie dans un autre de vos choix.", "Date en doublon");
                     return false;
@@ -1716,6 +2093,7 @@
         function resetForm() {
             document.getElementById('multi-step-form').reset();
             souscriptionUtilisee = false;
+            updateAvailabilityDatesMax();
             if (souscriptionTimer) {
                 clearTimeout(souscriptionTimer);
                 souscriptionTimer = null;
@@ -1767,6 +2145,75 @@
                 label.innerText = `Date de naissance *`;
             }
         }
+
+        function getValiditeDateStr(item) {
+            if (!item) return '';
+            const val = item.validit || item.validite || item['validité'];
+            if (!val) return '';
+            if (typeof val === 'string') {
+                const trimmed = val.trim();
+                if (/^\d{4}-\d{2}-\d{2}/.test(trimmed)) {
+                    return trimmed.substring(0, 10);
+                }
+            }
+            const d = new Date(val);
+            if (!isNaN(d.getTime())) {
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+            return '';
+        }
+
+        function formatValiditeDisplay(dateStr) {
+            if (!dateStr) return 'Non définie';
+            const parts = dateStr.split('-');
+            if (parts.length === 3) {
+                const [year, month, day] = parts;
+                const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+                const mIdx = parseInt(month, 10) - 1;
+                if (mIdx >= 0 && mIdx < 12) {
+                    return `${parseInt(day, 10)} ${months[mIdx]} ${year} (${day}/${month}/${year})`;
+                }
+                return `${day}/${month}/${year}`;
+            }
+            return dateStr;
+        }
+
+        function updateAvailabilityDatesMax(targetEbillet) {
+            const ticket = targetEbillet || ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet);
+            const maxDateStr = getValiditeDateStr(ticket);
+            ['date-1', 'date-2', 'date-3'].forEach(id => {
+                const dateEl = document.getElementById(id);
+                if (dateEl) {
+                    if (maxDateStr) {
+                        dateEl.setAttribute('max', maxDateStr);
+                    } else {
+                        dateEl.removeAttribute('max');
+                    }
+                }
+            });
+
+            const validiteDateEl = document.getElementById('step2-validite-date');
+            if (validiteDateEl) {
+                if (maxDateStr) {
+                    validiteDateEl.innerText = formatValiditeDisplay(maxDateStr);
+                } else {
+                    validiteDateEl.innerText = 'Non définie';
+                }
+            }
+        }
+
+        function handleProlongerValidite() {
+            const ticket = ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet);
+            showPopup(
+                "Veuillez consulter 👉 votre espace personnel en cliquant ici pour prolonger la validité de votre e-billet de 1 an.",
+                "Prolongation de validité",
+                () => sendReturnMessage({ type_msg: "prolonger_validite", data: ticket })
+            );
+        }
+
         function validateUniqueAvailabilityDates(e) {
             const target = e ? e.target : null;
             const choices = [
@@ -1781,6 +2228,12 @@
             });
 
             if (target && target.value) {
+                const maxDateStr = getValiditeDateStr(ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet));
+                if (target.type === 'date' && maxDateStr && target.value > maxDateStr) {
+                    target.setCustomValidity(`La date ne peut pas dépasser la date de validité (${maxDateStr}).`);
+                    target.reportValidity();
+                    return;
+                }
                 const currentChoice = choices.find(c => c.date === target || c.horaire === target);
                 if (currentChoice && currentChoice.date && currentChoice.horaire) {
                     const currentDate = currentChoice.date.value;
@@ -1817,19 +2270,21 @@
             }
         }
 
-        function closePopup() {
+        function closePopup(executeCallback = true) {
             const overlay = document.getElementById('custom-popup');
             if (overlay) overlay.style.display = 'none';
-            if (typeof popupConfirmCallback === 'function') {
+            if (executeCallback && typeof popupConfirmCallback === 'function') {
                 const cb = popupConfirmCallback;
                 popupConfirmCallback = null;
                 cb();
+            } else {
+                popupConfirmCallback = null;
             }
         }
 
         function closePopupOnBackdrop(e) {
             if (e.target && e.target.id === 'custom-popup') {
-                closePopup();
+                closePopup(false);
             }
         }
 
@@ -2059,6 +2514,7 @@
             }
 
             if (ebillet) {
+                updateAvailabilityDatesMax(ebillet);
                 const refInput = document.getElementById('ref-ebillet');
                 const nameInput = document.getElementById('nom-prenom');
                 if (refInput && ebillet.ref) {
@@ -2090,6 +2546,7 @@
                                 all_ebillet[idx] = { ...all_ebillet[idx], ...ebillet };
                             }
                         }
+                        updateAvailabilityDatesMax(ebillet);
                     }
                 }
                 if (data.type_msg === 'ebillet') {
@@ -2110,14 +2567,19 @@
             minDate.setDate(minDate.getDate() + 3);
 
             const todayStr = minDate.toISOString().split('T')[0];
+            const maxDateStr = getValiditeDateStr(ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet));
             ['date-1', 'date-2', 'date-3'].forEach(id => {
                 const dateEl = document.getElementById(id);
                 if (dateEl) {
                     dateEl.setAttribute('min', todayStr);
+                    if (maxDateStr) {
+                        dateEl.setAttribute('max', maxDateStr);
+                    }
                     dateEl.addEventListener('change', validateUniqueAvailabilityDates);
                     dateEl.addEventListener('input', validateUniqueAvailabilityDates);
                 }
             });
+            updateAvailabilityDatesMax();
             ['horaire-1', 'horaire-2', 'horaire-3'].forEach(id => {
                 const horaireEl = document.getElementById(id);
                 if (horaireEl) {
