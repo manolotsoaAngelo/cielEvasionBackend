@@ -1280,8 +1280,7 @@
                         <div class="validite-info-text">
                             <span class="validite-info-title">Validité du e-billet</span>
                             <span class="validite-info-desc">Votre e-billet est valide jusqu'au <span
-                                    id="step2-validite-date" class="validite-date-highlight">26 mai 2028
-                                    (26/05/2028)</span>. Vos choix de dates doivent être programmés avant cette
+                                    id="step2-validite-date" class="validite-date-highlight">Vendredi 26 Mai 2028</span>. Vos choix de dates doivent être programmés avant cette
                                 échéance.</span>
                         </div>
                     </div>
@@ -2198,15 +2197,39 @@
 
         function formatValiditeDisplay(dateStr) {
             if (!dateStr) return 'Non définie';
-            const parts = dateStr.split('-');
-            if (parts.length === 3) {
-                const [year, month, day] = parts;
-                const months = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
-                const mIdx = parseInt(month, 10) - 1;
-                if (mIdx >= 0 && mIdx < 12) {
-                    return `${parseInt(day, 10)} ${months[mIdx]} ${year} (${day}/${month}/${year})`;
+            const days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+            const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
+            let year, monthIdx, dayNum, dayOfWeek;
+
+            if (typeof dateStr === 'string' && /^\d{4}-\d{2}-\d{2}/.test(dateStr.trim())) {
+                const parts = dateStr.trim().substring(0, 10).split('-');
+                year = parseInt(parts[0], 10);
+                monthIdx = parseInt(parts[1], 10) - 1;
+                dayNum = parseInt(parts[2], 10);
+                const d = new Date(year, monthIdx, dayNum);
+                dayOfWeek = d.getDay();
+            } else if (typeof dateStr === 'string' && /^\d{2}\/\d{2}\/\d{4}/.test(dateStr.trim())) {
+                const parts = dateStr.trim().substring(0, 10).split('/');
+                dayNum = parseInt(parts[0], 10);
+                monthIdx = parseInt(parts[1], 10) - 1;
+                year = parseInt(parts[2], 10);
+                const d = new Date(year, monthIdx, dayNum);
+                dayOfWeek = d.getDay();
+            } else {
+                const d = new Date(dateStr);
+                if (!isNaN(d.getTime())) {
+                    year = d.getFullYear();
+                    monthIdx = d.getMonth();
+                    dayNum = d.getDate();
+                    dayOfWeek = d.getDay();
                 }
-                return `${day}/${month}/${year}`;
+            }
+
+            if (year && monthIdx >= 0 && monthIdx < 12 && dayNum && dayOfWeek !== undefined) {
+                const dayName = days[dayOfWeek];
+                const monthName = months[monthIdx];
+                return `${dayName} ${dayNum} ${monthName} ${year}`;
             }
             return dateStr;
         }
