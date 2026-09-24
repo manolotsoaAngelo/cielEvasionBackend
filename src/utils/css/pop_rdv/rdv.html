@@ -407,6 +407,59 @@
             transform: translateY(0);
         }
 
+        .badge-prolonge-pill {
+            font-size: 11px;
+            font-weight: 700;
+            background: #e6f7ff;
+            color: #096dd9;
+            border: 1px solid #91caff;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-left: 6px;
+        }
+
+        #validite-action-prolonger {
+            display: inline-block;
+        }
+
+        .validite-deja-prolonge-box {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 5px;
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            border-radius: 8px;
+            padding: 9px 14px;
+            max-width: 100%;
+            box-shadow: 0 1px 4px rgba(82, 196, 26, 0.08);
+        }
+
+        .validite-deja-prolonge-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #237804;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .validite-deja-prolonge-badge svg {
+            flex-shrink: 0;
+            color: #52c41a;
+        }
+
+        .validite-deja-prolonge-text {
+            margin: 0;
+            font-size: 12.5px;
+            line-height: 1.45;
+            color: #389e0d;
+        }
+
         .dispo-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -781,6 +834,15 @@
 
             .validite-action-wrap {
                 padding-left: 0;
+            }
+
+            #validite-action-prolonger {
+                width: 100%;
+            }
+
+            .validite-deja-prolonge-box {
+                width: 100%;
+                padding: 10px 12px;
             }
 
             .btn-prolongation {
@@ -1278,7 +1340,10 @@
                             </svg>
                         </div>
                         <div class="validite-info-text">
-                            <span class="validite-info-title">Validité du e-billet</span>
+                            <span class="validite-info-title">
+                                Validité du e-billet
+                                <span id="badge-prolonge-status" class="badge-prolonge-pill" style="display: none;">Prolongé (+1 an)</span>
+                            </span>
                             <span class="validite-info-desc">Votre e-billet est valide jusqu'au <span
                                     id="step2-validite-date" class="validite-date-highlight">Vendredi 26 Mai
                                     2028</span>. Vos choix de dates doivent être programmés avant cette
@@ -1286,14 +1351,29 @@
                         </div>
                     </div>
                     <div class="validite-action-wrap">
-                        <button type="button" class="btn-prolongation" onclick="handleProlongerValidite()">
-                            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>Prolonger la validité de 1 an (+12 mois)</span>
-                        </button>
+                        <div id="validite-action-prolonger">
+                            <button type="button" class="btn-prolongation" onclick="handleProlongerValidite()">
+                                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                                <span>Prolonger la validité de 1 an (+12 mois)</span>
+                            </button>
+                        </div>
+                        <div id="validite-action-deja-prolonge" class="validite-deja-prolonge-box" style="display: none;">
+                            <div class="validite-deja-prolonge-badge">
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
+                                    stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                <span>Extension de validité appliquée (+1 an)</span>
+                            </div>
+                            <p class="validite-deja-prolonge-text">
+                                Ce e-billet a déjà bénéficié d'une prolongation de 12 mois. La date de fin de validité indiquée ci-dessus intègre déjà cette extension.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="dispo-row">
@@ -2257,10 +2337,37 @@
                     validiteDateEl.innerText = 'Non définie';
                 }
             }
+
+            const isProlonge = !!(ticket && (ticket.prolonge === true || ticket.prolonge === 'true' || ticket.prolonge === 1 || ticket.prolonge === '1'));
+            const actionProlongerEl = document.getElementById('validite-action-prolonger');
+            const actionDejaProlongeEl = document.getElementById('validite-action-deja-prolonge');
+            const badgeProlongePill = document.getElementById('badge-prolonge-status');
+
+            if (actionProlongerEl && actionDejaProlongeEl) {
+                if (isProlonge) {
+                    actionProlongerEl.style.display = 'none';
+                    actionDejaProlongeEl.style.display = 'inline-flex';
+                } else {
+                    actionProlongerEl.style.display = 'block';
+                    actionDejaProlongeEl.style.display = 'none';
+                }
+            }
+
+            if (badgeProlongePill) {
+                badgeProlongePill.style.display = isProlonge ? 'inline-flex' : 'none';
+            }
         }
 
         function handleProlongerValidite() {
             const ticket = ebillet || (Array.isArray(all_ebillet) ? all_ebillet[0] : all_ebillet);
+            const isProlonge = !!(ticket && (ticket.prolonge === true || ticket.prolonge === 'true' || ticket.prolonge === 1 || ticket.prolonge === '1'));
+            if (isProlonge) {
+                showPopup(
+                    "Ce e-billet a déjà bénéficié de son extension de validité d'un an (+12 mois). Conformément aux conditions générales de vente, cette prolongation est unique et ne peut être renouvelée.",
+                    "Validité déjà prolongée"
+                );
+                return;
+            }
             showPopup(
                 "Souhaitez-vous prolonger la validité de votre e-billet d'un an ?",
                 "Prolongation de validité",
