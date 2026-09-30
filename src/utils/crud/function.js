@@ -64,13 +64,12 @@ export function tri_reportByASC_ref(result) {
 }
 
 export async function create_order_new(wixData) {
-  let data = await EbilletsService.getByRef(wixData.data.ref);
+  let report = await EbilletsService.getByRef(wixData.data.ref);
   let address = await UsersService.getById(wixData.address._id);
   let prix_article = wixData.prix_article;
   let methode_paiement = wixData.methode_paiement;
   let variable_line_commande, command;
 
-  let report = data;
   let ref = report.ref;
   if (report.commande) {
     command = await OrdersService.getById(report.commande);
@@ -209,7 +208,7 @@ export async function create_order_new(wixData) {
     let line_prolongation = {
       weight: 0,
       name:
-        "Prolongation : +12 mois supplémentaires e-Billet n° " + data.ref + "",
+        "Prolongation : +12 mois supplémentaires e-Billet n° " + report.ref + "",
       quantity: 1,
       sku: "",
       lineItemType: "PHYSICAL",
@@ -221,7 +220,7 @@ export async function create_order_new(wixData) {
       ),
       price: prix_article.prolongation,
       translatedName:
-        "Prolongation : +12 mois supplémentaires e-Billet n° " + data.ref + "",
+        "Prolongation : +12 mois supplémentaires e-Billet n° " + report.ref + "",
       totalPrice: prix_article.prolongation,
       priceData: {
         price: prix_article.prolongation,
@@ -245,7 +244,7 @@ export async function create_order_new(wixData) {
     let line_ER = {
       weight: 0,
       name:
-        "La Garantie : Échanges et Report​​​​ e-Billet n° ​" + data.ref + "",
+        "La Garantie : Échanges et Report​​​​ e-Billet n° ​" + report.ref + "",
       quantity: 1,
       sku: "",
       lineItemType: "PHYSICAL",
@@ -254,7 +253,7 @@ export async function create_order_new(wixData) {
       ),
       price: prix_article.er,
       translatedName:
-        "La Garantie : Échanges et Report​​​​​​ e-Billet n° ​" + data.ref + "",
+        "La Garantie : Échanges et Report​​​​​​ e-Billet n° ​" + report.ref + "",
       totalPrice: prix_article.er,
       priceData: {
         price: prix_article.er,
