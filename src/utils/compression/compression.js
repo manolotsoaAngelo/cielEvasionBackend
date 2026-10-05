@@ -6,32 +6,85 @@ for (let i = 0; i < 256; i++) {
   ASCII[i] = String.fromCharCode(i);
 }
 
-// 2. Cache LRU ultra-rapide basé sur Map (O(1)) avec taille maximale bornée
+// 2. Cache LRU ultra-rapide basé sur Map (O(1)) avec vérifications strictes et taille maximale bornée
 class SimpleLRU {
-  constructor(maxSize = 150) {
-    this.maxSize = maxSize;
+  /**
+   * @param {number} maxSize Nombre maximum d'entrées (défaut: 150)
+   * @param {number} maxEntryLength Taille maximale en caractères d'une entrée mise en cache (défaut: 2 Mo)
+   */
+  constructor(maxSize = 150, maxEntryLength = 2 * 1024 * 1024) {
+    this.maxSize = Number.isInteger(maxSize) && maxSize > 0 ? maxSize : 150;
+    this.maxEntryLength = Number.isInteger(maxEntryLength) && maxEntryLength > 0 ? maxEntryLength : 2097152;
     this.cache = new Map();
   }
 
   get(key) {
-    const value = this.cache.get(key);
-    if (value !== undefined) {
-      // Déplacement en fin de liste (récemment utilisé)
-      this.cache.delete(key);
-      this.cache.set(key, value);
+    // Vérification stricte du type et du contenu de la clé
+    if (typeof key !== "string" || key.length === 0) {
+      return undefined;
     }
+
+    if (!this.cache.has(key)) {
+      return undefined;
+    }
+
+    const value = this.cache.get(key);
+    // Vérification stricte de l'intégrité de la valeur extraite
+    if (value === undefined || value === null) {
+      this.cache.delete(key);
+      return undefined;
+    }
+
+    // Déplacement en fin de liste (récemment utilisé pour O(1) LRU)
+    this.cache.delete(key);
+    this.cache.set(key, value);
     return value;
   }
 
   set(key, value) {
+    // Vérification stricte de la clé et de la valeur
+    if (typeof key !== "string" || key.length === 0) {
+      return false;
+    }
+    if (value === undefined || value === null) {
+      return false;
+    }
+
+    // Protection mémoire : ne pas cacher des chaînes anormalement volumineuses
+    if (key.length > this.maxEntryLength || (typeof value === "string" && value.length > this.maxEntryLength)) {
+      return false;
+    }
+
     if (this.cache.has(key)) {
       this.cache.delete(key);
     } else if (this.cache.size >= this.maxSize) {
-      // Éviction de l'entrée la plus ancienne (premier élément)
+      // Éviction de l'entrée la plus ancienne (premier élément de l'itérateur Map)
       const oldestKey = this.cache.keys().next().value;
-      this.cache.delete(oldestKey);
+      if (oldestKey !== undefined) {
+        this.cache.delete(oldestKey);
+      }
     }
+
     this.cache.set(key, value);
+    return true;
+  }
+
+  has(key) {
+    if (typeof key !== "string" || key.length === 0) {
+      return false;
+    }
+    return this.cache.has(key);
+  }
+
+  delete(key) {
+    if (typeof key !== "string" || key.length === 0) {
+      return false;
+    }
+    return this.cache.delete(key);
+  }
+
+  get size() {
+    return this.cache.size;
   }
 
   clear() {
@@ -40,13 +93,14 @@ class SimpleLRU {
 }
 
 // Caches multi-niveaux :
-// - WeakMap pour les références d'objets (accès instantané en 0 ms sans resérialisation JSON)
+// - WeakMap pour les références d'objets (avec détection de mutation et réinitialisation complète)
 // - LRU pour les chaînes sérialisées / réponses HTTP
-const objectCompressCache = new WeakMap();
+let objectCompressCache = new WeakMap();
 const lruCompressCache = new SimpleLRU(150);
 const lruDecompressCache = new SimpleLRU(150);
 
 export function clear_compression_cache() {
+  objectCompressCache = new WeakMap();
   lruCompressCache.clear();
   lruDecompressCache.clear();
 }
@@ -275,67 +329,184 @@ function fastCompressToUTF16(uncompressed) {
 }
 
 function safeCompressToUTF16(input) {
+  if (typeof input !== "string" || input.length === 0) return "";
   try {
-    return fastCompressToUTF16(input);
+    const res = fastCompressToUTF16(input);
+    if (typeof res === "string" && res.length > 0) {
+      return res;
+    }
+    return LZString.compressToUTF16(input) || "";
   } catch (err) {
-    return LZString.compressToUTF16(input);
+    try {
+      return LZString.compressToUTF16(input) || "";
+    } catch {
+      return "";
+    }
   }
 }
 
 export function compressed_obj(data) {
-  if (data == null) return "";
+  // 1. Validation stricte des entrées
+  if (data === null || data === undefined) {
+    return "";
+  }
 
-  const isObj = typeof data === "object";
+  // Si c'est déjà une chaîne vide
+  if (typeof data === "string" && data.length === 0) {
+    return "";
+  }
 
-  // Niveau 1 : Vérification dans le WeakMap pour les références d'objets (0 ms)
-  if (isObj) {
-    const cachedByRef = objectCompressCache.get(data);
-    if (cachedByRef !== undefined) {
-      return cachedByRef;
+  const isObject = typeof data === "object" || typeof data === "function";
+
+  // Niveau 1 : Vérification stricte dans le WeakMap pour les références d'objets (0 ms)
+  if (isObject) {
+    try {
+      const cachedEntry = objectCompressCache.get(data);
+      if (cachedEntry && typeof cachedEntry.compressed === "string" && cachedEntry.compressed.length > 0) {
+        // Objet garanti immuable
+        if (cachedEntry.isFrozen) {
+          return cachedEntry.compressed;
+        }
+        // Vérification stricte anti-mutation pour objets mutables
+        const isArr = Array.isArray(data);
+        if (isArr && cachedEntry.isArray) {
+          if (data.length === cachedEntry.arrayLength) {
+            return cachedEntry.compressed;
+          }
+        } else if (!isArr && !cachedEntry.isArray) {
+          if (Object.keys(data).length === cachedEntry.keyCount) {
+            return cachedEntry.compressed;
+          }
+        }
+      }
+    } catch {
+      // Ignorer si data n'est pas supporté comme clé WeakMap
     }
   }
 
-  // Sérialisation si nécessaire
-  const jsonStr = typeof data === "string" ? data : JSON.stringify(data);
+  // Sérialisation sécurisée
+  let jsonStr;
+  if (typeof data === "string") {
+    jsonStr = data;
+  } else {
+    try {
+      jsonStr = JSON.stringify(data);
+    } catch (err) {
+      console.error("Erreur de sérialisation JSON dans compressed_obj :", err);
+      return "";
+    }
+  }
 
-  // Niveau 2 : Vérification dans le cache LRU (chaînes déjà compressées)
+  if (typeof jsonStr !== "string" || jsonStr.length === 0) {
+    return "";
+  }
+
+  // Niveau 2 : Vérification stricte dans le cache LRU (chaînes déjà compressées)
   const cachedByStr = lruCompressCache.get(jsonStr);
-  if (cachedByStr !== undefined) {
-    if (isObj) {
-      objectCompressCache.set(data, cachedByStr);
+  if (typeof cachedByStr === "string" && cachedByStr.length > 0) {
+    if (isObject) {
+      try {
+        const isArr = Array.isArray(data);
+        objectCompressCache.set(data, {
+          compressed: cachedByStr,
+          isFrozen: Object.isFrozen(data),
+          isArray: isArr,
+          arrayLength: isArr ? data.length : 0,
+          keyCount: isArr ? 0 : Object.keys(data).length,
+        });
+      } catch {}
     }
     return cachedByStr;
   }
 
-  // Compression via le moteur optimisé
+  // Compression via le moteur optimisé avec repli sécurisé
   const compressed = safeCompressToUTF16(jsonStr);
 
-  // Mise en cache
+  if (typeof compressed !== "string" || compressed.length === 0) {
+    return "";
+  }
+
+  // Mise en cache avec validation stricte
   lruCompressCache.set(jsonStr, compressed);
-  if (isObj) {
-    objectCompressCache.set(data, compressed);
+  if (isObject) {
+    try {
+      const isArr = Array.isArray(data);
+      objectCompressCache.set(data, {
+        compressed,
+        isFrozen: Object.isFrozen(data),
+        isArray: isArr,
+        arrayLength: isArr ? data.length : 0,
+        keyCount: isArr ? 0 : Object.keys(data).length,
+      });
+    } catch {}
   }
 
   return compressed;
 }
 
 export function decompressed_obj(compressed_obj) {
-  if (compressed_obj == null || compressed_obj === "") return null;
-  if (typeof compressed_obj !== "string") return compressed_obj;
-
-  // Niveau 1 : Cache LRU pour les réponses décompressées
-  const cached = lruDecompressCache.get(compressed_obj);
-  if (cached !== undefined) {
-    return cached;
+  // 1. Validation stricte des entrées
+  if (compressed_obj === null || compressed_obj === undefined || compressed_obj === "") {
+    return null;
   }
 
+  // Si ce n'est pas une chaîne (déjà un objet décompressé), renvoyer tel quel
+  if (typeof compressed_obj !== "string") {
+    return compressed_obj;
+  }
+
+  const trimmed = compressed_obj.trim();
+  if (trimmed.length === 0) {
+    return null;
+  }
+
+  // Niveau 1 : Vérification stricte dans le cache LRU de décompression
+  const cachedUncompressed = lruDecompressCache.get(compressed_obj);
+  if (typeof cachedUncompressed === "string" && cachedUncompressed.length > 0) {
+    try {
+      return JSON.parse(cachedUncompressed);
+    } catch {
+      return cachedUncompressed;
+    }
+  }
+
+  // Décompression avec gestion stricte des erreurs
   try {
     const uncompressed = LZString.decompressFromUTF16(compressed_obj);
-    const parsed = uncompressed ? JSON.parse(uncompressed) : null;
-    if (parsed !== null) {
-      lruDecompressCache.set(compressed_obj, parsed);
+
+    // Si la décompression a échoué
+    if (uncompressed === null || uncompressed === undefined) {
+      // Repli de secours : la chaîne reçue était-elle déjà du JSON brut non compressé ?
+      if (
+        (trimmed.startsWith("{") && trimmed.endsWith("}")) ||
+        (trimmed.startsWith("[") && trimmed.endsWith("]"))
+      ) {
+        try {
+          return JSON.parse(compressed_obj);
+        } catch {
+          return null;
+        }
+      }
+      return null;
     }
-    return parsed;
+
+    if (typeof uncompressed !== "string") {
+      return null;
+    }
+
+    if (uncompressed.length === 0) {
+      return "";
+    }
+
+    // Mise en cache stricte de la chaîne décompressée (immuable, évite les mutations de références)
+    lruDecompressCache.set(compressed_obj, uncompressed);
+
+    // Parsing JSON avec repli transparent sur la chaîne brute (HTML, CSS, texte brut)
+    try {
+      return JSON.parse(uncompressed);
+    } catch {
+      return uncompressed;
+    }
   } catch (err) {
     console.error("Erreur dans decompressed_obj :", err);
     return null;
